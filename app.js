@@ -700,58 +700,116 @@ function playFullDialogue() {
 }
 
 let recognition = null;
+let speechTimeout = null;
+
+function stopMicState(message = null) {
+  if (speechTimeout) {
+    clearTimeout(speechTimeout);
+    speechTimeout = null;
+  }
+  state.isListeningMic = false;
+  
+  if (recognition) {
+    try { recognition.abort(); } catch(e) {}
+    recognition = null;
+  }
+
+  const micBtn = document.getElementById('btn-start-mic');
+  const micIcon = document.getElementById('mic-icon');
+  const micText = document.getElementById('mic-text');
+  const transcriptBox = document.getElementById('speech-transcript');
+
+  if (micBtn) {
+    micBtn.className = "w-full sm:w-auto px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl shadow-lg transition-all flex items-center justify-center gap-2";
+  }
+  if (micIcon) micIcon.innerText = "🎤";
+  if (micText) micText.innerText = "Mulai Rekam Suara";
+  
+  if (message && transcriptBox) {
+    transcriptBox.innerHTML = `<span class="text-slate-300">${message}</span>`;
+  }
+}
+
 function toggleSpeechRecognition() {
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
   if (!SpeechRecognition) {
-    alert("Browser Anda belum mendukung Speech Recognition. Silakan gunakan Google Chrome di PC/Android.");
+    alert("Browser HP Anda tidak mendukung pengenalan suara. Silakan gunakan Google Chrome di Android.");
     return;
   }
 
+  // Stop any playing text-to-speech audio to prevent mobile microphone hardware lockup
+  if (window.speechSynthesis) {
+    try { window.speechSynthesis.cancel(); } catch(e) {}
+  }
+
+  const micBtn = document.getElementById('btn-start-mic');
+  const micIcon = document.getElementById('mic-icon');
   const micText = document.getElementById('mic-text');
   const transcriptBox = document.getElementById('speech-transcript');
 
   if (state.isListeningMic) {
-    if (recognition) recognition.stop();
-    state.isListeningMic = false;
-    if (micText) micText.innerText = "Mulai Rekam Suara";
+    stopMicState("Rekaman dihentikan.");
     return;
   }
+
+  stopMicState();
 
   try {
     recognition = new SpeechRecognition();
     recognition.lang = 'ar-SA';
+    recognition.continuous = false;
     recognition.interimResults = true;
 
     recognition.onstart = () => {
       state.isListeningMic = true;
+      if (micBtn) {
+        micBtn.className = "w-full sm:w-auto px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 animate-pulse";
+      }
+      if (micIcon) micIcon.innerText = "⏹️";
       if (micText) micText.innerText = "Mendengarkan... (Bicara sekarang)";
-      if (transcriptBox) transcriptBox.innerText = "Mendengarkan ucapan Bahasa Arab Anda...";
+      if (transcriptBox) {
+        transcriptBox.innerHTML = '<span class="text-amber-300 font-semibold animate-pulse">🎙️ Mendengarkan ucapan Bahasa Arab Anda...</span>';
+      }
+
+      // Safety timeout: 10 seconds auto-stop if phone mic gets stuck
+      speechTimeout = setTimeout(() => {
+        if (state.isListeningMic) {
+          stopMicState("Waktu rekam selesai (10s). Klik tombol rekam untuk mencoba lagi.");
+        }
+      }, 10000);
     };
 
     recognition.onresult = (event) => {
-      const resultText = Array.from(event.results)
-        .map(result => result[0].transcript)
-        .join('');
-      if (transcriptBox) {
-        transcriptBox.innerHTML = `<span class="font-arabic text-xl text-teal-300 font-bold">${resultText}</span>`;
+      let resultText = '';
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        resultText += event.results[i][0].transcript;
+      }
+      if (transcriptBox && resultText.trim()) {
+        transcriptBox.innerHTML = `<span class="font-arabic text-2xl text-teal-300 font-bold leading-relaxed">${resultText}</span>`;
       }
     };
 
     recognition.onerror = (event) => {
-      state.isListeningMic = false;
-      if (micText) micText.innerText = "Mulai Rekam Suara";
-      if (transcriptBox) transcriptBox.innerText = "Terjadi kesalahan/tidak terdeteksi. Silakan coba lagi.";
+      let errMsg = "Terjadi kesalahan pada mikrofon HP. Silakan coba lagi.";
+      if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
+        errMsg = "⚠️ Izin mikrofon belum diizinkan di browser HP Anda. Izinkan akses mikrofon di browser.";
+      } else if (event.error === 'no-speech') {
+        errMsg = "⚠️ Suara tidak terdeteksi. Bicara lebih keras ke mikrofon HP.";
+      } else if (event.error === 'network') {
+        errMsg = "⚠️ Koneksi internet dibutuhkan untuk pengenalan suara Bahasa Arab.";
+      }
+      stopMicState(errMsg);
     };
 
     recognition.onend = () => {
-      state.isListeningMic = false;
-      if (micText) micText.innerText = "Mulai Rekam Suara";
+      stopMicState();
     };
 
     recognition.start();
+
   } catch(err) {
-    alert("Gagal mengaktifkan mikrofon: " + err.message);
+    stopMicState("Gagal mengaktifkan mikrofon: " + err.message);
   }
 }
 
