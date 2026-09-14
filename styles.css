@@ -1,0 +1,142 @@
+/* CSS Styles for Media Pembelajaran Interaktif Bahasa Arab Kelas X MAN 1 Pontianak */
+
+@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+  --primary-teal: #2f6b78;
+  --primary-teal-dark: #1f4750;
+  --accent-mint: #e2f1f3;
+  --bg-page: #f2f7f8;
+  --text-main: #1e293b;
+  --card-bg: #ffffff;
+  --card-border: #e2e8f0;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', 'Cairo', sans-serif;
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+/* Font Arab (Naskh Standard for Pristine Harakat & Tasydid) */
+.font-arabic {
+  font-family: 'Amiri', 'Noto Naskh Arabic', 'Scheherazade New', 'Traditional Arabic', serif;
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "mset" 1;
+  font-variant-ligatures: normal;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  line-height: 2.2;
+}
+
+.font-cairo {
+  font-family: 'Cairo', sans-serif;
+}
+
+/* Perspective for 3D Flashcard Flip */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.38s cubic-bezier(0.34, 1.35, 0.64, 1);
+  will-change: transform;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+/* Card Styling */
+.card-soft {
+  background-color: #ffffff;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0 4px 20px -2px rgba(47, 107, 120, 0.06);
+  transition: all 0.25s ease;
+}
+
+.card-soft:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -4px rgba(47, 107, 120, 0.12);
+}
+
+/* Nav Item Styling */
+.nav-tab {
+  transition: all 0.2s ease-in-out;
+  border-radius: 0.875rem;
+  font-weight: 600;
+}
+
+.nav-tab.active {
+  background-color: var(--primary-teal);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(47, 107, 120, 0.25);
+}
+
+.nav-tab:not(.active):hover {
+  background-color: rgba(47, 107, 120, 0.08);
+  color: var(--primary-teal-dark);
+}
+
+/* Audio Pulse Animation */
+@keyframes audio-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(47, 107, 120, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgba(47, 107, 120, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(47, 107, 120, 0);
+  }
+}
+
+.animate-pulse-audio {
+  animation: audio-pulse 1.5s infinite;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Printable Certificate Styles */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #printable-certificate, #printable-certificate * {
+    visibility: visible;
+  }
+  #printable-certificate {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    box-shadow: none;
+    border: 3px double #2f6b78;
+  }
+}

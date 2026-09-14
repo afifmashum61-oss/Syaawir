@@ -1,0 +1,2072 @@
+// App Core Logic for Media Pembelajaran Interaktif Bahasa Arab Kelas X - MAN 1 Pontianak
+
+// --- STATE MANAGEMENT ---
+const state = {
+  currentTab: 'home',
+  
+  // Mufrodat Filters
+  mufrodatTopic: 'all',
+  mufrodatType: 'all',
+  mufrodatSearch: '',
+
+  // Maharah Kalam
+  currentDialogIndex: 0,
+  activeRole: null, // 'speaker1' or 'speaker2' or null
+  isListeningMic: false,
+
+  // Maharah Qiraah
+  currentQiraahIndex: 0,
+  qiraahShowHarakat: true,
+  qiraahShowTranslation: false,
+
+  // Maharah Istima'
+  istimaPassageIndex: 0,
+  istimaHideText: false,
+
+  // Qawaid
+  qawaidBab: 1, // 1 = Bab 1, 2 = Bab 2, 3 = Bab 3
+
+  // Tadribat (Quizizz / Kahoot Gamified Quiz)
+  tadribatBab: 1, // 1 = Bab 1, 2 = Bab 2
+  tadribatVersion: 1, // 1 = Versi 1 (Mufradat), 2 = Versi 2 (Qawaid)
+  quizCurrentIndex: 0,
+  quizAnswers: [],
+  quizScore: 0,
+  quizPoints: 0,
+  quizStreak: 0,
+  quizMaxStreak: 0,
+  quizIsFinished: false
+};
+
+// --- AUDIO SYNTHESIZER (Web Audio API) ---
+class SoundFx {
+  static playClick() {
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(600, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(300, ctx.currentTime + 0.05);
+      gain.gain.setValueAtTime(0.1, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.05);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.05);
+    } catch(e) {}
+  }
+
+  static playCorrect() {
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const now = ctx.currentTime;
+      [523.25, 659.25, 783.99, 1046.50].forEach((freq, idx) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0.15, now + idx * 0.08);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.08 + 0.2);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now + idx * 0.08);
+        osc.stop(now + idx * 0.08 + 0.2);
+      });
+    } catch(e) {}
+  }
+
+  static playWrong() {
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(180, now);
+      osc.frequency.setValueAtTime(130, now + 0.1);
+      gain.gain.setValueAtTime(0.2, now);
+      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.3);
+    } catch(e) {}
+  }
+}
+
+// --- TEXT TO SPEECH (Web Speech API) ---
+function speakArabic(text, btnElement = null) {
+  if (!('speechSynthesis' in window)) {
+    alert("Browser Anda tidak mendukung fitur pemutaran audio otomatis. Gunakan Chrome/Edge.");
+    return;
+  }
+
+  window.speechSynthesis.cancel(); // Stop any ongoing speech
+
+  // Cleanup harakat/parens and newlines
+  const cleanText = text.replace(/[\(\)]/g, '').replace(/[\r\n]+/g, ' ').trim();
+  if (!cleanText) return;
+
+  const utterance = new SpeechSynthesisUtterance(cleanText);
+  utterance.lang = 'ar-SA';
+  utterance.rate = 0.85; // Slower rate for clear learning
+
+  const voices = window.speechSynthesis.getVoices();
+  const arVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('ar'));
+  if (arVoice) {
+    utterance.voice = arVoice;
+  }
+
+  if (btnElement) {
+    btnElement.classList.add('animate-pulse', 'ring-2', 'ring-purple-400');
+    utterance.onend = () => {
+      btnElement.classList.remove('animate-pulse', 'ring-2', 'ring-purple-400');
+    };
+    utterance.onerror = () => {
+      btnElement.classList.remove('animate-pulse', 'ring-2', 'ring-purple-400');
+    };
+  }
+
+  if (window.speechSynthesis.paused) {
+    window.speechSynthesis.resume();
+  }
+
+  window.speechSynthesis.speak(utterance);
+}
+
+function speakIstimaPassage(btnElement = null) {
+  const pIdx = state.istimaPassageIndex || 0;
+  const passage = ARABIC_DATA.istima[pIdx];
+  if (passage && passage.arabicText) {
+    speakArabic(passage.arabicText, btnElement);
+  }
+}
+
+function speakIstimaBlank(bIdx, btnElement = null) {
+  const pIdx = state.istimaPassageIndex || 0;
+  const item = ARABIC_DATA.istima[pIdx] && ARABIC_DATA.istima[pIdx].fillBlanks && ARABIC_DATA.istima[pIdx].fillBlanks[bIdx];
+  if (item && item.textToSpeech) {
+    speakArabic(item.textToSpeech, btnElement);
+  }
+}
+
+function speakQiraahText(btnElement = null) {
+  const qIdx = state.currentQiraahIndex || 0;
+  const qiraah = ARABIC_DATA.qiraah[qIdx];
+  if (qiraah && qiraah.arabicText) {
+    speakArabic(qiraah.arabicText, btnElement);
+  }
+}
+
+function togglePauseAudio(btnElement = null) {
+  if (!('speechSynthesis' in window)) return;
+
+  const synth = window.speechSynthesis;
+  
+  if (!synth.speaking) {
+    speakIstimaPassage(btnElement);
+    return;
+  }
+
+  if (synth.paused) {
+    synth.resume();
+    SoundFx.playClick();
+    const btnPause = document.getElementById('btn-istima-pause');
+    if (btnPause) {
+      btnPause.innerHTML = `<span>⏸️ Jeda</span>`;
+      btnPause.className = 'px-4 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold rounded-xl shadow-lg transition-all flex items-center gap-2';
+    }
+  } else {
+    synth.pause();
+    SoundFx.playClick();
+    const btnPause = document.getElementById('btn-istima-pause');
+    if (btnPause) {
+      btnPause.innerHTML = `<span>▶️ Lanjutkan</span>`;
+      btnPause.className = 'px-4 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-bold rounded-xl shadow-lg transition-all flex items-center gap-2';
+    }
+  }
+}
+
+function stopAudio() {
+  if (!('speechSynthesis' in window)) return;
+  SoundFx.playClick();
+  window.speechSynthesis.cancel();
+
+  const btnPause = document.getElementById('btn-istima-pause');
+  if (btnPause) {
+    btnPause.innerHTML = `<span>⏸️ Jeda</span>`;
+    btnPause.className = 'px-4 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold rounded-xl shadow-lg transition-all flex items-center gap-2';
+  }
+}
+
+if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+  window.speechSynthesis.onvoiceschanged = () => {
+    window.speechSynthesis.getVoices();
+  };
+}
+
+// --- INITIALIZATION ---
+document.addEventListener('DOMContentLoaded', () => {
+  initNavigation();
+  renderTabContent();
+});
+
+function initNavigation() {
+  const tabs = document.querySelectorAll('[data-tab]');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', (e) => {
+      e.preventDefault();
+      SoundFx.playClick();
+      const targetTab = tab.getAttribute('data-tab');
+      switchTab(targetTab);
+    });
+  });
+}
+
+function switchTab(tabId) {
+  state.currentTab = tabId;
+  
+  // Update Active UI Tab Button
+  document.querySelectorAll('[data-tab]').forEach(tab => {
+    if (tab.getAttribute('data-tab') === tabId) {
+      tab.classList.add('active');
+    } else {
+      tab.classList.remove('active');
+    }
+  });
+
+  renderTabContent();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function renderTabContent() {
+  const container = document.getElementById('main-container');
+  if (!container) return;
+
+  switch (state.currentTab) {
+    case 'home':
+      container.innerHTML = renderHomeHTML();
+      break;
+    case 'mufrodat':
+      container.innerHTML = renderMufrodatHTML();
+      attachMufrodatEvents();
+      break;
+    case 'kalam':
+      container.innerHTML = renderKalamHTML();
+      attachKalamEvents();
+      break;
+    case 'qiraah':
+      container.innerHTML = renderQiraahHTML();
+      attachQiraahEvents();
+      break;
+    case 'istima':
+      container.innerHTML = renderIstimaHTML();
+      attachIstimaEvents();
+      break;
+    case 'qawaid':
+      container.innerHTML = renderQawaidHTML();
+      attachQawaidEvents();
+      break;
+    case 'tadribat':
+      container.innerHTML = renderTadribatHTML();
+      attachTadribatEvents();
+      break;
+    default:
+      container.innerHTML = renderHomeHTML();
+  }
+}
+
+// ==========================================
+// 1. BERANDA / HERO HTML
+// ==========================================
+function renderHomeHTML() {
+  return `
+    <div class="space-y-8 animate-fadeIn">
+      <!-- Hero Banner -->
+      <div class="card-soft p-8 sm:p-12 bg-gradient-to-br from-[#2f6b78] to-[#1f4750] text-white relative overflow-hidden">
+        
+        <div class="relative z-10 max-w-3xl space-y-6">
+          <!-- Badge Header -->
+          <div class="inline-flex items-center gap-2.5 px-4 py-1.5 bg-white/10 backdrop-blur-md rounded-full text-xs font-semibold tracking-wide text-teal-100 border border-white/20">
+            <img src="logo.webp" alt="Logo MAN 1 Pontianak" class="w-5 h-5 object-contain" />
+            <span>${ARABIC_DATA.info.school}</span>
+            <span class="text-teal-300">•</span>
+            <span>Kelas X</span>
+            <span class="text-teal-200 font-semibold">(العاشر)</span>
+          </div>
+
+          <!-- Main Title Block -->
+          <div class="space-y-6">
+            <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-snug">
+              Media Pembelajaran Interaktif
+            </h1>
+            <div class="text-teal-200 font-arabic text-4xl sm:text-6xl font-normal pt-6 mt-6 leading-[2.2] tracking-wide">
+              اللُّغَةُ العَرَبِيَّةُ
+            </div>
+          </div>
+
+          <p class="text-teal-50/90 text-base sm:text-lg max-w-2xl leading-relaxed">
+            Selamat datang di media pembelajaran Bahasa Arab Kelas X MAN 1 Pontianak. Kuasai kosakata, percakapan, membaca, menyimak, dan tata bahasa Arab melalui fitur interaktif modern!
+          </p>
+
+          <div class="pt-4 flex flex-wrap gap-4">
+            <button onclick="switchTab('mufrodat')" class="px-6 py-3 bg-white text-[#2f6b78] hover:bg-teal-50 font-bold rounded-xl shadow-lg transition-all transform hover:-translate-y-0.5 flex items-center gap-2">
+              <span>🚀 Mulai Belajar Mufrodat</span>
+            </button>
+            <button onclick="switchTab('tadribat')" class="px-6 py-3 bg-teal-800/60 hover:bg-teal-800 text-white font-semibold rounded-xl border border-teal-400/30 transition-all flex items-center gap-2">
+              <span>📝 Uji Kemampuan (Kuis)</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature Menu Grid (6 Cards) -->
+      <div>
+        <h2 class="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-2">
+          <span>📚 Menu Pembelajaran Interaktif</span>
+        </h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          
+          <!-- Mufrodat -->
+          <div onclick="switchTab('mufrodat')" class="card-soft p-6 cursor-pointer group hover:border-teal-500 transition-all">
+            <div class="w-14 h-14 rounded-2xl bg-teal-50 text-[#2f6b78] flex items-center justify-center text-2xl font-bold mb-4 group-hover:scale-110 transition-transform">
+              🔤
+            </div>
+            <div class="flex items-center justify-between">
+              <h3 class="text-xl font-bold text-slate-800">Mufrodat</h3>
+              <span class="font-arabic text-2xl text-teal-700">المفردات</span>
+            </div>
+            <p class="text-slate-600 text-sm mt-2 leading-relaxed">
+              Kartu kosakata (*flashcards*) interaktif dengan audio pelafalan fasih dan filter jenis kata (Isim, Fi'il, Harf).
+            </p>
+          </div>
+
+          <!-- Kalam -->
+          <div onclick="switchTab('kalam')" class="card-soft p-6 cursor-pointer group hover:border-teal-500 transition-all">
+            <div class="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-2xl font-bold mb-4 group-hover:scale-110 transition-transform">
+              🗣️
+            </div>
+            <div class="flex items-center justify-between">
+              <h3 class="text-xl font-bold text-slate-800">Maharah Kalam</h3>
+              <span class="font-arabic text-2xl text-blue-700">مهارة الكلام</span>
+            </div>
+            <p class="text-slate-600 text-sm mt-2 leading-relaxed">
+              Simulasi percakapan interaktif 2 orang, pemutaran audio baris demi baris, dan tes latihan bicara via mikrofon.
+            </p>
+          </div>
+
+          <!-- Qira'ah -->
+          <div onclick="switchTab('qiraah')" class="card-soft p-6 cursor-pointer group hover:border-teal-500 transition-all">
+            <div class="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-2xl font-bold mb-4 group-hover:scale-110 transition-transform">
+              📖
+            </div>
+            <div class="flex items-center justify-between">
+              <h3 class="text-xl font-bold text-slate-800">Maharah Qira'ah</h3>
+              <span class="font-arabic text-2xl text-emerald-700">مهارة القراءة</span>
+            </div>
+            <p class="text-slate-600 text-sm mt-2 leading-relaxed">
+              Teks bacaan naratif dengan sakelar (*toggle*) tampil/sembunyi harakat, terjemahan, dan soal pemahaman teks.
+            </p>
+          </div>
+
+          <!-- Istima' -->
+          <div onclick="switchTab('istima')" class="card-soft p-6 cursor-pointer group hover:border-teal-500 transition-all">
+            <div class="w-14 h-14 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center text-2xl font-bold mb-4 group-hover:scale-110 transition-transform">
+              🎧
+            </div>
+            <div class="flex items-center justify-between">
+              <h3 class="text-xl font-bold text-slate-800">Maharah Istima'</h3>
+              <span class="font-arabic text-2xl text-purple-700">مهارة الاستماع</span>
+            </div>
+            <p class="text-slate-600 text-sm mt-2 leading-relaxed">
+              Latihan mendengarkan audio dikte kosakata dan melengkapi kalimat rumpang secara interaktif.
+            </p>
+          </div>
+
+          <!-- Qawaid -->
+          <div onclick="switchTab('qawaid')" class="card-soft p-6 cursor-pointer group hover:border-teal-500 transition-all">
+            <div class="w-14 h-14 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center text-2xl font-bold mb-4 group-hover:scale-110 transition-transform">
+              📐
+            </div>
+            <div class="flex items-center justify-between">
+              <h3 class="text-xl font-bold text-slate-800">Qawaid</h3>
+              <span class="font-arabic text-2xl text-amber-700">القواعد</span>
+            </div>
+            <p class="text-slate-600 text-sm mt-2 leading-relaxed">
+              Tata bahasa Arab Kelas X: Pembagian kata (Isim/Fi'il/Harf), Dhomir, dan *color-coded sentence breakdown*.
+            </p>
+          </div>
+
+          <!-- Tadribat -->
+          <div onclick="switchTab('tadribat')" class="card-soft p-6 cursor-pointer group hover:border-teal-500 transition-all">
+            <div class="w-14 h-14 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center text-2xl font-bold mb-4 group-hover:scale-110 transition-transform">
+              📝
+            </div>
+            <div class="flex items-center justify-between">
+              <h3 class="text-xl font-bold text-slate-800">Tadribat (Kuis)</h3>
+              <span class="font-arabic text-2xl text-rose-700">التدريبات</span>
+            </div>
+            <p class="text-slate-600 text-sm mt-2 leading-relaxed">
+              Latihan soal interaktif dengan timer, feedback instan, pembahasan, dan unduh sertifikat hasil belajar.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// ==========================================
+// 2. MUFRODAT HTML & LOGIC
+// ==========================================
+function renderMufrodatHTML() {
+  // Filter items
+  let filtered = ARABIC_DATA.mufrodat.filter(item => {
+    const matchTopic = state.mufrodatTopic === 'all' || item.topicId === state.mufrodatTopic;
+    const matchType = state.mufrodatType === 'all' || item.type === state.mufrodatType;
+    const matchSearch = state.mufrodatSearch === '' || 
+      item.arabic.includes(state.mufrodatSearch) || 
+      item.latin.toLowerCase().includes(state.mufrodatSearch.toLowerCase()) || 
+      item.indonesian.toLowerCase().includes(state.mufrodatSearch.toLowerCase());
+    return matchTopic && matchType && matchSearch;
+  });
+
+  return `
+    <div class="space-y-6 animate-fadeIn">
+      <!-- Title Header -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">
+            <span>🔤 Mufrodat Interaktif</span>
+            <span class="font-arabic text-3xl text-teal-700">المفردات</span>
+          </h2>
+          <p class="text-slate-600 text-sm mt-1">
+            Klik pada kartu untuk membalik kata (Flip Card) dan dengarkan pelafalan fasihnya.
+          </p>
+        </div>
+        <div class="text-right text-xs text-slate-500 font-semibold">
+          Menampilkan <span class="text-teal-700 font-bold">${filtered.length}</span> kosakata
+        </div>
+      </div>
+
+      <!-- Controls & Filters -->
+      <div class="card-soft p-4 bg-white flex flex-wrap items-center justify-between gap-4">
+        <!-- Topic Filter -->
+        <div class="flex items-center gap-2">
+          <label class="text-xs font-bold text-slate-600 uppercase tracking-wider">Tema:</label>
+          <select id="mufrodat-topic-filter" class="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-teal-500">
+            <option value="all" ${state.mufrodatTopic === 'all' ? 'selected' : ''}>Semua Tema Bab</option>
+            ${ARABIC_DATA.topics.map(t => `<option value="${t.id}" ${state.mufrodatTopic === t.id ? 'selected' : ''}>${t.latin}</option>`).join('')}
+          </select>
+        </div>
+
+        <!-- Type Filter -->
+        <div class="flex items-center gap-2">
+          <label class="text-xs font-bold text-slate-600 uppercase tracking-wider">Jenis:</label>
+          <select id="mufrodat-type-filter" class="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-teal-500 font-arabic">
+            <option value="all" ${state.mufrodatType === 'all' ? 'selected' : ''}>Semua Jenis</option>
+            <option value="isim" ${state.mufrodatType === 'isim' ? 'selected' : ''}>الاسم</option>
+            <option value="fiil" ${state.mufrodatType === 'fiil' ? 'selected' : ''}>الفعل</option>
+            <option value="harf" ${state.mufrodatType === 'harf' ? 'selected' : ''}>الحرف</option>
+          </select>
+        </div>
+
+        <!-- Search Input -->
+        <div class="flex-1 min-w-[200px]">
+          <input type="text" id="mufrodat-search" value="${state.mufrodatSearch}" placeholder="Cari kata Arab / Latin / Arti..." class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"/>
+        </div>
+      </div>
+
+      <!-- Flashcards Grid -->
+      ${filtered.length === 0 ? `
+        <div class="card-soft p-12 text-center text-slate-500">
+          <p class="text-lg">Tidak ada kosakata yang cocok dengan pencarian.</p>
+        </div>
+      ` : `
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          ${filtered.map(item => renderFlashcardItem(item)).join('')}
+        </div>
+      `}
+    </div>
+  `;
+}
+
+function renderFlashcardItem(item) {
+  const typeBadge = item.type === 'isim' ? 'bg-sky-100 text-sky-800' : (item.type === 'fiil' ? 'bg-amber-100 text-amber-800' : 'bg-purple-100 text-purple-800');
+  const typeText = item.type === 'isim' ? 'الاسم' : (item.type === 'fiil' ? 'الفعل' : 'الحرف');
+
+  return `
+    <div class="perspective-1000 h-64 select-none cursor-pointer group" onclick="flipCard(${item.id})">
+      <div id="card-inner-${item.id}" class="transform-style-3d relative w-full h-full card-soft shadow-sm hover:shadow-xl transition-all">
+        
+        <!-- CARD FRONT (HANYA BAHASA ARAB) -->
+        <div class="backface-hidden absolute inset-0 p-6 flex flex-col justify-between items-center text-center bg-white rounded-2xl border border-slate-200 group-hover:border-teal-500">
+          <div class="w-full flex justify-between items-center text-xs">
+            <span class="px-3 py-1 rounded-full font-arabic font-bold text-sm ${typeBadge}">${typeText}</span>
+            <button onclick="event.stopPropagation(); speakArabic('${item.arabic}', this)" class="p-2 bg-teal-50 hover:bg-teal-100 text-teal-700 rounded-full transition-colors" title="Dengarkan Suara">
+              🔊
+            </button>
+          </div>
+
+          <div class="space-y-2 my-auto">
+            <h3 class="font-arabic text-4xl sm:text-5xl text-slate-800 leading-[2.2] py-2">${item.arabic}</h3>
+          </div>
+
+          <div class="text-xs text-slate-400 font-semibold flex items-center gap-1">
+            <span>🔄 Klik untuk melihat arti</span>
+          </div>
+        </div>
+
+        <!-- CARD BACK (ARTI & LATIN) -->
+        <div class="backface-hidden rotate-y-180 absolute inset-0 p-6 flex flex-col justify-between text-center bg-gradient-to-br from-teal-700 to-[#1f4750] text-white rounded-2xl shadow-lg">
+          <div class="w-full flex justify-between items-center text-xs text-teal-200">
+            <span class="font-semibold text-sm">${item.latin}</span>
+            <button onclick="event.stopPropagation(); speakArabic('${item.example || item.arabic}', this)" class="p-1.5 bg-white/20 hover:bg-white/30 text-white rounded-full transition-colors" title="Dengarkan Kalimat">
+              🔊
+            </button>
+          </div>
+
+          <div class="space-y-3 my-auto">
+            <h4 class="text-2xl font-bold text-teal-100">${item.indonesian}</h4>
+            ${item.example ? `
+              <div class="p-2.5 bg-white/10 rounded-xl backdrop-blur-sm border border-white/15 text-xs text-teal-50 space-y-1">
+                <p class="font-arabic text-lg text-teal-200">${item.example}</p>
+              </div>
+            ` : ''}
+          </div>
+
+          <div class="text-xs text-teal-200/80 font-semibold">
+            🔄 Klik untuk kembali
+          </div>
+        </div>
+
+      </div>
+    </div>
+  `;
+}
+
+function flipCard(cardId) {
+  const cardInner = document.getElementById(`card-inner-${cardId}`);
+  if (cardInner) {
+    cardInner.classList.toggle('rotate-y-180');
+    try {
+      setTimeout(() => SoundFx.playClick(), 10);
+    } catch(e) {}
+  }
+}
+
+function attachMufrodatEvents() {
+  const topicSelect = document.getElementById('mufrodat-topic-filter');
+  const typeSelect = document.getElementById('mufrodat-type-filter');
+  const searchInput = document.getElementById('mufrodat-search');
+
+  if (topicSelect) {
+    topicSelect.addEventListener('change', (e) => {
+      state.mufrodatTopic = e.target.value;
+      renderTabContent();
+    });
+  }
+  if (typeSelect) {
+    typeSelect.addEventListener('change', (e) => {
+      state.mufrodatType = e.target.value;
+      renderTabContent();
+    });
+  }
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      state.mufrodatSearch = e.target.value;
+      renderTabContent();
+    });
+  }
+}
+
+// ==========================================
+// 3. MAHARAH KALAM HTML & LOGIC
+// ==========================================
+function renderKalamHTML() {
+  const currentDialog = ARABIC_DATA.kalam[state.currentDialogIndex];
+
+  return `
+    <div class="space-y-6 animate-fadeIn">
+      <!-- Title Header -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">
+            <span>🗣️ Maharah Kalam (Berbicara)</span>
+            <span class="font-arabic text-3xl text-blue-700">مهارة الكلام</span>
+          </h2>
+          <p class="text-slate-600 text-sm mt-1">
+            Simulasi percakapan interaktif 2 tokoh. Dengarkan pelafalan dan latih kemampuan bicara Anda.
+          </p>
+        </div>
+
+        <!-- Dialogue Selector -->
+        <select id="kalam-dialog-select" class="px-4 py-2.5 bg-white border border-slate-300 rounded-xl text-sm font-semibold text-slate-800 shadow-sm focus:ring-2 focus:ring-blue-500">
+          ${ARABIC_DATA.kalam.map((d, idx) => `
+            <option value="${idx}" ${state.currentDialogIndex === idx ? 'selected' : ''}>${d.latinTitle}</option>
+          `).join('')}
+        </select>
+      </div>
+
+      <!-- Dialogue Card Container -->
+      <div class="card-soft p-6 sm:p-8 space-y-6">
+        <!-- Title Banner -->
+        <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200/60 p-4 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div>
+            <h3 class="font-arabic text-2xl sm:text-3xl font-bold text-blue-900 leading-[2.4] py-1">${currentDialog.title}</h3>
+          </div>
+
+          <button onclick="playFullDialogue()" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl shadow-md transition-all flex items-center gap-2">
+            <span>▶️ Putar Seluruh Percakapan</span>
+          </button>
+        </div>
+
+        <!-- Chat Bubble Lines (Murni Bahasa Arab) -->
+        <div class="space-y-4 pt-2">
+          ${currentDialog.lines.map((line, idx) => {
+            const isSpeaker1 = idx % 2 === 0;
+            return `
+              <div class="flex flex-col ${isSpeaker1 ? 'items-start' : 'items-end'}">
+                <div class="flex items-center gap-2 mb-1">
+                  <span class="text-xs font-bold px-2.5 py-0.5 rounded-full ${isSpeaker1 ? 'bg-blue-100 text-blue-800' : 'bg-emerald-100 text-emerald-800'}">
+                    ${line.speaker}
+                  </span>
+                </div>
+
+                <div class="max-w-2xl p-4 sm:p-5 rounded-2xl ${isSpeaker1 ? 'bg-blue-50/80 rounded-tl-none border border-blue-100' : 'bg-emerald-50/80 rounded-tr-none border border-emerald-100'} shadow-sm">
+                  <div class="flex items-start justify-between gap-4">
+                    <p class="font-arabic text-2xl sm:text-3xl text-slate-800 leading-[2.4] py-1">${line.arabic}</p>
+                    <button onclick="speakArabic('${line.arabic}', this)" class="p-2 bg-white hover:bg-slate-100 text-slate-700 rounded-full shadow-sm flex-shrink-0" title="Dengarkan Suara">
+                      🔊
+                    </button>
+                  </div>
+                </div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      </div>
+
+      <!-- Speech Practice Box (Web Speech Recognition) -->
+      <div class="card-soft p-6 bg-gradient-to-br from-slate-900 to-slate-800 text-white space-y-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="text-2xl">🎙️</span>
+            <h3 class="text-lg font-bold text-slate-100">Tes Latihan Pengucapan (Voice Practice)</h3>
+          </div>
+        </div>
+
+        <p class="text-xs text-slate-300">
+          Tekan tombol mikrofon di bawah, ucapkan salam/kalimat Bahasa Arab dari dialog di atas, dan lihat hasil deteksi suara Anda!
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-center gap-4 pt-2">
+          <button id="btn-start-mic" onclick="toggleSpeechRecognition()" class="w-full sm:w-auto px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl shadow-lg transition-all flex items-center justify-center gap-2">
+            <span id="mic-icon">🎤</span>
+            <span id="mic-text">Mulai Rekam Suara</span>
+          </button>
+
+          <div id="speech-result-box" class="flex-1 w-full p-3 bg-slate-800/90 rounded-xl border border-slate-700 text-xs min-h-[48px] flex items-center">
+            <span id="speech-transcript" class="text-slate-400 italic">Hasil rekaman suara akan muncul di sini...</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function playFullDialogue() {
+  const currentDialog = ARABIC_DATA.kalam[state.currentDialogIndex];
+  let lineIdx = 0;
+
+  function speakNext() {
+    if (lineIdx < currentDialog.lines.length) {
+      const line = currentDialog.lines[lineIdx];
+      const utterance = new SpeechSynthesisUtterance(line.arabic);
+      utterance.lang = 'ar-SA';
+      utterance.rate = 0.85;
+      utterance.onend = () => {
+        lineIdx++;
+        setTimeout(speakNext, 600);
+      };
+      window.speechSynthesis.speak(utterance);
+    }
+  }
+
+  window.speechSynthesis.cancel();
+  speakNext();
+}
+
+let recognition = null;
+function toggleSpeechRecognition() {
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  if (!SpeechRecognition) {
+    alert("Browser Anda belum mendukung Speech Recognition. Silakan gunakan Google Chrome di PC/Android.");
+    return;
+  }
+
+  const micText = document.getElementById('mic-text');
+  const transcriptBox = document.getElementById('speech-transcript');
+
+  if (state.isListeningMic) {
+    if (recognition) recognition.stop();
+    state.isListeningMic = false;
+    if (micText) micText.innerText = "Mulai Rekam Suara";
+    return;
+  }
+
+  try {
+    recognition = new SpeechRecognition();
+    recognition.lang = 'ar-SA';
+    recognition.interimResults = true;
+
+    recognition.onstart = () => {
+      state.isListeningMic = true;
+      if (micText) micText.innerText = "Mendengarkan... (Bicara sekarang)";
+      if (transcriptBox) transcriptBox.innerText = "Mendengarkan ucapan Bahasa Arab Anda...";
+    };
+
+    recognition.onresult = (event) => {
+      const resultText = Array.from(event.results)
+        .map(result => result[0].transcript)
+        .join('');
+      if (transcriptBox) {
+        transcriptBox.innerHTML = `<span class="font-arabic text-xl text-teal-300 font-bold">${resultText}</span>`;
+      }
+    };
+
+    recognition.onerror = (event) => {
+      state.isListeningMic = false;
+      if (micText) micText.innerText = "Mulai Rekam Suara";
+      if (transcriptBox) transcriptBox.innerText = "Terjadi kesalahan/tidak terdeteksi. Silakan coba lagi.";
+    };
+
+    recognition.onend = () => {
+      state.isListeningMic = false;
+      if (micText) micText.innerText = "Mulai Rekam Suara";
+    };
+
+    recognition.start();
+  } catch(err) {
+    alert("Gagal mengaktifkan mikrofon: " + err.message);
+  }
+}
+
+function attachKalamEvents() {
+  const select = document.getElementById('kalam-dialog-select');
+  if (select) {
+    select.addEventListener('change', (e) => {
+      state.currentDialogIndex = parseInt(e.target.value, 10);
+      renderTabContent();
+    });
+  }
+}
+
+// ==========================================
+// 4. MAHARAH QIRA'AH HTML & LOGIC
+// ==========================================
+function renderQiraahHTML() {
+  const qiraahIdx = state.currentQiraahIndex || 0;
+  const currentQiraah = ARABIC_DATA.qiraah[qiraahIdx];
+
+  return `
+    <div class="space-y-6 animate-fadeIn">
+      <!-- Title Header -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">
+            <span>📖 Maharah Qira'ah (Membaca)</span>
+            <span class="font-arabic text-3xl text-emerald-700">مهارة القراءة</span>
+          </h2>
+          <p class="text-slate-600 text-sm mt-1">
+            Baca teks Bahasa Arab di bawah ini, sesuaikan pengaturan harakat & terjemahan, lalu jawab soal pemahamannya.
+          </p>
+        </div>
+
+        <!-- Text Switcher (Teks A / Teks B) -->
+        <select id="qiraah-select" class="px-4 py-2.5 bg-white border border-slate-300 rounded-xl text-sm font-semibold text-slate-800 shadow-sm focus:ring-2 focus:ring-emerald-500 font-arabic">
+          ${ARABIC_DATA.qiraah.map((q, idx) => `
+            <option value="${idx}" ${qiraahIdx === idx ? 'selected' : ''}>${q.title}</option>
+          `).join('')}
+        </select>
+      </div>
+
+      <!-- Control Toggles -->
+      <div class="card-soft p-4 bg-white flex flex-wrap items-center justify-between gap-4">
+        <div class="flex items-center gap-6">
+          <!-- Toggle Harakat -->
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" id="toggle-harakat" ${state.qiraahShowHarakat ? 'checked' : ''} class="w-5 h-5 text-emerald-600 rounded focus:ring-emerald-500"/>
+            <span class="text-sm font-semibold text-slate-700">Tampilkan Harakat</span>
+          </label>
+
+          <!-- Toggle Translation -->
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" id="toggle-translation" ${state.qiraahShowTranslation ? 'checked' : ''} class="w-5 h-5 text-emerald-600 rounded focus:ring-emerald-500"/>
+            <span class="text-sm font-semibold text-slate-700">Tampilkan Terjemahan Bahasa Indonesia</span>
+          </label>
+        </div>
+
+        <button onclick="speakQiraahText(this)" class="px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold rounded-xl shadow transition-all flex items-center gap-2">
+          <span>🔊 Dengarkan Pembacaan Teks</span>
+        </button>
+      </div>
+
+      <!-- Reading Box -->
+      <div class="card-soft p-6 sm:p-10 space-y-8 bg-white border border-emerald-100">
+        <div class="text-center pb-6 border-b border-slate-100">
+          <h3 class="font-arabic text-3xl sm:text-4xl font-bold text-emerald-900 leading-[2.8] tracking-wide py-2">${currentQiraah.title}</h3>
+        </div>
+
+        <!-- Arabic Text Display (RTL & Extra Generous Line-Height) -->
+        <div dir="rtl" class="font-arabic text-2xl sm:text-3xl text-slate-800 leading-[2.8] tracking-wide text-right space-y-6">
+          ${formatQiraahText(currentQiraah.arabicText, state.qiraahShowHarakat)}
+        </div>
+
+        <!-- Translation Display -->
+        ${state.qiraahShowTranslation ? `
+          <div class="mt-8 p-6 bg-emerald-50/70 border border-emerald-200/80 rounded-2xl space-y-2 text-slate-700 text-sm leading-relaxed animate-fadeIn">
+            <h4 class="font-bold text-emerald-900 flex items-center gap-2">
+              <span>🇮🇩 Terjemahan Bahasa Indonesia:</span>
+            </h4>
+            <p class="whitespace-pre-line">${currentQiraah.translation}</p>
+          </div>
+        ` : ''}
+      </div>
+
+      <!-- Comprehension Questions -->
+      <div class="card-soft p-6 sm:p-8 space-y-6">
+        <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2">
+          <span>📝</span>
+          <span class="font-arabic text-2xl font-bold text-emerald-900">فَهْمُ المَقْرُوْءِ</span>
+        </h3>
+
+        <div class="space-y-6">
+          ${currentQiraah.questions.map((q, idx) => `
+            <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-4">
+              <div class="flex items-start gap-3">
+                <span class="w-7 h-7 rounded-full bg-emerald-100 text-emerald-800 font-bold text-xs flex items-center justify-center flex-shrink-0 mt-1">
+                  ${idx + 1}
+                </span>
+                <div class="space-y-1">
+                  <h4 class="font-arabic text-2xl font-bold text-slate-800 leading-[2.2]">${q.q}</h4>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                ${q.options.map((opt, optIdx) => `
+                  <button onclick="checkQiraahAnswer(${idx}, ${optIdx})" id="qiraah-opt-${idx}-${optIdx}" class="qiraah-opt-btn p-3.5 bg-white hover:bg-emerald-50 border border-slate-200 hover:border-emerald-400 rounded-xl font-arabic text-xl text-slate-800 text-center transition-all">
+                    ${opt}
+                  </button>
+                `).join('')}
+              </div>
+
+              <div id="qiraah-feedback-${idx}" class="hidden p-3 rounded-xl text-xs font-semibold"></div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function formatQiraahText(text, showHarakat) {
+  let processed = text;
+  if (!showHarakat) {
+    // Remove main Arabic diacritics
+    processed = processed.replace(/[\u064B-\u0652]/g, '');
+  }
+  return processed.split('\n\n').map(p => `<p class="my-4 leading-[2.8] block">${p}</p>`).join('');
+}
+
+function checkQiraahAnswer(qIdx, optIdx) {
+  const qData = ARABIC_DATA.qiraah[state.currentQiraahIndex || 0].questions[qIdx];
+  const feedbackBox = document.getElementById(`qiraah-feedback-${qIdx}`);
+  
+  if (!feedbackBox) return;
+
+  if (optIdx === qData.answer) {
+    SoundFx.playCorrect();
+    feedbackBox.className = 'p-3 bg-emerald-100 text-emerald-900 border border-emerald-300 rounded-xl text-xs font-semibold block';
+    feedbackBox.innerHTML = `✅ <strong>Jawaban Benar!</strong> ${qData.explanation}`;
+  } else {
+    SoundFx.playWrong();
+    feedbackBox.className = 'p-3 bg-rose-100 text-rose-900 border border-rose-300 rounded-xl text-xs font-semibold block';
+    feedbackBox.innerHTML = `❌ <strong>Jawaban Kurang Tepat.</strong> Silakan coba lagi atau baca kembali paragraf terkait.`;
+  }
+}
+
+function attachQiraahEvents() {
+  const selectTeks = document.getElementById('qiraah-select');
+  const toggleH = document.getElementById('toggle-harakat');
+  const toggleT = document.getElementById('toggle-translation');
+
+  if (selectTeks) {
+    selectTeks.addEventListener('change', (e) => {
+      state.currentQiraahIndex = parseInt(e.target.value, 10);
+      renderTabContent();
+    });
+  }
+  if (toggleH) {
+    toggleH.addEventListener('change', (e) => {
+      state.qiraahShowHarakat = e.target.checked;
+      renderTabContent();
+    });
+  }
+  if (toggleT) {
+    toggleT.addEventListener('change', (e) => {
+      state.qiraahShowTranslation = e.target.checked;
+      renderTabContent();
+    });
+  }
+}
+
+// ==========================================
+// 5. MAHARAH ISTIMA' HTML & LOGIC (BERBAHAN TEKS QIRA'AH)
+// ==========================================
+function renderIstimaHTML() {
+  const pIdx = state.istimaPassageIndex || 0;
+  const passage = ARABIC_DATA.istima[pIdx];
+
+  return `
+    <div class="space-y-8 animate-fadeIn">
+      <!-- Title Header -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">
+            <span>🎧 Maharah Istima' (Mendengarkan Teks Bacaan)</span>
+            <span class="font-arabic text-3xl text-purple-700">مهارة الاستماع</span>
+          </h2>
+          <p class="text-slate-600 text-sm mt-1">
+            Bahan mendengarkan diambil langsung dari naskah bacaan Maharah Qira'ah (Teks A & Teks B).
+          </p>
+        </div>
+
+        <!-- Passage Selector Switcher -->
+        <select id="istima-passage-select" class="px-4 py-2.5 bg-white border border-slate-300 rounded-xl text-sm font-semibold text-slate-800 shadow-sm focus:ring-2 focus:ring-purple-500 font-arabic">
+          ${ARABIC_DATA.istima.map((p, idx) => `
+            <option value="${idx}" ${pIdx === idx ? 'selected' : ''}>${p.title}</option>
+          `).join('')}
+        </select>
+      </div>
+
+      <!-- MAIN LISTENING AUDIO PLAYER CARD -->
+      <div class="card-soft p-6 sm:p-8 space-y-6 bg-gradient-to-br from-purple-900 via-indigo-900 to-slate-900 text-white rounded-3xl shadow-xl">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-purple-800/60 pb-4">
+          <div>
+            <span class="block text-xs font-bold uppercase tracking-wider text-purple-300 mb-3">Naskah Istima' Utama</span>
+            <h3 class="font-arabic text-3xl sm:text-4xl font-bold text-purple-100 leading-[2.4] pt-2">${passage.title}</h3>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2">
+            <button onclick="speakIstimaPassage(this)" class="px-4 py-2.5 bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold rounded-xl shadow-lg transition-all flex items-center gap-2">
+              <span>🔊 Putar Bacaan</span>
+            </button>
+            <button id="btn-istima-pause" onclick="togglePauseAudio(this)" class="px-4 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold rounded-xl shadow-lg transition-all flex items-center gap-2">
+              <span>⏸️ Jeda</span>
+            </button>
+            <button onclick="stopAudio()" class="px-4 py-2.5 bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold rounded-xl shadow-lg transition-all flex items-center gap-2">
+              <span>⏹️ Stop</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Hide/Show Text Controls -->
+        <div class="flex items-center justify-between p-3.5 bg-white/10 backdrop-blur-md rounded-2xl border border-white/15">
+          <label class="flex items-center gap-3 cursor-pointer text-xs font-semibold text-purple-200">
+            <input type="checkbox" id="toggle-istima-hidetext" ${state.istimaHideText ? 'checked' : ''} class="w-5 h-5 text-purple-500 rounded focus:ring-purple-400"/>
+            <span>🙈 Sembunyikan Teks Saat Mendengarkan (Latih Pendengaran Murni)</span>
+          </label>
+        </div>
+
+        <!-- Passage Text Box (Controlled by Hide Text state) -->
+        ${state.istimaHideText ? `
+          <div class="p-8 text-center bg-purple-950/60 border border-purple-800/50 rounded-2xl space-y-3">
+            <div class="text-4xl">🎧</div>
+            <p class="text-purple-200 text-sm font-semibold">Teks disembunyikan. Fokuslah mendengarkan pelafalan audio!</p>
+            <p class="text-xs text-purple-400">Hapus centang di atas jika ingin melihat naskah teks.</p>
+          </div>
+        ` : `
+          <div dir="rtl" class="p-6 bg-purple-950/40 border border-purple-800/40 rounded-2xl font-arabic text-2xl sm:text-3xl text-purple-50 leading-[2.8] tracking-wide text-right space-y-4">
+            ${passage.arabicText.split('\n\n').map(p => `<p class="leading-[2.8] block">${p}</p>`).join('')}
+          </div>
+        `}
+      </div>
+
+      <!-- SECTION 1: DICTATION & FILL IN THE BLANKS (التدريب الأول: استمع وأكمل) -->
+      <div class="card-soft p-6 sm:p-8 space-y-6">
+        <div class="border-b border-purple-100 pb-4">
+          <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2">
+            <span>🎧 Latihan 1: Mendengarkan Kalimat Rumpang (دِكْتِيه)</span>
+          </h3>
+          <p class="text-xs text-slate-600 mt-1">Dengarkan cuplikan audio kalimat dari naskah di atas, lalu pilih kata yang hilang!</p>
+        </div>
+
+        <div class="space-y-6">
+          ${passage.fillBlanks.map((item, bIdx) => `
+            <div class="p-5 bg-purple-50/50 border border-purple-100 rounded-2xl space-y-4">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div class="flex items-center gap-3">
+                  <span class="w-8 h-8 rounded-full bg-purple-200 text-purple-900 font-bold text-xs flex items-center justify-center flex-shrink-0">
+                    ${bIdx + 1}
+                  </span>
+                  <button onclick="speakIstimaBlank(${bIdx}, this)" class="px-4 py-2 bg-purple-700 hover:bg-purple-800 text-white rounded-xl text-xs font-bold shadow-sm flex items-center gap-2">
+                    <span>🔊 Putar Audio Kalimat</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Blank Sentence Display -->
+              <div dir="rtl" class="font-arabic text-2xl sm:text-3xl text-slate-800 text-right leading-[2.2] pt-2">
+                ${item.sentenceTemplate}
+              </div>
+
+              <!-- Options Grid -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                ${item.options.map((opt, optIdx) => `
+                  <button onclick="checkIstimaBlankAnswer(${bIdx}, ${optIdx})" class="p-3.5 bg-white hover:bg-purple-100 border border-purple-200 hover:border-purple-400 rounded-xl font-arabic text-xl text-slate-800 text-center transition-all">
+                    ${opt}
+                  </button>
+                `).join('')}
+              </div>
+
+              <div id="istima-blank-feedback-${bIdx}" class="hidden p-3 rounded-xl text-xs font-semibold"></div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+
+      <!-- SECTION 2: LISTENING COMPREHENSION QUESTIONS (التدريب الثاني: الأسئلة للمستمعين) -->
+      <div class="card-soft p-6 sm:p-8 space-y-6">
+        <div class="border-b border-purple-100 pb-4">
+          <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2">
+            <span>📝 Latihan 2: Soal Pemahaman Mendengar</span>
+            <span class="font-arabic text-2xl text-purple-700 font-bold">فَهْمُ الْمَسْمُوْعِ</span>
+          </h3>
+          <p class="text-xs text-slate-600 mt-1">Jawab pertanyaan pemahaman naskah bacaan yang telah didengarkan:</p>
+        </div>
+
+        <div class="space-y-6">
+          ${passage.questions.map((q, qIdx) => `
+            <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-4">
+              <div class="flex items-start gap-3">
+                <span class="w-7 h-7 rounded-full bg-purple-100 text-purple-800 font-bold text-xs flex items-center justify-center flex-shrink-0 mt-1">
+                  ${qIdx + 1}
+                </span>
+                <div class="space-y-1">
+                  <h4 class="font-arabic text-2xl font-bold text-slate-800 leading-[2.2]">${q.q}</h4>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                ${q.options.map((opt, optIdx) => `
+                  <button onclick="checkIstimaQAnswer(${qIdx}, ${optIdx})" class="p-3.5 bg-white hover:bg-purple-50 border border-slate-200 hover:border-purple-400 rounded-xl font-arabic text-xl text-slate-800 text-center transition-all">
+                    ${opt}
+                  </button>
+                `).join('')}
+              </div>
+
+              <div id="istima-q-feedback-${qIdx}" class="hidden p-3 rounded-xl text-xs font-semibold"></div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function checkIstimaBlankAnswer(bIdx, optIdx) {
+  const pIdx = state.istimaPassageIndex || 0;
+  const itemData = ARABIC_DATA.istima[pIdx].fillBlanks[bIdx];
+  const feedbackBox = document.getElementById(`istima-blank-feedback-${bIdx}`);
+  if (!feedbackBox) return;
+
+  if (optIdx === itemData.correct) {
+    SoundFx.playCorrect();
+    feedbackBox.className = 'p-3 bg-emerald-100 text-emerald-900 border border-emerald-300 rounded-xl text-xs font-semibold block';
+    feedbackBox.innerHTML = `✅ <strong>Jawaban Benar!</strong> ${itemData.explanation}`;
+  } else {
+    SoundFx.playWrong();
+    feedbackBox.className = 'p-3 bg-rose-100 text-rose-900 border border-rose-300 rounded-xl text-xs font-semibold block';
+    feedbackBox.innerHTML = `❌ <strong>Jawaban Kurang Tepat.</strong> Dengarkan ulang audio kalimat dan coba lagi!`;
+  }
+}
+
+function checkIstimaQAnswer(qIdx, optIdx) {
+  const pIdx = state.istimaPassageIndex || 0;
+  const qData = ARABIC_DATA.istima[pIdx].questions[qIdx];
+  const feedbackBox = document.getElementById(`istima-q-feedback-${qIdx}`);
+  if (!feedbackBox) return;
+
+  if (optIdx === qData.answer) {
+    SoundFx.playCorrect();
+    feedbackBox.className = 'p-3 bg-emerald-100 text-emerald-900 border border-emerald-300 rounded-xl text-xs font-semibold block';
+    feedbackBox.innerHTML = `✅ <strong>Jawaban Benar!</strong> ${qData.explanation}`;
+  } else {
+    SoundFx.playWrong();
+    feedbackBox.className = 'p-3 bg-rose-100 text-rose-900 border border-rose-300 rounded-xl text-xs font-semibold block';
+    feedbackBox.innerHTML = `❌ <strong>Jawaban Kurang Tepat.</strong> Silakan dengarkan kembali naskah istima'.`;
+  }
+}
+
+function attachIstimaEvents() {
+  const selectPassage = document.getElementById('istima-passage-select');
+  const toggleHide = document.getElementById('toggle-istima-hidetext');
+
+  if (selectPassage) {
+    selectPassage.addEventListener('change', (e) => {
+      state.istimaPassageIndex = parseInt(e.target.value, 10);
+      renderTabContent();
+    });
+  }
+
+  if (toggleHide) {
+    toggleHide.addEventListener('change', (e) => {
+      state.istimaHideText = e.target.checked;
+      renderTabContent();
+    });
+  }
+}
+
+// ==========================================
+// 6. QAWAID HTML & LOGIC
+// ==========================================
+function switchQawaidBab(bab) {
+  if (state.qawaidBab === bab) return;
+  SoundFx.playClick();
+  state.qawaidBab = bab;
+  renderTabContent();
+}
+
+function renderQawaidHTML() {
+  const isBab2 = state.qawaidBab === 2;
+
+  // Header Bab Switcher
+  const babSwitcherHTML = `
+    <div class="card-soft p-3.5 bg-slate-900/90 backdrop-blur-md rounded-2xl border border-slate-800 flex flex-wrap items-center justify-between gap-3 shadow-xl mb-2">
+      <div class="flex items-center gap-2.5">
+        <span class="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-300 font-extrabold flex items-center justify-center text-sm border border-amber-500/30">
+          📐
+        </span>
+        <div>
+          <h4 class="text-xs sm:text-sm font-extrabold text-white">Materi Qawaid & Gramatika Bahasa Arab Kelas X</h4>
+          <p class="text-[11px] text-slate-400">Pilih Bab untuk melihat ringkasan materi dan soal latihan</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0">
+        <button onclick="switchQawaidBab(1)" class="flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 whitespace-nowrap ${state.qawaidBab === 1 ? 'bg-gradient-to-r from-amber-600 to-yellow-600 text-white shadow-md ring-2 ring-amber-400/50' : 'bg-slate-800 hover:bg-slate-700 text-slate-300'}">
+          <span>Bab 1: Istifham & Dhomir</span>
+        </button>
+        <button onclick="switchQawaidBab(2)" class="flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 whitespace-nowrap ${state.qawaidBab === 2 ? 'bg-gradient-to-r from-amber-600 to-yellow-600 text-white shadow-md ring-2 ring-amber-400/50' : 'bg-slate-800 hover:bg-slate-700 text-slate-300'}">
+          <span>Bab 2: Muzakkar/Mu'annats & Huruf Jar</span>
+        </button>
+        <button onclick="switchQawaidBab(3)" class="flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 whitespace-nowrap ${state.qawaidBab === 3 ? 'bg-gradient-to-r from-amber-600 to-yellow-600 text-white shadow-md ring-2 ring-amber-400/50' : 'bg-slate-800 hover:bg-slate-700 text-slate-300'}">
+          <span>Bab 3: Mufrad/Mutsanna/Jamak & Huruf 'Athaf</span>
+        </button>
+      </div>
+    </div>
+  `;
+
+  if (state.qawaidBab === 3) {
+    const q3 = ARABIC_DATA.qawaidBab3;
+    const questions3 = q3.questions;
+
+    return `
+      <div class="space-y-8 animate-fadeIn max-w-4xl mx-auto">
+        ${babSwitcherHTML}
+
+        <!-- Title Header -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+          <div>
+            <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">
+              <span>📐 Qawaid Bab 3: Mufrad, Mutsanna, Jamak & Huruf 'Athaf</span>
+              <span class="font-arabic text-3xl text-amber-700">القواعد والتراكيب</span>
+            </h2>
+            <p class="text-slate-600 text-sm mt-1">
+              Bentuk Kata Benda berdasarkan jumlah (Tunggal, Dual, Jamak) dan Kata Hubung / Konjungsi (وَ, فَـ, ثُمَّ, أَوْ).
+            </p>
+          </div>
+        </div>
+
+        <div class="space-y-8">
+          
+          <!-- SECTION 1: MUFRAD, MUTSNAA & JAMAK -->
+          <div class="card-soft p-6 sm:p-8 space-y-6">
+            <div class="border-b border-amber-100 pb-4">
+              <h3 class="text-xl font-bold text-amber-900 flex items-center gap-2">
+                <span>${q3.numberTypes.title}</span>
+              </h3>
+              <p class="text-sm text-slate-600 mt-1">${q3.numberTypes.desc}</p>
+            </div>
+
+            <!-- Table Mufrad, Mutsanna, Jamak -->
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse min-w-[600px]">
+                <thead>
+                  <tr class="bg-amber-100/80 text-amber-950 text-xs font-bold uppercase whitespace-nowrap">
+                    ${q3.numberTypes.tableHeaders.map(h => `<th class="p-3.5 text-center font-arabic text-lg whitespace-nowrap">${h}</th>`).join('')}
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 text-sm">
+                  ${q3.numberTypes.table.map(row => `
+                    <tr class="hover:bg-amber-50/40 transition-colors">
+                      <td class="p-3.5 text-center font-arabic text-xl font-bold text-blue-800 bg-blue-50/50 rounded-lg whitespace-nowrap">${row.mufrad}</td>
+                      <td class="p-3.5 text-center font-arabic text-xl font-bold text-teal-800 bg-teal-50/50 rounded-lg whitespace-nowrap">${row.mutsanna}</td>
+                      <td class="p-3.5 text-center font-arabic text-xl font-bold text-purple-800 bg-purple-50/50 rounded-lg whitespace-nowrap">${row.jamak}</td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Definitions of Jamak & Mutsanna -->
+            <div class="p-5 bg-amber-50/80 border border-amber-200/80 rounded-2xl space-y-3 text-xs leading-relaxed text-slate-800">
+              <h4 class="font-bold text-amber-900 text-sm">📌 Penjelasan & Pembagian Bentuk Kata (الملاحظة):</h4>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1">
+                ${q3.numberTypes.definitions.map(d => `
+                  <div class="p-3 bg-white rounded-xl border border-amber-200/60 space-y-1">
+                    <span class="font-arabic font-bold text-amber-900 text-base block">${d.type}</span>
+                    <p class="text-slate-600 text-xs">${d.desc}</p>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 2: HURUF AL-'ATHAF -->
+          <div class="card-soft p-6 sm:p-8 space-y-6">
+            <div class="border-b border-amber-100 pb-4">
+              <h3 class="text-xl font-bold text-amber-900 flex items-center gap-2">
+                <span>${q3.hurufAthaf.title}</span>
+              </h3>
+              <p class="text-sm text-slate-600 mt-1">${q3.hurufAthaf.desc}</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              ${q3.hurufAthaf.list.map(h => `
+                <div class="p-5 bg-gradient-to-br from-amber-50 to-yellow-50 border border-amber-200/80 rounded-2xl space-y-3 shadow-sm">
+                  <div class="flex items-center justify-between border-b border-amber-200/60 pb-2">
+                    <span class="font-arabic text-3xl font-bold text-amber-900">${h.huruf}</span>
+                    <span class="px-3 py-1 bg-amber-200/60 text-amber-950 font-bold text-xs rounded-full">${h.meaning}</span>
+                  </div>
+                  <p class="text-xs text-slate-600 italic font-medium">${h.functionDesc}</p>
+                  <div class="space-y-1 pt-1">
+                    <p class="text-xs font-bold text-slate-500 uppercase">Contoh Kalimat:</p>
+                    ${h.examples.map(ex => `
+                      <div class="flex items-center justify-between bg-white p-2.5 rounded-xl border border-amber-100">
+                        <span class="font-arabic text-xl font-bold text-slate-800">${ex}</span>
+                        <button onclick="speakArabic('${ex}', this)" class="text-xs text-amber-700 hover:text-amber-900 p-1">🔊</button>
+                      </div>
+                    `).join('')}
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <!-- SECTION 3: 10 SOAL LATIHAN QAWAID BAB 3 -->
+          <div class="card-soft p-6 sm:p-8 space-y-6">
+            <div class="border-b border-amber-100 pb-4">
+              <h3 class="text-xl font-bold text-amber-900 flex items-center gap-2">
+                <span>📝 Latihan 10 Soal Qawaid Bab 3</span>
+                <span class="font-arabic text-2xl text-amber-700 font-bold">تَدْرِيْبَاتُ القَوَاعِدِ (البَابُ الثَّالِثُ)</span>
+              </h3>
+              <p class="text-xs text-slate-600 mt-1">Uji pemahaman Mufrad/Mutsanna/Jamak dan Huruf 'Athaf (وَ, فَـ, ثُمَّ, أَوْ):</p>
+            </div>
+
+            <div class="space-y-6">
+              ${questions3.map((q, qIdx) => `
+                <div class="p-5 bg-amber-50/50 rounded-2xl border border-amber-100 space-y-4">
+                  <div class="flex items-start gap-3">
+                    <span class="w-7 h-7 rounded-full bg-amber-200 text-amber-900 font-bold text-xs flex items-center justify-center flex-shrink-0 mt-1">
+                      ${qIdx + 1}
+                    </span>
+                    <div class="space-y-1">
+                      <h4 class="font-arabic text-2xl font-bold text-slate-800 leading-[2.4] pt-1">${q.q}</h4>
+                    </div>
+                  </div>
+
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                    ${q.options.map((opt, optIdx) => `
+                      <button onclick="checkQawaidQAnswer(${qIdx}, ${optIdx})" class="p-3.5 bg-white hover:bg-amber-100 border border-amber-200 hover:border-amber-400 rounded-xl font-arabic text-xl text-slate-800 text-center transition-all">
+                        ${opt}
+                      </button>
+                    `).join('')}
+                  </div>
+
+                  <div id="qawaid-q-feedback-${qIdx}" class="hidden p-3 rounded-xl text-xs font-semibold"></div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+        </div>
+      </div>
+    `;
+  }
+
+  if (isBab2) {
+    const q2 = ARABIC_DATA.qawaidBab2;
+    const questions2 = q2.questions;
+
+    return `
+      <div class="space-y-8 animate-fadeIn max-w-4xl mx-auto">
+        ${babSwitcherHTML}
+
+        <!-- Title Header -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+          <div>
+            <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">
+              <span>📐 Qawaid Bab 2: Al-Muzakkar wal-Mu'annats & Huruf Jar</span>
+              <span class="font-arabic text-3xl text-amber-700">القواعد والتراكيب</span>
+            </h2>
+            <p class="text-slate-600 text-sm mt-1">
+              Pola Isim Muzakkar/Mu'annats, Kata Tunjuk (Isim Isyarah), Kata Ganti (Dhomir), dan Huruf Jar (حُرُوْفُ الْجَرِّ).
+            </p>
+          </div>
+        </div>
+
+        <div class="space-y-8">
+          
+          <!-- SECTION 1: ISIM ISYARAH MUDZAKKAR & MU'ANNATS -->
+          <div class="card-soft p-6 sm:p-8 space-y-6">
+            <div class="border-b border-amber-100 pb-4">
+              <h3 class="text-xl font-bold text-amber-900 flex items-center gap-2">
+                <span>${q2.muzakkarMuannats.title}</span>
+              </h3>
+              <p class="text-sm text-slate-600 mt-1">${q2.muzakkarMuannats.desc}</p>
+            </div>
+
+            <!-- Table Asma'ul Isyarah -->
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse min-w-[600px]">
+                <thead>
+                  <tr class="bg-amber-100/80 text-amber-950 text-xs font-bold uppercase whitespace-nowrap">
+                    <th class="p-3.5 whitespace-nowrap">Jenis Kata</th>
+                    <th class="p-3.5 text-center font-arabic text-xl whitespace-nowrap">الإشارة (Dekat)</th>
+                    <th class="p-3.5 font-arabic text-lg text-right whitespace-nowrap">Contoh (Dekat)</th>
+                    <th class="p-3.5 text-center font-arabic text-xl whitespace-nowrap">الإشارة (Jauh)</th>
+                    <th class="p-3.5 font-arabic text-lg text-right whitespace-nowrap">Contoh (Jauh)</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 text-sm">
+                  ${q2.muzakkarMuannats.isyarahTable.map(row => `
+                    <tr class="hover:bg-amber-50/40 transition-colors">
+                      <td class="p-3.5 font-bold text-amber-900 whitespace-nowrap">${row.type}</td>
+                      <td class="p-3.5 text-center font-arabic text-2xl font-bold text-blue-700 bg-blue-50/50 rounded-lg whitespace-nowrap">${row.dekat}</td>
+                      <td class="p-3.5 font-arabic text-lg text-slate-800 text-right whitespace-nowrap">${row.dekatEx.slice(0, 3).join(', ')}</td>
+                      <td class="p-3.5 text-center font-arabic text-2xl font-bold text-purple-700 bg-purple-50/50 rounded-lg whitespace-nowrap">${row.jauh}</td>
+                      <td class="p-3.5 font-arabic text-lg text-slate-800 text-right whitespace-nowrap">${row.jauhEx.slice(0, 3).join(', ')}</td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Catatan Tanda Mu'annats -->
+            <div class="p-5 bg-amber-50/80 border border-amber-200/80 rounded-2xl space-y-2 text-xs leading-relaxed text-slate-800">
+              <h4 class="font-bold text-amber-900 text-sm">📌 Catatan Penting Tanda-Tanda Isim Mu'annats (الملاحظة):</h4>
+              ${q2.muzakkarMuannats.notes.map(n => `<p>${n}</p>`).join('')}
+            </div>
+          </div>
+
+          <!-- SECTION 2: DHOMIR GENDER MUDZAKKAR & MU'ANNATS -->
+          <div class="card-soft p-6 sm:p-8 space-y-6">
+            <div class="border-b border-amber-100 pb-4">
+              <h3 class="text-xl font-bold text-amber-900 flex items-center gap-2">
+                <span>${q2.dhomirGender.title}</span>
+              </h3>
+              <p class="text-sm text-slate-600 mt-1">${q2.dhomirGender.desc}</p>
+            </div>
+
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse min-w-[650px]">
+                <thead>
+                  <tr class="bg-amber-100/80 text-amber-950 text-xs font-bold uppercase whitespace-nowrap">
+                    <th class="p-3.5 whitespace-nowrap">Gender</th>
+                    <th class="p-3.5 text-center font-arabic text-lg whitespace-nowrap">الضمير المنفصل</th>
+                    <th class="p-3.5 font-arabic text-lg text-right whitespace-nowrap">Contoh Kalimat (Munfashil)</th>
+                    <th class="p-3.5 text-center font-arabic text-lg whitespace-nowrap">الضمير المتصل</th>
+                    <th class="p-3.5 font-arabic text-lg text-right whitespace-nowrap">Contoh Frasa (Muttashil)</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 text-sm">
+                  ${q2.dhomirGender.table.map(row => `
+                    <tr class="hover:bg-amber-50/40 transition-colors">
+                      <td class="p-3.5 font-bold text-amber-900 whitespace-nowrap">${row.gender}</td>
+                      <td class="p-3.5 text-center font-arabic text-xl font-bold text-teal-700 bg-teal-50/50 rounded-lg whitespace-nowrap">${row.munfashil}</td>
+                      <td class="p-3.5 font-arabic text-lg text-slate-800 text-right whitespace-nowrap">${row.exMunfashil}</td>
+                      <td class="p-3.5 text-center font-arabic text-xl font-bold text-rose-700 bg-rose-50/50 rounded-lg whitespace-nowrap">${row.muttashil}</td>
+                      <td class="p-3.5 font-arabic text-lg text-slate-800 text-right whitespace-nowrap">${row.exMuttashil}</td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- SECTION 3: HURUF AL-JAR -->
+          <div class="card-soft p-6 sm:p-8 space-y-6">
+            <div class="border-b border-amber-100 pb-4">
+              <h3 class="text-xl font-bold text-amber-900 flex items-center gap-2">
+                <span>${q2.hurufJar.title}</span>
+              </h3>
+              <p class="text-sm text-slate-600 mt-1">${q2.hurufJar.desc}</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              ${q2.hurufJar.table.map(h => `
+                <div class="p-5 bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200/80 rounded-2xl space-y-3 shadow-sm">
+                  <div class="flex items-center justify-between border-b border-amber-200/60 pb-2">
+                    <span class="font-arabic text-3xl font-bold text-amber-900">${h.huruf}</span>
+                    <span class="px-3 py-1 bg-amber-200/60 text-amber-950 font-bold text-xs rounded-full">${h.meaning}</span>
+                  </div>
+                  <div class="space-y-1 pt-1">
+                    <p class="text-xs font-bold text-slate-500 uppercase">Contoh Kalimat:</p>
+                    ${h.examples.map(ex => `
+                      <div class="flex items-center justify-between bg-white p-2.5 rounded-xl border border-amber-100">
+                        <span class="font-arabic text-xl font-bold text-slate-800">${ex}</span>
+                        <button onclick="speakArabic('${ex}', this)" class="text-xs text-amber-700 hover:text-amber-900 p-1">🔊</button>
+                      </div>
+                    `).join('')}
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <!-- SECTION 4: 10 SOAL LATIHAN QAWAID BAB 2 -->
+          <div class="card-soft p-6 sm:p-8 space-y-6">
+            <div class="border-b border-amber-100 pb-4">
+              <h3 class="text-xl font-bold text-amber-900 flex items-center gap-2">
+                <span>📝 Latihan 10 Soal Qawaid Bab 2</span>
+                <span class="font-arabic text-2xl text-amber-700 font-bold">تَدْرِيْبَاتُ القَوَاعِدِ (البَابُ الثَّانِي)</span>
+              </h3>
+              <p class="text-xs text-slate-600 mt-1">Uji pemahaman Isim Muzakkar/Mu'annats, Dhomir Gender, dan Huruf Jar:</p>
+            </div>
+
+            <div class="space-y-6">
+              ${questions2.map((q, qIdx) => `
+                <div class="p-5 bg-amber-50/50 rounded-2xl border border-amber-100 space-y-4">
+                  <div class="flex items-start gap-3">
+                    <span class="w-7 h-7 rounded-full bg-amber-200 text-amber-900 font-bold text-xs flex items-center justify-center flex-shrink-0 mt-1">
+                      ${qIdx + 1}
+                    </span>
+                    <div class="space-y-1">
+                      <h4 class="font-arabic text-2xl font-bold text-slate-800 leading-[2.4] pt-1">${q.q}</h4>
+                    </div>
+                  </div>
+
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                    ${q.options.map((opt, optIdx) => `
+                      <button onclick="checkQawaidQAnswer(${qIdx}, ${optIdx})" class="p-3.5 bg-white hover:bg-amber-100 border border-amber-200 hover:border-amber-400 rounded-xl font-arabic text-xl text-slate-800 text-center transition-all">
+                        ${opt}
+                      </button>
+                    `).join('')}
+                  </div>
+
+                  <div id="qawaid-q-feedback-${qIdx}" class="hidden p-3 rounded-xl text-xs font-semibold"></div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+        </div>
+      </div>
+    `;
+  }
+
+  // Otherwise, Bab 1 Qawaid
+  const istifhamData = ARABIC_DATA.qawaid[0];
+  const dhomirData = ARABIC_DATA.qawaid[1];
+  const kalimahData = ARABIC_DATA.qawaid[2];
+
+  return `
+    <div class="space-y-8 animate-fadeIn max-w-4xl mx-auto">
+      ${babSwitcherHTML}
+
+      <!-- Title Header -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">
+            <span>📐 Qawaid Bab 1: Kata Tanya, Dhomir & Pembagian Kata</span>
+            <span class="font-arabic text-3xl text-amber-700">القواعد والتراكيب</span>
+          </h2>
+          <p class="text-slate-600 text-sm mt-1">
+            Ringkasan materi Adawatul Istifham (Kata Tanya), Dhomir (Kata Ganti), dan Pembagian Kata.
+          </p>
+        </div>
+      </div>
+
+      <!-- Grammar Sections -->
+      <div class="space-y-8">
+        
+        <!-- SECTION 1: ADAWATUL ISTIFHAM (14 KATA TANYA) -->
+        <div class="card-soft p-6 sm:p-8 space-y-6">
+          <div class="border-b border-amber-100 pb-4">
+            <h3 class="text-xl font-bold text-amber-900 flex items-center gap-2">
+              <span>${istifhamData.title}</span>
+            </h3>
+            <p class="text-sm text-slate-600 mt-1">${istifhamData.description}</p>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="bg-amber-100/80 text-amber-950 text-xs font-bold uppercase tracking-wider">
+                  <th class="p-3.5 text-center w-12">#</th>
+                  <th class="p-3.5 font-arabic text-xl text-right">الأَدَاةُ (Kata Tanya)</th>
+                  <th class="p-3.5">Arti / Terjemahan</th>
+                  <th class="p-3.5">Keterangan Penggunaan</th>
+                  <th class="p-3.5 text-center w-16">Audio</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 text-sm">
+                ${istifhamData.istifhamTable.map(item => `
+                  <tr class="hover:bg-amber-50/40 transition-colors">
+                    <td class="p-3.5 text-center font-bold text-slate-400">${item.id}</td>
+                    <td class="p-3.5 font-arabic text-2xl font-bold text-amber-900 text-right">${item.arabic}</td>
+                    <td class="p-3.5 font-semibold text-slate-800">${item.meaning}</td>
+                    <td class="p-3.5 text-xs font-medium text-slate-600 bg-slate-50/50 rounded-lg">${item.desc}</td>
+                    <td class="p-3.5 text-center">
+                      <button onclick="speakArabic('${item.arabic}', this)" class="p-2 bg-amber-50 hover:bg-amber-100 text-amber-700 rounded-full transition-colors" title="Dengarkan Suara">
+                        🔊
+                      </button>
+                    </td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- SECTION 2: DHOMIR MUNFASHIL & MUTTASHIL -->
+        <div class="card-soft p-6 sm:p-8 space-y-6">
+          <div class="border-b border-amber-100 pb-4">
+            <h3 class="text-xl font-bold text-amber-900 flex items-center gap-2">
+              <span>${dhomirData.title}</span>
+            </h3>
+            <p class="text-sm text-slate-600 mt-1">${dhomirData.description}</p>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse min-w-[650px]">
+              <thead>
+                <tr class="bg-amber-100/80 text-amber-950 text-xs font-bold uppercase whitespace-nowrap">
+                  <th class="p-3.5 font-arabic text-lg text-right whitespace-nowrap">الضَّمِيْرُ</th>
+                  <th class="p-3.5 text-center font-arabic text-lg whitespace-nowrap">المُتَّصِل</th>
+                  <th class="p-3.5 font-arabic text-lg text-right whitespace-nowrap">Contoh (اسْم)</th>
+                  <th class="p-3.5 font-arabic text-lg text-right whitespace-nowrap">Contoh (عُنْوَان)</th>
+                  <th class="p-3.5 font-arabic text-lg text-right whitespace-nowrap">Contoh (بَيْت)</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 text-sm">
+                ${dhomirData.dhomirMuttashilTable.map(row => `
+                  <tr class="hover:bg-amber-50/40 transition-colors">
+                    <td class="p-3.5 font-arabic text-2xl font-bold text-amber-900 text-right whitespace-nowrap">${row.dhomir}</td>
+                    <td class="p-3.5 text-center font-arabic text-2xl font-bold text-teal-700 bg-teal-50/50 rounded-lg whitespace-nowrap">${row.muttashil}</td>
+                    <td class="p-3.5 font-arabic text-xl text-slate-800 text-right whitespace-nowrap">${row.exIsm}</td>
+                    <td class="p-3.5 font-arabic text-xl text-slate-800 text-right whitespace-nowrap">${row.exUnwan}</td>
+                    <td class="p-3.5 font-arabic text-xl text-slate-800 text-right whitespace-nowrap">${row.exBait}</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- SECTION 3: PEMBAGIAN KATA -->
+        <div class="card-soft p-6 sm:p-8 space-y-6">
+          <h3 class="text-xl font-bold text-amber-900 flex items-center gap-2">
+            <span>${kalimahData.title}</span>
+          </h3>
+          <p class="text-sm text-slate-600">${kalimahData.description}</p>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            ${kalimahData.breakdown.map(b => `
+              <div class="p-5 bg-amber-50/60 border border-amber-200/80 rounded-2xl space-y-2">
+                <h4 class="font-arabic text-2xl font-bold text-amber-900">${b.type}</h4>
+                <p class="text-xs text-slate-700 leading-relaxed">${b.desc}</p>
+              </div>
+            `).join('')}
+          </div>
+
+          <!-- Color Coded Sentence Breakdown -->
+          <div class="p-6 bg-slate-900 text-white rounded-2xl space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-amber-400 uppercase tracking-wider">💡 Contoh Analisis Struktur Kalimat:</span>
+              <button onclick="speakArabic('${kalimahData.interactiveSentence.text}', this)" class="text-xs bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-lg text-amber-300">
+                🔊 Dengarkan
+              </button>
+            </div>
+
+            <div class="font-arabic text-3xl text-center py-4 text-slate-100 tracking-wide">
+              "${kalimahData.interactiveSentence.text}"
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 pt-2">
+              ${kalimahData.interactiveSentence.words.map(w => `
+                <div class="p-3 border rounded-xl text-center space-y-1 ${w.color}">
+                  <div class="font-arabic text-2xl font-bold">${w.word}</div>
+                  <div class="text-[10px] font-sans font-bold uppercase">${w.role}</div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 4: 10 SOAL LATIHAN QAWAID -->
+        <div class="card-soft p-6 sm:p-8 space-y-6">
+          <div class="border-b border-amber-100 pb-4">
+            <h3 class="text-xl font-bold text-amber-900 flex items-center gap-2">
+              <span>📝 Latihan 10 Soal Qawaid (Tata Bahasa)</span>
+              <span class="font-arabic text-2xl text-amber-700 font-bold">تَدْرِيْبَاتُ القَوَاعِدِ</span>
+            </h3>
+            <p class="text-xs text-slate-600 mt-1">Uji pemahaman Kata Tanya (Adawatul Istifham), Dhomir, dan Pembagian Kata (Isim/Fi'il/Harf):</p>
+          </div>
+
+          <div class="space-y-6">
+            ${ARABIC_DATA.qawaidQuestions.map((q, qIdx) => `
+              <div class="p-5 bg-amber-50/50 rounded-2xl border border-amber-100 space-y-4">
+                <div class="flex items-start gap-3">
+                  <span class="w-7 h-7 rounded-full bg-amber-200 text-amber-900 font-bold text-xs flex items-center justify-center flex-shrink-0 mt-1">
+                    ${qIdx + 1}
+                  </span>
+                  <div class="space-y-1">
+                    <h4 class="font-arabic text-2xl font-bold text-slate-800 leading-[2.4] pt-1">${q.q}</h4>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                  ${q.options.map((opt, optIdx) => `
+                    <button onclick="checkQawaidQAnswer(${qIdx}, ${optIdx})" class="p-3.5 bg-white hover:bg-amber-100 border border-amber-200 hover:border-amber-400 rounded-xl font-arabic text-xl text-slate-800 text-center transition-all">
+                      ${opt}
+                    </button>
+                  `).join('')}
+                </div>
+
+                <div id="qawaid-q-feedback-${qIdx}" class="hidden p-3 rounded-xl text-xs font-semibold"></div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  `;
+}
+
+function checkQawaidQAnswer(qIdx, optIdx) {
+  let questions;
+  if (state.qawaidBab === 3) {
+    questions = ARABIC_DATA.qawaidBab3.questions;
+  } else if (state.qawaidBab === 2) {
+    questions = ARABIC_DATA.qawaidBab2.questions;
+  } else {
+    questions = ARABIC_DATA.qawaidQuestions;
+  }
+  const qData = questions[qIdx];
+  const feedbackBox = document.getElementById(`qawaid-q-feedback-${qIdx}`);
+  if (!feedbackBox) return;
+
+  if (optIdx === qData.answer) {
+    SoundFx.playCorrect();
+    feedbackBox.className = 'p-3 bg-emerald-100 text-emerald-900 border border-emerald-300 rounded-xl text-xs font-semibold block';
+    feedbackBox.innerHTML = `✅ <strong>Jawaban Benar!</strong> ${qData.explanation}`;
+  } else {
+    SoundFx.playWrong();
+    feedbackBox.className = 'p-3 bg-rose-100 text-rose-900 border border-rose-300 rounded-xl text-xs font-semibold block';
+    feedbackBox.innerHTML = `❌ <strong>Jawaban Kurang Tepat.</strong> Silakan baca kembali ringkasan materi qawaid di atas.`;
+  }
+}
+
+function attachQawaidEvents() {}
+
+// ==========================================
+// 7. TADRIBAT (QUIZIZZ / KAHOOT GAMIFIED 20 SOAL PER VERSI)
+// ==========================================
+function getTadribatQuestions() {
+  const bab = state.tadribatBab || 1;
+  const ver = state.tadribatVersion || 1;
+
+  if (bab === 3) {
+    return ver === 2 ? (ARABIC_DATA.tadribat.bab3_v2 || []) : (ARABIC_DATA.tadribat.bab3_v1 || []);
+  }
+  if (bab === 2) {
+    return ver === 2 ? (ARABIC_DATA.tadribat.bab2_v2 || []) : (ARABIC_DATA.tadribat.bab2_v1 || []);
+  }
+  return ver === 2 ? (ARABIC_DATA.tadribat.bab1_v2 || ARABIC_DATA.tadribat.v2 || []) : (ARABIC_DATA.tadribat.bab1_v1 || ARABIC_DATA.tadribat.v1 || []);
+}
+
+function resetQuizState() {
+  state.quizCurrentIndex = 0;
+  state.quizAnswers = [];
+  state.quizScore = 0;
+  state.quizPoints = 0;
+  state.quizStreak = 0;
+  state.quizMaxStreak = 0;
+  state.quizIsFinished = false;
+}
+
+function switchTadribatBab(bab) {
+  if (state.tadribatBab === bab) return;
+  SoundFx.playClick();
+  state.tadribatBab = bab;
+  resetQuizState();
+  renderTabContent();
+}
+
+function switchTadribatVersion(ver) {
+  if (state.tadribatVersion === ver) return;
+  SoundFx.playClick();
+  state.tadribatVersion = ver;
+  resetQuizState();
+  renderTabContent();
+}
+
+function renderTadribatHTML() {
+  if (state.quizIsFinished) {
+    return renderQuizResultHTML();
+  }
+
+  const questions = getTadribatQuestions();
+  const q = questions[state.quizCurrentIndex];
+  const totalQ = questions.length;
+  const progressPercent = ((state.quizCurrentIndex + 1) / totalQ) * 100;
+  const currentAnswer = state.quizAnswers[state.quizCurrentIndex];
+  const isAnswered = currentAnswer !== undefined;
+
+  // Kahoot Shape Symbols & Colors
+  const kahootStyles = [
+    { bg: "bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white border-red-700", shape: "▲", label: "A" },
+    { bg: "bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white border-blue-700", shape: "◆", label: "B" },
+    { bg: "bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-900 border-amber-600", shape: "●", label: "C" },
+    { bg: "bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white border-emerald-700", shape: "■", label: "D" }
+  ];
+
+  return `
+    <div class="space-y-6 animate-fadeIn max-w-4xl mx-auto">
+      
+      <!-- BAB & VERSION SELECTOR BAR -->
+      <div class="card-soft p-4 bg-slate-900/90 backdrop-blur-md rounded-2xl border border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4 shadow-xl">
+        <div class="flex items-center gap-3">
+          <span class="w-10 h-10 rounded-xl bg-teal-500/20 text-teal-300 font-extrabold flex items-center justify-center text-lg border border-teal-500/30">
+            📝
+          </span>
+          <div>
+            <h4 class="text-xs sm:text-sm font-extrabold text-white whitespace-nowrap">Paket Tadribat Interaktif (Kelas X)</h4>
+            <p class="text-[11px] sm:text-xs text-slate-400 whitespace-nowrap">Pilih Bab dan Versi Soal (20 Soal/Versi)</p>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2.5 w-full md:w-auto">
+          <!-- BAB SELECTOR -->
+          <div class="flex items-center bg-slate-800 p-1 rounded-xl border border-slate-700">
+            <button onclick="switchTadribatBab(1)" class="px-3 py-1.5 rounded-lg text-xs font-extrabold transition-all ${state.tadribatBab === 1 ? 'bg-amber-500 text-slate-950 shadow' : 'text-slate-400 hover:text-white'}">
+              Bab 1
+            </button>
+            <button onclick="switchTadribatBab(2)" class="px-3 py-1.5 rounded-lg text-xs font-extrabold transition-all ${state.tadribatBab === 2 ? 'bg-amber-500 text-slate-950 shadow' : 'text-slate-400 hover:text-white'}">
+              Bab 2
+            </button>
+            <button onclick="switchTadribatBab(3)" class="px-3 py-1.5 rounded-lg text-xs font-extrabold transition-all ${state.tadribatBab === 3 ? 'bg-amber-500 text-slate-950 shadow' : 'text-slate-400 hover:text-white'}">
+              Bab 3
+            </button>
+          </div>
+
+          <!-- VERSI SELECTOR -->
+          <div class="flex items-center gap-2">
+            <button onclick="switchTadribatVersion(1)" class="px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${state.tadribatVersion === 1 ? 'bg-gradient-to-r from-teal-600 to-emerald-600 text-white shadow-md ring-2 ring-teal-400/50' : 'bg-slate-800 hover:bg-slate-700 text-slate-300'}">
+              <span>📚 Versi 1 (Kosakata & Hiwar)</span>
+            </button>
+            <button onclick="switchTadribatVersion(2)" class="px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${state.tadribatVersion === 2 ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md ring-2 ring-purple-400/50' : 'bg-slate-800 hover:bg-slate-700 text-slate-300'}">
+              <span>📐 Versi 2 (Gramatika & Qawaid)</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TOP BAR STATUS -->
+      <div class="card-soft p-4 bg-slate-900 text-white flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-slate-800 shadow-xl">
+        <div class="flex items-center gap-3">
+          <span class="text-xs font-bold text-slate-400">
+            Soal <span class="text-white font-extrabold text-base">${state.quizCurrentIndex + 1}</span> / ${totalQ}
+          </span>
+          <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold ${state.tadribatVersion === 1 ? 'bg-teal-500/20 text-teal-300 border border-teal-500/30' : 'bg-purple-500/20 text-purple-300 border border-purple-500/30'}">
+            Bab ${state.tadribatBab || 1} - ${state.tadribatVersion === 1 ? 'Versi 1: Kosakata & Hiwar' : 'Versi 2: Gramatika & Qawaid'}
+          </span>
+        </div>
+
+        <!-- Streak & Points Counters -->
+        <div class="flex items-center gap-4 text-xs font-bold">
+          <div class="flex items-center gap-1.5 px-3 py-1 bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded-xl">
+            <span class="text-base animate-bounce">🔥</span>
+            <span>STREAK: <span class="text-amber-200 text-sm font-extrabold">x${state.quizStreak}</span></span>
+          </div>
+
+          <div class="flex items-center gap-1.5 px-3 py-1 bg-teal-500/20 text-teal-300 border border-teal-500/30 rounded-xl">
+            <span class="text-base">⭐</span>
+            <span>POIN: <span class="text-teal-200 text-sm font-extrabold">${state.quizPoints.toLocaleString('id-ID')}</span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROGRESS BAR -->
+      <div class="w-full bg-slate-800 h-3 rounded-full overflow-hidden shadow-inner border border-slate-700">
+        <div class="bg-gradient-to-r from-purple-500 via-pink-500 to-rose-500 h-full transition-all duration-300 rounded-full" style="width: ${progressPercent}%"></div>
+      </div>
+
+      <!-- QUESTION CARD -->
+      <div class="card-soft p-6 sm:p-10 space-y-8 bg-white border border-slate-200 rounded-3xl shadow-xl">
+        <div class="text-center py-2">
+          <h3 class="font-arabic text-3xl sm:text-5xl font-bold text-slate-900 leading-[2.4] tracking-wide py-2">${q.question}</h3>
+        </div>
+
+        <!-- 4 KAHOOT COLOR CARDS GRID -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          ${q.options.map((opt, idx) => {
+            const style = kahootStyles[idx];
+            const isChosen = currentAnswer === idx;
+            const isCorrectChoice = isAnswered && idx === q.answer;
+            const isWrongChoice = isAnswered && isChosen && idx !== q.answer;
+
+            let borderEffect = 'border-transparent shadow-md';
+            if (isAnswered) {
+              if (isCorrectChoice) borderEffect = 'ring-4 ring-emerald-400 border-white scale-[1.02] shadow-2xl';
+              else if (isWrongChoice) borderEffect = 'opacity-40 border-slate-400 line-through';
+              else borderEffect = 'opacity-50';
+            }
+
+            return `
+              <button onclick="selectQuizAnswer(${idx})" ${isAnswered ? 'disabled' : ''} class="p-5 ${style.bg} ${borderEffect} rounded-2xl text-left transition-all transform hover:-translate-y-0.5 active:scale-95 flex items-center justify-between shadow-lg cursor-pointer">
+                <div class="flex items-center gap-3.5">
+                  <span class="w-9 h-9 rounded-xl bg-white/20 backdrop-blur-md text-white font-extrabold text-sm flex items-center justify-center flex-shrink-0 border border-white/30">
+                    ${style.shape}
+                  </span>
+                  <span class="text-base sm:text-lg font-bold">${opt}</span>
+                </div>
+                ${isChosen ? `<span class="text-xl font-bold">${idx === q.answer ? '✅' : '❌'}</span>` : ''}
+              </button>
+            `;
+          }).join('')}
+        </div>
+
+        <!-- INSTANT FEEDBACK BANNER AFTER ANSWERING -->
+        ${isAnswered ? `
+          <div class="p-5 rounded-2xl text-sm font-bold animate-fadeIn space-y-2 ${currentAnswer === q.answer ? 'bg-emerald-50 text-emerald-950 border-2 border-emerald-300' : 'bg-rose-50 text-rose-950 border-2 border-rose-300'}">
+            <div class="flex items-center justify-between">
+              <span class="text-base font-extrabold flex items-center gap-2">
+                ${currentAnswer === q.answer ? '🎉 BENAR! AMAZING!' : '❌ KURANG TEPAT!'}
+              </span>
+              ${currentAnswer === q.answer ? `
+                <span class="px-3 py-1 bg-emerald-200 text-emerald-900 rounded-full text-xs font-mono font-bold">
+                  +${1000 + (state.quizStreak * 200)} POIN
+                </span>
+              ` : ''}
+            </div>
+            <p class="text-xs leading-relaxed font-normal">${q.explanation}</p>
+          </div>
+        ` : ''}
+
+        <!-- NAVIGATION ACTION BUTTONS -->
+        <div class="flex justify-between items-center pt-6 border-t border-slate-100">
+          <button onclick="prevQuizQuestion()" ${state.quizCurrentIndex === 0 ? 'disabled class="opacity-30 cursor-not-allowed px-4 py-2.5 text-xs font-bold text-slate-400"' : 'class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl shadow-sm"'}>
+            ← Soal Sebelumnya
+          </button>
+
+          ${state.quizCurrentIndex === totalQ - 1 ? `
+            <button onclick="finishQuiz()" ${!isAnswered ? 'disabled class="opacity-50 cursor-not-allowed px-8 py-3 bg-emerald-400 text-white font-bold rounded-xl"' : 'class="px-8 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-extrabold rounded-2xl shadow-xl transition-all flex items-center gap-2 transform hover:scale-105"'}">
+              <span>🏆 Selesaikan Kuis & Lihat Hasil</span>
+            </button>
+          ` : `
+            <button onclick="nextQuizQuestion()" ${!isAnswered ? 'disabled class="opacity-40 cursor-not-allowed px-6 py-3 bg-slate-300 text-slate-500 text-xs font-bold rounded-xl"' : 'class="px-6 py-3 bg-purple-700 hover:bg-purple-800 text-white text-xs font-extrabold rounded-xl shadow-lg transition-all transform hover:scale-105"'}>
+              Soal Selanjutnya →
+            </button>
+          `}
+        </div>
+
+      </div>
+    </div>
+  `;
+}
+
+function selectQuizAnswer(optIdx) {
+  if (state.quizAnswers[state.quizCurrentIndex] !== undefined) return; // Prevent re-select
+
+  const questions = getTadribatQuestions();
+  const q = questions[state.quizCurrentIndex];
+  state.quizAnswers[state.quizCurrentIndex] = optIdx;
+
+  if (optIdx === q.answer) {
+    SoundFx.playCorrect();
+    state.quizStreak++;
+    if (state.quizStreak > state.quizMaxStreak) {
+      state.quizMaxStreak = state.quizStreak;
+    }
+    const bonus = 1000 + (state.quizStreak * 200);
+    state.quizPoints += bonus;
+  } else {
+    SoundFx.playWrong();
+    state.quizStreak = 0;
+  }
+
+  renderTabContent();
+}
+
+function nextQuizQuestion() {
+  const questions = getTadribatQuestions();
+  const totalQ = questions.length;
+  if (state.quizCurrentIndex < totalQ - 1) {
+    state.quizCurrentIndex++;
+    renderTabContent();
+  }
+}
+
+function prevQuizQuestion() {
+  if (state.quizCurrentIndex > 0) {
+    state.quizCurrentIndex--;
+    renderTabContent();
+  }
+}
+
+function finishQuiz() {
+  let correctCount = 0;
+  const questions = getTadribatQuestions();
+  const totalQ = questions.length;
+  questions.forEach((q, idx) => {
+    if (state.quizAnswers[idx] === q.answer) {
+      correctCount++;
+    }
+  });
+
+  state.quizScore = Math.round((correctCount / totalQ) * 100);
+  state.quizIsFinished = true;
+
+  if (state.quizScore >= 70) {
+    SoundFx.playCorrect();
+  } else {
+    SoundFx.playWrong();
+  }
+
+  renderTabContent();
+}
+
+function resetQuiz() {
+  state.quizCurrentIndex = 0;
+  state.quizAnswers = [];
+  state.quizScore = 0;
+  state.quizPoints = 0;
+  state.quizStreak = 0;
+  state.quizMaxStreak = 0;
+  state.quizIsFinished = false;
+  renderTabContent();
+}
+
+function renderQuizResultHTML() {
+  const isPassed = state.quizScore >= 70;
+  const questions = getTadribatQuestions();
+  const totalQ = questions.length;
+  let correctCount = 0;
+  questions.forEach((q, idx) => {
+    if (state.quizAnswers[idx] === q.answer) correctCount++;
+  });
+
+  const currentVerName = state.tadribatVersion === 1 ? 'Versi 1: Kosakata & Ungkapan' : 'Versi 2: Tata Bahasa & Qawaid';
+  const otherVerNum = state.tadribatVersion === 1 ? 2 : 1;
+  const otherVerName = state.tadribatVersion === 1 ? 'Versi 2 (Qawaid)' : 'Versi 1 (Mufradat)';
+
+  return `
+    <div class="space-y-8 animate-fadeIn max-w-4xl mx-auto text-center">
+      
+      <!-- KAHOOT VICTORY SUMMARY BANNER -->
+      <div class="card-soft p-8 sm:p-12 space-y-8 bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900 text-white rounded-3xl shadow-2xl border border-purple-800/40">
+        
+        <div class="inline-flex p-5 rounded-full ${isPassed ? 'bg-amber-400/20 text-amber-300 border-2 border-amber-400/40' : 'bg-blue-400/20 text-blue-300 border-2 border-blue-400/40'} text-6xl mb-2 animate-bounce">
+          ${isPassed ? '🏆' : '🎯'}
+        </div>
+
+        <div class="space-y-2">
+          <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">
+            ${isPassed ? 'Mumtaz! Hasil Belajar Luar Biasa!' : 'Tetap Semangat! Belajar Lagi!'}
+          </h2>
+          <p class="text-purple-200 text-sm sm:text-base">
+            Kuis Interaktif Bahasa Arab Kelas X - Bab 1 (${currentVerName})
+          </p>
+        </div>
+
+        <!-- 3 STAT CARDS (POIN, SKOR %, STREAK) -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto pt-4">
+          <div class="p-5 bg-white/10 backdrop-blur-md rounded-2xl border border-white/15">
+            <div class="text-xs font-bold text-purple-300 uppercase tracking-wider">Total Poin Quiz</div>
+            <div class="text-3xl font-extrabold text-teal-300 mt-1">⭐ ${state.quizPoints.toLocaleString('id-ID')}</div>
+          </div>
+
+          <div class="p-5 bg-white/10 backdrop-blur-md rounded-2xl border border-white/15">
+            <div class="text-xs font-bold text-purple-300 uppercase tracking-wider">Nilai Akhir</div>
+            <div class="text-3xl font-extrabold ${isPassed ? 'text-emerald-400' : 'text-amber-400'} mt-1">${state.quizScore} / 100</div>
+          </div>
+
+          <div class="p-5 bg-white/10 backdrop-blur-md rounded-2xl border border-white/15">
+            <div class="text-xs font-bold text-purple-300 uppercase tracking-wider">Max Streak</div>
+            <div class="text-3xl font-extrabold text-amber-300 mt-1">🔥 x${state.quizMaxStreak}</div>
+          </div>
+        </div>
+
+        <p class="text-slate-300 text-xs sm:text-sm max-w-lg mx-auto leading-relaxed">
+          Anda berhasil menjawab <strong class="text-white">${correctCount} dari ${totalQ} soal</strong> dengan benar pada ${currentVerName}.
+        </p>
+
+        <div class="flex flex-wrap justify-center gap-4 pt-4">
+          <button onclick="resetQuiz()" class="px-6 py-3.5 bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-700 hover:to-red-700 text-white font-bold rounded-2xl shadow-lg transition-all flex items-center gap-2 transform hover:scale-105">
+            <span>🔄 Mainkan Lagi (${state.tadribatVersion === 1 ? 'Versi 1' : 'Versi 2'})</span>
+          </button>
+
+          <button onclick="switchTadribatVersion(${otherVerNum})" class="px-6 py-3.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold rounded-2xl shadow-lg transition-all flex items-center gap-2 transform hover:scale-105">
+            <span>✨ Coba ${otherVerName}</span>
+          </button>
+
+          <button onclick="window.print()" class="px-6 py-3.5 bg-white/20 hover:bg-white/30 text-white font-bold rounded-2xl border border-white/30 shadow-lg transition-all flex items-center gap-2 transform hover:scale-105">
+            <span>🖨️ Cetak Sertifikat Hasil</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- PRINTABLE CERTIFICATE -->
+      <div id="printable-certificate" class="hidden print:block p-8 bg-white text-slate-800 text-left space-y-6 border-4 border-[#2f6b78] rounded-3xl">
+        <div class="text-center border-b-2 border-slate-200 pb-4">
+          <h1 class="text-2xl font-bold text-[#2f6b78] uppercase">MAN 1 PONTIANAK</h1>
+          <h2 class="text-lg font-semibold">Laporan Hasil Belajar Interaktif Bahasa Arab - Kelas X</h2>
+          <p class="text-xs text-slate-500 font-mono">Kurikulum Merdeka / KMA Nomor 1503 Tahun 2025</p>
+        </div>
+
+        <div class="space-y-2 text-sm">
+          <p><strong>Mata Pelajaran:</strong> Bahasa Arab (اللغة العربية) - Bab 1 At-Tahiyyah wat-Ta'aruf</p>
+          <p><strong>Paket Kuis:</strong> ${currentVerName}</p>
+          <p><strong>Satuan Pendidikan:</strong> MAN 1 Pontianak</p>
+          <p><strong>Jumlah Soal:</strong> 20 Soal Pilihan Ganda Interaktif</p>
+          <p><strong>Tanggal Pengerjaan:</strong> ${new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+          <p><strong>Jawaban Benar:</strong> ${correctCount} / ${totalQ} Soal</p>
+          <p><strong>Total Poin Game:</strong> ${state.quizPoints.toLocaleString('id-ID')} Poin</p>
+          <p><strong>Skor Capaian Akhir:</strong> <span class="text-xl font-bold text-emerald-700">${state.quizScore} / 100</span> (${isPassed ? 'Sangat Baik (Lulus)' : 'Cukup'})</p>
+        </div>
+
+        <div class="pt-12 flex justify-between text-xs text-slate-500">
+          <div>
+            <p>Mengetahui,</p>
+            <p class="mt-12 font-bold text-slate-700">Guru Mata Pelajaran Bahasa Arab</p>
+          </div>
+          <div class="text-right">
+            <p>Pontianak, ${new Date().toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+            <p class="mt-12 font-bold text-slate-700">MAN 1 Pontianak</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  `;
+}
+
+function attachTadribatEvents() {}
