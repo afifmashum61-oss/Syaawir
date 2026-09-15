@@ -225,12 +225,12 @@ if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
 
 // --- FIREBASE REALTIME CLOUD DATABASE SETUP ---
 const firebaseConfig = {
-  apiKey: "AIzaSyB_MAN1PontianakArabic2026_Key",
-  authDomain: "man1pontianak-arabic.firebaseapp.com",
-  projectId: "man1pontianak-arabic-app",
-  storageBucket: "man1pontianak-arabic-app.appspot.com",
-  messagingSenderId: "10987654321",
-  appId: "1:10987654321:web:abcdef1234567890"
+  apiKey: "AIzaSyAVWMWq27oh6fgKGhzpOWS7XY28vzqP6WQ",
+  authDomain: "db-man-1-pontianak-x.firebaseapp.com",
+  projectId: "db-man-1-pontianak-x",
+  storageBucket: "db-man-1-pontianak-x.firebasestorage.app",
+  messagingSenderId: "210970490880",
+  appId: "1:210970490880:web:496fba068c56b296d740e5"
 };
 
 let db = null;
