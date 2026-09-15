@@ -2329,12 +2329,6 @@ function renderLoginHTML() {
           ` : `
             <!-- FORM LOGIN GURU -->
             <form id="form-login-guru" onsubmit="handleGuruLogin(event)" class="space-y-4">
-              <div class="p-3.5 bg-amber-50 rounded-2xl border border-amber-200 text-xs text-amber-900 space-y-1">
-                <p class="font-bold">👨‍🏫 Portal Pengajar Bahasa Arab</p>
-                <p>Pengajar: <strong>${ARABIC_DATA.info.teacher}</strong></p>
-                <p class="text-[11px] text-amber-700 font-mono mt-1">PIN Default: guru123</p>
-              </div>
-
               <div class="space-y-1.5">
                 <label class="text-xs font-bold text-slate-700 uppercase tracking-wider">PIN / Password Guru</label>
                 <input type="password" id="guru-pin" required placeholder="Masukkan PIN Guru" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold focus:ring-2 focus:ring-amber-500 focus:outline-none"/>
