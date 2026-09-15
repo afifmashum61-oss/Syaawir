@@ -251,6 +251,9 @@ function initFirebase() {
     } catch(err) {
       console.warn("Firebase initialization notice:", err);
     }
+  } else {
+    // Retry initialization if Firebase script is loading asynchronously on mobile networks
+    setTimeout(initFirebase, 500);
   }
 }
 
@@ -264,14 +267,14 @@ function subscribeRealtimeScores() {
           cloudScores.push(Object.assign({ id: doc.id }, doc.data()));
         });
         cloudScores.sort((a, b) => (b.timestamp || b.id || '').localeCompare(a.timestamp || a.id || ''));
-        if (cloudScores.length > 0) {
-          state.studentScores = cloudScores;
-          try {
-            localStorage.setItem('arabic_app_scores', JSON.stringify(cloudScores));
-          } catch(e) {}
-          if (state.currentTab === 'guru-dashboard') {
-            renderTabContent();
-          }
+        state.studentScores = cloudScores;
+        try {
+          localStorage.setItem('arabic_app_scores', JSON.stringify(cloudScores));
+        } catch(e) {}
+
+        // Instant Live UI Update on Teacher Dashboard
+        if (state.currentTab === 'guru-dashboard') {
+          renderTabContent();
         }
       }, (err) => {
         console.warn("Realtime cloud score sync notice:", err);
@@ -290,7 +293,7 @@ function saveScoreToCloud(scoreRecord) {
       db.collection("student_scores").doc(scoreRecord.id).set(Object.assign({}, scoreRecord, {
         timestamp: new Date().toISOString()
       })).then(() => {
-        console.log("Score successfully synced to Cloud Firestore!");
+        console.log("Score successfully synced to Cloud Firestore across all devices!");
       }).catch((err) => {
         console.warn("Error saving to Cloud:", err);
       });
