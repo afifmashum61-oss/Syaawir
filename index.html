@@ -61,16 +61,9 @@
           </div>
         </div>
 
-        <!-- Quick Info Badge -->
-        <div class="hidden md:flex items-center gap-4 text-xs font-semibold text-slate-600 bg-slate-100/80 px-4 py-2 rounded-2xl border border-slate-200/60">
-          <div class="flex items-center gap-1.5">
-            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span>👨‍🏫 Pengajar: <strong class="text-slate-900 font-extrabold">Yosi, S. Ag, M. Pd.</strong></span>
-          </div>
-          <span class="text-slate-300">|</span>
-          <span>Kurikulum Merdeka / KMA 1503</span>
-          <span class="text-slate-300">|</span>
-          <span class="text-[#2f6b78] font-bold">MAN 1 Pontianak</span>
+        <!-- User Login / Profile Badge Header -->
+        <div id="user-header-badge" class="flex items-center gap-2">
+          <!-- Dynamic User / Login Button rendered via app.js -->
         </div>
 
       </div>
@@ -110,6 +103,16 @@
         <button data-tab="tadribat" class="nav-tab px-4 py-2.5 text-xs sm:text-sm whitespace-nowrap flex items-center gap-2">
           <span>📝</span>
           <span class="font-arabic text-lg font-bold">التدريبات</span>
+        </button>
+
+        <!-- Dynamic Guru Dashboard Tab (Visible when logged in as Guru) -->
+        <button id="nav-btn-guru" data-tab="guru-dashboard" class="hidden nav-tab px-4 py-2.5 text-xs sm:text-sm whitespace-nowrap flex items-center gap-2 bg-amber-50 text-amber-800 border border-amber-200/80 rounded-xl font-bold">
+          <span>👨‍🏫 Dashboard Guru</span>
+        </button>
+
+        <!-- Dynamic Login Button Tab -->
+        <button id="nav-btn-login" data-tab="login" class="nav-tab px-4 py-2.5 text-xs sm:text-sm whitespace-nowrap flex items-center gap-2 bg-teal-50 text-teal-700 border border-teal-200/80 rounded-xl font-bold ml-auto">
+          <span>🔑 Masuk / Login</span>
         </button>
 
       </nav>

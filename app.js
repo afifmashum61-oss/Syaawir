@@ -3,6 +3,24 @@
 // --- STATE MANAGEMENT ---
 const state = {
   currentTab: 'home',
+
+  // AUTHENTICATION & USER SESSION
+  auth: {
+    isLoggedIn: false,
+    role: null, // 'siswa' | 'guru' | 'guest'
+    userName: '',
+    userClass: '',
+    guruPin: 'guru123'
+  },
+  authTab: 'siswa', // 'siswa' or 'guru'
+  
+  // GURU DASHBOARD FILTERS
+  guruFilterClass: 'all',
+  guruFilterBab: 'all',
+  guruSearchName: '',
+
+  // STUDENT SCORES DATABASE (LOADED FROM LOCALSTORAGE)
+  studentScores: [],
   
   // Mufrodat Filters
   mufrodatTopic: 'all',
@@ -207,9 +225,75 @@ if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
 
 // --- INITIALIZATION ---
 document.addEventListener('DOMContentLoaded', () => {
+  initAuth();
   initNavigation();
   renderTabContent();
 });
+
+function initAuth() {
+  try {
+    const savedAuth = localStorage.getItem('arabic_app_auth');
+    if (savedAuth) {
+      state.auth = Object.assign(state.auth, JSON.parse(savedAuth));
+    }
+    const savedScores = localStorage.getItem('arabic_app_scores');
+    if (savedScores) {
+      state.studentScores = JSON.parse(savedScores);
+    } else {
+      state.studentScores = Array.from(ARABIC_DATA.initialScores || []);
+      localStorage.setItem('arabic_app_scores', JSON.stringify(state.studentScores));
+    }
+  } catch(e) {
+    state.studentScores = Array.from(ARABIC_DATA.initialScores || []);
+  }
+  updateUserHeaderUI();
+}
+
+function updateUserHeaderUI() {
+  const badgeContainer = document.getElementById('user-header-badge');
+  const btnGuru = document.getElementById('nav-btn-guru');
+  const btnLogin = document.getElementById('nav-btn-login');
+
+  if (state.auth.isLoggedIn) {
+    if (state.auth.role === 'guru') {
+      if (badgeContainer) {
+        badgeContainer.innerHTML = `
+          <div class="flex items-center gap-2 bg-amber-50 border border-amber-200 px-3 py-1.5 rounded-xl text-xs font-semibold text-amber-900 shadow-sm">
+            <span>👨‍🏫 Guru: <strong class="font-bold text-amber-950">${ARABIC_DATA.info.teacher}</strong></span>
+            <button onclick="logoutUser()" class="ml-1 px-2 py-0.5 bg-amber-200 hover:bg-amber-300 text-amber-900 rounded-lg font-bold text-[10px] transition-colors" title="Keluar">
+              Keluar
+            </button>
+          </div>
+        `;
+      }
+      if (btnGuru) btnGuru.classList.remove('hidden');
+      if (btnLogin) btnLogin.classList.add('hidden');
+    } else if (state.auth.role === 'siswa') {
+      if (badgeContainer) {
+        badgeContainer.innerHTML = `
+          <div class="flex items-center gap-2 bg-teal-50 border border-teal-200 px-3 py-1.5 rounded-xl text-xs font-semibold text-teal-900 shadow-sm">
+            <span>👨‍🎓 <strong class="font-bold">${state.auth.userName}</strong> (${state.auth.userClass})</span>
+            <button onclick="logoutUser()" class="ml-1 px-2 py-0.5 bg-teal-200 hover:bg-teal-300 text-teal-900 rounded-lg font-bold text-[10px] transition-colors" title="Keluar">
+              Keluar
+            </button>
+          </div>
+        `;
+      }
+      if (btnGuru) btnGuru.classList.add('hidden');
+      if (btnLogin) btnLogin.classList.add('hidden');
+    }
+  } else {
+    if (badgeContainer) {
+      badgeContainer.innerHTML = `
+        <button onclick="switchTab('login')" class="px-4 py-2 bg-[#2f6b78] hover:bg-[#1f4750] text-white text-xs font-bold rounded-xl shadow-md transition-all flex items-center gap-2">
+          <span>🔑 Masuk / Login</span>
+        </button>
+      `;
+    }
+    if (btnGuru) btnGuru.classList.add('hidden');
+    if (btnLogin) btnLogin.classList.remove('hidden');
+  }
+}
 
 function initNavigation() {
   const tabs = document.querySelectorAll('[data-tab]');
@@ -246,6 +330,13 @@ function renderTabContent() {
   switch (state.currentTab) {
     case 'home':
       container.innerHTML = renderHomeHTML();
+      break;
+    case 'login':
+      container.innerHTML = renderLoginHTML();
+      break;
+    case 'guru-dashboard':
+      container.innerHTML = renderGuruDashboardHTML();
+      attachGuruDashboardEvents();
       break;
     case 'mufrodat':
       container.innerHTML = renderMufrodatHTML();
@@ -2003,6 +2094,28 @@ function finishQuiz() {
   state.quizScore = Math.round((correctCount / totalQ) * 100);
   state.quizIsFinished = true;
 
+  // Auto record score for Student / Teacher recap
+  const studentName = (state.auth.isLoggedIn && state.auth.userName) ? state.auth.userName : 'Siswa (Tamu)';
+  const studentClass = (state.auth.isLoggedIn && state.auth.userClass) ? state.auth.userClass : 'Kelas X';
+  const now = new Date();
+  const dateStr = now.toLocaleDateString('id-ID', { day: '2-digit', month: '2-digit', year: 'numeric' }) + ' ' + now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+
+  const scoreRecord = {
+    id: 'SCORE_' + Date.now(),
+    nama: studentName,
+    kelas: studentClass,
+    bab: state.tadribatBab || 1,
+    versi: state.tadribatVersion || 1,
+    skor: state.quizScore,
+    poin: state.quizPoints,
+    tanggal: dateStr
+  };
+
+  state.studentScores.unshift(scoreRecord);
+  try {
+    localStorage.setItem('arabic_app_scores', JSON.stringify(state.studentScores));
+  } catch(e) {}
+
   if (state.quizScore >= 70) {
     SoundFx.playCorrect();
   } else {
@@ -2032,6 +2145,8 @@ function renderQuizResultHTML() {
     if (state.quizAnswers[idx] === q.answer) correctCount++;
   });
 
+  const studentName = (state.auth.isLoggedIn && state.auth.userName) ? state.auth.userName : 'Siswa Tamu / Peserta';
+  const studentClass = (state.auth.isLoggedIn && state.auth.userClass) ? state.auth.userClass : 'Kelas X MAN 1 Pontianak';
   const currentVerName = state.tadribatVersion === 1 ? 'Versi 1: Kosakata & Ungkapan' : 'Versi 2: Tata Bahasa & Qawaid';
   const otherVerNum = state.tadribatVersion === 1 ? 2 : 1;
   const otherVerName = state.tadribatVersion === 1 ? 'Versi 2 (Qawaid)' : 'Versi 1 (Mufradat)';
@@ -2051,7 +2166,7 @@ function renderQuizResultHTML() {
             ${isPassed ? 'Mumtaz! Hasil Belajar Luar Biasa!' : 'Tetap Semangat! Belajar Lagi!'}
           </h2>
           <p class="text-purple-200 text-sm sm:text-base">
-            Kuis Interaktif Bahasa Arab Kelas X - Bab 1 (${currentVerName})
+            Kuis Interaktif Bahasa Arab Kelas X - Bab ${state.tadribatBab || 1} (${currentVerName})
           </p>
         </div>
 
@@ -2074,7 +2189,7 @@ function renderQuizResultHTML() {
         </div>
 
         <p class="text-slate-300 text-xs sm:text-sm max-w-lg mx-auto leading-relaxed">
-          Anda berhasil menjawab <strong class="text-white">${correctCount} dari ${totalQ} soal</strong> dengan benar pada ${currentVerName}.
+          <strong>${studentName}</strong> (${studentClass}) berhasil menjawab <strong class="text-white">${correctCount} dari ${totalQ} soal</strong> dengan benar pada ${currentVerName}.
         </p>
 
         <div class="flex flex-wrap justify-center gap-4 pt-4">
@@ -2101,10 +2216,12 @@ function renderQuizResultHTML() {
         </div>
 
         <div class="space-y-2 text-sm">
-          <p><strong>Mata Pelajaran:</strong> Bahasa Arab (اللغة العربية) - Bab 1 At-Tahiyyah wat-Ta'aruf</p>
+          <p><strong>Nama Siswa:</strong> <span class="text-base font-extrabold text-slate-900">${studentName}</span></p>
+          <p><strong>Kelas:</strong> <span class="font-bold text-slate-800">${studentClass}</span></p>
+          <p><strong>Mata Pelajaran:</strong> Bahasa Arab (اللغة العربية) - Bab ${state.tadribatBab || 1}</p>
           <p><strong>Paket Kuis:</strong> ${currentVerName}</p>
           <p><strong>Satuan Pendidikan:</strong> MAN 1 Pontianak</p>
-          <p><strong>Jumlah Soal:</strong> 20 Soal Pilihan Ganda Interaktif</p>
+          <p><strong>Jumlah Soal:</strong> ${totalQ} Soal Pilihan Ganda Interaktif</p>
           <p><strong>Tanggal Pengerjaan:</strong> ${new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
           <p><strong>Jawaban Benar:</strong> ${correctCount} / ${totalQ} Soal</p>
           <p><strong>Total Poin Game:</strong> ${state.quizPoints.toLocaleString('id-ID')} Poin</p>
@@ -2115,6 +2232,7 @@ function renderQuizResultHTML() {
           <div>
             <p>Mengetahui,</p>
             <p class="mt-12 font-bold text-slate-700">Guru Mata Pelajaran Bahasa Arab</p>
+            <p class="font-extrabold text-slate-900">${ARABIC_DATA.info.teacher}</p>
           </div>
           <div class="text-right">
             <p>Pontianak, ${new Date().toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
@@ -2128,3 +2246,444 @@ function renderQuizResultHTML() {
 }
 
 function attachTadribatEvents() {}
+
+// ==========================================
+// AUTHENTICATION & LOGIN RENDERERS & LOGIC
+// ==========================================
+function renderLoginHTML() {
+  const isSiswaTab = state.authTab === 'siswa';
+  const classesList = ARABIC_DATA.classes || ["X Merdeka 1", "X Merdeka 2", "X Merdeka 3", "X Merdeka 4", "X Merdeka 5", "X Merdeka 6", "X Merdeka 7"];
+
+  return `
+    <div class="max-w-xl mx-auto space-y-6 animate-fadeIn py-6">
+      
+      <!-- Title Header -->
+      <div class="text-center space-y-2">
+        <div class="w-16 h-16 mx-auto bg-teal-50 text-[#2f6b78] rounded-2xl flex items-center justify-center text-3xl shadow-sm border border-teal-100">
+          🔑
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
+          Selamat Datang di Portal Belajar
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-500">
+          Media Pembelajaran Interaktif Bahasa Arab Kelas X — MAN 1 Pontianak
+        </p>
+      </div>
+
+      <!-- Login Container Box -->
+      <div class="card-soft p-6 sm:p-8 bg-white border border-slate-200/80 shadow-xl rounded-3xl space-y-6">
+        
+        <!-- Tab Switcher (Siswa vs Guru) -->
+        <div class="flex p-1 bg-slate-100 rounded-2xl border border-slate-200/60">
+          <button onclick="switchAuthTab('siswa')" class="flex-1 py-2.5 text-xs sm:text-sm font-bold rounded-xl transition-all ${isSiswaTab ? 'bg-white text-teal-700 shadow-sm' : 'text-slate-500 hover:text-slate-800'}">
+            👨‍🎓 Login Siswa
+          </button>
+          <button onclick="switchAuthTab('guru')" class="flex-1 py-2.5 text-xs sm:text-sm font-bold rounded-xl transition-all ${!isSiswaTab ? 'bg-white text-amber-700 shadow-sm' : 'text-slate-500 hover:text-slate-800'}">
+            👨‍🏫 Login Guru
+          </button>
+        </div>
+
+        ${isSiswaTab ? `
+          <!-- FORM LOGIN SISWA -->
+          <form id="form-login-siswa" onsubmit="handleSiswaLogin(event)" class="space-y-4">
+            <div class="space-y-1.5">
+              <label class="text-xs font-bold text-slate-700 uppercase tracking-wider">Nama Lengkap Siswa</label>
+              <input type="text" id="siswa-nama" required placeholder="Contoh: Ahmad Ridho" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold focus:ring-2 focus:ring-teal-500 focus:outline-none"/>
+            </div>
+
+            <div class="space-y-1.5">
+              <label class="text-xs font-bold text-slate-700 uppercase tracking-wider">Kelas (MAN 1 Pontianak)</label>
+              <select id="siswa-kelas" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                ${classesList.map(c => `<option value="${c}">${c}</option>`).join('')}
+              </select>
+            </div>
+
+            <button type="submit" class="w-full py-3.5 bg-[#2f6b78] hover:bg-[#1f4750] text-white font-bold text-sm rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 transform hover:scale-[1.01]">
+              <span>🚀 Masuk Sebagai Siswa</span>
+            </button>
+          </form>
+        ` : `
+          <!-- FORM LOGIN GURU -->
+          <form id="form-login-guru" onsubmit="handleGuruLogin(event)" class="space-y-4">
+            <div class="p-4 bg-amber-50 rounded-2xl border border-amber-200 text-xs text-amber-900 space-y-1">
+              <p class="font-bold">👨‍🏫 Portal Pengajar Bahasa Arab</p>
+              <p>Pengajar: <strong>${ARABIC_DATA.info.teacher}</strong></p>
+              <p class="text-[11px] text-amber-700 font-mono mt-1">PIN Default: guru123</p>
+            </div>
+
+            <div class="space-y-1.5">
+              <label class="text-xs font-bold text-slate-700 uppercase tracking-wider">PIN / Password Guru</label>
+              <input type="password" id="guru-pin" required placeholder="Masukkan PIN Guru" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold focus:ring-2 focus:ring-amber-500 focus:outline-none"/>
+            </div>
+
+            <button type="submit" class="w-full py-3.5 bg-amber-600 hover:bg-amber-700 text-white font-bold text-sm rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 transform hover:scale-[1.01]">
+              <span>👨‍🏫 Masuk Ke Dashboard Guru</span>
+            </button>
+          </form>
+        `}
+
+        <div class="pt-4 border-t border-slate-100 text-center">
+          <button onclick="handleGuestLogin()" class="text-xs font-semibold text-slate-500 hover:text-slate-800 underline transition-colors">
+            👉 Lanjut Belajar Tanpa Login (Sebagai Tamu / Guest)
+          </button>
+        </div>
+
+      </div>
+    </div>
+  `;
+}
+
+function switchAuthTab(tab) {
+  state.authTab = tab;
+  SoundFx.playClick();
+  renderTabContent();
+}
+
+function handleSiswaLogin(e) {
+  e.preventDefault();
+  const nama = document.getElementById('siswa-nama').value.trim();
+  const kelas = document.getElementById('siswa-kelas').value;
+
+  if (!nama) {
+    alert("Harap masukkan nama lengkap Anda.");
+    return;
+  }
+
+  state.auth = {
+    isLoggedIn: true,
+    role: 'siswa',
+    userName: nama,
+    userClass: kelas,
+    guruPin: state.auth.guruPin || 'guru123'
+  };
+
+  try {
+    localStorage.setItem('arabic_app_auth', JSON.stringify(state.auth));
+  } catch(err) {}
+
+  SoundFx.playCorrect();
+  updateUserHeaderUI();
+  switchTab('home');
+}
+
+function handleGuruLogin(e) {
+  e.preventDefault();
+  const pin = document.getElementById('guru-pin').value.trim();
+  const correctPin = state.auth.guruPin || 'guru123';
+
+  if (pin !== correctPin) {
+    SoundFx.playWrong();
+    alert("⚠️ PIN Guru salah! Silakan coba lagi (Default PIN: guru123).");
+    return;
+  }
+
+  state.auth = {
+    isLoggedIn: true,
+    role: 'guru',
+    userName: ARABIC_DATA.info.teacher,
+    userClass: 'MAN 1 Pontianak',
+    guruPin: correctPin
+  };
+
+  try {
+    localStorage.setItem('arabic_app_auth', JSON.stringify(state.auth));
+  } catch(err) {}
+
+  SoundFx.playCorrect();
+  updateUserHeaderUI();
+  switchTab('guru-dashboard');
+}
+
+function handleGuestLogin() {
+  state.auth = {
+    isLoggedIn: false,
+    role: 'guest',
+    userName: 'Siswa Tamu',
+    userClass: 'Kelas X',
+    guruPin: state.auth.guruPin || 'guru123'
+  };
+  try {
+    localStorage.removeItem('arabic_app_auth');
+  } catch(e) {}
+
+  SoundFx.playClick();
+  updateUserHeaderUI();
+  switchTab('home');
+}
+
+function logoutUser() {
+  if (confirm("Apakah Anda yakin ingin keluar dari akun?")) {
+    handleGuestLogin();
+  }
+}
+
+// ==========================================
+// GURU DASHBOARD RENDERER & LOGIC
+// ==========================================
+function renderGuruDashboardHTML() {
+  if (!state.auth.isLoggedIn || state.auth.role !== 'guru') {
+    return `
+      <div class="card-soft p-12 text-center max-w-xl mx-auto space-y-4">
+        <div class="text-5xl">🔒</div>
+        <h2 class="text-2xl font-bold text-slate-800">Akses Dibatasi</h2>
+        <p class="text-sm text-slate-500">Halaman ini khusus untuk Pengajar / Guru Bahasa Arab MAN 1 Pontianak.</p>
+        <button onclick="switchTab('login')" class="px-6 py-2.5 bg-[#2f6b78] text-white font-bold rounded-xl text-xs">
+          🔑 Login Guru Sekarang
+        </button>
+      </div>
+    `;
+  }
+
+  const scores = state.studentScores || [];
+
+  // Filter Scores
+  let filteredScores = scores.filter(s => {
+    const matchClass = state.guruFilterClass === 'all' || s.kelas === state.guruFilterClass;
+    const matchBab = state.guruFilterBab === 'all' || s.bab == state.guruFilterBab;
+    const matchSearch = state.guruSearchName === '' || (s.nama && s.nama.toLowerCase().includes(state.guruSearchName.toLowerCase()));
+    return matchClass && matchBab && matchSearch;
+  });
+
+  // Calculate Statistics
+  const totalAttempts = scores.length;
+  const avgScore = scores.length > 0 ? Math.round(scores.reduce((acc, curr) => acc + (curr.skor || 0), 0) / scores.length) : 0;
+  const uniqueStudents = new Set(scores.map(s => s.nama)).size;
+  const classesList = ARABIC_DATA.classes || ["X Merdeka 1", "X Merdeka 2", "X Merdeka 3", "X Merdeka 4", "X Merdeka 5", "X Merdeka 6", "X Merdeka 7"];
+
+  return `
+    <div class="space-y-8 animate-fadeIn">
+      
+      <!-- Title Header -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">
+            <span>👨‍🏫 Dashboard Guru Bahasa Arab</span>
+            <span class="font-arabic text-3xl text-amber-700">لوحة التحكم</span>
+          </h2>
+          <p class="text-slate-600 text-sm mt-1">
+            Pengajar: <strong>${ARABIC_DATA.info.teacher}</strong> — MAN 1 Pontianak
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2">
+          <button onclick="exportScoresToCSV()" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center gap-2">
+            <span>📥 Export Rekap (Excel / CSV)</span>
+          </button>
+          <button onclick="window.print()" class="px-4 py-2.5 bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center gap-2">
+            <span>🖨️ Cetak Laporan</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 3 STAT SUMMARY CARDS -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <div class="card-soft p-6 bg-gradient-to-br from-amber-500 to-amber-600 text-white shadow-lg rounded-2xl">
+          <div class="text-xs font-bold uppercase tracking-wider text-amber-100">Total Kuis Selesai</div>
+          <div class="text-4xl font-extrabold mt-2">${totalAttempts} <span class="text-lg font-normal">Kuis</span></div>
+          <p class="text-xs text-amber-100/80 mt-1">Total pengerjaan kuis siswa</p>
+        </div>
+
+        <div class="card-soft p-6 bg-gradient-to-br from-teal-600 to-teal-700 text-white shadow-lg rounded-2xl">
+          <div class="text-xs font-bold uppercase tracking-wider text-teal-100">Rata-rata Nilai Siswa</div>
+          <div class="text-4xl font-extrabold mt-2">${avgScore} <span class="text-lg font-normal">/ 100</span></div>
+          <p class="text-xs text-teal-100/80 mt-1">Capaian rata-rata kuis</p>
+        </div>
+
+        <div class="card-soft p-6 bg-gradient-to-br from-indigo-600 to-indigo-700 text-white shadow-lg rounded-2xl">
+          <div class="text-xs font-bold uppercase tracking-wider text-indigo-100">Siswa Aktif Kuis</div>
+          <div class="text-4xl font-extrabold mt-2">${uniqueStudents} <span class="text-lg font-normal">Siswa</span></div>
+          <p class="text-xs text-indigo-100/80 mt-1">Siswa terdaftar pengerjaan</p>
+        </div>
+      </div>
+
+      <!-- FILTERS & TABLE REKAP -->
+      <div class="card-soft p-6 bg-white space-y-6">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+            <span>📊 Rekapitulasi Nilai Kuis Siswa</span>
+          </h3>
+
+          <div class="flex flex-wrap items-center gap-3 w-full sm:w-auto">
+            <!-- Filter Kelas -->
+            <select id="guru-filter-class" class="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-amber-500">
+              <option value="all" ${state.guruFilterClass === 'all' ? 'selected' : ''}>Semua Kelas</option>
+              ${classesList.map(c => `<option value="${c}" ${state.guruFilterClass === c ? 'selected' : ''}>${c}</option>`).join('')}
+            </select>
+
+            <!-- Filter Bab -->
+            <select id="guru-filter-bab" class="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-amber-500">
+              <option value="all" ${state.guruFilterBab === 'all' ? 'selected' : ''}>Semua Bab</option>
+              <option value="1" ${state.guruFilterBab == 1 ? 'selected' : ''}>Bab 1</option>
+              <option value="2" ${state.guruFilterBab == 2 ? 'selected' : ''}>Bab 2</option>
+              <option value="3" ${state.guruFilterBab == 3 ? 'selected' : ''}>Bab 3</option>
+            </select>
+
+            <!-- Search Nama -->
+            <input type="text" id="guru-search-name" value="${state.guruSearchName}" placeholder="Cari nama siswa..." class="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-amber-500 flex-1 min-w-[150px]"/>
+          </div>
+        </div>
+
+        <!-- SCORES TABLE -->
+        <div class="overflow-x-auto rounded-2xl border border-slate-200">
+          <table class="w-full text-left border-collapse text-xs sm:text-sm">
+            <thead>
+              <tr class="bg-slate-100 text-slate-700 font-bold uppercase tracking-wider text-[11px] border-b border-slate-200">
+                <th class="p-3.5">No</th>
+                <th class="p-3.5">Nama Siswa</th>
+                <th class="p-3.5">Kelas</th>
+                <th class="p-3.5">Materi Kuis</th>
+                <th class="p-3.5 text-center">Nilai Akhir</th>
+                <th class="p-3.5 text-center">Total Poin</th>
+                <th class="p-3.5">Tanggal Pengerjaan</th>
+                <th class="p-3.5 text-center print:hidden">Aksi</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              ${filteredScores.length === 0 ? `
+                <tr>
+                  <td colspan="8" class="p-8 text-center text-slate-500">Belum ada rekapitulasi nilai kuis yang sesuai dengan filter.</td>
+                </tr>
+              ` : filteredScores.map((s, idx) => {
+                const isPassed = s.skor >= 70;
+                const verText = s.versi === 1 ? 'Mufradat' : 'Qawaid';
+                return `
+                  <tr class="hover:bg-slate-50 transition-colors">
+                    <td class="p-3.5 font-bold text-slate-500">${idx + 1}</td>
+                    <td class="p-3.5 font-bold text-slate-900">${s.nama}</td>
+                    <td class="p-3.5 text-slate-600 font-semibold">${s.kelas || 'Kelas X'}</td>
+                    <td class="p-3.5">
+                      <span class="px-2.5 py-1 bg-teal-50 text-teal-800 rounded-full text-xs font-semibold">Bab ${s.bab || 1} (${verText})</span>
+                    </td>
+                    <td class="p-3.5 text-center font-extrabold text-base ${isPassed ? 'text-emerald-600' : 'text-amber-600'}">
+                      ${s.skor}
+                    </td>
+                    <td class="p-3.5 text-center font-bold text-teal-700">⭐ ${(s.poin || 0).toLocaleString('id-ID')}</td>
+                    <td class="p-3.5 text-slate-500 text-xs">${s.tanggal || '-'}</td>
+                    <td class="p-3.5 text-center print:hidden">
+                      <button onclick="deleteScoreRecord('${s.id}')" class="p-1.5 bg-rose-50 hover:bg-rose-100 text-rose-600 rounded-lg text-xs font-bold transition-colors" title="Hapus Data">
+                        🗑️
+                      </button>
+                    </td>
+                  </tr>
+                `;
+              }).join('')}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="flex items-center justify-between pt-2 text-xs text-slate-500">
+          <div>Menampilkan <strong>${filteredScores.length}</strong> dari total <strong>${scores.length}</strong> data nilai</div>
+          <button onclick="clearAllScores()" class="text-rose-600 hover:text-rose-800 font-bold underline transition-colors">
+            ⚠️ Hapus Semua Rekap Nilai
+          </button>
+        </div>
+      </div>
+
+      <!-- SETTING PIN GURU BOX -->
+      <div class="card-soft p-6 bg-slate-900 text-white rounded-2xl space-y-4">
+        <h3 class="text-base font-bold text-slate-100 flex items-center gap-2">
+          <span>⚙️ Pengaturan PIN Akses Guru</span>
+        </h3>
+        <form onsubmit="changeGuruPin(event)" class="flex flex-col sm:flex-row items-center gap-3 max-w-xl">
+          <input type="password" id="new-guru-pin" placeholder="Masukkan PIN Guru Baru" required class="px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs font-semibold text-white focus:outline-none focus:ring-2 focus:ring-amber-500 flex-1"/>
+          <button type="submit" class="px-5 py-2.5 bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs rounded-xl shadow-md transition-all">
+            💾 Simpan PIN Baru
+          </button>
+        </form>
+      </div>
+
+    </div>
+  `;
+}
+
+function attachGuruDashboardEvents() {
+  const classSelect = document.getElementById('guru-filter-class');
+  const babSelect = document.getElementById('guru-filter-bab');
+  const searchInput = document.getElementById('guru-search-name');
+
+  if (classSelect) {
+    classSelect.addEventListener('change', (e) => {
+      state.guruFilterClass = e.target.value;
+      renderTabContent();
+    });
+  }
+  if (babSelect) {
+    babSelect.addEventListener('change', (e) => {
+      state.guruFilterBab = e.target.value;
+      renderTabContent();
+    });
+  }
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      state.guruSearchName = e.target.value;
+      renderTabContent();
+    });
+  }
+}
+
+function exportScoresToCSV() {
+  const scores = state.studentScores || [];
+  if (scores.length === 0) {
+    alert("Belum ada data nilai kuis untuk diexport.");
+    return;
+  }
+
+  let csvContent = "data:text/csv;charset=utf-8,No,Nama Siswa,Kelas,Bab,Versi Kuis,Nilai (100),Total Poin,Tanggal Pengerjaan\n";
+  scores.forEach((s, idx) => {
+    const verText = s.versi === 1 ? "Mufradat" : "Qawaid";
+    const row = [
+      idx + 1,
+      `"${(s.nama || '').replace(/"/g, '""')}"`,
+      `"${s.kelas || ''}"`,
+      `Bab ${s.bab || 1}`,
+      `"${verText}"`,
+      s.skor || 0,
+      s.poin || 0,
+      `"${s.tanggal || ''}"`
+    ].join(",");
+    csvContent += row + "\n";
+  });
+
+  const encodedUri = encodeURI(csvContent);
+  const link = document.createElement("a");
+  link.setAttribute("href", encodedUri);
+  link.setAttribute("download", `Rekap_Nilai_Bahasa_Arab_MAN1Pontianak_${new Date().toISOString().slice(0,10)}.csv`);
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+function deleteScoreRecord(id) {
+  if (confirm("Apakah Anda yakin ingin menghapus data nilai siswa ini?")) {
+    state.studentScores = state.studentScores.filter(s => s.id !== id);
+    try {
+      localStorage.setItem('arabic_app_scores', JSON.stringify(state.studentScores));
+    } catch(e) {}
+    renderTabContent();
+  }
+}
+
+function clearAllScores() {
+  if (confirm("⚠️ APAKAH ANDA YAKIN INGIN MENGHAPUS SELURUH REKAP NILAI SISWA? Tindakan ini tidak dapat dibatalkan!")) {
+    state.studentScores = [];
+    try {
+      localStorage.setItem('arabic_app_scores', JSON.stringify(state.studentScores));
+    } catch(e) {}
+    renderTabContent();
+  }
+}
+
+function changeGuruPin(e) {
+  e.preventDefault();
+  const newPin = document.getElementById('new-guru-pin').value.trim();
+  if (!newPin) return;
+
+  state.auth.guruPin = newPin;
+  try {
+    localStorage.setItem('arabic_app_auth', JSON.stringify(state.auth));
+  } catch(err) {}
+
+  alert("✅ PIN Guru berhasil diperbarui!");
+  document.getElementById('new-guru-pin').value = '';
+}
+

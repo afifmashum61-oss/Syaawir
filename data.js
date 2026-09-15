@@ -2285,5 +2285,26 @@ Bel berbunyi dan kami duduk di bangku. Guru datang dan memberi salam lalu kami m
       { id: 19, question: "أَيُّ حَرْفِ عَطْفٍ يُفِيْدُ 'النَّفْيَ عَمَّا بَعْدَهُ' (Menafikan hal setelahnya)؟", options: ["لَا", "وَ", "ثُمَّ", "فَـ"], answer: 0, explanation: "Huruf 'لَا' (Bukan) menafikan kata/hukum yang jatuh setelahnya." },
       { id: 20, question: "تَرْجِمْ إِلَى الْعَرَبِيَّةِ: 'Kami belajar di kelas jam 7 kemudian beristirahat jam 10'", options: ["نَتَعَلَّمُ فِي الْفَصْلِ فِي السَّابِعَةِ ثُمَّ نَسْتَرِيْحُ فِي الْعَاشِرَةِ", "نَتَعَلَّمُ فِي الْفَصْلِ فَـنَسْتَرِيْحُ", "نَتَعَلَّمُ أَوْ نَسْتَرِيْحُ", "نَتَعَلَّمُ لَا نَسْتَرِيْحُ"], answer: 0, explanation: "Untuk urutan dengan jeda waktu beberapa jam, digunakan huruf 'ثُمَّ' (Kemudian)." }
     ]
-  }
+  },
+
+  // LIST KELAS MAN 1 PONTIANAK
+  classes: [
+    "X Merdeka 1",
+    "X Merdeka 2",
+    "X Merdeka 3",
+    "X Merdeka 4",
+    "X Merdeka 5",
+    "X Merdeka 6",
+    "X Merdeka 7"
+  ],
+
+  // SAMPLE STUDENT SCORES DATA FOR TEACHER DASHBOARD RECAP
+  initialScores: [
+    { id: "SCORE_1001", nama: "Ahmad Ridho", kelas: "X Merdeka 1", bab: 1, versi: 1, skor: 95, poin: 1900, tanggal: "14/09/2026 08:30" },
+    { id: "SCORE_1002", nama: "Siti Fatimah", kelas: "X Merdeka 1", bab: 1, versi: 2, skor: 90, poin: 1800, tanggal: "14/09/2026 09:15" },
+    { id: "SCORE_1003", nama: "Muhammad Syauqi", kelas: "X Merdeka 2", bab: 2, versi: 1, skor: 100, poin: 2000, tanggal: "14/09/2026 10:00" },
+    { id: "SCORE_1004", nama: "Nurul Aini", kelas: "X Merdeka 3", bab: 2, versi: 2, skor: 85, poin: 1700, tanggal: "14/09/2026 11:20" },
+    { id: "SCORE_1005", nama: "Faisal Amir", kelas: "X Merdeka 2", bab: 3, versi: 1, skor: 95, poin: 1900, tanggal: "14/09/2026 13:45" }
+  ]
 };
+
