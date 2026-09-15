@@ -2592,7 +2592,7 @@ function renderGuruDashboardHTML() {
       </div>
 
       <!-- SETTING PIN GURU BOX -->
-      <div class="card-soft p-6 bg-slate-900 text-white rounded-2xl space-y-4">
+      <div class="card-soft p-6 bg-slate-900 text-white rounded-2xl space-y-4 print:hidden">
         <h3 class="text-base font-bold text-slate-100 flex items-center gap-2">
           <span>⚙️ Pengaturan PIN Akses Guru</span>
         </h3>

@@ -123,20 +123,69 @@ body {
   background: #94a3b8;
 }
 
-/* Printable Certificate Styles */
+/* Printable Certificate & Report Styles */
 @media print {
-  body * {
-    visibility: hidden;
+  /* Hide UI elements that shouldn't appear on print */
+  header, 
+  footer, 
+  nav, 
+  button, 
+  select,
+  input,
+  .print\:hidden,
+  #user-header-badge {
+    display: none !important;
   }
-  #printable-certificate, #printable-certificate * {
-    visibility: visible;
+
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
+
+  #main-container {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Printable Certificate Mode (Quiz Result) */
   #printable-certificate {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    box-shadow: none;
-    border: 3px double #2f6b78;
+    display: block !important;
+    visibility: visible !important;
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    width: 100% !important;
+    box-shadow: none !important;
+    border: 4px double #2f6b78 !important;
+    padding: 2rem !important;
+    margin: 0 auto !important;
+  }
+
+  /* Teacher Dashboard Table & Summary Print formatting */
+  .card-soft {
+    box-shadow: none !important;
+    border: 1px solid #cbd5e1 !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+  }
+
+  th, td {
+    border: 1px solid #94a3b8 !important;
+    padding: 8px 12px !important;
+    color: #000000 !important;
+  }
+
+  th {
+    background-color: #f1f5f9 !important;
   }
 }
+
