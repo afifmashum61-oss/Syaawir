@@ -261,10 +261,13 @@ function initAuth() {
 }
 
 function updateUserHeaderUI() {
+  const headerElement = document.getElementById('app-header');
   const badgeContainer = document.getElementById('user-header-badge');
   const btnGuru = document.getElementById('nav-btn-guru');
 
   if (state.auth.isLoggedIn) {
+    if (headerElement) headerElement.classList.remove('hidden');
+
     if (state.auth.role === 'guru') {
       if (badgeContainer) {
         badgeContainer.innerHTML = `
@@ -291,14 +294,8 @@ function updateUserHeaderUI() {
       if (btnGuru) btnGuru.classList.add('hidden');
     }
   } else {
-    if (badgeContainer) {
-      badgeContainer.innerHTML = `
-        <button onclick="switchTab('login')" class="px-4 py-2 bg-[#2f6b78] hover:bg-[#1f4750] text-white text-xs font-bold rounded-xl shadow-md transition-all flex items-center gap-2">
-          <span>🔑 Masuk / Login Portal</span>
-        </button>
-      `;
-    }
-    if (btnGuru) btnGuru.classList.add('hidden');
+    // HIDE TOP HEADER BAR ON FULL-SCREEN LOGIN GATE SCREEN
+    if (headerElement) headerElement.classList.add('hidden');
   }
 }
 
@@ -2276,75 +2273,89 @@ function renderLoginHTML() {
   const classesList = ARABIC_DATA.classes || ["X Merdeka 1", "X Merdeka 2", "X Merdeka 3", "X Merdeka 4", "X Merdeka 5", "X Merdeka 6", "X Merdeka 7"];
 
   return `
-    <div class="max-w-xl mx-auto space-y-6 animate-fadeIn py-6">
-      
-      <!-- Title Header -->
-      <div class="text-center space-y-2">
-        <div class="w-16 h-16 mx-auto bg-teal-50 text-[#2f6b78] rounded-2xl flex items-center justify-center text-3xl shadow-sm border border-teal-100">
-          🔑
-        </div>
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
-          Selamat Datang di Portal Belajar
-        </h2>
-        <p class="text-xs sm:text-sm text-slate-500">
-          Media Pembelajaran Interaktif Bahasa Arab Kelas X — MAN 1 Pontianak
-        </p>
-      </div>
-
-      <!-- Login Container Box -->
-      <div class="card-soft p-6 sm:p-8 bg-white border border-slate-200/80 shadow-xl rounded-3xl space-y-6">
+    <div class="fixed inset-0 z-50 overflow-y-auto bg-gradient-to-br from-[#163339] via-[#1f4750] to-[#2f6b78] flex items-center justify-center p-4 sm:p-6 animate-fadeIn selection:bg-teal-500 selection:text-white">
+      <div class="max-w-md w-full space-y-6 text-center my-auto">
         
-        <!-- Tab Switcher (Siswa vs Guru) -->
-        <div class="flex p-1 bg-slate-100 rounded-2xl border border-slate-200/60">
-          <button onclick="switchAuthTab('siswa')" class="flex-1 py-2.5 text-xs sm:text-sm font-bold rounded-xl transition-all ${isSiswaTab ? 'bg-white text-teal-700 shadow-sm' : 'text-slate-500 hover:text-slate-800'}">
-            👨‍🎓 Login Siswa
-          </button>
-          <button onclick="switchAuthTab('guru')" class="flex-1 py-2.5 text-xs sm:text-sm font-bold rounded-xl transition-all ${!isSiswaTab ? 'bg-white text-amber-700 shadow-sm' : 'text-slate-500 hover:text-slate-800'}">
-            👨‍🏫 Login Guru
-          </button>
+        <!-- Header Logo & Branding -->
+        <div class="space-y-3">
+          <div class="w-20 h-20 mx-auto bg-white/10 backdrop-blur-md p-3.5 rounded-3xl border border-white/20 shadow-2xl flex items-center justify-center transform hover:scale-105 transition-transform">
+            <img src="logo.webp" alt="Logo MAN 1 Pontianak" class="w-full h-full object-contain" />
+          </div>
+          <div>
+            <div class="inline-block px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-xs font-bold text-teal-200 border border-white/15 mb-2">
+              MAN 1 PONTIANAK • KELAS X
+            </div>
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-snug">
+              Media Pembelajaran Interaktif
+            </h1>
+            <p class="text-teal-200 text-xs sm:text-sm font-semibold mt-1">
+              Bahasa Arab (اللغة العربية) — Kurikulum Merdeka
+            </p>
+          </div>
         </div>
 
-        ${isSiswaTab ? `
-          <!-- FORM LOGIN SISWA -->
-          <form id="form-login-siswa" onsubmit="handleSiswaLogin(event)" class="space-y-4">
-            <div class="space-y-1.5">
-              <label class="text-xs font-bold text-slate-700 uppercase tracking-wider">Nama Lengkap Siswa</label>
-              <input type="text" id="siswa-nama" required placeholder="Contoh: Ahmad Ridho" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold focus:ring-2 focus:ring-teal-500 focus:outline-none"/>
-            </div>
-
-            <div class="space-y-1.5">
-              <label class="text-xs font-bold text-slate-700 uppercase tracking-wider">Kelas (MAN 1 Pontianak)</label>
-              <select id="siswa-kelas" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold focus:ring-2 focus:ring-teal-500 focus:outline-none">
-                ${classesList.map(c => `<option value="${c}">${c}</option>`).join('')}
-              </select>
-            </div>
-
-            <button type="submit" class="w-full py-3.5 bg-[#2f6b78] hover:bg-[#1f4750] text-white font-bold text-sm rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 transform hover:scale-[1.01]">
-              <span>🚀 Masuk Sebagai Siswa</span>
+        <!-- Floating Login Card Box -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-2xl text-slate-800 space-y-6 text-left border border-white/20">
+          
+          <!-- Tab Switcher (Siswa vs Guru) -->
+          <div class="flex p-1 bg-slate-100 rounded-2xl border border-slate-200/60">
+            <button onclick="switchAuthTab('siswa')" class="flex-1 py-2.5 text-xs sm:text-sm font-bold rounded-xl transition-all ${isSiswaTab ? 'bg-white text-teal-700 shadow-sm' : 'text-slate-500 hover:text-slate-800'}">
+              👨‍🎓 Login Siswa
             </button>
-          </form>
-        ` : `
-          <!-- FORM LOGIN GURU -->
-          <form id="form-login-guru" onsubmit="handleGuruLogin(event)" class="space-y-4">
-            <div class="p-4 bg-amber-50 rounded-2xl border border-amber-200 text-xs text-amber-900 space-y-1">
-              <p class="font-bold">👨‍🏫 Portal Pengajar Bahasa Arab</p>
-              <p>Pengajar: <strong>${ARABIC_DATA.info.teacher}</strong></p>
-              <p class="text-[11px] text-amber-700 font-mono mt-1">PIN Default: guru123</p>
-            </div>
-
-            <div class="space-y-1.5">
-              <label class="text-xs font-bold text-slate-700 uppercase tracking-wider">PIN / Password Guru</label>
-              <input type="password" id="guru-pin" required placeholder="Masukkan PIN Guru" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold focus:ring-2 focus:ring-amber-500 focus:outline-none"/>
-            </div>
-
-            <button type="submit" class="w-full py-3.5 bg-amber-600 hover:bg-amber-700 text-white font-bold text-sm rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 transform hover:scale-[1.01]">
-              <span>👨‍🏫 Masuk Ke Dashboard Guru</span>
+            <button onclick="switchAuthTab('guru')" class="flex-1 py-2.5 text-xs sm:text-sm font-bold rounded-xl transition-all ${!isSiswaTab ? 'bg-white text-amber-700 shadow-sm' : 'text-slate-500 hover:text-slate-800'}">
+              👨‍🏫 Login Guru
             </button>
-          </form>
-        `}
+          </div>
 
-        <div class="pt-4 border-t border-slate-100 text-center text-xs text-slate-400 font-medium">
-          🔒 Akses media pembelajaran Bahasa Arab MAN 1 Pontianak terlindungi. Silakan login sebagai Siswa atau Guru untuk memulai.
+          ${isSiswaTab ? `
+            <!-- FORM LOGIN SISWA -->
+            <form id="form-login-siswa" onsubmit="handleSiswaLogin(event)" class="space-y-4">
+              <div class="space-y-1.5">
+                <label class="text-xs font-bold text-slate-700 uppercase tracking-wider">Nama Lengkap Siswa</label>
+                <input type="text" id="siswa-nama" required placeholder="Contoh: Ahmad Ridho" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold focus:ring-2 focus:ring-teal-500 focus:outline-none"/>
+              </div>
+
+              <div class="space-y-1.5">
+                <label class="text-xs font-bold text-slate-700 uppercase tracking-wider">Kelas (MAN 1 Pontianak)</label>
+                <select id="siswa-kelas" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                  ${classesList.map(c => `<option value="${c}">${c}</option>`).join('')}
+                </select>
+              </div>
+
+              <button type="submit" class="w-full py-3.5 bg-[#2f6b78] hover:bg-[#1f4750] text-white font-bold text-sm rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 transform hover:scale-[1.01]">
+                <span>🚀 Masuk Ke Portal Pembelajaran</span>
+              </button>
+            </form>
+          ` : `
+            <!-- FORM LOGIN GURU -->
+            <form id="form-login-guru" onsubmit="handleGuruLogin(event)" class="space-y-4">
+              <div class="p-3.5 bg-amber-50 rounded-2xl border border-amber-200 text-xs text-amber-900 space-y-1">
+                <p class="font-bold">👨‍🏫 Portal Pengajar Bahasa Arab</p>
+                <p>Pengajar: <strong>${ARABIC_DATA.info.teacher}</strong></p>
+                <p class="text-[11px] text-amber-700 font-mono mt-1">PIN Default: guru123</p>
+              </div>
+
+              <div class="space-y-1.5">
+                <label class="text-xs font-bold text-slate-700 uppercase tracking-wider">PIN / Password Guru</label>
+                <input type="password" id="guru-pin" required placeholder="Masukkan PIN Guru" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold focus:ring-2 focus:ring-amber-500 focus:outline-none"/>
+              </div>
+
+              <button type="submit" class="w-full py-3.5 bg-amber-600 hover:bg-amber-700 text-white font-bold text-sm rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 transform hover:scale-[1.01]">
+                <span>👨‍🏫 Masuk Ke Dashboard Guru</span>
+              </button>
+            </form>
+          `}
+
+          <div class="pt-3 border-t border-slate-100 text-center text-xs text-slate-400 font-medium">
+            🔒 Akses terlindungi. Silakan login sebagai Siswa atau Guru untuk memulai.
+          </div>
+
+        </div>
+
+        <!-- Footer Info -->
+        <div class="text-xs text-teal-100/70 font-medium space-y-1">
+          <p>👨‍🏫 Guru Pengajar: <strong>${ARABIC_DATA.info.teacher}</strong></p>
+          <p>© 2026 MAN 1 Pontianak — Hak Cipta Dilindungi</p>
         </div>
 
       </div>
