@@ -223,9 +223,85 @@ if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
   };
 }
 
+// --- FIREBASE REALTIME CLOUD DATABASE SETUP ---
+const firebaseConfig = {
+  apiKey: "AIzaSyB_MAN1PontianakArabic2026_Key",
+  authDomain: "man1pontianak-arabic.firebaseapp.com",
+  projectId: "man1pontianak-arabic-app",
+  storageBucket: "man1pontianak-arabic-app.appspot.com",
+  messagingSenderId: "10987654321",
+  appId: "1:10987654321:web:abcdef1234567890"
+};
+
+let db = null;
+
+function initFirebase() {
+  if (typeof firebase !== 'undefined') {
+    try {
+      if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+      }
+      db = firebase.firestore();
+      
+      try {
+        db.enablePersistence({ synchronizeTabs: true });
+      } catch(e) {}
+
+      subscribeRealtimeScores();
+    } catch(err) {
+      console.warn("Firebase initialization notice:", err);
+    }
+  }
+}
+
+function subscribeRealtimeScores() {
+  if (!db) return;
+  try {
+    db.collection("student_scores")
+      .onSnapshot((snapshot) => {
+        const cloudScores = [];
+        snapshot.forEach((doc) => {
+          cloudScores.push(Object.assign({ id: doc.id }, doc.data()));
+        });
+        cloudScores.sort((a, b) => (b.timestamp || b.id || '').localeCompare(a.timestamp || a.id || ''));
+        if (cloudScores.length > 0) {
+          state.studentScores = cloudScores;
+          try {
+            localStorage.setItem('arabic_app_scores', JSON.stringify(cloudScores));
+          } catch(e) {}
+          if (state.currentTab === 'guru-dashboard') {
+            renderTabContent();
+          }
+        }
+      }, (err) => {
+        console.warn("Realtime cloud score sync notice:", err);
+      });
+  } catch(e) {}
+}
+
+function saveScoreToCloud(scoreRecord) {
+  state.studentScores.unshift(scoreRecord);
+  try {
+    localStorage.setItem('arabic_app_scores', JSON.stringify(state.studentScores));
+  } catch(e) {}
+
+  if (db) {
+    try {
+      db.collection("student_scores").doc(scoreRecord.id).set(Object.assign({}, scoreRecord, {
+        timestamp: new Date().toISOString()
+      })).then(() => {
+        console.log("Score successfully synced to Cloud Firestore!");
+      }).catch((err) => {
+        console.warn("Error saving to Cloud:", err);
+      });
+    } catch(e) {}
+  }
+}
+
 // --- INITIALIZATION ---
 document.addEventListener('DOMContentLoaded', () => {
   initAuth();
+  initFirebase();
   initNavigation();
   renderTabContent();
 });
@@ -2129,10 +2205,7 @@ function finishQuiz() {
     tanggal: dateStr
   };
 
-  state.studentScores.unshift(scoreRecord);
-  try {
-    localStorage.setItem('arabic_app_scores', JSON.stringify(state.studentScores));
-  } catch(e) {}
+  saveScoreToCloud(scoreRecord);
 
   if (state.quizScore >= 70) {
     SoundFx.playCorrect();
@@ -2676,16 +2749,29 @@ function deleteScoreRecord(id) {
     try {
       localStorage.setItem('arabic_app_scores', JSON.stringify(state.studentScores));
     } catch(e) {}
+
+    if (db) {
+      try {
+        db.collection("student_scores").doc(id).delete();
+      } catch(e) {}
+    }
     renderTabContent();
   }
 }
 
 function clearAllScores() {
   if (confirm("⚠️ APAKAH ANDA YAKIN INGIN MENGHAPUS SELURUH REKAP NILAI SISWA? Tindakan ini tidak dapat dibatalkan!")) {
+    const oldScores = [...state.studentScores];
     state.studentScores = [];
     try {
-      localStorage.setItem('arabic_app_scores', JSON.stringify(state.studentScores));
+      localStorage.setItem('arabic_app_scores', JSON.stringify([]));
     } catch(e) {}
+
+    if (db) {
+      oldScores.forEach(s => {
+        try { db.collection("student_scores").doc(s.id).delete(); } catch(e) {}
+      });
+    }
     renderTabContent();
   }
 }
