@@ -234,7 +234,12 @@ function initAuth() {
   try {
     const savedAuth = localStorage.getItem('arabic_app_auth');
     if (savedAuth) {
-      state.auth = Object.assign(state.auth, JSON.parse(savedAuth));
+      const parsed = JSON.parse(savedAuth);
+      if (parsed && parsed.isLoggedIn) {
+        state.auth = Object.assign(state.auth, parsed);
+      } else {
+        state.auth.isLoggedIn = false;
+      }
     }
     const savedScores = localStorage.getItem('arabic_app_scores');
     if (savedScores) {
@@ -246,13 +251,18 @@ function initAuth() {
   } catch(e) {
     state.studentScores = Array.from(ARABIC_DATA.initialScores || []);
   }
+
+  // If not logged in, set active tab to login
+  if (!state.auth.isLoggedIn) {
+    state.currentTab = 'login';
+  }
+
   updateUserHeaderUI();
 }
 
 function updateUserHeaderUI() {
   const badgeContainer = document.getElementById('user-header-badge');
   const btnGuru = document.getElementById('nav-btn-guru');
-  const btnLogin = document.getElementById('nav-btn-login');
 
   if (state.auth.isLoggedIn) {
     if (state.auth.role === 'guru') {
@@ -267,7 +277,6 @@ function updateUserHeaderUI() {
         `;
       }
       if (btnGuru) btnGuru.classList.remove('hidden');
-      if (btnLogin) btnLogin.classList.add('hidden');
     } else if (state.auth.role === 'siswa') {
       if (badgeContainer) {
         badgeContainer.innerHTML = `
@@ -280,18 +289,16 @@ function updateUserHeaderUI() {
         `;
       }
       if (btnGuru) btnGuru.classList.add('hidden');
-      if (btnLogin) btnLogin.classList.add('hidden');
     }
   } else {
     if (badgeContainer) {
       badgeContainer.innerHTML = `
         <button onclick="switchTab('login')" class="px-4 py-2 bg-[#2f6b78] hover:bg-[#1f4750] text-white text-xs font-bold rounded-xl shadow-md transition-all flex items-center gap-2">
-          <span>🔑 Masuk / Login</span>
+          <span>🔑 Masuk / Login Portal</span>
         </button>
       `;
     }
     if (btnGuru) btnGuru.classList.add('hidden');
-    if (btnLogin) btnLogin.classList.remove('hidden');
   }
 }
 
@@ -308,6 +315,14 @@ function initNavigation() {
 }
 
 function switchTab(tabId) {
+  // STRICT LOGIN GUARD: Block navigation if not logged in
+  if (!state.auth.isLoggedIn && tabId !== 'login') {
+    state.currentTab = 'login';
+    renderTabContent();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return;
+  }
+
   state.currentTab = tabId;
   
   // Update Active UI Tab Button
@@ -326,6 +341,12 @@ function switchTab(tabId) {
 function renderTabContent() {
   const container = document.getElementById('main-container');
   if (!container) return;
+
+  // STRICT MANDATORY AUTH GUARD
+  if (!state.auth.isLoggedIn) {
+    container.innerHTML = renderLoginHTML();
+    return;
+  }
 
   switch (state.currentTab) {
     case 'home':
@@ -2322,10 +2343,8 @@ function renderLoginHTML() {
           </form>
         `}
 
-        <div class="pt-4 border-t border-slate-100 text-center">
-          <button onclick="handleGuestLogin()" class="text-xs font-semibold text-slate-500 hover:text-slate-800 underline transition-colors">
-            👉 Lanjut Belajar Tanpa Login (Sebagai Tamu / Guest)
-          </button>
+        <div class="pt-4 border-t border-slate-100 text-center text-xs text-slate-400 font-medium">
+          🔒 Akses media pembelajaran Bahasa Arab MAN 1 Pontianak terlindungi. Silakan login sebagai Siswa atau Guru untuk memulai.
         </div>
 
       </div>
@@ -2394,26 +2413,19 @@ function handleGuruLogin(e) {
   switchTab('guru-dashboard');
 }
 
-function handleGuestLogin() {
-  state.auth = {
-    isLoggedIn: false,
-    role: 'guest',
-    userName: 'Siswa Tamu',
-    userClass: 'Kelas X',
-    guruPin: state.auth.guruPin || 'guru123'
-  };
-  try {
-    localStorage.removeItem('arabic_app_auth');
-  } catch(e) {}
-
-  SoundFx.playClick();
-  updateUserHeaderUI();
-  switchTab('home');
-}
-
 function logoutUser() {
   if (confirm("Apakah Anda yakin ingin keluar dari akun?")) {
-    handleGuestLogin();
+    state.auth.isLoggedIn = false;
+    state.auth.role = null;
+    state.auth.userName = '';
+    state.auth.userClass = '';
+    try {
+      localStorage.removeItem('arabic_app_auth');
+    } catch(e) {}
+    state.currentTab = 'login';
+    updateUserHeaderUI();
+    renderTabContent();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }
 
