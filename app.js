@@ -1597,77 +1597,112 @@ function renderQawaidHTML() {
   if (state.qawaidBab === 4) {
     const q4 = ARABIC_DATA.qawaidBab4;
     const questions4 = q4.questions;
+    const taqsim = q4.taqsimKalimah;
+    const aqsam = q4.aqsamFiil;
+
     return `
       <div class="space-y-8 animate-fadeIn max-w-4xl mx-auto">
         ${babSwitcherHTML}
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
           <div>
             <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">
-              <span>📐 Qawaid Bab 4: Jumlah Ismiyyah & Jumlah Fi'liyyah</span>
-              <span class="font-arabic text-3xl text-amber-700">الجملة الاسمية والجملة الفعلية</span>
+              <span>📐 Qawaid Bab 4: Pembagian Kata & Pembagian Kata Kerja</span>
+              <span class="font-arabic text-3xl text-amber-700">تَقْسِيْمُ الْكَلِمَةِ وَأَقْسَامُ الْفِعْلِ</span>
             </h2>
-            <p class="text-slate-600 text-sm mt-1">Perbedaan Kalimat Nominal (Jumlah Ismiyyah) dan Kalimat Verbal (Jumlah Fi'liyyah).</p>
+            <p class="text-slate-600 text-sm mt-1">Materi Qawaid Kurikulum Merdeka: Isim, Fi'il, Harf & Pembagian Fi'il Madhi, Mudhari', Amr.</p>
           </div>
         </div>
 
         <div class="space-y-8">
-          <div class="card-soft p-6 sm:p-8 space-y-6">
-            <h3 class="text-xl font-bold text-amber-900">${q4.jumlahIsmiyyah.title}</h3>
-            <p class="text-sm text-slate-600">${q4.jumlahIsmiyyah.desc}</p>
-            <div class="overflow-x-auto">
-              <table class="w-full text-left border-collapse min-w-[600px]">
-                <thead>
-                  <tr class="bg-amber-100 text-amber-950 text-xs font-bold uppercase">
-                    ${q4.jumlahIsmiyyah.tableHeaders.map(h => `<th class="p-3.5 text-center font-arabic text-lg">${h}</th>`).join('')}
-                  </tr>
-                </thead>
-                <tbody class="divide-y divide-slate-100 text-sm">
-                  ${q4.jumlahIsmiyyah.table.map(row => `
-                    <tr class="hover:bg-amber-50 transition-colors">
-                      <td class="p-3.5 text-center font-arabic text-xl font-bold text-blue-800 bg-blue-50/50 rounded-lg">${row.mubtada}</td>
-                      <td class="p-3.5 text-center font-arabic text-xl font-bold text-teal-800 bg-teal-50/50 rounded-lg">${row.khabar}</td>
-                      <td class="p-3.5 text-center font-arabic text-2xl font-bold text-amber-900">${row.sentence}</td>
-                      <td class="p-3.5 text-center font-bold text-slate-800">${row.translation}</td>
-                    </tr>
-                  `).join('')}
-                </tbody>
-              </table>
+          <!-- SECTION 1: TAQSIM AL-KALIMAH -->
+          <div class="card-soft p-6 sm:p-8 space-y-6 bg-gradient-to-br from-white to-amber-50/30">
+            <div class="border-b border-amber-200/60 pb-4">
+              <span class="px-3 py-1 bg-amber-100 text-amber-900 text-xs font-bold rounded-full uppercase tracking-wider">Materi 1</span>
+              <h3 class="text-2xl font-bold text-amber-900 font-arabic mt-2">${taqsim.title}</h3>
+              <p class="text-lg font-bold text-slate-700 font-arabic">${taqsim.subtitle}</p>
+              <p class="text-sm text-slate-600 mt-1">${taqsim.desc}</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              ${taqsim.items.map(item => `
+                <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4 hover:shadow-md transition-shadow">
+                  <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <span class="px-3 py-1 rounded-lg text-xs font-bold ${item.badgeColor}">${item.typeTitle}</span>
+                    <span class="font-arabic text-2xl font-bold text-slate-800">${item.arabicName}</span>
+                  </div>
+
+                  <div class="space-y-2 bg-slate-50 p-3 rounded-xl text-xs">
+                    <p class="font-arabic text-lg font-bold text-amber-800 leading-relaxed">${item.definitionArabic}</p>
+                    <p class="text-slate-600 italic">${item.definitionIndo}</p>
+                  </div>
+
+                  <div>
+                    <h5 class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Contoh Kata (مِثَالٌ):</h5>
+                    <div class="flex flex-wrap gap-1.5">
+                      ${item.examples.map(ex => `<span class="px-2.5 py-1 bg-amber-100/70 border border-amber-200 text-amber-950 font-arabic text-base font-bold rounded-lg">${ex}</span>`).join('')}
+                    </div>
+                  </div>
+
+                  <div>
+                    <h5 class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Ciri-ciri Utama:</h5>
+                    <ul class="space-y-1 text-xs text-slate-600">
+                      ${item.characteristics.map(c => `<li class="flex items-start gap-1.5"><span class="text-amber-500 font-bold">•</span> <span>${c}</span></li>`).join('')}
+                    </ul>
+                  </div>
+                </div>
+              `).join('')}
             </div>
           </div>
 
-          <div class="card-soft p-6 sm:p-8 space-y-6">
-            <h3 class="text-xl font-bold text-amber-900">${q4.jumlahFiliyyah.title}</h3>
-            <p class="text-sm text-slate-600">${q4.jumlahFiliyyah.desc}</p>
-            <div class="overflow-x-auto">
-              <table class="w-full text-left border-collapse min-w-[600px]">
-                <thead>
-                  <tr class="bg-amber-100 text-amber-950 text-xs font-bold uppercase">
-                    ${q4.jumlahFiliyyah.tableHeaders.map(h => `<th class="p-3.5 text-center font-arabic text-lg">${h}</th>`).join('')}
-                  </tr>
-                </thead>
-                <tbody class="divide-y divide-slate-100 text-sm">
-                  ${q4.jumlahFiliyyah.table.map(row => `
-                    <tr class="hover:bg-amber-50 transition-colors">
-                      <td class="p-3.5 text-center font-arabic text-xl font-bold text-teal-800 bg-teal-50/50 rounded-lg">${row.fiil}</td>
-                      <td class="p-3.5 text-center font-arabic text-xl font-bold text-blue-800 bg-blue-50/50 rounded-lg">${row.fail}</td>
-                      <td class="p-3.5 text-center font-arabic text-xl font-bold text-purple-800 bg-purple-50/50 rounded-lg">${row.maful}</td>
-                      <td class="p-3.5 text-center font-arabic text-2xl font-bold text-amber-900">${row.sentence}</td>
-                      <td class="p-3.5 text-center font-bold text-slate-800">${row.translation}</td>
-                    </tr>
-                  `).join('')}
-                </tbody>
-              </table>
+          <!-- SECTION 2: AQSAM AL-FI'IL -->
+          <div class="card-soft p-6 sm:p-8 space-y-6 bg-gradient-to-br from-white to-amber-50/30">
+            <div class="border-b border-amber-200/60 pb-4">
+              <span class="px-3 py-1 bg-amber-100 text-amber-900 text-xs font-bold rounded-full uppercase tracking-wider">Materi 2</span>
+              <h3 class="text-2xl font-bold text-amber-900 font-arabic mt-2">${aqsam.title}</h3>
+              <p class="text-lg font-bold text-slate-700 font-arabic">${aqsam.subtitle}</p>
+              <p class="text-sm text-slate-600 mt-1">${aqsam.desc}</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              ${aqsam.categories.map(cat => `
+                <div class="p-5 rounded-2xl bg-white border border-amber-200/70 shadow-sm space-y-4">
+                  <div class="flex items-center justify-between border-b border-amber-100 pb-3">
+                    <div>
+                      <h4 class="font-bold text-slate-800 text-sm">${cat.name}</h4>
+                      <p class="text-[11px] text-slate-500 italic mt-0.5">${cat.note}</p>
+                    </div>
+                    <span class="font-arabic text-2xl font-bold text-amber-700">${cat.title}</span>
+                  </div>
+
+                  <div class="space-y-3 max-h-[380px] overflow-y-auto pr-1">
+                    ${cat.sentences.map(s => `
+                      <div class="p-3 bg-amber-50/40 border border-amber-100/80 rounded-xl space-y-1">
+                        <p class="font-arabic text-xl text-slate-900 font-medium text-right leading-relaxed">${s.arabic}</p>
+                        <p class="text-xs text-slate-500 italic">${s.latin}</p>
+                        <p class="text-xs font-semibold text-slate-700">${s.indo}</p>
+                      </div>
+                    `).join('')}
+                  </div>
+                </div>
+              `).join('')}
             </div>
           </div>
 
+          <!-- SECTION 3: 10 SOAL LATIHAN QAWAID BAB 4 -->
           <div class="card-soft p-6 sm:p-8 space-y-6">
-            <h3 class="text-xl font-bold text-amber-900">📝 Latihan 10 Soal Qawaid Bab 4</h3>
+            <div class="flex items-center justify-between pb-2 border-b border-amber-200/60">
+              <h3 class="text-xl font-bold text-amber-900">📝 Latihan 10 Soal Qawaid Bab 4</h3>
+              <span class="text-xs font-bold text-amber-700 bg-amber-100 px-3 py-1 rounded-full">Soal Pilihan Ganda</span>
+            </div>
             <div class="space-y-6">
               ${questions4.map((q, qIdx) => `
                 <div class="p-5 bg-amber-50/50 rounded-2xl border border-amber-100 space-y-4">
                   <div class="flex items-start gap-3">
                     <span class="w-7 h-7 rounded-full bg-amber-200 text-amber-900 font-bold text-xs flex items-center justify-center flex-shrink-0 mt-1">${qIdx + 1}</span>
-                    <h4 class="font-arabic text-2xl font-bold text-slate-800 leading-[2.4] pt-1">${q.q}</h4>
+                    <div>
+                      <h4 class="font-arabic text-2xl font-bold text-slate-800 leading-[2.4] pt-1">${q.q}</h4>
+                      <p class="text-xs text-slate-500 italic">${q.latinQ}</p>
+                    </div>
                   </div>
                   <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                     ${q.options.map((opt, optIdx) => `

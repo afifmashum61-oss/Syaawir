@@ -5034,214 +5034,357 @@ const ARABIC_DATA = {
     ]
   },
   "qawaidBab4": {
-    "title": "القواعد والتركيب - الباب الرابع (الجملة الاسمية والجملة الفعلية)",
-    "jumlahIsmiyyah": {
-      "title": "١ - الْجُمْلَةُ الاِسْمِيَّةُ (Kalimat Nominal / Ismiyyah)",
-      "desc": "Jumlah Ismiyyah adalah kalimat yang diawali dengan kata benda (Isim). Komponen utamanya adalah Mubtada' (الْمُبْتَدَأُ) dan Khabar (الْخَبَرُ):",
-      "tableHeaders": [
-        "الْمُبْتَدَأُ (Mubtada')",
-        "الْخَبَرُ (Khabar)",
-        "الْجُمْلَةُ الاِسْمِيَّةُ (Kalimat Lengkap)",
-        "Terjemahan"
-      ],
-      "table": [
+    "title": "📐 Qawaid Bab 4: Pembagian Kata & Pembagian Kata Kerja",
+    "latinTitle": "Taqsim al-Kalimah & Aqsam al-Fi'il",
+    "taqsimKalimah": {
+      "title": "(أ) - تَقْسِيْمُ الْكَلِمَةِ",
+      "subtitle": "كَلِمَةٌ ثَلَاثَةُ أَقْسَامٍ: اِسْمٌ وَفِعْلٌ وَحَرْفٌ",
+      "desc": "Kata dalam Bahasa Arab terbagi menjadi 3 jenis utama: Isim (Kata Benda), Fi'il (Kata Kerja), dan Harf (Kata Tugas/Depan).",
+      "items": [
         {
-          "mubtada": "الْقِرَاءَةُ",
-          "khabar": "مُفِيْدَةٌ",
-          "sentence": "الْقِرَاءَةُ مُفِيْدَةٌ",
-          "translation": "Membaca itu bermanfaat."
+          "id": "ism",
+          "arabicName": "الاسْمُ",
+          "typeTitle": "1. Isim (Kata Benda / Nominal)",
+          "definitionArabic": "مَا دَلَّ عَلَى مَعْنًى فِيْ نَفْسِهِ غَيْرِ مُقْتَرِنٍ بِزَمَانٍ",
+          "definitionIndo": "Kalimah isim adalah kata yang menunjukkan arti pada dirinya sendiri dan tidak berkaitan dengan waktu.",
+          "examples": [
+            "هِوَايَةٌ",
+            "قِرَاءَةٌ",
+            "رَسْمٌ",
+            "الْمَدْرَسَةُ",
+            "الطَّالِبُ",
+            "الطَّالِبَةُ",
+            "الْفَصْلُ",
+            "الصَّفُّ",
+            "أَحْمَدُ",
+            "فَاطِمَةُ",
+            "أَنَا",
+            "أَنْتَ",
+            "هُوَ",
+            "هِيَ"
+          ],
+          "characteristics": [
+            "Menerima tanda tanwin (تَنْوِيْن): هِوَايَةٌ، قِرَاءَةٌ، رَسْمٌ",
+            "Dapat dimasuki Alif Lam (ال): الْمَدْرَسَةُ، الطَّالِبُ، الطَّالِبَةُ، الْفَصْلُ، الصَّفُّ",
+            "Dapat dimasuki oleh huruf nida' (panggilan): يَا أَحْمَدُ، يَا فَاطِمَةُ",
+            "Dapat dimajrurkan oleh huruf jar atau idafah: فِي الْفَصْلِ، فِي الصَّفِّ، كُتُبُ التَّارِيْخِ"
+          ],
+          "badgeColor": "bg-sky-100 text-sky-900 border-sky-300"
         },
         {
-          "mubtada": "عُمَرُ",
-          "khabar": "يَلْعَبُ كُرَةَ الْقَدَمِ",
-          "sentence": "عُمَرُ يَلْعَبُ كُرَةَ الْقَدَمِ",
-          "translation": "Umar sedang bermain sepak bola."
+          "id": "fiil",
+          "arabicName": "الْفِعْلُ",
+          "typeTitle": "2. Fi'il (Kata Kerja / Verbal)",
+          "definitionArabic": "مَا دَلَّ عَلَى مَعْنًى فِيْ نَفْسِهِ مُقْتَرِنٍ بِزَمَانٍ",
+          "definitionIndo": "Kalimah fi'il adalah kata yang menunjukkan arti pada dirinya sendiri dan berkaitan dengan waktu.",
+          "examples": [
+            "قَرَأَ - يَقْرَأُ",
+            "كَتَبَ - يَكْتُبُ",
+            "ذَهَبَ - يَذْهَبُ",
+            "جَلَسَ - يَجْلِسُ",
+            "اشْتَرَكَ - يَشْتَرِكُ",
+            "مَارَسَ - يُمَارِسُ",
+            "تَعَلَّمَ - يَتَعَلَّمُ"
+          ],
+          "characteristics": [
+            "Dapat bersambung dengan ta' fa'il (تَاءُ الْفَاعِلِ - subjek akhir): كَتَبْتُ، كَتَبْتَ، كَتَبْتِ (كَتَبْتُ الأَخْبَارَ)",
+            "Dapat bersambung dengan ta' ta'nis (تَاءُ التَّأْنِيْثِ - تْ mu'annats): ذَهَبَتْ، دَخَلَتْ (شَافِيَةُ ذَهَبَتْ إِلَى الْمَدْرَسَةِ)",
+            "Dapat bersambung dengan ya' mukhatabah (يَاءُ مُخَاطَبَةٍ - kamu P): تَكْتُبِيْنَ، إِجْلِسِي"
+          ],
+          "badgeColor": "bg-emerald-100 text-emerald-900 border-emerald-300"
         },
         {
-          "mubtada": "الرِّيَاضَةُ",
-          "khabar": "تُقَوِّي الْجِسْمَ",
-          "sentence": "الرِّيَاضَةُ تُقَوِّي الْجِسْمَ",
-          "translation": "Olahraga itu menguatkan tubuh."
-        },
-        {
-          "mubtada": "الطُّلَّابُ",
-          "khabar": "يَدْرُسُوْنَ فِي الْفَصْلِ",
-          "sentence": "الطُّلَّابُ يَدْرُسُوْنَ فِي الْفَصْلِ",
-          "translation": "Para siswa sedang belajar di kelas."
+          "id": "harf",
+          "arabicName": "الْحَرْفُ",
+          "typeTitle": "3. Harf (Kata Tugas / Sambung)",
+          "definitionArabic": "مَا دَلَّ عَلَى مَعْنًى فِيْ غَيْرِهِ وَلَيْسَ لَهُ عَلاَمَةٌ يَتَمَيَّزُ بِهَا كَمَا لِلِاسْمِ وَالْفِعْلِ",
+          "definitionIndo": "Kalimah huruf adalah kata yang menunjukkan arti bersama kata lain dan tidak memiliki tanda khusus sebagaimana isim dan fi'il.",
+          "examples": [
+            "هَلْ",
+            "مِنْ",
+            "إِلَى",
+            "فِيْ",
+            "قَدْ",
+            "ثُمَّ",
+            "فَـ",
+            "بَلْ",
+            "لَا",
+            "أَوْ"
+          ],
+          "characteristics": [
+            "Huruf Jar (حَرْفُ جَرٍّ): مِنْ، إِلَى، عَنْ، عَلَى، فِيْ، بـِ، كـَ، لـِ (Mengakibatkan isim setelahnya menjadi majrur)",
+            "Huruf 'Atf (حَرْفُ عَطْفٍ): وَ، فَـ، ثُمَّ، أَوْ، لَا، لَكِنْ، بَلْ، حَتَّى (Menyambungkan kata/kalimat)"
+          ],
+          "badgeColor": "bg-purple-100 text-purple-900 border-purple-300"
         }
       ]
     },
-    "jumlahFiliyyah": {
-      "title": "٢ - الْجُمْلَةُ الْفِعْلِيَّةُ (Kalimat Verbal / Fi'liyyah)",
-      "desc": "Jumlah Fi'liyyah adalah kalimat yang diawali dengan kata kerja (Fi'il). Urutannya: Fi'il + Fa'il (Subjek/Pelaku) + Maf'ul Bih (Objek):",
-      "tableHeaders": [
-        "الْفِعْلُ (Fi'il)",
-        "الْفَاعِلُ (Fa'il)",
-        "الْمَفْعُوْلُ بِهِ (Maf'ul Bih)",
-        "الْجُمْلَةُ الْفِعْلِيَّةُ",
-        "Terjemahan"
-      ],
-      "table": [
+    "aqsamFiil": {
+      "title": "(ب) - أَقْسَامُ الْفِعْلِ",
+      "subtitle": "فِعْلٌ مَاضٍ وَفِعْلٌ مُضَارِعٌ وَفِعْلُ أَمْرٍ",
+      "desc": "Pembagian Kata Kerja (Fi'il) berdasarkan waktu dan bentuknya terbagi menjadi 3:",
+      "categories": [
         {
-          "fiil": "يَقْرَأُ",
-          "fail": "أَحْمَدُ",
-          "maful": "الْكِتَابَ",
-          "sentence": "يَقْرَأُ أَحْمَدُ الْكِتَابَ",
-          "translation": "Ahmad membaca buku itu."
+          "id": "madi",
+          "title": "فِعْلٌ مَاضٍ",
+          "name": "Fi'il Madhi (Kata Kerja Lampau)",
+          "note": "Secara umum diakhiri harakat fathah. Berharakat sukun bila bertemu ta' fa'il (كَتَبْتُ) atau nun damir (كَتَبْنَا).",
+          "sentences": [
+            {
+              "arabic": "الطَّالِبُ <span class='text-rose-600 font-extrabold'>جَلَسَ</span> عَلَى الْكُرْسِيِّ",
+              "latin": "Al-Thālibu jalasa 'alāl kursiyyi",
+              "indo": "Siswa itu duduk di atas kursi."
+            },
+            {
+              "arabic": "أَحْمَدُ <span class='text-rose-600 font-extrabold'>جَلَسَ</span> عَلَى الْكُرْسِيِّ",
+              "latin": "Aḥmadu jalasa 'alāl kursiyyi",
+              "indo": "Ahmad duduk di atas kursi."
+            },
+            {
+              "arabic": "الطَّالِبَةُ <span class='text-rose-600 font-extrabold'>جَلَسَتْ</span> عَلَى الْكُرْسِيِّ",
+              "latin": "Al-Thālibatu jalasat 'alāl kursiyyi",
+              "indo": "Siswi itu duduk di atas kursi."
+            },
+            {
+              "arabic": "فَاطِمَةُ <span class='text-rose-600 font-extrabold'>جَلَسَتْ</span> عَلَى الْكُرْسِيِّ",
+              "latin": "Fāṭimatu jalasat 'alāl kursiyyi",
+              "indo": "Fatimah duduk di atas kursi."
+            },
+            {
+              "arabic": "أَنَا <span class='text-rose-600 font-extrabold'>كَتَبْتُ</span> الأَخْبَارَ",
+              "latin": "Ana katabtul akhbāra",
+              "indo": "Saya telah menulis berita."
+            },
+            {
+              "arabic": "أَنْتَ <span class='text-rose-600 font-extrabold'>كَتَبْتَ</span> الأَخْبَارَ",
+              "latin": "Anta katabtal akhbāra",
+              "indo": "Kamu (L) telah menulis berita."
+            },
+            {
+              "arabic": "أَنْتِ <span class='text-rose-600 font-extrabold'>كَتَبْتِ</span> الأَخْبَارَ",
+              "latin": "Anti katabtil akhbāra",
+              "indo": "Kamu (P) telah menulis berita."
+            },
+            {
+              "arabic": "نَحْنُ <span class='text-rose-600 font-extrabold'>كَتَبْنَا</span> الدَّرْسَ",
+              "latin": "Naḥnu katabnād darsa",
+              "indo": "Kami telah menulis pelajaran."
+            }
+          ]
         },
         {
-          "fiil": "تَطْبُخُ",
-          "fail": "الأُمُّ",
-          "maful": "الطَّعَامَ",
-          "sentence": "تَطْبُخُ الأُمُّ الطَّعَامَ",
-          "translation": "Ibu memasak makanan."
+          "id": "mudhari",
+          "title": "فِعْلٌ مُضَارِعٌ",
+          "name": "Fi'il Mudhari' (Sekarang / Akan Datang)",
+          "note": "Diawali salah satu huruf mudhara'ah (أ - ن - ي - ت). Harakat akhir umumnya dammah (mu'rab).",
+          "sentences": [
+            {
+              "arabic": "الطَّالِبُ <span class='text-rose-600 font-extrabold'>يَجْلِسُ</span> عَلَى الْكُرْسِيِّ",
+              "latin": "Al-Thālibu yajlisu 'alāl kursiyyi",
+              "indo": "Siswa itu sedang duduk di atas kursi."
+            },
+            {
+              "arabic": "أَحْمَدُ <span class='text-rose-600 font-extrabold'>يَجْلِسُ</span> عَلَى الْكُرْسِيِّ",
+              "latin": "Aḥmadu yajlisu 'alāl kursiyyi",
+              "indo": "Ahmad sedang duduk di atas kursi."
+            },
+            {
+              "arabic": "الطَّالِبَةُ <span class='text-rose-600 font-extrabold'>تَجْلِسُ</span> عَلَى الْكُرْسِيِّ",
+              "latin": "Al-Thālibatu tajlisu 'alāl kursiyyi",
+              "indo": "Siswi itu sedang duduk di atas kursi."
+            },
+            {
+              "arabic": "فَاطِمَةُ <span class='text-rose-600 font-extrabold'>تَجْلِسُ</span> عَلَى الْكُرْسِيِّ",
+              "latin": "Fāṭimatu tajlisu 'alāl kursiyyi",
+              "indo": "Fatimah sedang duduk di atas kursi."
+            },
+            {
+              "arabic": "أَنَا <span class='text-rose-600 font-extrabold'>أَكْتُبُ</span> الأَخْبَارَ",
+              "latin": "Ana aktubul akhbāra",
+              "indo": "Saya sedang menulis berita."
+            },
+            {
+              "arabic": "أَنْتَ <span class='text-rose-600 font-extrabold'>تَكْتُبُ</span> الأَخْبَارَ",
+              "latin": "Anta taktubul akhbāra",
+              "indo": "Kamu (L) sedang menulis berita."
+            },
+            {
+              "arabic": "أَنْتِ <span class='text-rose-600 font-extrabold'>تَكْتُبِيْنَ</span> الأَخْبَارَ",
+              "latin": "Anti taktubīnal akhbāra",
+              "indo": "Kamu (P) sedang menulis berita."
+            },
+            {
+              "arabic": "نَحْنُ <span class='text-rose-600 font-extrabold'>نَكْتُبُ</span> الدَّرْسَ",
+              "latin": "Naḥnu naktubud darsa",
+              "indo": "Kami sedang menulis pelajaran."
+            }
+          ]
         },
         {
-          "fiil": "يَلْعَبُ",
-          "fail": "الطُّلَّابُ",
-          "maful": "كُرَةَ السَّلَّةِ",
-          "sentence": "يَلْعَبُ الطُّلَّابُ كُرَةَ السَّلَّةِ",
-          "translation": "Para siswa bermain bola basket."
-        },
-        {
-          "fiil": "يَكْتُبُ",
-          "fail": "زَيْدٌ",
-          "maful": "الرِّسَالَةَ",
-          "sentence": "يَكْتُبُ زَيْدٌ الرِّسَالَةَ",
-          "translation": "Zaid menulis surat."
+          "id": "amr",
+          "title": "فِعْلُ أَمْرٍ",
+          "name": "Fi'il Amr (Kata Kerja Perintah)",
+          "note": "Diakhiri sukun (إِجْلِسْ), kasrah dengan ya' mukhatabah (إِجْلِسِي), atau dammah dengan wau jama' (اكْتُبُوا).",
+          "sentences": [
+            {
+              "arabic": "يَا أَحْمَدُ، <span class='text-rose-600 font-extrabold'>إِجْلِسْ</span> عَلَى الْكُرْسِيِّ",
+              "latin": "Yā Aḥmadu, ijlis 'alāl kursiyyi",
+              "indo": "Wahai Ahmad, duduklah di atas kursi!"
+            },
+            {
+              "arabic": "يَا فَاطِمَةُ، <span class='text-rose-600 font-extrabold'>إِجْلِسِي</span> عَلَى الْكُرْسِيِّ",
+              "latin": "Yā Fāṭimatu, ijlisī 'alāl kursiyyi",
+              "indo": "Wahai Fatimah, duduklah di atas kursi!"
+            },
+            {
+              "arabic": "يَا مُحَمَّدُ، <span class='text-rose-600 font-extrabold'>اكْتُبِ</span> الأَخْبَارَ",
+              "latin": "Yā Muḥammadu, uktubil akhbāra",
+              "indo": "Wahai Muhammad, tulislah berita!"
+            },
+            {
+              "arabic": "يَا نَجْوَى، <span class='text-rose-600 font-extrabold'>اكْتُبِي</span> الأَخْبَارَ",
+              "latin": "Yā Najwā, uktubīl akhbāra",
+              "indo": "Wahai Najwa, tulislah berita!"
+            },
+            {
+              "arabic": "أَيُّهَا الطُّلَّابُ، <span class='text-rose-600 font-extrabold'>اكْتُبُوا</span> الدَّرْسَ",
+              "latin": "Ayyuhāṭ ṭullābu, uktubūd darsa",
+              "indo": "Wahai para siswa, tulislah pelajaran!"
+            }
+          ]
         }
       ]
     },
     "questions": [
       {
         "id": 1,
-        "q": "مَا هِيَ 'الْجُمْلَةُ الاِسْمِيَّةُ'؟",
-        "latinQ": "Apakah definisi dari Jumlah Ismiyyah?",
+        "q": "تَنْقَسِمُ الْكَلِمَةُ فِي اللُّغَةِ الْعَرَبِيَّةِ إِلَى ثَلَاثَةِ أَقْسَامٍ، وَهِيَ:",
+        "latinQ": "Kata dalam Bahasa Arab terbagi menjadi 3 jenis, yaitu:",
         "options": [
-          "الْجُمْلَةُ الَّتِي تَبْدَأُ بِالاِسْمِ",
-          "الْجُمْلَةُ الَّتِي تَبْدَأُ بِالْفِعْلِ",
-          "الْجُمْلَةُ الَّتِي تَبْدَأُ بِالْحَرْفِ",
-          "الْجُمْلَةُ الَّتِي لَا مَعْنَى لَهَا"
+          "اِسْمٌ، وَفِعْلٌ، وَحَرْفٌ",
+          "مُبْتَدَأٌ، وَخَبَرٌ، وَفَاعِلٌ",
+          "مَاضٍ، وَمُضَارِعٌ، وَأَمْرٌ",
+          "مُفْرَدٌ، وَمُثَنَّى، وَجَمْعٌ"
         ],
         "answer": 0,
-        "explanation": "Jumlah Ismiyyah adalah kalimat yang diawali dengan kata benda (Isim)."
+        "explanation": "Pembagian kata (تَقْسِيْمُ الْكَلِمَةِ) terbagi 3: Isim (Kata Benda), Fi'il (Kata Kerja), dan Harf (Kata Tugas)."
       },
       {
         "id": 2,
-        "q": "أَيُّ جُمْلَةٍ مِنَ الْجُمَلِ الآتِيَةِ هِيَ 'جُمْلَةٌ فِعْلِيَّةٌ'؟",
-        "latinQ": "Manakah kalimat berikut yang merupakan Jumlah Fi'liyyah?",
+        "q": "مَا دَلَّ عَلَى مَعْنًى فِيْ نَفْسِهِ غَيْرِ مُقْتَرِنٍ بِزَمَانٍ يُسَمَّى:",
+        "latinQ": "Kata yang menunjukkan arti pada dirinya sendiri dan TIDAK terikat waktu disebut:",
         "options": [
-          "الْقِرَاءَةُ مُفِيْدَةٌ",
-          "يَقْرَأُ أَحْمَدُ الْكِتَابَ",
-          "الطَّالِبُ ذَكِيٌّ",
-          "الْبَيْتُ كَبِيْرٌ"
+          "الاسْمُ",
+          "الْفِعْلُ",
+          "الْحَرْفُ",
+          "الظَّرْفُ"
         ],
-        "answer": 1,
-        "explanation": "'يَقْرَأُ أَحْمَدُ الْكِتَابَ' diawali dengan kata kerja 'يَقْرَأُ' (Fi'il), maka tergolong Jumlah Fi'liyyah."
+        "answer": 0,
+        "explanation": "Isim adalah kata yang menunjukkan arti tanpa terikat oleh waktu."
       },
       {
         "id": 3,
-        "q": "مَا هُوَ 'الْفَاعِلُ' فِي جُمْلَةِ: 'يَكْتُبُ زَيْدٌ الرِّسَالَةَ'؟",
-        "latinQ": "Manakah Fa'il (Subjek/Pelaku) dalam kalimat tersebut?",
+        "q": "أَيُّ كَلِمَةٍ مِنَ الْكَلِمَاتِ الآتِيَةِ تَدُلُّ عَلَى 'اِسْمٍ' لِأَنَّهَا تَقْبَلُ (ال):",
+        "latinQ": "Manakah kata berikut yang tergolong Isim karena menerima Alif Lam (ال)?",
         "options": [
-          "يَكْتُبُ",
-          "زَيْدٌ",
-          "الرِّسَالَةَ",
-          "فِي"
+          "الْمَدْرَسَةُ",
+          "يَقْرَأُ",
+          "كَتَبَتْ",
+          "مِنْ"
         ],
-        "answer": 1,
-        "explanation": "زَيْدٌ adalah Fa'il (pelaku yang melakukan perbuatan menulis)."
+        "answer": 0,
+        "explanation": "'الْمَدْرَسَةُ' adalah Isim karena memiliki tanda diawali Alif Lam (ال)."
       },
       {
         "id": 4,
-        "q": "حَوِّلِ الْجُمْلَةَ الاِسْمِيَّةَ 'عُمَرُ يَلْعَبُ' إِلَى جُمْلَةٍ فِعْلِيَّةٍ:",
-        "latinQ": "Ubah kalimat Ismiyyah 'عُمَرُ يَلْعَبُ' menjadi kalimat Fi'liyyah:",
+        "q": "تَتَّصِلُ 'تَاءُ التَّأْنِيْثِ' (تْ) بِالْفِعْلِ الْمَاضِي عِنْدَمَا يَكُوْنُ الْفَاعِلُ:",
+        "latinQ": "Ta' Ta'nis (تْ) bersambung pada Fi'il Madhi jika pelakunya adalah:",
         "options": [
-          "يَلْعَبُ عُمَرُ",
-          "عُمَرُ يَلْعَبُ",
-          "الْمَلْعَبُ عُمَرُ",
-          "يَلْعَبَانِ عُمَرُ"
-        ],
-        "answer": 0,
-        "explanation": "Dalam Jumlah Fi'liyyah, kata kerja (Fi'il) diletakkan di depan: 'يَلْعَبُ عُمَرُ'."
-      },
-      {
-        "id": 5,
-        "q": "مَا إِعْرَابُ كَلِمَةِ 'الْكِتَابَ' فِي جُمْلَةِ 'يَقْرَأُ أَحْمَدُ الْكِتَابَ'؟",
-        "latinQ": "Apakah kedudukan kata 'الْكِتَابَ' dalam kalimat tersebut?",
-        "options": [
-          "مَفْعُوْلٌ بِهِ",
-          "فَاعِلٌ",
-          "مُبْتَدَأٌ",
-          "خَبَرٌ"
-        ],
-        "answer": 0,
-        "explanation": "'الْكِتَابَ' berkedudukan sebagai Maf'ul Bih (objek penderita) manshub dengan fathah."
-      },
-      {
-        "id": 6,
-        "q": "أَكْمِلِ الْجُمْلَةَ الاِسْمِيَّةَ: الرِّيَاضَةُ _____ لِلْجِسْمِ.",
-        "latinQ": "Lengkapi Jumlah Ismiyyah: Olahraga itu _____ bagi tubuh.",
-        "options": [
-          "مُفِيْدَةٌ",
-          "مُفِيْدٌ",
-          "يَفْعَلُ",
-          "فِي"
-        ],
-        "answer": 0,
-        "explanation": "الرِّيَاضَةُ adalah isim mu'annats, maka khabar-nya juga harus mu'annats: مُفِيْدَةٌ."
-      },
-      {
-        "id": 7,
-        "q": "مَا هُوَ 'الْمُبْتَدَأُ' فِي جُمْلَةِ 'الْقِرَاءَةُ تُوَسِّعُ الْمَعْرِفَةَ'؟",
-        "latinQ": "Manakah Mubtada' dalam kalimat tersebut?",
-        "options": [
-          "الْقِرَاءَةُ",
-          "تُوَسِّعُ",
-          "الْمَعْرِفَةَ",
-          "فِي"
-        ],
-        "answer": 0,
-        "explanation": "الْقِرَاءَةُ adalah Isim diawal kalimat yang menjadi Mubtada'."
-      },
-      {
-        "id": 8,
-        "q": "أَيُّ كَلِمَةٍ تُمَثِّلُ 'الْفِعْلَ' فِي جُمْلَةِ 'تَطْبُخُ الأُمُّ الطَّعَامَ'؟",
-        "latinQ": "Kata manakah yang merupakan Fi'il (kata kerja)?",
-        "options": [
-          "تَطْبُخُ",
-          "الأُمُّ",
-          "الطَّعَامَ",
-          "فِي"
-        ],
-        "answer": 0,
-        "explanation": "تَطْبُخُ adalah kata kerja (Fi'il Mudhari' bermakna sedang/akan memasak)."
-      },
-      {
-        "id": 9,
-        "q": "عِنْدَمَا يَتَقَدَّمُ الْفِعْلُ عَلَى الْفَاعِلِ، تُسَمَّى الْجُمْلَةُ:",
-        "latinQ": "Ketika kata kerja mendahului subjeknya, kalimat tersebut dinamakan:",
-        "options": [
-          "جُمْلَةً فِعْلِيَّةً",
-          "جُمْلَةً اِسْمِيَّةً",
-          "شِبْهَ جُمْلَةٍ",
+          "مُؤَنَّثًا (seperti: فَاطِمَةُ جَلَسَتْ)",
+          "مُذَكَّرًا (seperti: أَحْمَدُ جَلَسَ)",
+          "جَمْعًا (seperti: الطُّلَّابُ)",
           "حَرْفًا"
         ],
         "answer": 0,
-        "explanation": "Kalimat yang diawali kata kerja adalah Jumlah Fi'liyyah."
+        "explanation": "Ta' Ta'nis Sakinah (تْ) digunakan khusus untuk pelaku perempuan (Mu'annats)."
+      },
+      {
+        "id": 5,
+        "q": "الْكَلِمَةُ الَّتِي تَدُلُّ عَلَى مَعْنًى فِيْ غَيْرِهَا وَلاَ تَمْتَلِكُ عَلاَمَةً خَاصَّةً هِيَ:",
+        "latinQ": "Kata yang baru bermakna bersama kata lain dan tidak memiliki tanda khusus adalah:",
+        "options": [
+          "الْحَرْفُ",
+          "الاسْمُ",
+          "الْفِعْلُ",
+          "الْمُبْتَدَأُ"
+        ],
+        "answer": 0,
+        "explanation": "Harf (kata tugas) memerlukan kata lain untuk memunculkan maknanya."
+      },
+      {
+        "id": 6,
+        "q": "أَقْسَامُ الْفِعْلِ ثَلَاثَةٌ، وَهِيَ:",
+        "latinQ": "Pembagian Kata Kerja (Fi'il) terbagi menjadi 3 jenis, yaitu:",
+        "options": [
+          "فِعْلٌ مَاضٍ، وَفِعْلٌ مُضَارِعٌ، وَفِعْلُ أَمْرٍ",
+          "اِسْمٌ، وَفِعْلٌ، وَحَرْفٌ",
+          "مُذَكَّرٌ، وَمُؤَنَّثٌ، وَمُفْرَدٌ",
+          "حَرْفُ جَرٍّ، وَحَرْفُ عَطْفٍ، وَظَرْفٌ"
+        ],
+        "answer": 0,
+        "explanation": "Fi'il terbagi 3: Fi'il Madhi (lampau), Mudhari' (sekarang/akan datang), dan Amr (perintah)."
+      },
+      {
+        "id": 7,
+        "q": "يَبْدَأُ الْفِعْلُ الْمُضَارِعُ بِأَحَدِ حُرُوْفِ الْمُضَارَعَةِ، وَهِيَ:",
+        "latinQ": "Fi'il Mudhari' diawali oleh salah satu huruf mudhara'ah, yaitu:",
+        "options": [
+          "أ - ن - ي - ت",
+          "مِ - إِ - عِ - لِ",
+          "ب - ت - ث - ج",
+          "و - ف - ثُمَّ - أَوْ"
+        ],
+        "answer": 0,
+        "explanation": "Huruf mudhara'ah disingkat أنَيْتُ (Alif, Nun, Ya, Ta)."
+      },
+      {
+        "id": 8,
+        "q": "الْفِعْلُ الْمَاضِي مِنْ (كَتَبَ) مَعَ الضَّمِيْرِ 'أَنَا' هُوَ:",
+        "latinQ": "Fi'il Madhi dari (كَتَبَ) untuk kata ganti 'أَنَا' (Saya) adalah:",
+        "options": [
+          "كَتَبْتُ الأَخْبَارَ",
+          "كَتَبْتَ الأَخْبَارَ",
+          "يَكْتُبُ الأَخْبَارَ",
+          "اُكْتُبِ الأَخْبَارَ"
+        ],
+        "answer": 0,
+        "explanation": "Fi'il Madhi untuk 'أَنَا' diakhiri dengan Ta' fa'il sukun + dammah (كَتَبْتُ)."
+      },
+      {
+        "id": 9,
+        "q": "مَا هُوَ الْفِعْلُ الأَمْرُ الْمُنَاسِبُ لِلْمُخَاطَبِ الْمُؤَنَّثِ (يَا فَاطِمَةُ)؟",
+        "latinQ": "Kata kerja perintah (Fi'il Amr) yang sesuai untuk perempuan (يا فاطمة) adalah:",
+        "options": [
+          "إِجْلِسِي عَلَى الْكُرْسِيِّ",
+          "إِجْلِسْ عَلَى الْكُرْسِيِّ",
+          "يَجْلِسُ عَلَى الْكُرْسِيِّ",
+          "جَلَسَتْ عَلَى الْكُرْسِيِّ"
+        ],
+        "answer": 0,
+        "explanation": "Fi'il Amr untuk mu'annats bersambung dengan ya' mukhatabah: 'إِجْلِسِي'."
       },
       {
         "id": 10,
-        "q": "تَرْجِمْ إِلَى الْعَرَبِيَّةِ (جُمْلَة فِعْلِيَّة): 'Siswa itu berenang di kolam renang'.",
-        "latinQ": "Terjemahkan ke Bahasa Arab (Jumlah Fi'liyyah): 'Siswa itu berenang di kolam renang'.",
+        "q": "فِي جُمْلَةِ 'شَافِيَةُ ذَهَبَتْ إِلَى الْمَدْرَسَةِ'، كَلِمَةُ 'إِلَى' تُمَثِّلُ:",
+        "latinQ": "Dalam kalimat tersebut, kata 'إِلَى' tergolong sebagai:",
         "options": [
-          "يَسْبَحُ الطَّالِبُ فِي الْمَسْبَحِ",
-          "الطَّالِبُ يَسْبَحُ فِي الْمَسْبَحِ",
-          "الْمَسْبَحُ فِيهِ طَالِبٌ",
-          "يَسْبَحُوْنَ الطَّالِبُ"
+          "حَرْفَ جَرٍّ (Huruf Jar)",
+          "فِعْلًا مَاضِيًا (Fi'il Madhi)",
+          "اِسْمًا (Isim)",
+          "فِعْلَ أَمْرٍ (Fi'il Amr)"
         ],
         "answer": 0,
-        "explanation": "Jumlah Fi'liyyah diawali dengan fi'il: 'يَسْبَحُ الطَّالِبُ فِي الْمَسْبَحِ'."
+        "explanation": "'إِلَى' adalah Huruf Jar yang membuat isim setelahnya majrur."
       }
     ]
   },
