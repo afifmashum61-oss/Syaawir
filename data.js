@@ -1143,186 +1143,6 @@ const ARABIC_DATA = {
       "example": "يَتَدَرَّبُ عُمَرُ عَلَى الْخِطَابَةِ فِي الْمَدْرَسَةِ"
     },
     {
-      "id": 401,
-      "topicId": "mihnah",
-      "arabic": "الْمِهْنَةُ",
-      "latin": "Al-Mihnah",
-      "indonesian": "Profesi / Pekerjaan",
-      "type": "isim",
-      "example": "كُلُّ إِنْسَانٍ لَهُ مِهْنَةٌ فِي الْمُجْتَمَعِ"
-    },
-    {
-      "id": 402,
-      "topicId": "mihnah",
-      "arabic": "طَبِيْبٌ / طَبِيْبَةٌ",
-      "latin": "Ṭabībun / Ṭabībatun",
-      "indonesian": "Dokter (Laki-laki / Perempuan)",
-      "type": "isim",
-      "example": "يَفْحَصُ الطَّبِيْبُ الْمَرِيْضَ فِي الْمُسْتَشْفَى"
-    },
-    {
-      "id": 403,
-      "topicId": "mihnah",
-      "arabic": "مُدَرِّسٌ / أُسْتَاذٌ",
-      "latin": "Mudarrisun / Ustāżun",
-      "indonesian": "Guru / Pengajar",
-      "type": "isim",
-      "example": "يُدَرِّسُ الْمُدَرِّسُ الطُّلَّابَ بِإِخْلَاصٍ"
-    },
-    {
-      "id": 404,
-      "topicId": "mihnah",
-      "arabic": "مُهَنْدِسٌ / مُهَنْدِسَةٌ",
-      "latin": "Muhandisun / Muhandisatun",
-      "indonesian": "Insinyur / Arsitek",
-      "type": "isim",
-      "example": "يَبْنِي الْمُهَنْدِسُ الْبُيُوْتَ وَالشَّوَارِعَ"
-    },
-    {
-      "id": 405,
-      "topicId": "mihnah",
-      "arabic": "شُرْطِيٌّ",
-      "latin": "Syurṭiyyun",
-      "indonesian": "Polisi",
-      "type": "isim",
-      "example": "يُنَظِّمُ الشُّرْطِيُّ الْمُرُوْرَ فِي الشَّارِعِ"
-    },
-    {
-      "id": 406,
-      "topicId": "mihnah",
-      "arabic": "تَاجِرٌ",
-      "latin": "Tājirun",
-      "indonesian": "Pedagang / Pengusaha",
-      "type": "isim",
-      "example": "يَبِيْعُ التَّاجِرُ الْبَضَائِعَ فِي السُّوْقِ"
-    },
-    {
-      "id": 407,
-      "topicId": "mihnah",
-      "arabic": "فَلَّاحٌ",
-      "latin": "Fallāḥun",
-      "indonesian": "Petani",
-      "type": "isim",
-      "example": "يَزْرَعُ الْفَلَّاحُ الرُّزَّ فِي الْمَزْرَعَةِ"
-    },
-    {
-      "id": 408,
-      "topicId": "mihnah",
-      "arabic": "صَحَفِيٌّ",
-      "latin": "Ṣaḥafiyyun",
-      "indonesian": "Wartawan / Jurnalis",
-      "type": "isim",
-      "example": "يَكْتُبُ الصَّحَفِيُّ الأَخْبَارَ فِي الصَّحِيْفَةِ"
-    },
-    {
-      "id": 409,
-      "topicId": "mihnah",
-      "arabic": "جُنْدِيٌّ",
-      "latin": "Jundiyyun",
-      "indonesian": "Tentara / Prajurit",
-      "type": "isim",
-      "example": "يَحْمِي الْجُنْدِيُّ الْوَطَنَ مِن الأَعْدَاءِ"
-    },
-    {
-      "id": 410,
-      "topicId": "mihnah",
-      "arabic": "مُوَظَّفٌ",
-      "latin": "Muwaẓẓafun",
-      "indonesian": "Pegawai / Karyawan",
-      "type": "isim",
-      "example": "يَعْمَلُ الْمُوَظَّفُ فِي الْمَكْتَبِ الْحُكُوْمِيِّ"
-    },
-    {
-      "id": 411,
-      "topicId": "mihnah",
-      "arabic": "طَيَّارٌ",
-      "latin": "Ṭayyārun",
-      "indonesian": "Pilot",
-      "type": "isim",
-      "example": "يَقُوْدُ الطَّيَّارُ الطَّائِرَةَ فِي السَّمَاءِ"
-    },
-    {
-      "id": 412,
-      "topicId": "mihnah",
-      "arabic": "قَاضٍ / الْقَاضِي",
-      "latin": "Qāḍin",
-      "indonesian": "Hakim",
-      "type": "isim",
-      "example": "يَحْكُمُ الْقَاضِي بِالْعَدْلِ فِي الْمَحْكَمَةِ"
-    },
-    {
-      "id": 413,
-      "topicId": "mihnah",
-      "arabic": "صَيَّادٌ",
-      "latin": "Ṣayyādun",
-      "indonesian": "Nelayan / Pemburu",
-      "type": "isim",
-      "example": "يَصْطَادُ الصَّيَّادُ السَّمَكَ فِي الْبَحْرِ"
-    },
-    {
-      "id": 414,
-      "topicId": "mihnah",
-      "arabic": "خَيَّاطٌ",
-      "latin": "Khayyāṭun",
-      "indonesian": "Penjahit",
-      "type": "isim",
-      "example": "يَخِيْطُ الْخَيَّاطُ الْمَلَابِسَ الْجَمِيْلَةَ"
-    },
-    {
-      "id": 415,
-      "topicId": "mihnah",
-      "arabic": "طَبَّاخٌ",
-      "latin": "Ṭabbākhun",
-      "indonesian": "Koki / Juru Masak",
-      "type": "isim",
-      "example": "يُعِدُّ الطَّبَّاخُ الطَّعَامَ اللَذِيْذَ فِي الْمَطْعَمِ"
-    },
-    {
-      "id": 416,
-      "topicId": "mihnah",
-      "arabic": "مُصَمِّمٌ",
-      "latin": "Muṣammimun",
-      "indonesian": "Desainer / Perancang",
-      "type": "isim",
-      "example": "يُصَمِّمُ الْمُصَمِّمُ الْمَلَابِسَ وَالْمُؤَلَّفَاتِ"
-    },
-    {
-      "id": 417,
-      "topicId": "mihnah",
-      "arabic": "مُحَاضِرٌ",
-      "latin": "Muḥāḍirun",
-      "indonesian": "Dosen / Pengajar Perguruan Tinggi",
-      "type": "isim",
-      "example": "تُدَرِّسُ الْمُحَاضِرَةُ فِي الْجَامِعَةِ"
-    },
-    {
-      "id": 418,
-      "topicId": "mihnah",
-      "arabic": "مُسْتَقْبَلٌ",
-      "latin": "Mustaqbalun",
-      "indonesian": "Masa Depan",
-      "type": "isim",
-      "example": "أَرْمِي إِلَى مُسْتَقْبَلٍ مُشْرِقٍ فِي حَيَاتِي"
-    },
-    {
-      "id": 419,
-      "topicId": "mihnah",
-      "arabic": "أَمَلٌ / أُمْنِيَّةٌ",
-      "latin": "Amalun / Umniyyatun",
-      "indonesian": "Cita-cita / Harapan",
-      "type": "isim",
-      "example": "أُمْنِيَتِي أَنْ أَكُوْنَ طَبِيْبًا فِي الْمُسْتَقْبَلِ"
-    },
-    {
-      "id": 420,
-      "topicId": "mihnah",
-      "arabic": "عَمِلَ - يَعْمَلُ",
-      "latin": "‘Amila - Ya'malu",
-      "indonesian": "Bekerja (Past - Present)",
-      "type": "fiil",
-      "example": "يَعْمَلُ الطَّبِيْبُ فِي الْمُسْتَشْفَى"
-    },
-    {
       "id": 501,
       "topicId": "yaumiyyah",
       "arabic": "الْحَيَاةُ الْيَوْمِيَّةُ",
@@ -1501,6 +1321,249 @@ const ARABIC_DATA = {
       "indonesian": "Setiap Hari / Harian",
       "type": "harf",
       "example": "نَقْرَأُ الْكُتُبَ يَوْمِيًّا لِزِيَادَةِ الْمَعْرِفَةِ"
+    },
+    {
+      "id": 501,
+      "topicId": "mihnah",
+      "arabic": "الْمِهْنَةُ ج الْمِهَنُ",
+      "latin": "Al-Mihnah j. Al-Mihan",
+      "indonesian": "Profesi / Pekerjaan (Jamak: Profesi-profesi)",
+      "type": "isim",
+      "example": "كُلُّ إِنْسَانٍ لَهُ مِهْنَةٌ فِي الْمُجْتَمَعِ"
+    },
+    {
+      "id": 502,
+      "topicId": "mihnah",
+      "arabic": "الْمُدَرِّسُ",
+      "latin": "Al-Mudarrisu",
+      "indonesian": "Guru (Laki-laki)",
+      "type": "isim",
+      "example": "يُدَرِّسُ الْمُدَرِّسُ الطُّلَّابَ فِي الْفَصْلِ"
+    },
+    {
+      "id": 503,
+      "topicId": "mihnah",
+      "arabic": "الْمُحَاضِرُ",
+      "latin": "Al-Muḥāḍiru",
+      "indonesian": "Dosen",
+      "type": "isim",
+      "example": "يُلْقِي الْمُحَاضِرُ الْمُحَاضَرَةَ فِي الْجَامِعَةِ"
+    },
+    {
+      "id": 504,
+      "topicId": "mihnah",
+      "arabic": "مُدِيْرُ الْمَدْرَسَةِ",
+      "latin": "Mudīrul Madrasah",
+      "indonesian": "Kepala Sekolah",
+      "type": "isim",
+      "example": "مُدِيْرُ الْمَدْرَسَةِ يَقُوْدُ الْمَدْرَسَةَ بِنَجَاحٍ"
+    },
+    {
+      "id": 505,
+      "topicId": "mihnah",
+      "arabic": "الْمُوَظَّفُ الإِدَارِيُّ",
+      "latin": "Al-Muwaẓẓaful Idāriyyu",
+      "indonesian": "Pegawai Tata Usaha / Staf Administrasi",
+      "type": "isim",
+      "example": "يَعْمَلُ الْمُوَظَّفُ الإِدَارِيُّ فِي مَكْتَبِ الْمَدْرَسَةِ"
+    },
+    {
+      "id": 506,
+      "topicId": "mihnah",
+      "arabic": "الْمُهَنْدِسُ",
+      "latin": "Al-Muhandisu",
+      "indonesian": "Insinyur / Arsitek",
+      "type": "isim",
+      "example": "يَبْنِي الْمُهَنْدِسُ الْمَبَانِيَ الْحَدِيْثَةَ"
+    },
+    {
+      "id": 507,
+      "topicId": "mihnah",
+      "arabic": "الطَّبِيْبُ",
+      "latin": "Aṭ-Ṭabību",
+      "indonesian": "Dokter",
+      "type": "isim",
+      "example": "يُعَالِجُ الطَّبِيْبُ الْمَرِضَى فِي الْمُسْتَشْفَى"
+    },
+    {
+      "id": 508,
+      "topicId": "mihnah",
+      "arabic": "الْمُمَرِّضُ",
+      "latin": "Al-Mumarriḍu",
+      "indonesian": "Perawat",
+      "type": "isim",
+      "example": "يُسَاعِدُ الْمُمَرِّضُ الطَّبِيْبَ فِي الْعِيَادَةِ"
+    },
+    {
+      "id": 509,
+      "topicId": "mihnah",
+      "arabic": "الصَّيْدَلِيُّ",
+      "latin": "Aṣ-Ṣaidaliyyu",
+      "indonesian": "Apoteker",
+      "type": "isim",
+      "example": "يَبِيْعُ الصَّيْدَلِيُّ الأَدْوِيَةَ فِي الصَّيْدَلِيَّةِ"
+    },
+    {
+      "id": 510,
+      "topicId": "mihnah",
+      "arabic": "الْفَلَّاحُ",
+      "latin": "Al-Fallāḥu",
+      "indonesian": "Petani",
+      "type": "isim",
+      "example": "يَزْرَعُ الْفَلَّاحُ الرُّزَّ فِي الْمَزْرَعَةِ"
+    },
+    {
+      "id": 511,
+      "topicId": "mihnah",
+      "arabic": "الصَّيَّادُ",
+      "latin": "Aṣ-Ṣayyādu",
+      "indonesian": "Nelayan",
+      "type": "isim",
+      "example": "يَصِيْدُ الصَّيَّادُ السَّمَكَ فِي الْبَحْرِ"
+    },
+    {
+      "id": 512,
+      "topicId": "mihnah",
+      "arabic": "مُرَبِّي الْمَوَاشِي",
+      "latin": "Murabbil Mawāsyī",
+      "indonesian": "Peternak (Pemelihara Ternak)",
+      "type": "isim",
+      "example": "يُرَبِّي مُرَبِّي الْمَوَاشِي الأَبْقَارَ وَالأَغْنَامَ"
+    },
+    {
+      "id": 513,
+      "topicId": "mihnah",
+      "arabic": "الشُّرْطِيُّ",
+      "latin": "Asy-Syurṭiyyu",
+      "indonesian": "Polisi",
+      "type": "isim",
+      "example": "يَحْفَظُ الشُّرْطِيُّ الأَمْنَ فِي الْمَدِيْنَةِ"
+    },
+    {
+      "id": 514,
+      "topicId": "mihnah",
+      "arabic": "الْجُنْدِيُّ",
+      "latin": "Al-Jundiyyu",
+      "indonesian": "Tentara / Prajurit",
+      "type": "isim",
+      "example": "يَحْمِي الْجُنْدِيُّ الْوَطَنَ مِنَ الأَعْدَاءِ"
+    },
+    {
+      "id": 515,
+      "topicId": "mihnah",
+      "arabic": "الْمُحَامِي",
+      "latin": "Al-Muḥāmī",
+      "indonesian": "Pengacara / Advokat",
+      "type": "isim",
+      "example": "يُدَافِعُ الْمُحَامِي عَنْ حُقُوْقِ الْمَظْلُوْمِيْنَ"
+    },
+    {
+      "id": 516,
+      "topicId": "mihnah",
+      "arabic": "الصَّحَفِيُّ",
+      "latin": "Aṣ-Ṣaḥafiyyu",
+      "indonesian": "Wartawan / Jurnalis",
+      "type": "isim",
+      "example": "يَكْتُبُ الصَّحَفِيُّ الأَخْبَارَ فِي الصَّحِيْفَةِ"
+    },
+    {
+      "id": 517,
+      "topicId": "mihnah",
+      "arabic": "الْمُصَوِّرُ",
+      "latin": "Al-Muṣawwiru",
+      "indonesian": "Fotografer / Juru Foto",
+      "type": "isim",
+      "example": "يَلْتَقِطُ الْمُصَوِّرُ الصُّوَرَ الْجَمِيْلَةَ"
+    },
+    {
+      "id": 518,
+      "topicId": "mihnah",
+      "arabic": "التَّاجِرُ",
+      "latin": "At-Tājiru",
+      "indonesian": "Pedagang / Pengusaha",
+      "type": "isim",
+      "example": "يَبِيْعُ التَّاجِرُ الْبَضَائِعَ فِي السُّوْقِ"
+    },
+    {
+      "id": 519,
+      "topicId": "mihnah",
+      "arabic": "الطَّبَّاخُ",
+      "latin": "Aṭ-Ṭabbākhu",
+      "indonesian": "Koki / Juru Masak",
+      "type": "isim",
+      "example": "يَطْبُخُ الطَّبَّاخُ الطَّعَامَ اللَّذِيْذَ فِي الْمَطْعَمِ"
+    },
+    {
+      "id": 520,
+      "topicId": "mihnah",
+      "arabic": "بَارِيْسْتَا",
+      "latin": "Bārīstā",
+      "indonesian": "Barista (Pembuat Kopi)",
+      "type": "isim",
+      "example": "يُعِدُّ الْبَارِيْسْتَا الْقَهْوَةَ الطَّازَجَةَ فِي الْمَقْهَى"
+    },
+    {
+      "id": 521,
+      "topicId": "mihnah",
+      "arabic": "الْخَبَّازُ",
+      "latin": "Al-Khabbāzu",
+      "indonesian": "Pembuat Roti / Tukang Roti",
+      "type": "isim",
+      "example": "يَصْنَعُ الْخَبَّازُ الْخُبْزَ فِي الْمَخْبَزِ"
+    },
+    {
+      "id": 522,
+      "topicId": "mihnah",
+      "arabic": "الرَّسَّامُ",
+      "latin": "Ar-Rassāmu",
+      "indonesian": "Pelukis",
+      "type": "isim",
+      "example": "يَرْسُمُ الرَّسَّامُ اللَّوْحَةَ الْفَنِّيَّةَ"
+    },
+    {
+      "id": 523,
+      "topicId": "mihnah",
+      "arabic": "الْمُخْرِجُ",
+      "latin": "Al-Mukhriju",
+      "indonesian": "Sutradara",
+      "type": "isim",
+      "example": "يُوَجِّهُ الْمُخْرِجُ الْمُمَثِّلِيْنَ فِي الْفِلْمِ"
+    },
+    {
+      "id": 524,
+      "topicId": "mihnah",
+      "arabic": "الْمُغَنِّي",
+      "latin": "Al-Mugannī",
+      "indonesian": "Penyanyi",
+      "type": "isim",
+      "example": "يُغَنِّي الْمُغَنِّي الأُغْنِيَةَ الْجَمِيْلَةَ"
+    },
+    {
+      "id": 525,
+      "topicId": "mihnah",
+      "arabic": "الْخَيَّاطُ",
+      "latin": "Al-Khayyāṭu",
+      "indonesian": "Penjahit",
+      "type": "isim",
+      "example": "يَخِيْطُ الْخَيَّاطُ الْمَلَابِسَ الْجَدِيْدَةَ"
+    },
+    {
+      "id": 526,
+      "topicId": "mihnah",
+      "arabic": "النَّجَّارُ",
+      "latin": "An-Najjāru",
+      "indonesian": "Tukang Kayu",
+      "type": "isim",
+      "example": "يَصْنَعُ النَّجَّارُ الأَثَاثَ مِنَ الْخَشَبِ"
+    },
+    {
+      "id": 527,
+      "topicId": "mihnah",
+      "arabic": "الْبَنَّاءُ",
+      "latin": "Al-Bannā'u",
+      "indonesian": "Tukang Bangunan",
+      "type": "isim",
+      "example": "يَبْنِي الْبَنَّاءُ الْجُدْرَانَ بِالْآجُرِّ"
     }
   ],
   "kalam": [
