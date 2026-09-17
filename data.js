@@ -3129,143 +3129,157 @@ const ARABIC_DATA = {
     },
     {
       "id": "qiraah9",
-      "title": "القِرَاءَةُ (١) - البَابُ الْخَامِسُ : الْمِهَنُ وَخِدْمَةُ الْمُجْتَمَعِ",
-      "latinTitle": "Bab 5 - Teks 1: Profesi & Pengabdian Masyarakat",
+      "title": "القِرَاءَةُ (١) - البَابُ الْخَامِسُ : أَنْوَاعُ الْمِهَنِ وَمَجَالَاتُهَا (Pendidikan, Kesehatan & Tokoh Cita-cita)",
+      "latinTitle": "Qira'ah 1 Bab 5: Ragam Profesi Bidang Pendidikan, Kesehatan & Tokoh Cita-cita Indonesia",
       "topicId": "mihnah",
-      "arabicText": "الْمِهْنَةُ عَمَلٌ يُؤَدِّيْهِ الإِنْسَانُ فِي حَيَاتِهِ لِيَكْسِبَ الرِّزْقَ وَيَخْدُمَ الْمُجْتَمَعَ. الْمِهَنُ فِي الْحَيَاةِ مُتَنَوِّعَةٌ وَكُلُّهَا مُهِمَّةٌ. الطَّبِيْبُ يَفْحَصُ الْمَرِيْضَ وَيُعْطِيْهِ الدَّوَاءَ فِي الْمُسْتَشْفَى. وَالْمُدَرِّسُ يُعَلِّمُ الطُّلَّابَ الْعُلُوْمَ وَالأَخْلَاقَ فِي الْمَدْرَسَةِ.\n\nوَالْمُهَنْدِسُ يُصَمِّمُ الْمَبَانِيَ وَالْجُسُوْرَ وَالشَّوَارِعَ. وَالشُّرْطِيُّ يُحَافِظُ عَلَى الأَمْنِ وَيُنَظِّمُ الْمُرُوْرَ فِي الْمَدِيْنَةِ. وَالْفَلَّاحُ يَزْرَعُ الرُّزَّ وَالْخُضْرَاوَاتِ فِي الْمَزْرَعَةِ. نَحْنُ نَحْتَرِمُ كُلَّ أصحابِ الْمِهَنِ لِأَنَّهُمْ يَعْمَلُوْنَ بِإِخْلَاصٍ.",
-      "latinText": "",
-      "translation": "Profesi adalah pekerjaan yang dilakukan seseorang dalam hidupnya untuk mengais rezeki dan mengabdi kepada masyarakat. Profesi dalam kehidupan beraneka ragam dan semuanya penting. Dokter memeriksa orang sakit dan memberinya obat di rumah sakit. Dan guru mengajar para siswa ilmu pengetahuan dan akhlak di sekolah.\n\nInsinyur merancang bangunan, jembatan, dan jalan raya. Polisi menjaga keamanan dan mengatur lalu lintas di kota. Dan petani menanam padi serta sayur-sayuran di sawah. Kita menghormati semua pemilik profesi karena mereka bekerja dengan ikhlas.",
+      "paragraphs": [
+        "هُنَاكَ أَنْوَاعٌ كَثِيْرَةٌ مِنَ الْمِهَنِ. مِنْهَا الْمُدَرِّسُ وَالْمُحَاضِرُ وَمُدِيْرُ الْمَدْرَسَةِ وَالْمُوَظَّفُ الإِدَارِيُّ وَالْمُهَنْدِسُ وَالطَّبِيْبُ وَالْمُمَرِّضُ وَالصَّيْدَلِيُّ وَغَيْرُ ذَلِكَ.",
+        "الْمُدَرِّسُ يُعَلِّمُ الْعُلُوْمَ وَالْمَعَارِفَ فِي الْمَدْرَسَةِ. وَالْمُحَاضِرُ يُعَلِّمُ الْعُلُوْمَ وَالْمَعَارِفَ فِي الْجَامِعَةِ. وَكَذَلِكَ مُدِيْرُ الْمَدْرَسَةِ وَالْمُوَظَّفُ الإِدَارِيُّ كُلُّهُمْ يَعْمَلُوْنَ فِي مَجَالِ التَّرْبِيَةِ.",
+        "الطَّبِيْبُ يُعَالِجُ الْمَرِضَى. وَالْمُمَرِّضُ يُسَاعِدُ الطَّبِيْبَ فِي الْمُسْتَشْفَى وَالصَّيْدَلِيُّ يَعْمَلُ فِي الصَّيْدَلِيَّةِ كُلَّ يَوْمٍ. كُلُّهُمْ يَعْمَلُوْنَ فِي مَجَالِ الصِّحَّةِ. هُمْ نَشِيْطُوْنَ فِي أَعْمَالِهِمْ.",
+        "ذَاتَ يَوْمٍ سَأَلْتُ إِلَى أَصْدِقَائِي عَنْ آمَالِهِمْ، أَرَادَتْ خَدِيْجَةُ أَنْ تَكُوْنَ صَحَفِيَّةً مَشْهُوْرَةً مِثْلَ نَجْوَى شِهَاب (Najwa Shihab). وَأَرَادَ مَرْوَانُ أَنْ يَكُوْنَ مُصَوِّرًا مَعْرُوْفًا مِثْلَ دَارْوِيْس تِرْيَادِي (Darwis Triadi). أَمَّا عِزْفَانُ فَأَرَادَ أَنْ يَكُوْنَ تَاجِرًا نَاجِحًا مِثْلَ خَيْرُوْل تَأْنْجُونْج (Chairul Tanjung)."
+      ],
+      "translations": [
+        "Ada banyak jenis profesi. Di antaranya guru, dosen, kepala sekolah, pegawai tata usaha, insinyur, dokter, perawat, apoteker, dan lain-lain.",
+        "Guru mengajar ilmu pengetahuan di sekolah. Dosen mengajar ilmu pengetahuan di perguruan tinggi. Begitu pula kepala sekolah dan pegawai tata usaha, semuanya bekerja di bidang pendidikan.",
+        "Dokter mengobati orang sakit. Perawat membantu dokter di rumah sakit. Dan apoteker bekerja di apotek setiap hari. Mereka semua bekerja di bidang kesehatan. Mereka giat dalam pekerjaan mereka.",
+        "Suatu hari saya bertanya kepada teman-teman saya tentang cita-cita mereka. Khadijah ingin menjadi wartawan terkenal seperti Najwa Shihab. Marwan ingin menjadi fotografer terkenal seperti Darwis Triadi. Adapun Izfan ingin menjadi pengusaha sukses seperti Chairul Tanjung."
+      ],
       "questions": [
         {
-          "q": "مَاذَا يَفْعَلُ الطَّبِيْبُ فِي الْمُسْتَشْفَى؟",
-          "latinQ": "Apa yang dilakukan dokter di rumah sakit?",
+          "q": "مَنْ يَعْمَلُ فِي مَجَالِ التَّرْبِيَةِ وَيُعَلِّمُ فِي الْجَامِعَةِ؟",
+          "latinQ": "Siapakah yang bekerja di bidang pendidikan dan mengajar di perguruan tinggi?",
           "options": [
-            "يَفْحَصُ الْمَرِيْضَ وَيُعْطِيْهِ الدَّوَاءَ",
-            "يَزْرَعُ الرُّزَّ",
-            "يُعَلِّمُ الطُّلَّابَ",
-            "يَبْنِي الشَّوَارِعَ"
+            "الْمُحَاضِرُ",
+            "الْمُدَرِّسُ",
+            "الطَّبِيْبُ",
+            "الْمُصَوِّرُ"
           ],
           "answer": 0,
-          "explanation": "Pada teks disebutkan: 'الطَّبِيْبُ يَفْحَصُ الْمَرِيْضَ وَيُعْطِيْهِ الدَّوَاءَ'."
+          "explanation": "Berdasarkan teks: 'وَالْمُحَاضِرُ يُعَلِّمُ الْعُلُوْمَ وَالْمَعَارِفَ فِي الْجَامِعَةِ'."
         },
         {
-          "q": "أَيْنَ يُعَلِّمُ الْمُدَرِّسُ الطُّلَّابَ؟",
-          "latinQ": "Di mana guru mengajar para siswa?",
+          "q": "أَيْنَ يَعْمَلُ الصَّيْدَلِيُّ كُلَّ يَوْمٍ؟",
+          "latinQ": "Di manakah apoteker bekerja setiap hari?",
           "options": [
-            "فِي الْمَدْرَسَةِ",
+            "فِي الصَّيْدَلِيَّةِ",
             "فِي الْمُسْتَشْفَى",
-            "فِي الْمَزْرَعَةِ",
-            "فِي الشَّارِعِ"
+            "فِي الْمَدْرَسَةِ",
+            "فِي الْمَزْرَعَةِ"
           ],
           "answer": 0,
-          "explanation": "Pada teks disebutkan: 'وَالْمُدَرِّسُ يُعَلِّمُ الطُّلَّابَ... فِي الْمَدْرَسَةِ'."
+          "explanation": "Berdasarkan teks: 'وَالصَّيْدَلِيُّ يَعْمَلُ فِي الصَّيْدَلِيَّةِ كُلَّ يَوْمٍ'."
         },
         {
-          "q": "مَنْ يُصَمِّمُ الْمَبَانِيَ وَالْجُسُوْرَ؟",
-          "latinQ": "Siapakah yang merancang bangunan dan jembatan?",
+          "q": "مَاذَا تُرِيْدُ خَدِيْجَةُ أَنْ تَكُوْنَ فِي الْمُسْتَقْبَلِ؟",
+          "latinQ": "Ingin menjadi apakah Khadijah di masa depan?",
           "options": [
-            "الْمُهَنْدِسُ",
-            "الفَلَّاحُ",
-            "الشُّرْطِيُّ",
-            "الطَّبَّاخُ"
+            "صَحَفِيَّةً مَشْهُوْرَةً مِثْلَ نَجْوَى شِهَاب",
+            "طَبِيْبَةً",
+            "مُصَوِّرَةً",
+            "تَاجِرَةً"
           ],
           "answer": 0,
-          "explanation": "Pada teks disebutkan: 'وَالْمُهَنْدِسُ يُصَمِّمُ الْمَبَانِيَ وَالْجُسُوْرَ'."
+          "explanation": "Berdasarkan teks: 'أَرَادَتْ خَدِيْجَةُ أَنْ تَكُوْنَ صَحَفِيَّةً مَشْهُوْرَةً مِثْلَ نَجْوَى شِهَاب'."
         },
         {
-          "q": "مَاذَا يَفْعَلُ الشُّرْطِيُّ فِي الْمَدِيْنَةِ؟",
-          "latinQ": "Apa yang dilakukan polisi di kota?",
+          "q": "مَنْ هُوَ الْمُصَوِّرُ الْمَعْرُوْفُ الْمَذْكُوْرُ فِي النَّصِّ؟",
+          "latinQ": "Siapakah fotografer terkenal yang disebutkan dalam teks?",
           "options": [
-            "يُحَافِظُ عَلَى الأَمْنِ وَيُنَظِّمُ الْمُرُوْرَ",
-            "يَكْتُبُ الأَخْبَارَ",
-            "يَخِيْطُ الْمَلَابِسَ",
-            "يَصْطَادُ السَّمَكَ"
+            "دَارْوِيْس تِرْيَادِي (Darwis Triadi)",
+            "خَيْرُوْل تَأْنْجُونْج",
+            "سِيسْكَا سُوَكِيْتَامَا",
+            "مُحَمَّد أَنَا"
           ],
           "answer": 0,
-          "explanation": "Pada teks disebutkan: 'وَالشُّرْطِيُّ يُحَافِظُ عَلَى الأَمْنِ وَيُنَظِّمُ الْمُرُوْرَ'."
+          "explanation": "Berdasarkan teks: 'مُصَوِّرًا مَعْرُوْفًا مِثْلَ دَارْوِيْس تِرْيَادِي'."
         },
         {
-          "q": "لِمَاذَا نَحْتَرِمُ كُلَّ أَصْحَابِ الْمِهَنِ؟",
-          "latinQ": "Mengapa kita menghormati semua pemilik profesi?",
+          "q": "مَاذَا أَرَادَ عِزْفَانُ أَنْ يَكُوْنَ فِي الْمُسْتَقْبَلِ؟",
+          "latinQ": "Cita-cita apakah yang diinginkan Izfan di masa depan?",
           "options": [
-            "لِأَنَّهُمْ يَعْمَلُوْنَ بِإِخْلَاصٍ",
-            "لِأَنَّهُمْ أَغْنِيَاءُ",
-            "لِأَنَّهُمْ يَلْعَبُوْنَ",
-            "لِأَنَّهُمْ كُسَالَى"
+            "تَاجِرًا نَاجِحًا مِثْلَ خَيْرُوْل تَأْنْجُونْج",
+            "مُهَنْدِسًا",
+            "مُدَرِّسًا",
+            "طَبِيْبًا"
           ],
           "answer": 0,
-          "explanation": "Pada teks disebutkan: 'نَحْتَرِمُ كُلَّ أصحابِ الْمِهَنِ لِأَنَّهُمْ يَعْمَلُوْنَ بِإِخْلَاصٍ'."
+          "explanation": "Berdasarkan teks: 'تَاجِرًا نَاجِحًا مِثْلَ خَيْرُوْل تَأْنْجُونْج'."
         }
       ]
     },
     {
       "id": "qiraah10",
-      "title": "القِرَاءَةُ (٢) - البَابُ الْخَامِسُ : أُمْنِيَّتِي فِي الْمُسْتَقْبَلِ",
-      "latinTitle": "Bab 5 - Teks 2: Cita-Citaku di Masa Depan (Cerita Hasan)",
+      "title": "القِرَاءَةُ (٢) - البَابُ الْخَامِسُ : الْمِهَنُ فِي مَجَالِ الطَّهْيِ وَالْفُنُوْنِ وَالْعَمَلِ (Kuliner, Seni & Profesi Masyarakat)",
+      "latinTitle": "Qira'ah 2 Bab 5: Profesi Kuliner, Seni, Pertanian & Nilai Amanah/Ikhlas dalam Bekerja",
       "topicId": "mihnah",
-      "arabicText": "اِسْمِي حَسَنٌ. أَنَا طَالِبٌ فِي الصَّفِّ الْعَاشِرِ بِمَدْرَسَةِ MAN 1 Pontianak. أَدْرُسُ بِاجْتِهَادٍ لِأَحُقِّقَ أُمْنِيَتِي فِي الْمُسْتَقْبَلِ. أُمْنِيَتِي أَنْ أَكُوْنَ طَبِيْبًا مَاهِرًا فِي الْمُسْتَقْبَلِ لِأُسَاعِدَ الْفُقَرَاءَ وَالْمَرْضَى.\n\nوَأَخِي الأَكْبَرُ اسْمُهُ عُثْمَانُ، هُوَ يَدْرُسُ فِي كُلِّيَةِ الْهَنْدَسَةِ. هُوَ يُرِيْدُ أَنْ يَكُوْنَ مُهَنْدِسًا مِعْمَارِيًّا لِيَبْنِيَ الْمَسَاجِدَ وَالْمَدَارِسَ الْحَدِيْثَةَ. أَمَّا أُخْتِي الصَّغِيْرَةُ عَائِشَةُ، فَتَتَمَنَّى أَنْ تَكُوْنَ مُدَرِّسَةً لِلُّغَةِ الْعَرَبِيَّةِ لِتُعَلِّمَ الأَطْفَالَ قِرَاءَةَ الْقُرْآنِ. كُلُّنَا نَدْعُو اللهَ أَنْ يُوَفِّقَنَا فِي تَحْقِيْقِ أَمَالِنَا.",
-      "latinText": "",
-      "translation": "Nama saya Hasan. Saya siswa Kelas X di MAN 1 Pontianak. Saya belajar dengan sungguh-sungguh untuk meraih cita-citaku di masa depan. Cita-citaku adalah menjadi dokter yang terampil di masa depan untuk membantu orang-orang fakir dan sakit.\n\nDan kakak laki-lakiku namanya Utsman, dia belajar di Fakultas Teknik. Dia ingin menjadi insinyur arsitek untuk membangun masjid-masjid dan sekolah-sekolah modern. Sedangkan adik perempuanku Aisyah, berharap menjadi guru Bahasa Arab untuk mengajar anak-anak membaca Al-Qur'an. Kami semua berdoa kepada Allah agar meridhoi kami dalam menggapai harapan kami.",
+      "paragraphs": [
+        "هَلْ هُنَاكَ مِهَنٌ أُخْرَى؟ نَعَمْ، مِنْهَا الْمِهَنُ فِي مَجَالِ الطَّهْيِ وَصِنَاعَةِ الْمَأْكُوْلَاتِ وَالْمَشْرُوْبَاتِ. الطَّبَّاخُ يَطْبُخُ الطَّعَامَ فِي الْمَطْبَخِ. وَبَارِيْسْتَا يُعِدُّ الْقَهْوَةَ اللَّذِيْذَةَ. وَالْخَبَّازُ يَصْنَعُ الْخُبْزَ فِي الْمَخْبَزِ أَيْضًا. هَلْ تَعْرِفُ سِيسْكَا سُوَكِيْتَامَا (Sisca Soewitomo)؟ هِيَ الطَّبَّاخَةُ الْمَشْهُوْرَةُ. وَمَنْ مُحَمَّد أَنَا (Muhammad Aga)؟ هُوَ بَارِيْسْتَا الْمَشْهُوْرُ هُوَ يَعْمَلُ فِي الْمَقْهَى. أَمَّا هِينْدِرِي وِيْجَايَا (Hendri Wijaya) فَهُوَ الْخَبَّازُ الْمَشْهُوْرُ هُوَ يَعْمَلُ فِي الْمَخْبَزِ. كُلُّهُمْ مَشْهُوْرُوْنَ فِي إِنْدُونِيْسِيَا.",
+        "يَرْسُمُ الرَّسَّامُ الْمَنَاظِرَ الْجَمِيْلَةَ. وَيَعْمَلُ مُخْرِجُ الأَفْلَامِ فِي اسْتُودِيُو سِيْنِمَائِيٍّ. وَيُغَنِّي الْمُغَنِّي بِصَوْتِهِ الْجَمِيْلِ. وَالْفَلَّاحُ يَزْرَعُ الرُّزَّ فِي الْمَزْرَعَةِ. وَالصَّيَّادُ يَصْطَادُ السَّمَكَ فِي النَّهْرِ أَوْ فِي الْبَحْرِ. وَمُرَبِّي الْمَوَاشِي يُرَبِّي الْحَيَوَانَ. وَالْخَيَّاطُ يَخِيْطُ الْمَلَابِسَ وَالنَّجَّارُ يَعْمَلُ فِي تَصْنِيْعِ الأَثَاثِ وَالْبَنَّاءُ يَبْنِي الْبُيُوْتَ وَالْعِمَارَاتِ. هَذِهِ هِيَ الْمِهَنُ. عَلَى النَّاسِ أَنْ يَعْمَلُوا بِجُهْدٍ وَنَشَاطٍ لِتَحْقِيْقِ أَفْضَلِ النَّتَائِجِ وَزِيَادَةِ الْقُدْرَةِ الذَّاتِيَّةِ. وَعَلَى النَّاسِ أَنْ يَعْمَلُوا بِأَمَانَةٍ وَإِخْلَاصٍ لِلْحِفَاظِ عَلَى الثِّقَةِ وَالْحُصُوْلِ عَلَى الْبَرَكَةِ."
+      ],
+      "translations": [
+        "Apakah ada profesi-profesi lainnya? Ya, di antaranya profesi di bidang tata boga (kuliner) serta pembuatan makanan dan minuman. Koki memasak makanan di dapur. Barista menyiapkan kopi yang lezat. Dan pembuat roti membuat roti di toko roti juga. Apakah kamu kenal Sisca Soewitomo? Dia adalah koki wanita yang terkenal. Dan siapakah Muhammad Aga? Dia adalah barista terkenal yang bekerja di kafe. Adapun Hendri Wijaya, dia adalah pembuat roti terkenal yang bekerja di toko roti. Mereka semua terkenal di Indonesia.",
+        "Pelukis melukis pemandangan yang indah. Sutradara film bekerja di studio sinema. Penyanyi menyanyi dengan suaranya yang merdu. Petani menanam padi di sawah. Nelayan menangkap ikan di sungai atau laut. Peternak memelihara hewan. Penjahit menjahit pakaian, tukang kayu membuat mebel/perabotan, dan tukang bangunan membangun rumah dan gedung. Inilah profesi-profesi. Hendaknya manusia bekerja dengan tekun dan penuh semangat untuk mencapai hasil terbaik dan meningkatkan potensi diri. Dan hendaknya manusia bekerja dengan jujur (amanah) dan ikhlas untuk menjaga kepercayaan serta mendapatkan keberkahan."
+      ],
       "questions": [
         {
-          "q": "مَا هِيَ أُمْنِيَّةُ حَسَنٍ فِي الْمُسْتَقْبَلِ؟",
-          "latinQ": "Apakah cita-cita Hasan di masa depan?",
+          "q": "مَنْ هِيَ الطَّبَّاخَةُ الْمَشْهُوْرَةُ فِي إِنْدُونِيْسِيَا الْمَذْكُوْرَةُ فِي النَّصِّ؟",
+          "latinQ": "Siapakah koki wanita terkenal di Indonesia yang disebutkan dalam teks?",
           "options": [
-            "أَنْ يَكُوْنَ طَبِيْبًا مَاهِرًا",
-            "أَنْ يَكُوْنَ مُهَنْدِسًا",
-            "أَنْ يَكُوْنَ فَلَّاحًا",
-            "أَنْ يَكُوْنَ طَيَّارًا"
+            "سِيسْكَا سُوَكِيْتَامَا (Sisca Soewitomo)",
+            "نَجْوَى شِهَاب",
+            "خَدِيْجَةُ",
+            "فَاطِمَةُ"
           ],
           "answer": 0,
-          "explanation": "Pada teks disebutkan: 'أُمْنِيَتِي أَنْ أَكُوْنَ طَبِيْبًا مَاهِرًا'."
+          "explanation": "Berdasarkan teks: 'هِيَ الطَّبَّاخَةُ الْمَشْهُوْرَةُ (Sisca Soewitomo)'."
         },
         {
-          "q": "أَيْنَ يَدْرُسُ عُثْمَانُ أَخُوْ حَسَنٍ؟",
-          "latinQ": "Di mana Utsman kakak Hasan belajar?",
+          "q": "مَا مِهْنَةُ مُحَمَّد أَنَا (Muhammad Aga)؟",
+          "latinQ": "Apakah profesi Muhammad Aga dalam teks?",
           "options": [
-            "فِي كُلِّيَةِ الْهَنْدَسَةِ",
-            "فِي كُلِّيَةِ الطِّبِّ",
-            "فِي الْمَدْرَسَةِ الْمُتَوَسِّطَةِ",
-            "فِي كُلِّيَةِ التَّرْبِيَةِ"
+            "بَارِيْسْتَا مَشْهُوْرٌ فِي الْمَقْهَى",
+            "خَبَّازٌ",
+            "رَسَّامٌ",
+            "مُخْرِجٌ"
           ],
           "answer": 0,
-          "explanation": "Pada teks disebutkan: 'هُوَ يَدْرُسُ فِي كُلِّيَةِ الْهَنْدَسَةِ'."
+          "explanation": "Berdasarkan teks: 'هُوَ بَارِيْسْتَا الْمَشْهُوْرُ هُوَ يَعْمَلُ فِي الْمَقْهَى'."
         },
         {
-          "q": "مَاذَا يُرِيْدُ عُثْمَانُ أَنْ يَبْنِيَ؟",
-          "latinQ": "Apa yang ingin dibangun oleh Utsman?",
+          "q": "مَنْ يَعْمَلُ فِي تَصْنِيْعِ الأَثَاثِ مِنَ الْخَشَبِ؟",
+          "latinQ": "Siapakah yang bekerja membuat mebel / perabotan dari kayu?",
           "options": [
-            "الْمَسَاجِدَ وَالْمَدَارِسَ الْحَدِيْثَةَ",
-            "الْمَطَاعِمَ",
-            "الفَنَادِقَ",
-            "الْمَسَارِحَ"
+            "النَّجَّارُ",
+            "الْبَنَّاءُ",
+            "الْخَيَّاطُ",
+            "الْفَلَّاحُ"
           ],
           "answer": 0,
-          "explanation": "Pada teks disebutkan: 'لِيَبْنِيَ الْمَسَاجِدَ وَالْمَدَارِسَ الْحَدِيْثَةَ'."
+          "explanation": "Berdasarkan teks: 'وَالنَّجَّارُ يَعْمَلُ فِي تَصْنِيْعِ الأَثَاثِ'."
         },
         {
-          "q": "مَاذَا تَتَمَنَّى عَائِشَةُ أَنْ تَكُوْنَ؟",
-          "latinQ": "Apa harapan Aisyah di masa depan?",
+          "q": "أَيْنَ يَصْطَادُ الصَّيَّادُ السَّمَكَ؟",
+          "latinQ": "Di manakah nelayan menangkap ikan?",
           "options": [
-            "مُدَرِّسَةً لِلُّغَةِ الْعَرَبِيَّةِ",
-            "طَبِيْبَةً",
-            "مُهَنْدِسَةً",
-            "صَحَفِيَّةً"
+            "فِي النَّهْرِ أَوْ فِي الْبَحْرِ",
+            "فِي الْمَزْرَعَةِ",
+            "فِي الْمَقْهَى",
+            "فِي الْمَكْتَبِ"
           ],
           "answer": 0,
-          "explanation": "Pada teks disebutkan: 'فَتَتَمَنَّى أَنْ تَكُوْنَ مُدَرِّسَةً لِلُّغَةِ الْعَرَبِيَّةِ'."
+          "explanation": "Berdasarkan teks: 'وَالصَّيَّادُ يَصْطَادُ السَّمَكَ فِي النَّهْرِ أَوْ فِي الْبَحْرِ'."
         },
         {
-          "q": "لِمَاذَا يُرِيْدُ حَسَنٌ أَنْ يَكُوْنَ طَبِيْبًا؟",
-          "latinQ": "Mengapa Hasan ingin menjadi seorang dokter?",
+          "q": "كَيْفَ يَجِبُ عَلَى النَّاسِ أَنْ يَعْمَلُوا لِلْحُصُوْلِ عَلَى الْبَرَكَةِ؟",
+          "latinQ": "Bagaimanakah seharusnya manusia bekerja untuk mendapatkan keberkahan?",
           "options": [
-            "لِأُسَاعِدَ الْفُقَرَاءَ وَالْمَرْضَى",
-            "لِيَكْسِبَ الْمَالَ الْكَثِيْرَ",
-            "لِيَسَافِرَ",
-            "لِيَلْعَبَ"
+            "بِأَمَانَةٍ وَإِخْلَاصٍ",
+            "بِكَسَلٍ",
+            "بِسُرْعَةٍ فَقَطْ",
+            "بِدُوْنِ جُهْدٍ"
           ],
           "answer": 0,
-          "explanation": "Pada teks disebutkan: 'لِأُسَاعِدَ الْفُقَرَاءَ وَالْمَرْضَى'."
+          "explanation": "Berdasarkan teks: 'وَعَلَى النَّاسِ أَنْ يَعْمَلُوا بِأَمَانَةٍ وَإِخْلَاصٍ لِلْحُصُوْلِ عَلَى الْبَرَكَةِ'."
         }
       ]
     },
@@ -4319,95 +4333,119 @@ const ARABIC_DATA = {
     },
     {
       "id": "istima_teks_i",
-      "title": "الاسْتِمَاعُ (ط) - البَابُ الْخَامِسُ : نَصُّ الْمِهْنَةِ (طَارِق)",
-      "latinTitle": "Bahan Istima' Bab 5 Teks I: Profesi Dokter (Tariq)",
+      "title": "الاسْتِمَاعُ (ط) - البَابُ الْخَامِسُ : نَصُّ الْمِهَنِ (التَّرْبِيَة وَالصِّحَّة)",
+      "latinTitle": "Bahan Istima' Bab 5 Teks I: Bidang Pendidikan, Kesehatan & Najwa Shihab",
       "topicId": "mihnah",
-      "arabicText": "أَبِي طَبِيْبٌ مَاهِرٌ. يَعْمَلُ أَبِي فِي الْمُسْتَشْفَى الْحُكُوْمِيِّ فِي الْمَدِيْنَةِ. يَذْهَبُ أَبِي إِلَى الْمُسْتَشْفَى كُلَّ صَبَاحٍ بِالسَّيَّارَةِ. يُعَالِجُ أَبِي الْمَرِضَى بِإِخْلَاصٍ وَيُعْطِيْهِمُ الدَّوَاءَ.",
+      "arabicText": "الْمُدَرِّسُ يُعَلِّمُ الْعُلُوْمَ فِي الْمَدْرَسَةِ. وَالْمُحَاضِرُ يُعَلِّمُ فِي الْجَامِعَةِ. الطَّبِيْبُ يُعَالِجُ الْمَرِضَى فِي الْمُسْتَشْفَى. وَالصَّيْدَلِيُّ يَعْمَلُ فِي الصَّيْدَلِيَّةِ. أَرَادَتْ خَدِيْجَةُ أَنْ تَكُوْنَ صَحَفِيَّةً مَشْهُوْرَةً مِثْلَ نَجْوَى شِهَاب.",
       "fillBlanks": [
         {
-          "textToSpeech": "أَبِي طَبِيْبٌ مَاهِرٌ",
-          "sentenceTemplate": "أَبِي _____ مَاهِرٌ",
+          "textToSpeech": "الْمُدَرِّسُ يُعَلِّمُ الْعُلُوْمَ فِي الْمَدْرَسَةِ",
+          "sentenceTemplate": "الْمُدَرِّسُ يُعَلِّمُ الْعُلُوْمَ فِي _____ ",
           "options": [
-            "طَبِيْبٌ",
-            "مُهَنْدِسٌ",
-            "مُدَرِّسٌ",
-            "فَلَّاحٌ"
+            "الْمَدْرَسَةِ",
+            "الْجَامِعَةِ",
+            "الْمُسْتَشْفَى",
+            "الصَّيْدَلِيَّةِ"
           ],
           "correct": 0,
-          "explanation": "Kata yang terucap pada audio adalah 'طَبِيْبٌ' (Dokter)."
+          "explanation": "Kata yang terucap pada audio adalah 'الْمَدْرَسَةِ' (Sekolah)."
         },
         {
-          "textToSpeech": "يَعْمَلُ أَبِي فِي الْمُسْتَشْفَى الْحُكُوْمِيِّ",
-          "sentenceTemplate": "يَعْمَلُ أَبِي فِي _____ الْحُكُوْمِيِّ",
+          "textToSpeech": "أَرَادَتْ خَدِيْجَةُ أَنْ تَكُوْنَ صَحَفِيَّةً مَشْهُوْرَةً",
+          "sentenceTemplate": "أَرَادَتْ خَدِيْجَةُ أَنْ تَكُوْنَ _____ مَشْهُوْرَةً",
           "options": [
-            "الْمُسْتَشْفَى",
-            "الْمَكْتَبِ",
-            "الْمَسْجِدِ",
-            "الْمَدْرَسَةِ"
+            "صَحَفِيَّةً",
+            "طَبِيْبَةً",
+            "مُدَرِّسَةً",
+            "مُهَنْدِسَةً"
           ],
           "correct": 0,
-          "explanation": "Kata yang terucap pada audio adalah 'الْمُسْتَشْفَى' (Rumah Sakit)."
+          "explanation": "Kata yang terucap pada audio adalah 'صَحَفِيَّةً' (Wartawan P)."
         }
       ],
       "questions": [
         {
-          "q": "مَا مِهْنَةُ وَالِدِ طَارِقٍ؟",
-          "latinQ": "Apakah profesi ayah Tariq?",
+          "q": "أَيْنَ يُعَلِّمُ الْمُحَاضِرُ؟",
+          "latinQ": "Di manakah dosen mengajar berdasarkan audio?",
           "options": [
-            "طَبِيْبٌ",
-            "مُهَنْدِسٌ",
-            "شُرْطِيٌّ",
-            "مُدَرِّسٌ"
+            "فِي الْجَامِعَةِ",
+            "فِي الْمَدْرَسَةِ",
+            "فِي الْمُسْتَشْفَى",
+            "فِي الْمَكْتَبِ"
           ],
           "answer": 0,
-          "explanation": "Berdasarkan audio: 'أَبِي طَبِيْبٌ مَاهِرٌ'."
+          "explanation": "Berdasarkan audio: 'وَالْمُحَاضِرُ يُعَلِّمُ فِي الْجَامِعَةِ'."
         },
         {
-          "q": "كَيْفَ يَذْهَبُ أَبُو طَارِقٍ إِلَى الْمُسْتَشْفَى؟",
-          "latinQ": "Bagaimana ayah Tariq pergi ke rumah sakit?",
+          "q": "مَنْ يَعْمَلُ فِي الصَّيْدَلِيَّةِ؟",
+          "latinQ": "Siapakah yang bekerja di apotek?",
           "options": [
-            "بِالسَّيَّارَةِ",
-            "بِالحَافِلَةِ",
-            "بِالدَّرَّاجَةِ",
-            "مَاشِيًا"
+            "الصَّيْدَلِيُّ",
+            "الطَّبِيْبُ",
+            "الْمُمَرِّضُ",
+            "الْمُصَوِّرُ"
           ],
           "answer": 0,
-          "explanation": "Berdasarkan audio: 'يَذْهَبُ أَبِي إِلَى الْمُسْتَشْفَى... بِالسَّيَّارَةِ'."
+          "explanation": "Berdasarkan audio: 'وَالصَّيْدَلِيُّ يَعْمَلُ فِي الصَّيْدَلِيَّةِ'."
         }
       ]
     },
     {
       "id": "istima_teks_j",
-      "title": "الاسْتِمَاعُ (ي) - البَابُ الْخَامِسُ : نَصُّ الأَمَلِ (حَسَن)",
-      "latinTitle": "Bahan Istima' Bab 5 Teks J: Cita-cita (Hasan)",
+      "title": "الاسْتِمَاعُ (ي) - البَابُ الْخَامِسُ : نَصُّ الطَّهْيِ وَالْعَمَلِ (أَمَانَة وَإِخْلَاص)",
+      "latinTitle": "Bahan Istima' Bab 5 Teks J: Bidang Kuliner, Tukang Kayu & Kerja Amanah/Ikhlas",
       "topicId": "mihnah",
-      "arabicText": "أَنَا حَسَنٌ. أَنَا أَدْرُسُ فِي الْمَدْرَسَةِ الثَّانَوِيَّةِ الإِسْلَامِيَّةِ. أُمْنِيَتِي فِي الْمُسْتَقْبَلِ أَنْ أَكُوْنَ مُهَنْدِسًا. أُرِيْدُ أَنْ أَبْنِيَ الْمَبَانِيَ الْحَدِيْثَةَ وَالْجُسُوْرَ لِخِدْمَةِ الْوَطَنِ.",
+      "arabicText": "الطَّبَّاخُ يَطْبُخُ الطَّعَامَ فِي الْمَطْبَخِ. وَبَارِيْسْتَا يُعِدُّ الْقَهْوَةَ. سِيسْكَا سُوَكِيْتَامَا هِيَ الطَّبَّاخَةُ الْمَشْهُوْرَةُ. النَّجَّارُ يَعْمَلُ فِي تَصْنِيْعِ الأَثَاثِ. وَعَلَى النَّاسِ أَنْ يَعْمَلُوا بِأَمَانَةٍ وَإِخْلَاصٍ لِلْحُصُوْلِ عَلَى الْبَرَكَةِ.",
       "fillBlanks": [
         {
-          "textToSpeech": "أُمْنِيَتِي فِي الْمُسْتَقْبَلِ أَنْ أَكُوْنَ مُهَنْدِسًا",
-          "sentenceTemplate": "أُمْنِيَتِي فِي الْمُسْتَقْبَلِ أَنْ أَكُوْنَ _____ ",
+          "textToSpeech": "الطَّبَّاخُ يَطْبُخُ الطَّعَامَ فِي الْمَطْبَخِ",
+          "sentenceTemplate": "الطَّبَّاخُ يَطْبُخُ الطَّعَامَ فِي _____ ",
           "options": [
-            "مُهَنْدِسًا",
-            "طَبِيْبًا",
-            "طَيَّارًا",
-            "شُرْطِيًّا"
+            "الْمَطْبَخِ",
+            "الْمَقْهَى",
+            "الْمَخْبَزِ",
+            "الْمَزْرَعَةِ"
           ],
           "correct": 0,
-          "explanation": "Kata yang terucap pada audio adalah 'مُهَنْدِسًا' (Insinyur)."
+          "explanation": "Kata yang terucap pada audio adalah 'الْمَطْبَخِ' (Dapur)."
+        },
+        {
+          "textToSpeech": "عَلَى النَّاسِ أَنْ يَعْمَلُوا بِأَمَانَةٍ وَإِخْلَاصٍ",
+          "sentenceTemplate": "عَلَى النَّاسِ أَنْ يَعْمَلُوا بِأَمَانَةٍ وَ _____ ",
+          "options": [
+            "إِخْلَاصٍ",
+            "كَسَلٍ",
+            "خَوْفٍ",
+            "سُرْعَةٍ"
+          ],
+          "correct": 0,
+          "explanation": "Kata yang terucap pada audio adalah 'إِخْلَاصٍ' (Ikhlas)."
         }
       ],
       "questions": [
         {
-          "q": "مَا أُمْنِيَّةُ حَسَنٍ فِي الْمُسْتَقْبَلِ؟",
-          "latinQ": "Apakah cita-cita Hasan di masa depan?",
+          "q": "مَنْ هِيَ سِيسْكَا سُوَكِيْتَامَا؟",
+          "latinQ": "Siapakah Sisca Soewitomo berdasarkan audio?",
           "options": [
-            "أَنْ يَكُوْنَ مُهَنْدِسًا",
-            "أَنْ يَكُوْنَ طَبِيْبًا",
-            "أَنْ يَكُوْنَ مُدَرِّسًا",
-            "أَنْ يَكُوْنَ طَيَّارًا"
+            "هِيَ الطَّبَّاخَةُ الْمَشْهُوْرَةُ",
+            "هِيَ بَارِيْسْتَا",
+            "هِيَ صَحَفِيَّةٌ",
+            "هِيَ مُدَرِّسَةٌ"
           ],
           "answer": 0,
-          "explanation": "Berdasarkan audio: 'أُمْنِيَتِي فِي الْمُسْتَقْبَلِ أَنْ أَكُوْنَ مُهَنْدِسًا'."
+          "explanation": "Berdasarkan audio: 'سِيسْكَا سُوَكِيْتَامَا هِيَ الطَّبَّاخَةُ الْمَشْهُوْرَةُ'."
+        },
+        {
+          "q": "لِمَاذَا يَعْمَلُ النَّاسُ بِأَمَانَةٍ وَإِخْلَاصٍ؟",
+          "latinQ": "Mengapa manusia harus bekerja dengan jujur (amanah) dan ikhlas?",
+          "options": [
+            "لِلْحُصُوْلِ عَلَى الْبَرَكَةِ",
+            "لِلْحُصُوْلِ عَلَى الْمَالِ فَقَطْ",
+            "لِلشُّهْرَةِ",
+            "بِدُوْنِ سَبَبٍ"
+          ],
+          "answer": 0,
+          "explanation": "Berdasarkan audio: 'لِلْحُصُوْلِ عَلَى الْبَرَكَةِ' (Untuk mendapatkan keberkahan)."
         }
       ]
     },
