@@ -5478,233 +5478,254 @@ const ARABIC_DATA = {
     ]
   },
   "qawaidBab5": {
-    "title": "القواعد والتركيب - الباب الخامس (الفعل الماضي والمضارع والأمر)",
-    "fiilTypes": {
-      "title": "١ - أَنْوَاعُ الأَفْعَالِ (Jenis-Jenis Kata Kerja)",
-      "desc": "Kata kerja dalam Bahasa Arab terbagi 3 berdasarkan waktu terjadinya perbuatan: Fi'il Madhi (Past), Fi'il Mudhari' (Present/Future), dan Fi'il Amr (Imperative/Perintah):",
+    "title": "📐 Qawaid Bab 5: Jumlah Ismiyyah & Jumlah Fi'liyyah",
+    "latinTitle": "Al-Jumlah al-Ismiyyah wal-Jumlah al-Fi'liyyah",
+    "jumlahIsmiyyah": {
+      "title": "١ - أَمْثِلَةُ الْجُمْلَةِ الاِسْمِيَّةِ (Contoh-contoh Kalimat Nominal / Ismiyyah)",
+      "desc": "Jumlah Ismiyyah adalah kalimat yang diawali dengan kata benda (Isim / Mubtada'). Terdiri dari unsur Mubtada' (Subjek) dan Khabar (Predikat).",
       "tableHeaders": [
-        "الْفِعْلُ الْمَاضِي (Past)",
-        "الْفِعْلُ الْمُضَارِعُ (Present/Future)",
-        "فِعْلُ الأَمْرِ (Imperative)",
-        "Arti / Terjemahan"
+        "الرَّقْمُ",
+        "الْمُبْتَدَأُ (Subjek)",
+        "الْخَبَرُ (Predikat)",
+        "الْجُمْلَةُ الاِسْمِيَّةُ",
+        "Terjemahan"
       ],
       "table": [
         {
-          "madhi": "كَتَبَ",
-          "mudhari": "يَكْتُبُ",
-          "amr": "اُكْتُبْ",
-          "meaning": "Menulis"
+          "id": 1,
+          "mubtada": "هَذَا",
+          "khabar": "طَالِبٌ",
+          "sentence": "هَذَا طَالِبٌ",
+          "translation": "Ini adalah seorang siswa."
         },
         {
-          "madhi": "قَرَأَ",
-          "mudhari": "يَقْرَأُ",
-          "amr": "اقْرَأْ",
-          "meaning": "Membaca"
+          "id": 2,
+          "mubtada": "الطَّالِبُ",
+          "khabar": "نَشِيْطٌ",
+          "sentence": "الطَّالِبُ نَشِيْطٌ",
+          "translation": "Siswa itu rajin."
         },
         {
-          "madhi": "ذَهَبَ",
-          "mudhari": "يَذْهَبُ",
-          "amr": "اِذْهَبْ",
-          "meaning": "Pergi"
+          "id": 3,
+          "mubtada": "الْمُدَرِّسُ",
+          "khabar": "يُعَلِّمُ الطُّلَّابَ فِي الْمَدْرَسَةِ",
+          "sentence": "الْمُدَرِّسُ يُعَلِّمُ الطُّلَّابَ فِي الْمَدْرَسَةِ",
+          "translation": "Guru mengajar para siswa di sekolah."
         },
         {
-          "madhi": "عَمِلَ",
-          "mudhari": "يَعْمَلُ",
-          "amr": "اِعْمَلْ",
-          "meaning": "Bekerja / Mengerjakan"
+          "id": 4,
+          "mubtada": "الْمُحَاضِرُ",
+          "khabar": "يُعَلِّمُ الطُّلَّابَ الْجَامِعِيَّ فِي الْجَامِعَةِ",
+          "sentence": "الْمُحَاضِرُ يُعَلِّمُ الطُّلَّابَ الْجَامِعِيَّ فِي الْجَامِعَةِ",
+          "translation": "Dosen mengajar para mahasiswa di perguruan tinggi."
         },
         {
-          "madhi": "سَمِعَ",
-          "mudhari": "يَسْمَعُ",
-          "amr": "اِسْمَعْ",
-          "meaning": "Mendengar"
+          "id": 5,
+          "mubtada": "الطَّبِيْبُ",
+          "khabar": "فِي الْمُسْتَشْفَى",
+          "sentence": "الطَّبِيْبُ فِي الْمُسْتَشْفَى",
+          "translation": "Dokter itu berada di rumah sakit."
         },
         {
-          "madhi": "شَرِبَ",
-          "mudhari": "يَشْرَبُ",
-          "amr": "اشْرَبْ",
-          "meaning": "Minum"
+          "id": 6,
+          "mubtada": "الْكُتُبُ الدِّرَاسِيَّةُ",
+          "khabar": "عَلَى الرُّفُوْفِ",
+          "sentence": "الْكُتُبُ الدِّرَاسِيَّةُ عَلَى الرُّفُوْفِ",
+          "translation": "Buku-buku pelajaran berada di atas rak-rak."
+        },
+        {
+          "id": 7,
+          "mubtada": "الْمُوَظَّفُ",
+          "khabar": "أَمَامَ الْمَكْتَبِ",
+          "sentence": "الْمُوَظَّفُ أَمَامَ الْمَكْتَبِ",
+          "translation": "Pegawai itu berada di depan kantor."
         }
       ]
     },
-    "tashrifTable": {
-      "title": "٢ - تَصْرِيْفُ الأَفْعَالِ مَعَ الضَّمَائِرِ (Tashrif Fi'il dengan Dhomir)",
-      "desc": "Perubahan kata kerja menyesuaikan dhomir pelaku (Huwa, Hiya, Anta, Anti, Ana, Nahnu):",
+    "jumlahFiliyyah": {
+      "title": "٢ - أَمْثِلَةُ الْجُمْلَةِ الْفِعْلِيَّةِ (Contoh-contoh Kalimat Verbal / Fi'liyyah)",
+      "desc": "Jumlah Fi'liyyah adalah kalimat yang diawali dengan kata kerja (Fi'il). Terdiri dari unsur Fi'il (Kata Kerja), Fa'il (Subjek/Pelaku), dan Maf'ul Bih (Objek Penderita).",
       "tableHeaders": [
-        "الضَّمِيْرُ",
-        "الْمَاضِي (Past)",
-        "الْمُضَارِعُ (Present)",
-        "الأَمْرُ (Perintah)"
+        "الرَّقْمُ",
+        "الْفِعْلُ (Kata Kerja)",
+        "الْفَاعِلُ (Pelaku/Subjek)",
+        "الْمَفْعُوْلُ بِهِ (Objek)",
+        "الْجُمْلَةُ الْفِعْلِيَّةُ",
+        "Terjemahan"
       ],
       "table": [
         {
-          "dhomir": "هُوَ (Dia Lk)",
-          "madhi": "كَتَبَ",
-          "mudhari": "يَكْتُبُ",
-          "amr": "-"
+          "id": 1,
+          "fiil": "تَقْرَأُ",
+          "fail": "فَاطِمَةُ",
+          "maful": "الْقُرْآنَ",
+          "sentence": "تَقْرَأُ فَاطِمَةُ الْقُرْآنَ",
+          "translation": "Fatimah membaca Al-Qur'an."
         },
         {
-          "dhomir": "هِيَ (Dia Pr)",
-          "madhi": "كَتَبَتْ",
-          "mudhari": "تَكْتُبُ",
-          "amr": "-"
+          "id": 2,
+          "fiil": "كَتَبَ",
+          "fail": "مَحْمُوْدٌ",
+          "maful": "الدَّرْسَ",
+          "sentence": "كَتَبَ مَحْمُوْدٌ الدَّرْسَ",
+          "translation": "Mahmud telah menulis pelajaran."
         },
         {
-          "dhomir": "أَنْتَ (Kamu Lk)",
-          "madhi": "كَتَبْتَ",
-          "mudhari": "تَكْتُبُ",
-          "amr": "اُكْتُبْ"
+          "id": 3,
+          "fiil": "يُحِبُّ",
+          "fail": "اللَّهُ",
+          "maful": "الْمُسْلِمِيْنَ الْمُطِيْعِيْنَ",
+          "sentence": "يُحِبُّ اللَّهُ الْمُسْلِمِيْنَ الْمُطِيْعِيْنَ",
+          "translation": "Allah mencintai orang-orang muslim yang taat."
         },
         {
-          "dhomir": "أَنْتِ (Kamu Pr)",
-          "madhi": "كَتَبْتِ",
-          "mudhari": "تَكْتُبِيْنَ",
-          "amr": "اُكْتُبِي"
+          "id": 4,
+          "fiil": "نَالَتْ",
+          "fail": "خَدِيْجَةُ",
+          "maful": "الرِّسَالَةَ",
+          "sentence": "نَالَتْ خَدِيْجَةُ الرِّسَالَةَ",
+          "translation": "Khadijah telah menerima surat itu."
         },
         {
-          "dhomir": "أَنَا (Saya)",
-          "madhi": "كَتَبْتُ",
-          "mudhari": "أَكْتُبُ",
-          "amr": "-"
-        },
-        {
-          "dhomir": "نَحْنُ (Kami)",
-          "madhi": "كَتَبْنَا",
-          "mudhari": "نَكْتُبُ",
-          "amr": "-"
+          "id": 5,
+          "fiil": "يُحِبُّ",
+          "fail": "اللَّهُ",
+          "maful": "الْمُسْلِمَاتِ الْمُؤْمِنَاتِ",
+          "sentence": "يُحِبُّ اللَّهُ الْمُسْلِمَاتِ الْمُؤْمِنَاتِ",
+          "translation": "Allah mencintai wanita-wanita muslimah yang beriman."
         }
       ]
     },
     "questions": [
       {
         "id": 1,
-        "q": "مَا هُوَ 'الْفِعْلُ الْمَاضِي' لِكَلِمَةِ 'يَذْهَبُ'؟",
-        "latinQ": "Apakah bentuk Fi'il Madhi dari 'يَذْهَبُ'?",
+        "q": "مَا هِيَ 'الْجُمْلَةُ الاِسْمِيَّةُ'؟",
+        "latinQ": "Apakah definisi dari Jumlah Ismiyyah?",
         "options": [
-          "ذَهَبَ",
-          "اِذْهَبْ",
-          "ذَاهِبٌ",
-          "يَذْهَبُوْنَ"
+          "الْجُمْلَةُ الَّتِي تَبْدَأُ بِالاِسْمِ (المُبْتَدَأ)",
+          "الْجُمْلَةُ الَّتِي تَبْدَأُ بِالْفِعْلِ",
+          "الْجُمْلَةُ الَّتِي تَبْدَأُ بِالْحَرْفِ",
+          "الْجُمْلَةُ الَّتِي لَا مَعْنَى لَهَا"
         ],
         "answer": 0,
-        "explanation": "Fi'il Madhi dari 'يَذْهَبُ' adalah 'ذَهَبَ' (telah pergi)."
+        "explanation": "Jumlah Ismiyyah adalah kalimat yang diawali dengan kata benda (Isim / Mubtada')."
       },
       {
         "id": 2,
-        "q": "مَا هُوَ 'فِعْلُ الأَمْرِ' مِنْ كَلِمَةِ 'قَرَأَ' لِلْمُذَكَّرِ؟",
-        "latinQ": "Apakah bentuk Fi'il Amr dari 'قَرَأَ' untuk laki-laki?",
+        "q": "مَا هُوَ 'الْمُبْتَدَأُ' فِي جُمْلَةِ: 'الْمُدَرِّسُ يُعَلِّمُ الطُّلَّابَ فِي الْمَدْرَسَةِ'؟",
+        "latinQ": "Manakah Mubtada' dalam kalimat tersebut?",
         "options": [
-          "اقْرَأْ",
-          "يَقْرَأُ",
-          "قَارِئٌ",
-          "قَرَأْتُ"
+          "الْمُدَرِّسُ",
+          "يُعَلِّمُ",
+          "الطُّلَّابَ",
+          "فِي الْمَدْرَسَةِ"
         ],
         "answer": 0,
-        "explanation": "Fi'il Amr untuk 'قَرَأَ' adalah 'اقْرَأْ' (Bacalah!)."
+        "explanation": "'الْمُدَرِّسُ' adalah Isim di awal kalimat sebagai Mubtada'."
       },
       {
         "id": 3,
-        "q": "أَكْمِلِ الْجُمْلَةَ: أَنَا _____ الرِّسَالَةَ بِالأَمْسِ.",
-        "latinQ": "Lengkapi kalimat: Saya _____ surat itu kemarin.",
+        "q": "مَا هُوَ 'الْخَبَرُ' فِي جُمْلَةِ: 'الْمُحَاضِرُ يُعَلِّمُ الطُّلَّابَ الْجَامِعِيَّ فِي الْجَامِعَةِ'؟",
+        "latinQ": "Manakah Khabar dalam kalimat tersebut?",
         "options": [
-          "كَتَبْتُ",
-          "أَكْتُبُ",
-          "اُكْتُبْ",
-          "كَتَبْنَا"
+          "يُعَلِّمُ الطُّلَّابَ الْجَامِعِيَّ فِي الْجَامِعَةِ",
+          "الْمُحَاضِرُ",
+          "الْجَامِعَةِ",
+          "فِي"
         ],
         "answer": 0,
-        "explanation": "Untuk dhomir 'أَنَا' dalam lampau (Madhi), imbuhannya adalah ْتُ: 'كَتَبْتُ'."
+        "explanation": "Khabar berupa klausa kata kerja (jumlah fi'liyyah): 'يُعَلِّمُ الطُّلَّابَ...'."
       },
       {
         "id": 4,
-        "q": "مَاذَا يُفِيْدُ 'الْفِعْلُ الْمُضَارِعُ'؟",
-        "latinQ": "Apakah makna/waktu yang ditunjukkan Fi'il Mudhari'?",
+        "q": "فِي جُمْلَةِ 'الطَّبِيْبُ فِي الْمُسْتَشْفَى'، نَوْعُ الْخَبَرِ هُوَ:",
+        "latinQ": "Dalam kalimat 'الطَّبِيْبُ فِي الْمُسْتَشْفَى', jenis Khabar-nya adalah:",
         "options": [
-          "الزَّمَنُ الْحَالِيُّ أَوْ الْمُسْتَقْبَلُ",
-          "الزَّمَنُ الْمَاضِي",
-          "الأَمْرُ وَالطَّلَبُ",
-          "الْمَكَانُ"
+          "شِبْهُ جُمْلَةٍ (جَارٌّ وَمَجْرُوْرٌ)",
+          "مُفْرَدٌ",
+          "جُمْلَةٌ فِعْلِيَّةٌ",
+          "فِعْلٌ مَاضٍ"
         ],
         "answer": 0,
-        "explanation": "Fi'il Mudhari' menunjukkan perbuatan masa sekarang (Present) atau akan datang (Future)."
+        "explanation": "'فِي الْمُسْتَشْفَى' adalah Khabar Syibhul Jumlah (jar wa majrur)."
       },
       {
         "id": 5,
-        "q": "تَرْجِمْ إِلَى الْعَرَبِيَّةِ: 'Wahai Fatimah, minumlah susu ini!'",
-        "latinQ": "Terjemahkan ke Bahasa Arab: 'Wahai Fatimah, minumlah susu ini!'",
+        "q": "أَيُّ جُمْلَةٍ مِنَ الْجُمَلِ الآتِيَةِ خَبَرُهَا 'ظَرْفُ مَكَانٍ'؟",
+        "latinQ": "Manakah kalimat berikut yang Khabar-nya berupa Zharaf Makan (keterangan tempat)?",
         "options": [
-          "يَا فَاطِمَةُ، اشْرَبِي هَذَا الْحَلِيْبَ",
-          "يَا فَاطِمَةُ، اشْرَبْ هَذَا الْحَلِيْبَ",
-          "يَا فَاطِمَةُ، تَشْرَبُ الْحَلِيْبَ",
-          "يَا فَاطِمَةُ، شَرِبَتْ الْحَلِيْبَ"
+          "الْمُوَظَّفُ أَمَامَ الْمَكْتَبِ",
+          "الطَّالِبُ نَشِيْطٌ",
+          "هَذَا طَالِبٌ",
+          "تَقْرَأُ فَاطِمَةُ الْقُرْآنَ"
         ],
         "answer": 0,
-        "explanation": "Fi'il Amr untuk dhomir 'أَنْتِ' (Fatimah) berakhiran ya' sukun: 'اشْرَبِي'."
+        "explanation": "'أَمَامَ الْمَكْتَبِ' (di depan kantor) adalah zharaf makan yang berkedudukan sebagai Khabar."
       },
       {
         "id": 6,
-        "q": "مَا هُوَ الْفِعْلُ الْمُضَارِعُ لِلضَّمِيْرِ 'نَحْنُ' مِنْ 'عَمِلَ'؟",
-        "latinQ": "Apakah Fi'il Mudhari' untuk dhomir 'نَحْنُ' dari 'عَمِلَ'?",
+        "q": "مَا هِيَ 'الْجُمْلَةُ الْفِعْلِيَّةُ'؟",
+        "latinQ": "Apakah definisi dari Jumlah Fi'liyyah?",
         "options": [
-          "نَعْمَلُ",
-          "أَعْمَلُ",
-          "يَعْمَلُوْنَ",
-          "عَمِلْنَا"
+          "الْجُمْلَةُ الَّتِي تَبْدَأُ بِالْفِعْلِ",
+          "الْجُمْلَةُ الَّتِي تَبْدَأُ بِالاِسْمِ",
+          "الْجُمْلَةُ الَّتِي تَبْدَأُ بِالْحَرْفِ",
+          "الْجُمْلَةُ الَّتِي تَبْدَأُ بِالظَّرْفِ"
         ],
         "answer": 0,
-        "explanation": "Fi'il Mudhari' untuk 'نَحْنُ' diawali dengan huruf nun (نـ): 'نَعْمَلُ'."
+        "explanation": "Jumlah Fi'liyyah adalah kalimat yang diawali dengan kata kerja (Fi'il)."
       },
       {
         "id": 7,
-        "q": "أَكْمِلِ الْجُمْلَةَ: هِيَ _____ الطَّعَامَ فِي الْمَطْبَخِ الْآنَ.",
-        "latinQ": "Lengkapi kalimat: Dia (perempuan) _____ makanan di dapur sekarang.",
+        "q": "مَا هُوَ 'الْفَاعِلُ' فِي جُمْلَةِ: 'كَتَبَ مَحْمُوْدٌ الدَّرْسَ'؟",
+        "latinQ": "Manakah Fa'il (Subjek/Pelaku) dalam kalimat tersebut?",
         "options": [
-          "تَطْبُخُ",
-          "طَبَخَتْ",
-          "اُطْبُخِي",
-          "يَطْبُخُ"
+          "مَحْمُوْدٌ",
+          "كَتَبَ",
+          "الدَّرْسَ",
+          "فِي"
         ],
         "answer": 0,
-        "explanation": "Keterangan 'الْآنَ' (sekarang) menggunakan Fi'il Mudhari' untuk dhomir 'هِيَ' (تَطْبُخُ)."
+        "explanation": "'مَحْمُوْدٌ' adalah Fa'il (pelaku perbuatan menulis) marfu' dengan dammah."
       },
       {
         "id": 8,
-        "q": "مَا التَّصْرِيْفُ الصَّحِيْحُ لِفِعْلِ 'سَمِعَ' مَعَ الضَّمِيْرِ 'أَنْتَ' فِي الْمَاضِي؟",
-        "latinQ": "Apakah tashrif yang benar dari 'سَمِعَ' dengan dhomir 'أَنْتَ' dalam Madhi?",
+        "q": "لِمَاذَا كُتِبَتْ 'تَقْرَأُ' بِالتَّاءِ فِي جُمْلَةِ: 'تَقْرَأُ فَاطِمَةُ الْقُرْآنَ'؟",
+        "latinQ": "Mengapa kata kerja 'تَقْرَأُ' diawali huruf Ta (ت)?",
         "options": [
-          "سَمِعْتَ",
-          "سَمِعْتُ",
-          "تَسْمَعُ",
-          "اِسْمَعْ"
+          "لِأَنَّ الْفَاعِلَ مُؤَنَّثٌ (فَاطِمَةُ)",
+          "لِأَنَّ الْفَاعِلَ مُذَكَّرٌ",
+          "لِأَنَّهُ فِعْلٌ مَاضٍ",
+          "لِأَنَّهُ حَرْفٌ"
         ],
         "answer": 0,
-        "explanation": "Untuk dhomir 'أَنْتَ' pada Fi'il Madhi berakhiran ْتَ: 'سَمِعْتَ'."
+        "explanation": "Fi'il Mudhari' diawali Ta' (تـ) jika pelakunya Mu'annats (Fatimah)."
       },
       {
         "id": 9,
-        "q": "أَيُّ مِنْ الأَفْعَالِ الآتِيَةِ هُوَ 'فِعْلُ أَمْرٍ'؟",
-        "latinQ": "Manakah dari kata kerja berikut yang merupakan Fi'il Amr?",
+        "q": "مَا إِعْرَابُ كَلِمَةِ 'الْمُسْلِمِيْنَ' فِي جُمْلَةِ: 'يُحِبُّ اللَّهُ الْمُسْلِمِيْنَ الْمُطِيْعِيْنَ'؟",
+        "latinQ": "Apakah kedudukan kata 'الْمُسْلِمِيْنَ' dalam kalimat tersebut?",
         "options": [
-          "اِذْهَبْ",
-          "يَذْهَبُ",
-          "ذَهَبَ",
-          "ذَاهِبٌ"
+          "مَفْعُوْلٌ بِهِ (مَنْصُوْبٌ بِالْيَاءِ)",
+          "فَاعِلٌ",
+          "مُبْتَدَأٌ",
+          "خَبَرٌ"
         ],
         "answer": 0,
-        "explanation": "'اِذْهَبْ' (Pergilah!) adalah bentuk Perintah (Fi'il Amr)."
+        "explanation": "'الْمُسْلِمِيْنَ' adalah Maf'ul Bih (objek) manshub dengan Ya' (يا) karena Jamak Muzakkar Salim."
       },
       {
         "id": 10,
-        "q": "تَرْجِمْ إِلَى الْعَرَبِيَّةِ: 'Kami telah belajar Bahasa Arab'.",
-        "latinQ": "Terjemahkan ke Bahasa Arab: 'Kami telah belajar Bahasa Arab'.",
+        "q": "مَا إِعْرَابُ كَلِمَةِ 'الْمُسْلِمَاتِ' فِي جُمْلَةِ: 'يُحِبُّ اللَّهُ الْمُسْلِمَاتِ الْمُؤْمِنَاتِ'؟",
+        "latinQ": "Apakah tanda manshub untuk 'الْمُسْلِمَاتِ' sebagai Maf'ul Bih?",
         "options": [
-          "دَرَسْنَا اللُّغَةَ الْعَرَبِيَّةَ",
-          "نَدْرُسُ اللُّغَةَ الْعَرَبِيَّةَ",
-          "اُدْرُسُوا اللُّغَةَ الْعَرَبِيَّةَ",
-          "دَرَسْتُ اللُّغَةَ الْعَرَبِيَّةَ"
+          "مَفْعُوْلٌ بِهِ مَنْصُوْبٌ بِالْكَسْرَةِ (لِأَنَّهُ جَمْعُ مُؤَنَّثٍ سَالِمٌ)",
+          "مَنْصُوْبٌ بِالْفَتْحَةِ",
+          "مَرْفُوْعٌ بِالضَّمَّةِ",
+          "مَجْرُوْرٌ"
         ],
         "answer": 0,
-        "explanation": "'Telah belajar' (Past/Madhi) untuk 'Kami' (نَحْنُ) adalah 'دَرَسْنَا'."
+        "explanation": "Jamak Mu'annats Salim ('الْمُسْلِمَاتِ') jika menjadi Maf'ul Bih tanda manshub-nya adalah kasrah."
       }
     ]
   },

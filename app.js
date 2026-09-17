@@ -1514,31 +1514,32 @@ function renderQawaidHTML() {
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
           <div>
             <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">
-              <span>📐 Qawaid Bab 5: Fi'il Madhi, Mudhari' & Fi'il Amr</span>
-              <span class="font-arabic text-3xl text-amber-700">الفعل الماضي والمضارع والأمر</span>
+              <span>📐 Qawaid Bab 5: Jumlah Ismiyyah & Jumlah Fi'liyyah</span>
+              <span class="font-arabic text-3xl text-amber-700">الجملة الاسمية والجملة الفعلية</span>
             </h2>
-            <p class="text-slate-600 text-sm mt-1">Jenis-jenis Kata Kerja berdasarkan waktu (Past, Present/Future, Imperative) dan Tashrif Dhomir.</p>
+            <p class="text-slate-600 text-sm mt-1">Struktur Kalimat Nominal (Mubtada' + Khabar) dan Kalimat Verbal (Fi'il + Fa'il + Maf'ul Bih).</p>
           </div>
         </div>
 
         <div class="space-y-8">
           <div class="card-soft p-6 sm:p-8 space-y-6">
-            <h3 class="text-xl font-bold text-amber-900">${q5.fiilTypes.title}</h3>
-            <p class="text-sm text-slate-600">${q5.fiilTypes.desc}</p>
+            <h3 class="text-xl font-bold text-amber-900">${q5.jumlahIsmiyyah.title}</h3>
+            <p class="text-sm text-slate-600">${q5.jumlahIsmiyyah.desc}</p>
             <div class="overflow-x-auto">
               <table class="w-full text-left border-collapse min-w-[600px]">
                 <thead>
                   <tr class="bg-amber-100 text-amber-950 text-xs font-bold uppercase">
-                    ${q5.fiilTypes.tableHeaders.map(h => `<th class="p-3.5 text-center font-arabic text-lg">${h}</th>`).join('')}
+                    ${q5.jumlahIsmiyyah.tableHeaders.map(h => `<th class="p-3.5 text-center font-arabic text-lg">${h}</th>`).join('')}
                   </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-100 text-sm">
-                  ${q5.fiilTypes.table.map(row => `
+                  ${q5.jumlahIsmiyyah.table.map(row => `
                     <tr class="hover:bg-amber-50 transition-colors">
-                      <td class="p-3.5 text-center font-arabic text-xl font-bold text-amber-900 bg-amber-50/50 rounded-lg">${row.madhi}</td>
-                      <td class="p-3.5 text-center font-arabic text-xl font-bold text-teal-800 bg-teal-50/50 rounded-lg">${row.mudhari}</td>
-                      <td class="p-3.5 text-center font-arabic text-xl font-bold text-rose-800 bg-rose-50/50 rounded-lg">${row.amr}</td>
-                      <td class="p-3.5 text-center font-bold text-slate-800">${row.meaning}</td>
+                      <td class="p-3.5 text-center font-bold text-slate-500">${row.id}</td>
+                      <td class="p-3.5 text-center font-arabic text-xl font-bold text-blue-800 bg-blue-50/50 rounded-lg">${row.mubtada}</td>
+                      <td class="p-3.5 text-center font-arabic text-xl font-bold text-teal-800 bg-teal-50/50 rounded-lg">${row.khabar}</td>
+                      <td class="p-3.5 text-center font-arabic text-2xl font-bold text-amber-900">${row.sentence}</td>
+                      <td class="p-3.5 text-center font-bold text-slate-800">${row.translation}</td>
                     </tr>
                   `).join('')}
                 </tbody>
@@ -1547,22 +1548,24 @@ function renderQawaidHTML() {
           </div>
 
           <div class="card-soft p-6 sm:p-8 space-y-6">
-            <h3 class="text-xl font-bold text-amber-900">${q5.tashrifTable.title}</h3>
-            <p class="text-sm text-slate-600">${q5.tashrifTable.desc}</p>
+            <h3 class="text-xl font-bold text-amber-900">${q5.jumlahFiliyyah.title}</h3>
+            <p class="text-sm text-slate-600">${q5.jumlahFiliyyah.desc}</p>
             <div class="overflow-x-auto">
               <table class="w-full text-left border-collapse min-w-[600px]">
                 <thead>
                   <tr class="bg-amber-100 text-amber-950 text-xs font-bold uppercase">
-                    ${q5.tashrifTable.tableHeaders.map(h => `<th class="p-3.5 text-center font-arabic text-lg">${h}</th>`).join('')}
+                    ${q5.jumlahFiliyyah.tableHeaders.map(h => `<th class="p-3.5 text-center font-arabic text-lg">${h}</th>`).join('')}
                   </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-100 text-sm">
-                  ${q5.tashrifTable.table.map(row => `
+                  ${q5.jumlahFiliyyah.table.map(row => `
                     <tr class="hover:bg-amber-50 transition-colors">
-                      <td class="p-3.5 font-bold text-amber-900 text-center">${row.dhomir}</td>
-                      <td class="p-3.5 text-center font-arabic text-xl font-bold text-amber-900">${row.madhi}</td>
-                      <td class="p-3.5 text-center font-arabic text-xl font-bold text-teal-800">${row.mudhari}</td>
-                      <td class="p-3.5 text-center font-arabic text-xl font-bold text-rose-800">${row.amr}</td>
+                      <td class="p-3.5 text-center font-bold text-slate-500">${row.id}</td>
+                      <td class="p-3.5 text-center font-arabic text-xl font-bold text-teal-800 bg-teal-50/50 rounded-lg">${row.fiil}</td>
+                      <td class="p-3.5 text-center font-arabic text-xl font-bold text-blue-800 bg-blue-50/50 rounded-lg">${row.fail}</td>
+                      <td class="p-3.5 text-center font-arabic text-xl font-bold text-purple-800 bg-purple-50/50 rounded-lg">${row.maful}</td>
+                      <td class="p-3.5 text-center font-arabic text-2xl font-bold text-amber-900">${row.sentence}</td>
+                      <td class="p-3.5 text-center font-bold text-slate-800">${row.translation}</td>
                     </tr>
                   `).join('')}
                 </tbody>
@@ -1571,13 +1574,19 @@ function renderQawaidHTML() {
           </div>
 
           <div class="card-soft p-6 sm:p-8 space-y-6">
-            <h3 class="text-xl font-bold text-amber-900">📝 Latihan 10 Soal Qawaid Bab 5</h3>
+            <div class="flex items-center justify-between pb-2 border-b border-amber-200/60">
+              <h3 class="text-xl font-bold text-amber-900">📝 Latihan 10 Soal Qawaid Bab 5</h3>
+              <span class="text-xs font-bold text-amber-700 bg-amber-100 px-3 py-1 rounded-full">Soal Pilihan Ganda</span>
+            </div>
             <div class="space-y-6">
               ${questions5.map((q, qIdx) => `
                 <div class="p-5 bg-amber-50/50 rounded-2xl border border-amber-100 space-y-4">
                   <div class="flex items-start gap-3">
                     <span class="w-7 h-7 rounded-full bg-amber-200 text-amber-900 font-bold text-xs flex items-center justify-center flex-shrink-0 mt-1">${qIdx + 1}</span>
-                    <h4 class="font-arabic text-2xl font-bold text-slate-800 leading-[2.4] pt-1">${q.q}</h4>
+                    <div>
+                      <h4 class="font-arabic text-2xl font-bold text-slate-800 leading-[2.4] pt-1">${q.q}</h4>
+                      <p class="text-xs text-slate-500 italic">${q.latinQ}</p>
+                    </div>
                   </div>
                   <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                     ${q.options.map((opt, optIdx) => `
