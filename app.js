@@ -1404,18 +1404,285 @@ function renderQawaidHTML() {
       </div>
 
       <div class="flex items-center gap-2 w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0">
-        <button onclick="switchQawaidBab(1)" class="flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 whitespace-nowrap ${state.qawaidBab === 1 ? 'bg-gradient-to-r from-amber-600 to-yellow-600 text-white shadow-md ring-2 ring-amber-400/50' : 'bg-slate-800 hover:bg-slate-700 text-slate-300'}">
-          <span>Bab 1: Istifham & Dhomir</span>
+        <button onclick="switchQawaidBab(1)" class="flex-1 sm:flex-none px-3 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 whitespace-nowrap ${state.qawaidBab === 1 ? 'bg-gradient-to-r from-amber-600 to-yellow-600 text-white shadow-md ring-2 ring-amber-400/50' : 'bg-slate-800 hover:bg-slate-700 text-slate-300'}">
+          <span>Bab 1</span>
         </button>
-        <button onclick="switchQawaidBab(2)" class="flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 whitespace-nowrap ${state.qawaidBab === 2 ? 'bg-gradient-to-r from-amber-600 to-yellow-600 text-white shadow-md ring-2 ring-amber-400/50' : 'bg-slate-800 hover:bg-slate-700 text-slate-300'}">
-          <span>Bab 2: Muzakkar/Mu'annats & Huruf Jar</span>
+        <button onclick="switchQawaidBab(2)" class="flex-1 sm:flex-none px-3 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 whitespace-nowrap ${state.qawaidBab === 2 ? 'bg-gradient-to-r from-amber-600 to-yellow-600 text-white shadow-md ring-2 ring-amber-400/50' : 'bg-slate-800 hover:bg-slate-700 text-slate-300'}">
+          <span>Bab 2</span>
         </button>
-        <button onclick="switchQawaidBab(3)" class="flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 whitespace-nowrap ${state.qawaidBab === 3 ? 'bg-gradient-to-r from-amber-600 to-yellow-600 text-white shadow-md ring-2 ring-amber-400/50' : 'bg-slate-800 hover:bg-slate-700 text-slate-300'}">
-          <span>Bab 3: Mufrad/Mutsanna/Jamak & Huruf 'Athaf</span>
+        <button onclick="switchQawaidBab(3)" class="flex-1 sm:flex-none px-3 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 whitespace-nowrap ${state.qawaidBab === 3 ? 'bg-gradient-to-r from-amber-600 to-yellow-600 text-white shadow-md ring-2 ring-amber-400/50' : 'bg-slate-800 hover:bg-slate-700 text-slate-300'}">
+          <span>Bab 3</span>
+        </button>
+        <button onclick="switchQawaidBab(4)" class="flex-1 sm:flex-none px-3 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 whitespace-nowrap ${state.qawaidBab === 4 ? 'bg-gradient-to-r from-amber-600 to-yellow-600 text-white shadow-md ring-2 ring-amber-400/50' : 'bg-slate-800 hover:bg-slate-700 text-slate-300'}">
+          <span>Bab 4 (Genap)</span>
+        </button>
+        <button onclick="switchQawaidBab(5)" class="flex-1 sm:flex-none px-3 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 whitespace-nowrap ${state.qawaidBab === 5 ? 'bg-gradient-to-r from-amber-600 to-yellow-600 text-white shadow-md ring-2 ring-amber-400/50' : 'bg-slate-800 hover:bg-slate-700 text-slate-300'}">
+          <span>Bab 5 (Genap)</span>
+        </button>
+        <button onclick="switchQawaidBab(6)" class="flex-1 sm:flex-none px-3 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 whitespace-nowrap ${state.qawaidBab === 6 ? 'bg-gradient-to-r from-amber-600 to-yellow-600 text-white shadow-md ring-2 ring-amber-400/50' : 'bg-slate-800 hover:bg-slate-700 text-slate-300'}">
+          <span>Bab 6 (Genap)</span>
         </button>
       </div>
     </div>
   `;
+
+  if (state.qawaidBab === 6) {
+    const q6 = ARABIC_DATA.qawaidBab6;
+    const questions6 = q6.questions;
+    return `
+      <div class="space-y-8 animate-fadeIn max-w-4xl mx-auto">
+        ${babSwitcherHTML}
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+          <div>
+            <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">
+              <span>📐 Qawaid Bab 6: Zharaf Zaman & Zharaf Makan</span>
+              <span class="font-arabic text-3xl text-amber-700">ظَرْفُ الزَّمَانِ وَالْمَكَانِ</span>
+            </h2>
+            <p class="text-slate-600 text-sm mt-1">Keterangan Waktu (Zharaf Zaman) dan Keterangan Tempat (Zharaf Makan) dalam Bahasa Arab.</p>
+          </div>
+        </div>
+
+        <div class="space-y-8">
+          <div class="card-soft p-6 sm:p-8 space-y-6">
+            <h3 class="text-xl font-bold text-amber-900">${q6.zharafZaman.title}</h3>
+            <p class="text-sm text-slate-600">${q6.zharafZaman.desc}</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              ${q6.zharafZaman.list.map(h => `
+                <div class="p-4 bg-amber-50 rounded-2xl border border-amber-200 space-y-2">
+                  <div class="flex items-center justify-between">
+                    <span class="font-arabic text-2xl font-bold text-amber-900">${h.arabic}</span>
+                    <span class="px-3 py-1 bg-amber-200 text-amber-950 font-bold text-xs rounded-full">${h.meaning}</span>
+                  </div>
+                  <div class="bg-white p-2.5 rounded-xl border border-amber-100 flex items-center justify-between">
+                    <span class="font-arabic text-lg font-bold text-slate-800">${h.example}</span>
+                    <button onclick="speakArabic('${h.example}', this)" class="text-xs text-amber-700">🔊</button>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <div class="card-soft p-6 sm:p-8 space-y-6">
+            <h3 class="text-xl font-bold text-amber-900">${q6.zharafMakan.title}</h3>
+            <p class="text-sm text-slate-600">${q6.zharafMakan.desc}</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              ${q6.zharafMakan.list.map(h => `
+                <div class="p-4 bg-amber-50 rounded-2xl border border-amber-200 space-y-2">
+                  <div class="flex items-center justify-between">
+                    <span class="font-arabic text-2xl font-bold text-amber-900">${h.arabic}</span>
+                    <span class="px-3 py-1 bg-amber-200 text-amber-950 font-bold text-xs rounded-full">${h.meaning}</span>
+                  </div>
+                  <div class="bg-white p-2.5 rounded-xl border border-amber-100 flex items-center justify-between">
+                    <span class="font-arabic text-lg font-bold text-slate-800">${h.example}</span>
+                    <button onclick="speakArabic('${h.example}', this)" class="text-xs text-amber-700">🔊</button>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <div class="card-soft p-6 sm:p-8 space-y-6">
+            <h3 class="text-xl font-bold text-amber-900">📝 Latihan 10 Soal Qawaid Bab 6</h3>
+            <div class="space-y-6">
+              ${questions6.map((q, qIdx) => `
+                <div class="p-5 bg-amber-50/50 rounded-2xl border border-amber-100 space-y-4">
+                  <div class="flex items-start gap-3">
+                    <span class="w-7 h-7 rounded-full bg-amber-200 text-amber-900 font-bold text-xs flex items-center justify-center flex-shrink-0 mt-1">${qIdx + 1}</span>
+                    <h4 class="font-arabic text-2xl font-bold text-slate-800 leading-[2.4] pt-1">${q.q}</h4>
+                  </div>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                    ${q.options.map((opt, optIdx) => `
+                      <button onclick="checkQawaidQAnswer(${qIdx}, ${optIdx})" class="p-3.5 bg-white hover:bg-amber-100 border border-amber-200 hover:border-amber-400 rounded-xl font-arabic text-xl text-slate-800 text-center transition-all">${opt}</button>
+                    `).join('')}
+                  </div>
+                  <div id="qawaid-q-feedback-${qIdx}" class="hidden p-3 rounded-xl text-xs font-semibold"></div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  if (state.qawaidBab === 5) {
+    const q5 = ARABIC_DATA.qawaidBab5;
+    const questions5 = q5.questions;
+    return `
+      <div class="space-y-8 animate-fadeIn max-w-4xl mx-auto">
+        ${babSwitcherHTML}
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+          <div>
+            <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">
+              <span>📐 Qawaid Bab 5: Fi'il Madhi, Mudhari' & Fi'il Amr</span>
+              <span class="font-arabic text-3xl text-amber-700">الفعل الماضي والمضارع والأمر</span>
+            </h2>
+            <p class="text-slate-600 text-sm mt-1">Jenis-jenis Kata Kerja berdasarkan waktu (Past, Present/Future, Imperative) dan Tashrif Dhomir.</p>
+          </div>
+        </div>
+
+        <div class="space-y-8">
+          <div class="card-soft p-6 sm:p-8 space-y-6">
+            <h3 class="text-xl font-bold text-amber-900">${q5.fiilTypes.title}</h3>
+            <p class="text-sm text-slate-600">${q5.fiilTypes.desc}</p>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse min-w-[600px]">
+                <thead>
+                  <tr class="bg-amber-100 text-amber-950 text-xs font-bold uppercase">
+                    ${q5.fiilTypes.tableHeaders.map(h => `<th class="p-3.5 text-center font-arabic text-lg">${h}</th>`).join('')}
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 text-sm">
+                  ${q5.fiilTypes.table.map(row => `
+                    <tr class="hover:bg-amber-50 transition-colors">
+                      <td class="p-3.5 text-center font-arabic text-xl font-bold text-amber-900 bg-amber-50/50 rounded-lg">${row.madhi}</td>
+                      <td class="p-3.5 text-center font-arabic text-xl font-bold text-teal-800 bg-teal-50/50 rounded-lg">${row.mudhari}</td>
+                      <td class="p-3.5 text-center font-arabic text-xl font-bold text-rose-800 bg-rose-50/50 rounded-lg">${row.amr}</td>
+                      <td class="p-3.5 text-center font-bold text-slate-800">${row.meaning}</td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card-soft p-6 sm:p-8 space-y-6">
+            <h3 class="text-xl font-bold text-amber-900">${q5.tashrifTable.title}</h3>
+            <p class="text-sm text-slate-600">${q5.tashrifTable.desc}</p>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse min-w-[600px]">
+                <thead>
+                  <tr class="bg-amber-100 text-amber-950 text-xs font-bold uppercase">
+                    ${q5.tashrifTable.tableHeaders.map(h => `<th class="p-3.5 text-center font-arabic text-lg">${h}</th>`).join('')}
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 text-sm">
+                  ${q5.tashrifTable.table.map(row => `
+                    <tr class="hover:bg-amber-50 transition-colors">
+                      <td class="p-3.5 font-bold text-amber-900 text-center">${row.dhomir}</td>
+                      <td class="p-3.5 text-center font-arabic text-xl font-bold text-amber-900">${row.madhi}</td>
+                      <td class="p-3.5 text-center font-arabic text-xl font-bold text-teal-800">${row.mudhari}</td>
+                      <td class="p-3.5 text-center font-arabic text-xl font-bold text-rose-800">${row.amr}</td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card-soft p-6 sm:p-8 space-y-6">
+            <h3 class="text-xl font-bold text-amber-900">📝 Latihan 10 Soal Qawaid Bab 5</h3>
+            <div class="space-y-6">
+              ${questions5.map((q, qIdx) => `
+                <div class="p-5 bg-amber-50/50 rounded-2xl border border-amber-100 space-y-4">
+                  <div class="flex items-start gap-3">
+                    <span class="w-7 h-7 rounded-full bg-amber-200 text-amber-900 font-bold text-xs flex items-center justify-center flex-shrink-0 mt-1">${qIdx + 1}</span>
+                    <h4 class="font-arabic text-2xl font-bold text-slate-800 leading-[2.4] pt-1">${q.q}</h4>
+                  </div>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                    ${q.options.map((opt, optIdx) => `
+                      <button onclick="checkQawaidQAnswer(${qIdx}, ${optIdx})" class="p-3.5 bg-white hover:bg-amber-100 border border-amber-200 hover:border-amber-400 rounded-xl font-arabic text-xl text-slate-800 text-center transition-all">${opt}</button>
+                    `).join('')}
+                  </div>
+                  <div id="qawaid-q-feedback-${qIdx}" class="hidden p-3 rounded-xl text-xs font-semibold"></div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  if (state.qawaidBab === 4) {
+    const q4 = ARABIC_DATA.qawaidBab4;
+    const questions4 = q4.questions;
+    return `
+      <div class="space-y-8 animate-fadeIn max-w-4xl mx-auto">
+        ${babSwitcherHTML}
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+          <div>
+            <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">
+              <span>📐 Qawaid Bab 4: Jumlah Ismiyyah & Jumlah Fi'liyyah</span>
+              <span class="font-arabic text-3xl text-amber-700">الجملة الاسمية والجملة الفعلية</span>
+            </h2>
+            <p class="text-slate-600 text-sm mt-1">Perbedaan Kalimat Nominal (Jumlah Ismiyyah) dan Kalimat Verbal (Jumlah Fi'liyyah).</p>
+          </div>
+        </div>
+
+        <div class="space-y-8">
+          <div class="card-soft p-6 sm:p-8 space-y-6">
+            <h3 class="text-xl font-bold text-amber-900">${q4.jumlahIsmiyyah.title}</h3>
+            <p class="text-sm text-slate-600">${q4.jumlahIsmiyyah.desc}</p>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse min-w-[600px]">
+                <thead>
+                  <tr class="bg-amber-100 text-amber-950 text-xs font-bold uppercase">
+                    ${q4.jumlahIsmiyyah.tableHeaders.map(h => `<th class="p-3.5 text-center font-arabic text-lg">${h}</th>`).join('')}
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 text-sm">
+                  ${q4.jumlahIsmiyyah.table.map(row => `
+                    <tr class="hover:bg-amber-50 transition-colors">
+                      <td class="p-3.5 text-center font-arabic text-xl font-bold text-blue-800 bg-blue-50/50 rounded-lg">${row.mubtada}</td>
+                      <td class="p-3.5 text-center font-arabic text-xl font-bold text-teal-800 bg-teal-50/50 rounded-lg">${row.khabar}</td>
+                      <td class="p-3.5 text-center font-arabic text-2xl font-bold text-amber-900">${row.sentence}</td>
+                      <td class="p-3.5 text-center font-bold text-slate-800">${row.translation}</td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card-soft p-6 sm:p-8 space-y-6">
+            <h3 class="text-xl font-bold text-amber-900">${q4.jumlahFiliyyah.title}</h3>
+            <p class="text-sm text-slate-600">${q4.jumlahFiliyyah.desc}</p>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse min-w-[600px]">
+                <thead>
+                  <tr class="bg-amber-100 text-amber-950 text-xs font-bold uppercase">
+                    ${q4.jumlahFiliyyah.tableHeaders.map(h => `<th class="p-3.5 text-center font-arabic text-lg">${h}</th>`).join('')}
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 text-sm">
+                  ${q4.jumlahFiliyyah.table.map(row => `
+                    <tr class="hover:bg-amber-50 transition-colors">
+                      <td class="p-3.5 text-center font-arabic text-xl font-bold text-teal-800 bg-teal-50/50 rounded-lg">${row.fiil}</td>
+                      <td class="p-3.5 text-center font-arabic text-xl font-bold text-blue-800 bg-blue-50/50 rounded-lg">${row.fail}</td>
+                      <td class="p-3.5 text-center font-arabic text-xl font-bold text-purple-800 bg-purple-50/50 rounded-lg">${row.maful}</td>
+                      <td class="p-3.5 text-center font-arabic text-2xl font-bold text-amber-900">${row.sentence}</td>
+                      <td class="p-3.5 text-center font-bold text-slate-800">${row.translation}</td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card-soft p-6 sm:p-8 space-y-6">
+            <h3 class="text-xl font-bold text-amber-900">📝 Latihan 10 Soal Qawaid Bab 4</h3>
+            <div class="space-y-6">
+              ${questions4.map((q, qIdx) => `
+                <div class="p-5 bg-amber-50/50 rounded-2xl border border-amber-100 space-y-4">
+                  <div class="flex items-start gap-3">
+                    <span class="w-7 h-7 rounded-full bg-amber-200 text-amber-900 font-bold text-xs flex items-center justify-center flex-shrink-0 mt-1">${qIdx + 1}</span>
+                    <h4 class="font-arabic text-2xl font-bold text-slate-800 leading-[2.4] pt-1">${q.q}</h4>
+                  </div>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                    ${q.options.map((opt, optIdx) => `
+                      <button onclick="checkQawaidQAnswer(${qIdx}, ${optIdx})" class="p-3.5 bg-white hover:bg-amber-100 border border-amber-200 hover:border-amber-400 rounded-xl font-arabic text-xl text-slate-800 text-center transition-all">${opt}</button>
+                    `).join('')}
+                  </div>
+                  <div id="qawaid-q-feedback-${qIdx}" class="hidden p-3 rounded-xl text-xs font-semibold"></div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
 
   if (state.qawaidBab === 3) {
     const q3 = ARABIC_DATA.qawaidBab3;
@@ -1908,7 +2175,13 @@ function renderQawaidHTML() {
 
 function checkQawaidQAnswer(qIdx, optIdx) {
   let questions;
-  if (state.qawaidBab === 3) {
+  if (state.qawaidBab === 6 && ARABIC_DATA.qawaidBab6) {
+    questions = ARABIC_DATA.qawaidBab6.questions;
+  } else if (state.qawaidBab === 5 && ARABIC_DATA.qawaidBab5) {
+    questions = ARABIC_DATA.qawaidBab5.questions;
+  } else if (state.qawaidBab === 4 && ARABIC_DATA.qawaidBab4) {
+    questions = ARABIC_DATA.qawaidBab4.questions;
+  } else if (state.qawaidBab === 3) {
     questions = ARABIC_DATA.qawaidBab3.questions;
   } else if (state.qawaidBab === 2) {
     questions = ARABIC_DATA.qawaidBab2.questions;
@@ -1938,7 +2211,10 @@ function attachQawaidEvents() {}
 function getTadribatQuestions() {
   const bab = state.tadribatBab || 1;
   const ver = state.tadribatVersion || 1;
-
+  const key = `bab${bab}_v${ver}`;
+  if (ARABIC_DATA.tadribat && ARABIC_DATA.tadribat[key]) {
+    return ARABIC_DATA.tadribat[key];
+  }
   if (bab === 3) {
     return ver === 2 ? (ARABIC_DATA.tadribat.bab3_v2 || []) : (ARABIC_DATA.tadribat.bab3_v1 || []);
   }
@@ -2011,15 +2287,24 @@ function renderTadribatHTML() {
 
         <div class="flex flex-wrap items-center gap-2.5 w-full md:w-auto">
           <!-- BAB SELECTOR -->
-          <div class="flex items-center bg-slate-800 p-1 rounded-xl border border-slate-700">
-            <button onclick="switchTadribatBab(1)" class="px-3 py-1.5 rounded-lg text-xs font-extrabold transition-all ${state.tadribatBab === 1 ? 'bg-amber-500 text-slate-950 shadow' : 'text-slate-400 hover:text-white'}">
+          <div class="flex items-center bg-slate-800 p-1 rounded-xl border border-slate-700 overflow-x-auto">
+            <button onclick="switchTadribatBab(1)" class="px-2.5 py-1.5 rounded-lg text-xs font-extrabold transition-all ${state.tadribatBab === 1 ? 'bg-amber-500 text-slate-950 shadow' : 'text-slate-400 hover:text-white'}">
               Bab 1
             </button>
-            <button onclick="switchTadribatBab(2)" class="px-3 py-1.5 rounded-lg text-xs font-extrabold transition-all ${state.tadribatBab === 2 ? 'bg-amber-500 text-slate-950 shadow' : 'text-slate-400 hover:text-white'}">
+            <button onclick="switchTadribatBab(2)" class="px-2.5 py-1.5 rounded-lg text-xs font-extrabold transition-all ${state.tadribatBab === 2 ? 'bg-amber-500 text-slate-950 shadow' : 'text-slate-400 hover:text-white'}">
               Bab 2
             </button>
-            <button onclick="switchTadribatBab(3)" class="px-3 py-1.5 rounded-lg text-xs font-extrabold transition-all ${state.tadribatBab === 3 ? 'bg-amber-500 text-slate-950 shadow' : 'text-slate-400 hover:text-white'}">
+            <button onclick="switchTadribatBab(3)" class="px-2.5 py-1.5 rounded-lg text-xs font-extrabold transition-all ${state.tadribatBab === 3 ? 'bg-amber-500 text-slate-950 shadow' : 'text-slate-400 hover:text-white'}">
               Bab 3
+            </button>
+            <button onclick="switchTadribatBab(4)" class="px-2.5 py-1.5 rounded-lg text-xs font-extrabold transition-all ${state.tadribatBab === 4 ? 'bg-amber-500 text-slate-950 shadow' : 'text-slate-400 hover:text-white'}">
+              Bab 4
+            </button>
+            <button onclick="switchTadribatBab(5)" class="px-2.5 py-1.5 rounded-lg text-xs font-extrabold transition-all ${state.tadribatBab === 5 ? 'bg-amber-500 text-slate-950 shadow' : 'text-slate-400 hover:text-white'}">
+              Bab 5
+            </button>
+            <button onclick="switchTadribatBab(6)" class="px-2.5 py-1.5 rounded-lg text-xs font-extrabold transition-all ${state.tadribatBab === 6 ? 'bg-amber-500 text-slate-950 shadow' : 'text-slate-400 hover:text-white'}">
+              Bab 6
             </button>
           </div>
 
@@ -2609,6 +2894,9 @@ function renderGuruDashboardHTML() {
               <option value="1" ${state.guruFilterBab == 1 ? 'selected' : ''}>Bab 1</option>
               <option value="2" ${state.guruFilterBab == 2 ? 'selected' : ''}>Bab 2</option>
               <option value="3" ${state.guruFilterBab == 3 ? 'selected' : ''}>Bab 3</option>
+              <option value="4" ${state.guruFilterBab == 4 ? 'selected' : ''}>Bab 4</option>
+              <option value="5" ${state.guruFilterBab == 5 ? 'selected' : ''}>Bab 5</option>
+              <option value="6" ${state.guruFilterBab == 6 ? 'selected' : ''}>Bab 6</option>
             </select>
 
             <!-- Search Nama -->
