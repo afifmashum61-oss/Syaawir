@@ -1994,45 +1994,69 @@ const ARABIC_DATA = {
     },
     {
       "id": "dialog9",
-      "title": "الكلام (١) - البَابُ الْخَامِسُ : الْمِهْنَةُ وَالأَمَلُ",
-      "latinTitle": "Bab 5 - Percakapan 1: Profesi & Cita-cita (Hasan & Tariq)",
+      "title": "الكلام (١) - البَابُ الْخَامِسُ : الْحِوَارُ الرَّسْمِيُّ (الْمِهَنُ وَخِدْمَةُ الْمُجْتَمَعِ)",
+      "latinTitle": "Bab 5 - Percakapan Utama Buku Siswa: Profesi & Khidmah Masyarakat (Ali, Ahmad, Sa'id, Khalid, Yusuf, Sami)",
       "topicId": "mihnah",
       "lines": [
         {
-          "speaker": "حَسَن",
-          "arabic": "مَاذَا يَعْمَلُ أَبُوْكَ يَا طَارِقُ؟",
-          "latin": "Māżā ya'malu abūka yā Ṭāriq?",
-          "translation": "Apa pekerjaan ayahmu wahai Tariq?"
+          "speaker": "عَلِي",
+          "arabic": "السَّلَامُ عَلَيْكُمْ يَا إِخْوَتِي، كَيْفَ حَالُكُمُ الْيَوْمَ؟",
+          "latin": "Assalāmu 'alaikum yā ikhwatī, kaifa ḥālukumul yaum?",
+          "translation": "Assalamu'alaikum wahai saudara-saudaraku, bagaimana kabar kalian hari ini?"
         },
         {
-          "speaker": "طَارِق",
-          "arabic": "أَبِي طَبِيْبٌ، يَعْمَلُ فِي الْمُسْتَشْفَى. وَأَبُوْكَ؟",
-          "latin": "Abī ṭabībun, ya'malu fil mustasyfā. Wa abūka?",
-          "translation": "Ayahku seorang dokter, bekerja di rumah sakit. Dan ayahmu?"
+          "speaker": "أَحْمَد",
+          "arabic": "وَعَلَيْكُمُ السَّلَامُ يَا عَلِيُّ. الْحَمْدُ لِلَّهِ، لَقَدْ قَضَيْتُ الصَّبَاحَ فِي الْبَحْرِ وَأَحْضَرْتُ صَيْدًا وَفِيْرًا.",
+          "latin": "Wa 'alaikumus salāmu yā 'Aliyyu. Al-ḥamdu lillāhi, laqad qaḍaituṣ ṣabāḥa fil baḥri wa aḥḍartu ṣaidan wafīrā.",
+          "translation": "Wa'alaikumussalam wahai Ali. Alhamdulillah, aku telah menghabiskan pagi hari di laut dan membawa pulang hasil tangkapan ikan yang melimpah (Nelayan)."
         },
         {
-          "speaker": "حَسَن",
-          "arabic": "أَبِي مُهَنْدِسٌ، يَبْنِي الْمَبَانِيَ وَالشَّوَارِعَ.",
-          "latin": "Abī muhandisun, yabnil mabāniya wasy syawāri'.",
-          "translation": "Ayahku seorang insinyur, membangun gedung dan jalan raya."
+          "speaker": "سَعِيْد",
+          "arabic": "مَا شَاءَ اللَّهُ، أَمَّا أَنَا فَقَدْ كُنْتُ مَشْغُوْلًا بِرِعَايَةِ الْمَوَاشِي وَضَمَانِ حُصُوْلِهَا عَلَى الْغِذَاءِ الْكَافِي.",
+          "latin": "Mā syā'allāhu, ammā anā faqad kuntu masygūlan bi-ri'āyatil mawāsyī wa ḍamāni ḥuṣūlihā 'alal gizā'il kāfī.",
+          "translation": "Masya Allah, adapun aku sibuk menggembalakan/merawat hewan ternak dan memastikan ketersediaan pakan yang cukup (Peternak)."
         },
         {
-          "speaker": "طَارِق",
-          "arabic": "وَمَاذَا تُرِيْدُ أَنْ تَكُوْنَ فِي الْمُسْتَقْبَلِ؟",
-          "latin": "Wa māżā turīdu an takūna fil mustaqbal?",
-          "translation": "Dan kamu ingin jadi apa di masa depan?"
+          "speaker": "خَالِد",
+          "arabic": "أَنْتُمْ تَبْذُلُوْنَ جُهْدًا كَبِيْرًا فِي أَعْمَالِكُمْ، وَأَنَا كَذَلِك أَقُوْمُ بِدَوْرِي فِي الْحِفَاظِ عَلَى الأَمْنِ وَالنِّظَامِ فِي الْمَدِيْنَةِ.",
+          "latin": "Antum tabżulūna juhdan kabīran fī a'mālikum, wa anā każālika aqūmu bi-daurī fil ḥifāẓi 'alal amni wan niẓāmi fil madīnah.",
+          "translation": "Kalian telah mencurahkan usaha yang besar dalam pekerjaan kalian, dan aku pun demikian menjalankan peranku menjaga keamanan dan ketertiban di kota (Polisi)."
         },
         {
-          "speaker": "حَسَن",
-          "arabic": "أُرِيْدُ أَنْ أَكُوْنَ مُدَرِّسًا لِأُعَلِّمَ الطُّلَّابَ.",
-          "latin": "Urīdu an akūna mudarrisan li-u'allimat ṭullāb.",
-          "translation": "Saya ingin menjadi guru untuk mengajar para siswa."
+          "speaker": "يُوْسُف",
+          "arabic": "صَحِيْحٌ، وَأَنَا كَذَلِكَ أَعْمَلُ عَلَى حِمَايَةِ الْوَطَنِ وَالدِّفَاعِ عَنْ شَعْبِنَا، فَخِدْمَةُ الْوَطَنِ مَسْؤُوْلِيَّةٌ عَظِيْمَةٌ.",
+          "latin": "Ṣaḥīḥun, wa anā każālika a'malu 'alā ḥimāyatil waṭani wad difā'i 'an sya'binā, fa-khidmatul waṭani mas'ūliyyatun 'aẓīmah.",
+          "translation": "Benar, dan aku pun bekerja melindungi tanah air dan membela rakyat kita, karena mengabdi pada negara adalah tanggung jawab yang agung (Tentara/TNI)."
         },
         {
-          "speaker": "طَارِق",
-          "arabic": "وَأَنَا أُرِيْدُ أَنْ أَكُوْنَ طَبِيْبًا مِثْلَ أَبِي.",
-          "latin": "Wa anā urīdu an akūna ṭabīban mitsla abī.",
-          "translation": "Dan saya ingin menjadi dokter seperti ayahku."
+          "speaker": "سَامِي",
+          "arabic": "أَنْتُمْ تَقُوْمُوْنَ بِأَعْمَالٍ كَرِيْمَةٍ. أَمَّا مِهْنَتِي مُحَامٍ أَتَطَلَّبُ الْعَدَالَةَ وَالدِّفَاعَ عَنْ حُقُوْقِ النَّاسِ.",
+          "latin": "Antum taqūmūna bi-a'mālin karīmah. Ammā mihnatī muḥāmin ataṭallabul 'adālata wad difā'a 'an ḥuqūqin nās.",
+          "translation": "Kalian menjalankan pekerjaan-pekerjaan yang mulia. Adapun profesiku adalah pengacara yang menuntut keadilan dan membela hak-hak masyarakat (Pengacara)."
+        },
+        {
+          "speaker": "عَلِي",
+          "arabic": "سُبْحَانَ اللَّهِ، كُلُّ مِهْنَةٍ لَهَا دَوْرُهَا الْمُهِمُّ فِي الْمُجْتَمَعِ. أَنَا كَفَلَّاحٍ أَزْرَعُ الرُّزَّ وَأُوَفِّرُ الْغِذَاءَ لِلنَّاسِ. وَأَحْمَدُ يَصِيْدُ لَنَا السَّمَكَ، وَسَعِيْدٌ يُرَبِّي الْمَوَاشِي لِنَحْصُلَ عَلَى اللُّحُوْمِ وَالْحَلِيْبِ. وَخَالِدٌ يَحْفَظُ عَلَى الأَمْنِ. وَيُوْسُفُ يَحْمِي الْوَطَنَ. وَسَامِي يُدَافِعُ عَنْ حُقُوْقِ النَّاسِ.",
+          "latin": "Subḥānallāhi, kullu mihnatin lahā dauruhal muhimmu fil mujtama'. Anā kafallāḥin azra'ur ruzza wa uwaffirul gizā'a lin nās. Wa Aḥmadu yaṣīdu lanās samak, wa Sa'īdun yurabbil mawāsyi li-naḥṣula 'alal luḥūmi wal ḥalīb. Wa Khālidun yaḥfaẓu 'alal amn. Wa Yūsufu yaḥmil waṭan. Wa Sāmī yudāfi'u 'an ḥuqūqin nās.",
+          "translation": "Subhanallah, setiap profesi memiliki peran pentingnya di masyarakat. Aku sebagai petani menanam padi dan menyediakan bahan pangan untuk masyarakat. Ahmad menangkap ikan untuk kita, Sa'id memelihara ternak agar kita mendapatkan daging dan susu. Khalid menjaga keamanan. Yusuf melindungi tanah air. Dan Sami membela hak-hak masyarakat (Petani)."
+        },
+        {
+          "speaker": "أَحْمَد",
+          "arabic": "نَعَمْ، إِذَا اجْتَهَدَ كُلُّ وَاحِدٍ مِنَّا فِي عَمَلِهِ، يُصْبِحُ الْمُجْتَمَعُ أَكْثَرَ ازْدِهَارًا وَاسْتِقْرَارًا.",
+          "latin": "Na'am, iżaj tahada kullu wāḥidin minnā fī 'amalih, yuṣbiḥul mujtama'u aksara izdihāran was tiqrārā.",
+          "translation": "Ya, jika setiap orang dari kita bersungguh-sungguh dalam pekerjaannya, masyarakat akan menjadi lebih makmur dan stabil."
+        },
+        {
+          "speaker": "سَعِيْد",
+          "arabic": "بَارَكَ اللَّهُ فِي جُهُوْدِنَا جَمِيْعًا، فَلْنَحْرِصْ عَلَى أَدَاءِ أَعْمَالِنَا بِأَمَانَةٍ وَإِخْلَاصٍ.",
+          "latin": "Bārakallāhu fī juhūdinā jamī'an, fal-naḥriṣ 'alā adā'i a'mālinā bi-amānatin wa ikhlāṣ.",
+          "translation": "Semoga Allah memberkahi semua usaha kita, mari kita bersemangat menjalankan pekerjaan kita dengan jujur dan ikhlas."
+        },
+        {
+          "speaker": "الْجَمِيْع",
+          "arabic": "آمِيْن يَا رَبَّ الْعَالَمِيْنَ.",
+          "latin": "Āmīn yā Rabbal 'ālamīn.",
+          "translation": "Aamiin ya Rabbal 'Alamin."
         }
       ]
     },
