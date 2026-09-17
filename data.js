@@ -1144,186 +1144,6 @@ const ARABIC_DATA = {
     },
     {
       "id": 501,
-      "topicId": "yaumiyyah",
-      "arabic": "الْحَيَاةُ الْيَوْمِيَّةُ",
-      "latin": "Al-Ḥayātul Yaumiyyah",
-      "indonesian": "Kehidupan Sehari-hari",
-      "type": "isim",
-      "example": "الْحَيَاةُ الْيَوْمِيَّةُ لِلْإِنْسَانِ مَلِيْئَةٌ بِالأَعْمَالِ"
-    },
-    {
-      "id": 502,
-      "topicId": "yaumiyyah",
-      "arabic": "يَسْتَيْقِظُ",
-      "latin": "Yastaiqiẓu",
-      "indonesian": "Bangun (Tidur)",
-      "type": "fiil",
-      "example": "يَسْتَيْقِظُ أَحْمَدُ فِي السَّاعَةِ الرَّابِعَةِ صَبَاحًا"
-    },
-    {
-      "id": 503,
-      "topicId": "yaumiyyah",
-      "arabic": "يَتَوَضَّأُ",
-      "latin": "Yatawaḍḍa'u",
-      "indonesian": "Berwudu",
-      "type": "fiil",
-      "example": "يَتَوَضَّأُ الطَّالِبُ لِصَلَاةِ الصُّبْحِ"
-    },
-    {
-      "id": 504,
-      "topicId": "yaumiyyah",
-      "arabic": "يُصَلِّي",
-      "latin": "Yuṣallī",
-      "indonesian": "Salat / Berdoa",
-      "type": "fiil",
-      "example": "يُصَلِّي عُمَرُ الصُّبْحَ جَمَاعَةً فِي الْمَسْجِدِ"
-    },
-    {
-      "id": 505,
-      "topicId": "yaumiyyah",
-      "arabic": "يَغْتَسِلُ",
-      "latin": "Yaghtasilu",
-      "indonesian": "Mandi",
-      "type": "fiil",
-      "example": "يَغْتَسِلُ الطَّالِبُ فِي الْحَمَّامِ قَبْلَ الذَّهَابِ"
-    },
-    {
-      "id": 506,
-      "topicId": "yaumiyyah",
-      "arabic": "يَرْتَدِي / يَلْبَسُ",
-      "latin": "Yartadī / Yalbasu",
-      "indonesian": "Memakai (Pakaian)",
-      "type": "fiil",
-      "example": "يَلْبَسُ زَيْدٌ زِيَّ الْمَدْرَسَةِ النَّظِيْفَ"
-    },
-    {
-      "id": 507,
-      "topicId": "yaumiyyah",
-      "arabic": "يَتَنَاوَلُ الْفَطُوْرَ",
-      "latin": "Yatanāwalul Faṭūra",
-      "indonesian": "Sarapan Pagi",
-      "type": "fiil",
-      "example": "يَتَنَاوَلُ الطَّالِبُ الْفَطُوْرَ مَعَ الأُسْرَةِ"
-    },
-    {
-      "id": 508,
-      "topicId": "yaumiyyah",
-      "arabic": "يَذْهَبُ",
-      "latin": "Yażhabu",
-      "indonesian": "Pergi",
-      "type": "fiil",
-      "example": "يَذْهَبُ عُثْمَانُ إِلَى الْمَدْرَسَةِ بِالْحَافِلَةِ"
-    },
-    {
-      "id": 509,
-      "topicId": "yaumiyyah",
-      "arabic": "يَرْجِعُ / يَعُوْدُ",
-      "latin": "Yarji'u / Ya'ūdu",
-      "indonesian": "Pulang / Kembali",
-      "type": "fiil",
-      "example": "يَرْجِعُ الطَّالِبُ مِنَ الْمَدْرَسَةِ فِي السَّاعَةِ الثَّانِيَةِ"
-    },
-    {
-      "id": 510,
-      "topicId": "yaumiyyah",
-      "arabic": "يَدْرُسُ / يَتَعَلَّمُ",
-      "latin": "Yadrusu / Yatā'allamu",
-      "indonesian": "Belajar",
-      "type": "fiil",
-      "example": "يَدْرُسُ الطُّلَّابُ اللُّغَةَ الْعَرَبِيَّةَ فِي الْفَصْلِ"
-    },
-    {
-      "id": 511,
-      "topicId": "yaumiyyah",
-      "arabic": "يَقْرَأُ",
-      "latin": "Yaqra'u",
-      "indonesian": "Membaca",
-      "type": "fiil",
-      "example": "يَقْرَأُ فَارُوْقٌ الْقُرْآنَ بَعْدَ صَلَاةِ الْمَغْرِبِ"
-    },
-    {
-      "id": 512,
-      "topicId": "yaumiyyah",
-      "arabic": "يَكْتُبُ الْوَاجِبَ الْمَنْزِلِيَّ",
-      "latin": "Yaktubul Wājibal Manziliyya",
-      "indonesian": "Menulis Pekerjaan Rumah (PR)",
-      "type": "fiil",
-      "example": "يَكْتُبُ الطَّالِبُ الْوَاجِبَ الْمَنْزِلِيَّ فِي الْغُرْفَةِ"
-    },
-    {
-      "id": 513,
-      "topicId": "yaumiyyah",
-      "arabic": "يُتَابِعُ / يُشَاهِدُ",
-      "latin": "Yutābi'u / Yusyāhidu",
-      "indonesian": "Menonton / Mengikuti",
-      "type": "fiil",
-      "example": "يُشَاهِدُ حَسَنٌ التِّلْفَازَ فِي غُرْفَةِ الْجُلُوْسِ"
-    },
-    {
-      "id": 514,
-      "topicId": "yaumiyyah",
-      "arabic": "يَنَامُ",
-      "latin": "Yanāmu",
-      "indonesian": "Tidur",
-      "type": "fiil",
-      "example": "يَنَامُ الطَّالِبُ مُبَكِّرًا فِي السَّاعَةِ التَّاسِعَةِ لَيْلًا"
-    },
-    {
-      "id": 515,
-      "topicId": "yaumiyyah",
-      "arabic": "يَسْتَرِيْحُ",
-      "latin": "Yastarīḥu",
-      "indonesian": "Beristirahat",
-      "type": "fiil",
-      "example": "يَسْتَرِيْحُ الطُّلَّابُ فِي فِنَاءِ الْمَدْرَسَةِ"
-    },
-    {
-      "id": 516,
-      "topicId": "yaumiyyah",
-      "arabic": "يُنَظِّفُ",
-      "latin": "Yunaẓẓifu",
-      "indonesian": "Membersihkan",
-      "type": "fiil",
-      "example": "يُنَظِّفُ عُمَرُ غُرْفَتَهُ كُلَّ صَبَاحٍ"
-    },
-    {
-      "id": 517,
-      "topicId": "yaumiyyah",
-      "arabic": "يُسَاعِدُ",
-      "latin": "Yusā'idu",
-      "indonesian": "Membantu",
-      "type": "fiil",
-      "example": "تُسَاعِدُ فَاطِمَةُ أُمَّهَا فِي الْمَطْبَخِ"
-    },
-    {
-      "id": 518,
-      "topicId": "yaumiyyah",
-      "arabic": "مُبَكِّرًا",
-      "latin": "Mubakkiran",
-      "indonesian": "Lebih Awal / Pagi-pagi",
-      "type": "harf",
-      "example": "يَصِلُ الطَّالِبُ إِلَى الْمَدْرَسَةِ مُبَكِّرًا"
-    },
-    {
-      "id": 519,
-      "topicId": "yaumiyyah",
-      "arabic": "مُتَأَخِّرًا",
-      "latin": "Muta'akhkhiran",
-      "indonesian": "Terlambat",
-      "type": "harf",
-      "example": "لَا تَنَمْ مُتَأَخِّرًا فِي اللَّيْلِ"
-    },
-    {
-      "id": 520,
-      "topicId": "yaumiyyah",
-      "arabic": "يَوْمِيًّا",
-      "latin": "Yaumiyyan",
-      "indonesian": "Setiap Hari / Harian",
-      "type": "harf",
-      "example": "نَقْرَأُ الْكُتُبَ يَوْمِيًّا لِزِيَادَةِ الْمَعْرِفَةِ"
-    },
-    {
-      "id": 501,
       "topicId": "mihnah",
       "arabic": "الْمِهْنَةُ ج الْمِهَنُ",
       "latin": "Al-Mihnah j. Al-Mihan",
@@ -1564,6 +1384,168 @@ const ARABIC_DATA = {
       "indonesian": "Tukang Bangunan",
       "type": "isim",
       "example": "يَبْنِي الْبَنَّاءُ الْجُدْرَانَ بِالْآجُرِّ"
+    },
+    {
+      "id": 601,
+      "topicId": "yaumiyyah",
+      "arabic": "أَقُوْمُ مِنَ النَّوْمِ",
+      "latin": "Aqūmu minan naum",
+      "indonesian": "Saya bangun tidur",
+      "type": "fiil",
+      "example": "أَقُوْمُ مِنَ النَّوْمِ فِي السَّاعَةِ الرَّابِعَةِ صَبَاحًا"
+    },
+    {
+      "id": 602,
+      "topicId": "yaumiyyah",
+      "arabic": "أُنَظِّفُ غُرْفَةَ النَّوْمِ",
+      "latin": "Unaẓẓifu gurfatan naum",
+      "indonesian": "Saya merapikan / membersihkan kamar tidur",
+      "type": "fiil",
+      "example": "أُنَظِّفُ غُرْفَةَ النَّوْمِ بَعْدَ الاِسْتِيْقَاظِ"
+    },
+    {
+      "id": 603,
+      "topicId": "yaumiyyah",
+      "arabic": "أَغْتَسِلُ فِي الْحَمَّامِ",
+      "latin": "Agtasilu fil ḥammām",
+      "indonesian": "Saya mandi di kamar mandi",
+      "type": "fiil",
+      "example": "أَغْتَسِلُ فِي الْحَمَّامِ بِالْمَاءِ وَالصَّابُوْنِ"
+    },
+    {
+      "id": 604,
+      "topicId": "yaumiyyah",
+      "arabic": "أُصَلِّي الصُّبْحَ فِي الْمَسْجِدِ",
+      "latin": "Uṣallīṣ ṣubḥa fil masjid",
+      "indonesian": "Saya shalat Subuh di masjid",
+      "type": "fiil",
+      "example": "أُصَلِّي الصُّبْحَ فِي الْمَسْجِدِ جَمَاعَةً"
+    },
+    {
+      "id": 605,
+      "topicId": "yaumiyyah",
+      "arabic": "أُسَاعِدُ أُمِّي فِي الْمَطْبَخِ",
+      "latin": "Usā'idu ummī fil maṭbakh",
+      "indonesian": "Saya membantu ibuku di dapur",
+      "type": "fiil",
+      "example": "أُسَاعِدُ أُمِّي فِي الْمَطْبَخِ لِإِعْدَادِ الْفَطُوْرِ"
+    },
+    {
+      "id": 606,
+      "topicId": "yaumiyyah",
+      "arabic": "أَتَنَاوَلُ الْفَطُوْرَ فِي غُرْفَةِ الطَّعَامِ",
+      "latin": "Atanāwalul faṭūra fī gurfatit ṭa'ām",
+      "indonesian": "Saya sarapan di ruang makan",
+      "type": "fiil",
+      "example": "أَتَنَاوَلُ الْفَطُوْرَ فِي غُرْفَةِ الطَّعَامِ مَعَ الأُسْرَةِ"
+    },
+    {
+      "id": 607,
+      "topicId": "yaumiyyah",
+      "arabic": "أُوَدِّعُ وَالِدَيَّ",
+      "latin": "Uwaddi'u wālidayya",
+      "indonesian": "Saya berpamitan kepada kedua orang tua saya",
+      "type": "fiil",
+      "example": "أُوَدِّعُ وَالِدَيَّ قَبْلَ الذَّهَابِ إِلَى الْمَدْرَسَةِ"
+    },
+    {
+      "id": 608,
+      "topicId": "yaumiyyah",
+      "arabic": "أَذْهَبُ إِلَى الْمَدْرَسَةِ",
+      "latin": "Ażhabu ilal madrasah",
+      "indonesian": "Saya berangkat ke sekolah",
+      "type": "fiil",
+      "example": "أَذْهَبُ إِلَى الْمَدْرَسَةِ فِي السَّاعَةِ السَّادِسَةِ وَالنِّصْفِ"
+    },
+    {
+      "id": 609,
+      "topicId": "yaumiyyah",
+      "arabic": "أَكْنُسُ الْفَصْلَ",
+      "latin": "Aknusul faṣla",
+      "indonesian": "Saya menyapu kelas",
+      "type": "fiil",
+      "example": "أَكْنُسُ الْفَصْلَ مَعَ أَصْدِقَائِي قَبْلَ الدِّرَاسَةِ"
+    },
+    {
+      "id": 610,
+      "topicId": "yaumiyyah",
+      "arabic": "أَسْتَمِعُ إِلَى شَرْحِ الْمُدَرِّسِ",
+      "latin": "Astami'u ilā syarḥil mudarris",
+      "indonesian": "Saya mendengarkan penjelasan guru",
+      "type": "fiil",
+      "example": "أَسْتَمِعُ إِلَى شَرْحِ الْمُدَرِّسِ بِاهْتِمَامٍ فِي الْفَصْلِ"
+    },
+    {
+      "id": 611,
+      "topicId": "yaumiyyah",
+      "arabic": "أَلْعَبُ مَعَ أَصْدِقَائِي فِي الْمَلْعَبِ",
+      "latin": "Al'abu ma'a aṣdiqā'ī fil mal'ab",
+      "indonesian": "Saya bermain bersama teman-temanku di lapangan",
+      "type": "fiil",
+      "example": "أَلْعَبُ كُرَةَ الْقَدَمِ مَعَ أَصْدِقَائِي فِي الْمَلْعَبِ"
+    },
+    {
+      "id": 612,
+      "topicId": "yaumiyyah",
+      "arabic": "أَرْجِعُ مِنَ الْمَدْرَسَةِ",
+      "latin": "Arji'u minal madrasah",
+      "indonesian": "Saya pulang dari sekolah",
+      "type": "fiil",
+      "example": "أَرْجِعُ مِنَ الْمَدْرَسَةِ فِي السَّاعَةِ الثَّانِيَةِ ظُهْرًا"
+    },
+    {
+      "id": 613,
+      "topicId": "yaumiyyah",
+      "arabic": "أَتَنَاوَلُ الْغَدَاءَ",
+      "latin": "Atanāwalul gadā'a",
+      "indonesian": "Saya makan siang",
+      "type": "fiil",
+      "example": "أَتَنَاوَلُ الْغَدَاءَ بَعْدَ الْعَوْدَةِ مِنَ الْمَدْرَسَةِ"
+    },
+    {
+      "id": 614,
+      "topicId": "yaumiyyah",
+      "arabic": "أَتَنَاوَلُ الْعَشَاءَ",
+      "latin": "Atanāwalul 'asyā'a",
+      "indonesian": "Saya makan malam",
+      "type": "fiil",
+      "example": "أَتَنَاوَلُ الْعَشَاءَ مَعَ أُسْرَتِي فِي السَّاعَةِ السَّابِعَةِ مَسَاءً"
+    },
+    {
+      "id": 615,
+      "topicId": "yaumiyyah",
+      "arabic": "أَقْرَأُ الْقُرْآنَ",
+      "latin": "Aqra'ul qur'ān",
+      "indonesian": "Saya membaca Al-Qur'an",
+      "type": "fiil",
+      "example": "أَقْرَأُ الْقُرْآنَ بَعْدَ صَلَاةِ الْمَغْرِبِ"
+    },
+    {
+      "id": 616,
+      "topicId": "yaumiyyah",
+      "arabic": "أُذَاكِرُ الدُّرُوْسَ فِي غُرْفَةِ الْمُذَاكَرَةِ",
+      "latin": "Użākirud durūsa fī gurfatil mużākarah",
+      "indonesian": "Saya mengulang pelajaran di ruang belajar",
+      "type": "fiil",
+      "example": "أُذَاكِرُ الدُّرُوْسَ وَأَكْتُبُ الْوَاجِبَ الْمَنْزِلِيَّ"
+    },
+    {
+      "id": 617,
+      "topicId": "yaumiyyah",
+      "arabic": "أُشَاهِدُ التِّلْفَازَ فِي غُرْفَةِ الْجُلُوْسِ",
+      "latin": "Usyāhidut tilfāza fī gurfatil julūs",
+      "indonesian": "Saya menonton TV di ruang keluarga/tamu",
+      "type": "fiil",
+      "example": "أُشَاهِدُ التِّلْفَازَ مَعَ إِخْوَتِي فِي غُرْفَةِ الْجُلُوْسِ"
+    },
+    {
+      "id": 618,
+      "topicId": "yaumiyyah",
+      "arabic": "أَنَامُ فِي غُرْفَةِ النَّوْمِ",
+      "latin": "Anāmu fī gurfatin naum",
+      "indonesian": "Saya tidur di kamar tidur",
+      "type": "fiil",
+      "example": "أَنَامُ فِي غُرْفَةِ النَّوْمِ فِي السَّاعَةِ التَّاسِعَةِ لَيْلًا"
     }
   ],
   "kalam": [
