@@ -5908,209 +5908,374 @@ const ARABIC_DATA = {
     ]
   },
   "qawaidBab6": {
-    "title": "القواعد والتركيب - الباب السادس (أدوات الاستفهام وظرف الزمان والمكان)",
-    "zharafZaman": {
-      "title": "١ - ظَرْفُ الزَّمَانِ (Keterangan Waktu)",
-      "desc": "Zharaf Zaman adalah isim yang menunjukkan waktu terjadinya perbuatan:",
-      "list": [
+    "title": "📐 Qawaid Bab 6: Bilangan Kardinal (1-100) & Bilangan Bertingkat / Jam",
+    "latinTitle": "Al-Arqaam (1-100) & Al-'Adad al-Tartibi (Wazan Al-Fa'il)",
+    "adadAshli": {
+      "title": "(١) الأَرْقَامُ - الْعَدَدُ وَالْمَعْدُوْدُ (Bilangan Kardinal / Angka Dasar 1-100)",
+      "desc": "Tabel angka Bahasa Arab (Al-Arqaam) dari 1 sampai 100:",
+      "tableHeaders": [
+        "الرَّقْمُ",
+        "الْعَدَدُ (1-10)",
+        "الرَّقْمُ",
+        "الْعَدَدُ (11-20)",
+        "الرَّقْمُ",
+        "الْعَدَدُ (21-100)"
+      ],
+      "numbers": [
         {
-          "arabic": "صَبَاحًا",
-          "meaning": "Pagi hari",
-          "example": "أَسْتَيْقِظُ فِي السَّاعَةِ الرَّابِعَةِ صَبَاحًا"
+          "num1": "١",
+          "ar1": "وَاحِدٌ",
+          "num2": "١١",
+          "ar2": "أَحَدَ عَشَرَ",
+          "num3": "٢١",
+          "ar3": "وَاحِدٌ وَعِشْرُوْنَ"
         },
         {
-          "arabic": "نَهَارًا",
-          "meaning": "Siang hari",
-          "example": "نَرْجِعُ مِنَ الْمَدْرَسَةِ نَهَارًا"
+          "num1": "٢",
+          "ar1": "إِثْنَانِ",
+          "num2": "١٢",
+          "ar2": "إِثْنَا عَشَرَ",
+          "num3": "٣٢",
+          "ar3": "إِثْنَانِ وَثَلَاثُوْنَ"
         },
         {
-          "arabic": "مَسَاءً",
-          "meaning": "Sore / Malam hari",
-          "example": "أُذَاكِرُ الدُّرُوْسَ مَسَاءً"
+          "num1": "٣",
+          "ar1": "ثَلَاثَةٌ",
+          "num2": "١٣",
+          "ar2": "ثَلَاثَةَ عَشَرَ",
+          "num3": "٤٣",
+          "ar3": "ثَلَاثَةٌ وَأَرْبَعُوْنَ"
         },
         {
-          "arabic": "لَيْلًا",
-          "meaning": "Malam hari",
-          "example": "أَنَامُ فِي السَّاعَةِ التَّاسِعَةِ لَيْلًا"
+          "num1": "٤",
+          "ar1": "أَرْبَعَةٌ",
+          "num2": "١٤",
+          "ar2": "أَرْبَعَةَ عَشَرَ",
+          "num3": "٥٤",
+          "ar3": "أَرْبَعَةٌ وَخَمْسُوْنَ"
         },
         {
-          "arabic": "قَبْلَ",
-          "meaning": "Sebelum",
-          "example": "أَتَوَضَّأُ قَبْلَ الصَّلَاةِ"
+          "num1": "٥",
+          "ar1": "خَمْسَةٌ",
+          "num2": "١٥",
+          "ar2": "خَمْسَةَ عَشَرَ",
+          "num3": "٥٥",
+          "ar3": "خَمْسَةٌ وَخَمْسُوْنَ"
         },
         {
-          "arabic": "بَعْدَ",
-          "meaning": "Setelah / Sesudah",
-          "example": "أَقْرَأُ الْقُرْآنَ بَعْدَ صَلَاةِ الْمَغْرِبِ"
+          "num1": "٦",
+          "ar1": "سِتَّةٌ",
+          "num2": "١٦",
+          "ar2": "سِتَّةَ عَشَرَ",
+          "num3": "٦٠",
+          "ar3": "سِتُّوْنَ"
+        },
+        {
+          "num1": "٧",
+          "ar1": "سَبْعَةٌ",
+          "num2": "١٧",
+          "ar2": "سَبْعَةَ عَشَرَ",
+          "num3": "٧٠",
+          "ar3": "سَبْعُوْنَ"
+        },
+        {
+          "num1": "٨",
+          "ar1": "ثَمَانِيَةٌ",
+          "num2": "١٨",
+          "ar2": "ثَمَانِيَةَ عَشَرَ",
+          "num3": "٨٠",
+          "ar3": "ثَمَانُوْنَ"
+        },
+        {
+          "num1": "٩",
+          "ar1": "تِسْعَةٌ",
+          "num2": "١٩",
+          "ar2": "تِسْعَةَ عَشَرَ",
+          "num3": "٩٠",
+          "ar3": "تِسْعُوْنَ"
+        },
+        {
+          "num1": "١٠",
+          "ar1": "عَشَرَةٌ",
+          "num2": "٢٠",
+          "ar2": "عِشْرُوْنَ",
+          "num3": "١٠٠",
+          "ar3": "مِائَةٌ"
         }
       ]
     },
-    "zharafMakan": {
-      "title": "٢ - ظَرْفُ الْمَكَانِ (Keterangan Tempat)",
-      "desc": "Zharaf Makan adalah isim yang menunjukkan tempat posisi terjadinya perbuatan:",
-      "list": [
+    "adadTartibi": {
+      "title": "(٢) الْعَدَدُ وَالْمَعْدُوْدُ وَالْعَدَدُ التَّرْتِيْبِيُّ (عَلَى وَزْنِ الْفَاعِل)",
+      "desc": "Bilangan Bertingkat / Urutan (Wazan Al-Fa'il / Menyebut Jam & Tingkatan) untuk Muzakkar dan Mu'annats:",
+      "tableHeaders": [
+        "الرَّقْمُ",
+        "الْعَدَدُ لِلْمُذَكَّرِ",
+        "الْمُذَكَّرُ (التَّرْتِيْبِيُّ)",
+        "الْعَدَدُ لِلْمُؤَنَّثِ",
+        "الْمُؤَنَّثُ (التَّرْتِيْبِيُّ)",
+        "Arti / Penggunaan"
+      ],
+      "rows": [
         {
-          "arabic": "أَمَامَ",
-          "meaning": "Di depan",
-          "example": "الْمُدَرِّسُ يَقِفُ أَمَامَ الْفَصْلِ"
+          "num": "١",
+          "cardMz": "وَاحِدٌ",
+          "ordMz": "الأَوَّلُ",
+          "cardMn": "وَاحِدَةٌ",
+          "ordMn": "الأُوْلَى",
+          "meaning": "Pertama / Ke-1"
         },
         {
-          "arabic": "خَلْفَ / وَرَاءَ",
-          "meaning": "Di belakang",
-          "example": "الْمَلْعَبُ وَرَاءَ الْمَدْرَسَةِ"
+          "num": "٢",
+          "cardMz": "إِثْنَانِ",
+          "ordMz": "الثَّانِي",
+          "cardMn": "إِثْنَتَانِ",
+          "ordMn": "الثَّانِيَةُ",
+          "meaning": "Kedua / Ke-2 (Jam 2)"
         },
         {
-          "arabic": "فَوْقَ",
-          "meaning": "Di atas (Menempel / Melayang)",
-          "example": "الْمِصْبَاحُ فَوْقَ الطَّاوِلَةِ"
+          "num": "٣",
+          "cardMz": "ثَلَاثَةٌ",
+          "ordMz": "الثَّالِثُ",
+          "cardMn": "ثَلَاثٌ",
+          "ordMn": "الثَّالِثَةُ",
+          "meaning": "Ketiga / Ke-3 (Jam 3)"
         },
         {
-          "arabic": "تَحْتَ",
-          "meaning": "Di bawah",
-          "example": "الْقِطُّ تَحْتَ السَّرِيْرِ"
+          "num": "٤",
+          "cardMz": "أَرْبَعَةٌ",
+          "ordMz": "الرَّابِعُ",
+          "cardMn": "أَرْبَعٌ",
+          "ordMn": "الرَّابِعَةُ",
+          "meaning": "Keempat / Ke-4 (Jam 4)"
         },
         {
-          "arabic": "جَانِبَ",
-          "meaning": "Di samping",
-          "example": "الْمَكْتَبَةُ جَانِبَ الْمَسْجِدِ"
+          "num": "٥",
+          "cardMz": "خَمْسَةٌ",
+          "ordMz": "الْخَامِسُ",
+          "cardMn": "خَمْسٌ",
+          "ordMn": "الْخَامِسَةُ",
+          "meaning": "Kelima / Ke-5 (Jam 5)"
         },
         {
-          "arabic": "بَيْنَ",
-          "meaning": "Di antara",
-          "example": "الْمُدَرِّسَةُ بَيْنَ الطَّالِبَاتِ"
+          "num": "٦",
+          "cardMz": "سِتَّةٌ",
+          "ordMz": "السَّادِسُ",
+          "cardMn": "سِتٌّ",
+          "ordMn": "السَّادِسَةُ",
+          "meaning": "Keenam / Ke-6 (Jam 6)"
+        },
+        {
+          "num": "٧",
+          "cardMz": "سَبْعَةٌ",
+          "ordMz": "السَّابِعُ",
+          "cardMn": "سَبْعٌ",
+          "ordMn": "السَّابِعَةُ",
+          "meaning": "Ketujuh / Ke-7 (Jam 7)"
+        },
+        {
+          "num": "٨",
+          "cardMz": "ثَمَانِيَةٌ",
+          "ordMz": "الثَّامِنُ",
+          "cardMn": "ثَمَانٍ",
+          "ordMn": "الثَّامِنَةُ",
+          "meaning": "Kedelapan / Ke-8 (Jam 8)"
+        },
+        {
+          "num": "٩",
+          "cardMz": "تِسْعَةٌ",
+          "ordMz": "التَّاسِعُ",
+          "cardMn": "تِسْعٌ",
+          "ordMn": "التَّاسِعَةُ",
+          "meaning": "Kesembilan / Ke-9 (Jam 9)"
+        },
+        {
+          "num": "١٠",
+          "cardMz": "عَشَرَةٌ",
+          "ordMz": "الْعَاشِرُ",
+          "cardMn": "عَشْرٌ",
+          "ordMn": "الْعَاشِرَةُ",
+          "meaning": "Kesepuluh / Ke-10 (Jam 10)"
+        },
+        {
+          "num": "١١",
+          "cardMz": "أَحَدَ عَشَرَ",
+          "ordMz": "الْحَادِيَ عَشَرَ",
+          "cardMn": "إِحْدَى عَشْرَةَ",
+          "ordMn": "الْحَادِيَةَ عَشْرَةَ",
+          "meaning": "Ke-11 (Jam 11)"
+        },
+        {
+          "num": "١٢",
+          "cardMz": "إِثْنَا عَشَرَ",
+          "ordMz": "الثَّانِيَ عَشَرَ",
+          "cardMn": "إِثْنَتَا عَشْرَةَ",
+          "ordMn": "الثَّانِيَةَ عَشْرَةَ",
+          "meaning": "Ke-12 (Jam 12)"
+        },
+        {
+          "num": "٢٠",
+          "cardMz": "عِشْرُوْنَ",
+          "ordMz": "الْعِشْرُوْنَ",
+          "cardMn": "عِشْرُوْنَ",
+          "ordMn": "الْعِشْرُوْنَ",
+          "meaning": "Ke-20"
+        },
+        {
+          "num": "٢١",
+          "cardMz": "وَاحِدٌ وَعِشْرُوْنَ",
+          "ordMz": "الْحَادِي وَالْعِشْرُوْنَ",
+          "cardMn": "إِحْدَى وَعِشْرُوْنَ",
+          "ordMn": "الْحَادِيَةُ وَالْعِشْرُوْنَ",
+          "meaning": "Ke-21"
+        },
+        {
+          "num": "٣٠",
+          "cardMz": "ثَلَاثُوْنَ",
+          "ordMz": "الثَّلَاثُوْنَ",
+          "cardMn": "ثَلَاثُوْنَ",
+          "ordMn": "الثَّلَاثُوْنَ",
+          "meaning": "Ke-30"
+        },
+        {
+          "num": "٤٠",
+          "cardMz": "أَرْبَعُوْنَ",
+          "ordMz": "الأَرْبَعُوْنَ",
+          "cardMn": "أَرْبَعُوْنَ",
+          "ordMn": "الأَرْبَعُوْنَ",
+          "meaning": "Ke-40"
         }
       ]
     },
     "questions": [
       {
         "id": 1,
-        "q": "مَا هُوَ 'ظَرْفُ الزَّمَانِ' فِي جُمْلَةِ: 'أَسْتَيْقِظُ فِي السَّاعَةِ الرَّابِعَةِ صَبَاحًا'؟",
-        "latinQ": "Manakah Zharaf Zaman dalam kalimat tersebut?",
+        "q": "مَا هُوَ الْعَدَدُ التَّرْتِيْبِيُّ لِلسَّاعَةِ (2) لِلْمُؤَنَّثِ؟",
+        "latinQ": "Apakah bentuk Bilangan Bertingkat untuk menyebut Jam 2 (perempuan)?",
         "options": [
-          "صَبَاحًا",
-          "أَسْتَيْقِظُ",
-          "السَّاعَةِ",
-          "فِي"
+          "السَّاعَةُ الثَّانِيَةُ",
+          "السَّاعَةُ الإِثْنَتَانِ",
+          "السَّاعَةُ الثَّانِي",
+          "السَّاعَةُ الإِثْنَانِ"
         ],
         "answer": 0,
-        "explanation": "صَبَاحًا adalah Zharaf Zaman yang menunjukkan waktu 'pagi hari'."
+        "explanation": "Untuk menyebut jam (mu'annats), menggunakan 'Adad Tartibi wazan Al-Fa'ilah: 'الثَّانِيَةُ'."
       },
       {
         "id": 2,
-        "q": "مَا هُوَ 'ظَرْفُ الْمَكَانِ' فِي جُمْلَةِ: 'الْمُدَرِّسُ يَقِفُ أَمَامَ الْفَصْلِ'؟",
-        "latinQ": "Manakah Zharaf Makan dalam kalimat tersebut?",
+        "q": "كَيْفَ نَقُوْلُ 'Jam 5 Tepat' فِي اللُّغَةِ الْعَرَبِيَّةِ؟",
+        "latinQ": "Bagaimana kita mengucapkan 'Jam 5 Tepat' dalam Bahasa Arab?",
         "options": [
-          "أَمَامَ",
-          "الْمُدَرِّسُ",
-          "يَقِفُ",
-          "الْفَصْلِ"
+          "السَّاعَةُ الْخَامِسَةُ تَمَامًا",
+          "السَّاعَةُ خَمْسَةٌ تَمَامًا",
+          "السَّاعَةُ الْخَامِسُ تَمَامًا",
+          "السَّاعَةُ خَمْسٌ تَمَامًا"
         ],
         "answer": 0,
-        "explanation": "أَمَامَ adalah Zharaf Makan yang berarti 'di depan'."
+        "explanation": "Pengucapan jam menggunakan 'Adad Tartibi mu'annats: 'السَّاعَةُ الْخَامِسَةُ تَمَامًا'."
       },
       {
         "id": 3,
-        "q": "أَكْمِلِ الْجُمْلَةَ: أُصَلِّي الصُّبْحَ _____ طُلُوْعِ الشَّمْسِ.",
-        "latinQ": "Lengkapi kalimat: Saya salat Subuh _____ terbitnya matahari.",
+        "q": "مَا هُوَ الْعَدَدُ التَّرْتِيْبِيُّ لِلْمُذَكَّرِ لِلرَّقْمِ (1)؟",
+        "latinQ": "Apakah bentuk 'Adad Tartibi (urutan/ke-1) untuk Muzakkar?",
         "options": [
-          "قَبْلَ",
-          "بَعْدَ",
-          "تحْتَ",
-          "خَلْفَ"
+          "الأَوَّلُ",
+          "الأُوْلَى",
+          "وَاحِدٌ",
+          "وَاحِدَةٌ"
         ],
         "answer": 0,
-        "explanation": "Salat Subuh dilaksanakan 'قَبْلَ' (sebelum) terbitnya matahari."
+        "explanation": "Untuk Muzakkar 'Ke-1' adalah 'الأَوَّلُ', sedangkan untuk Mu'annats adalah 'الأُوْلَى'."
       },
       {
         "id": 4,
-        "q": "مَا مَعْنَى 'خَلْفَ' أَوْ 'وَرَاءَ' فِي اللُّغَةِ الإِنْدُونِيسِيَّةِ؟",
-        "latinQ": "Apakah arti dari 'خَلْفَ' atau 'وَرَاءَ'?",
+        "q": "كَيْفَ نَقُوْلُ 'Jam 12 Tengah Malam' فِي اللُّغَةِ الْعَرَبِيَّةِ؟",
+        "latinQ": "Bagaimana menyebut 'Jam 12 Tengah Malam' dalam Bahasa Arab?",
         "options": [
-          "Di belakang",
-          "Di depan",
-          "Di atas",
-          "Di bawah"
+          "السَّاعَةُ الثَّانِيَةَ عَشْرَةَ جَوْفَ اللَّيْلِ",
+          "السَّاعَةُ إِثْنَا عَشَرَ لَيْلًا",
+          "السَّاعَةُ الثَّانِيَ عَشَرَ لَيْلًا",
+          "السَّاعَةُ عِشْرُوْنَ"
         ],
         "answer": 0,
-        "explanation": "'خَلْفَ' / 'وَرَاءَ' artinya di belakang."
+        "explanation": "Berdasarkan teks percakapan: 'السَّاعَةُ الثَّانِيَةَ عَشْرَةَ جَوْفَ اللَّيْلِ'."
       },
       {
         "id": 5,
-        "q": "أَكْمِلِ الْجُمْلَةَ: أَقْرَأُ الْقُرْآنَ _____ صَلَاةِ الْمَغْرِبِ.",
-        "latinQ": "Lengkapi kalimat: Saya membaca Al-Qur'an _____ salat Maghrib.",
+        "q": "مَا هُوَ الْعَدَدُ (11) لِلْمُذَكَّرِ فِي الأَرْقَامِ؟",
+        "latinQ": "Apakah sebutan angka 11 untuk Muzakkar?",
         "options": [
-          "بَعْدَ",
-          "تَحْتَ",
-          "فَوْقَ",
-          "أَمَامَ"
+          "أَحَدَ عَشَرَ",
+          "إِحْدَى عَشْرَةَ",
+          "وَاحِدَ عَشَرَ",
+          "إِثْنَا عَشَرَ"
         ],
         "answer": 0,
-        "explanation": "Kata yang tepat adalah 'بَعْدَ' (setelah)."
+        "explanation": "Angka 11 untuk Muzakkar adalah 'أَحَدَ عَشَرَ'."
       },
       {
         "id": 6,
-        "q": "مَا هِيَ أَدَاةُ الإِسْتِفْهَامِ الْمُنَاسِبَةُ لِلسُّؤَالِ عَنِ الزَّمَنِ (الوَقْتِ)؟",
-        "latinQ": "Apakah kata tanya yang tepat untuk menanyakan waktu?",
+        "q": "مَا هُوَ الْعَدَدُ (20) فِي اللُّغَةِ الْعَرَبِيَّةِ؟",
+        "latinQ": "Apakah sebutan angka 20 dalam Bahasa Arab?",
         "options": [
-          "مَتَى",
-          "أَيْنَ",
-          "كَمْ",
-          "مَنْ"
+          "عِشْرُوْنَ",
+          "عَشَرَةٌ",
+          "أَرْبَعُوْنَ",
+          "ثَلَاثُوْنَ"
         ],
         "answer": 0,
-        "explanation": "'مَتَى' (Kapan) digunakan untuk menanyakan waktu."
+        "explanation": "Angka 20 adalah 'عِشْرُوْنَ'."
       },
       {
         "id": 7,
-        "q": "مَا هِيَ أَدَاةُ الإِسْتِفْهَامِ الْمُنَاسِبَةُ لِلسُّؤَالِ عَنِ الْمَكَانِ؟",
-        "latinQ": "Apakah kata tanya yang tepat untuk menanyakan tempat?",
+        "q": "يَأْتِي 'الْعَدَدُ التَّرْتِيْبِيُّ' (Bilangan Bertingkat) عَلَى وَزْنِ:",
+        "latinQ": "Bilangan Bertingkat ('Adad Tartibi) mengikuti timbangan/wazan:",
         "options": [
-          "أَيْنَ",
-          "مَتَى",
-          "كَيْفَ",
-          "مَاذَا"
+          "الْفَاعِلُ (مثل: الأَوَّل، الثَّانِي، الثَّالِث...)",
+          "الْمَفْعُوْلُ",
+          "الْمَفْعَلُ",
+          "الْفِعْلُ"
         ],
         "answer": 0,
-        "explanation": "'أَيْنَ' (Di mana) digunakan untuk menanyakan tempat."
+        "explanation": "'Adad Tartibi disusun sesuai wazan Al-Fa'il (الْفَاعِل)."
       },
       {
         "id": 8,
-        "q": "تَرْجِمْ إِلَى الْعَرَبِيَّةِ: 'Perpustakaan ada di samping masjid'.",
-        "latinQ": "Terjemahkan ke Bahasa Arab: 'Perpustakaan ada di samping masjid'.",
+        "q": "كَيْفَ نَقُوْلُ 'Kelas X' (Kelas Ke-10) فِي اللُّغَةِ الْعَرَبِيَّةِ؟",
+        "latinQ": "Bagaimana mengucapkan 'Kelas X' (Kelas Kesepuluh) dalam Bahasa Arab?",
         "options": [
-          "الْمَكْتَبَةُ جَانِبَ الْمَسْجِدِ",
-          "الْمَكْتَبَةُ أَمَامَ الْمَسْجِدِ",
-          "الْمَكْتَبَةُ تَحْتَ الْمَسْجِدِ",
-          "الْمَكْتَبَةُ فَوْقَ الْمَسْجِدِ"
+          "الصَّفُّ الْعَاشِرُ",
+          "الصَّفُّ عَشَرَةٌ",
+          "الصَّفُّ الْعَاشِرَةُ",
+          "الصَّفُّ الأَوَّلُ"
         ],
         "answer": 0,
-        "explanation": "'Di samping' dalam Bahasa Arab adalah 'جَانِبَ'."
+        "explanation": "'الصَّفُّ' adalah Muzakkar, maka 'Ke-10' adalah 'الْعَاشِرُ' (الصَّفُّ الْعَاشِرُ)."
       },
       {
         "id": 9,
-        "q": "أَكْمِلِ الْجُمْلَةَ: الْقِطُّ يَنَامُ _____ السَّرِيْرِ.",
-        "latinQ": "Lengkapi kalimat: Kucing itu tidur _____ tempat tidur.",
+        "q": "كَيْفَ نَقُوْلُ 'Jam 6 Kurang Seperempat' فِي اللُّغَةِ الْعَرَبِيَّةِ؟",
+        "latinQ": "Bagaimana mengucapkan 'Jam 6 Kurang Seperempat'?",
         "options": [
-          "تَحْتَ",
-          "صَبَاحًا",
-          "مَسَاءً",
-          "مَتَى"
+          "السَّادِسَةُ إِلَّا الرُّبْعَ",
+          "السَّادِسَةُ وَالنِّصْفُ",
+          "السَّادِسَةُ وَالرُّبْعُ",
+          "الْخَامِسَةُ تَمَامًا"
         ],
         "answer": 0,
-        "explanation": "'تَحْتَ' (di bawah) adalah Zharaf Makan yang sesuai."
+        "explanation": "'إِلَّا الرُّبْعَ' berarti kurang seperempat (15 menit)."
       },
       {
         "id": 10,
-        "q": "تَرْجِمْ إِلَى الْعَرَبِيَّةِ: 'Kapan kamu pulang dari sekolah?'",
-        "latinQ": "Terjemahkan ke Bahasa Arab: 'Kapan kamu pulang dari sekolah?'",
+        "q": "مَا هُوَ الْعَدَدُ التَّرْتِيْبِيُّ لِلْمُؤَنَّثِ لِلرَّقْمِ (7)؟",
+        "latinQ": "Apakah bentuk 'Adad Tartibi (ke-7) untuk Mu'annats (seperti menyebut jam)?",
         "options": [
-          "مَتَى تَرْجِعُ مِنَ الْمَدْرَسَةِ؟",
-          "أَيْنَ تَرْجِعُ مِنَ الْمَدْرَسَةِ؟",
-          "كَيْفَ تَرْجِعُ مِنَ الْمَدْرَسَةِ؟",
-          "مَنْ تَرْجِعُ مِنَ الْمَدْرَسَةِ؟"
+          "السَّابِعَةُ",
+          "السَّابِعُ",
+          "سَبْعَةٌ",
+          "سَبْعٌ"
         ],
         "answer": 0,
-        "explanation": "Kata tanya 'Kapan' adalah 'مَتَى'."
+        "explanation": "Untuk Mu'annats 'Ke-7' adalah 'السَّابِعَةُ' (seperti: 'السَّاعَةُ السَّابِعَةُ')."
       }
     ]
   },

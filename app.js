@@ -1435,60 +1435,83 @@ function renderQawaidHTML() {
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
           <div>
             <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">
-              <span>📐 Qawaid Bab 6: Zharaf Zaman & Zharaf Makan</span>
-              <span class="font-arabic text-3xl text-amber-700">ظَرْفُ الزَّمَانِ وَالْمَكَانِ</span>
+              <span>📐 Qawaid Bab 6: Bilangan (1-100) & Bilangan Bertingkat / Jam</span>
+              <span class="font-arabic text-3xl text-amber-700">الأَرْقَامُ وَالْعَدَدُ التَّرْتِيْبِيُّ</span>
             </h2>
-            <p class="text-slate-600 text-sm mt-1">Keterangan Waktu (Zharaf Zaman) dan Keterangan Tempat (Zharaf Makan) dalam Bahasa Arab.</p>
+            <p class="text-slate-600 text-sm mt-1">Struktur Bilangan Kardinal (Al-Arqaam 1-100) dan Bilangan Bertingkat / Jam (Wazan Al-Fa'il).</p>
           </div>
         </div>
 
         <div class="space-y-8">
+          <!-- SECTION 1: ADAD ASHLI (1-100) -->
           <div class="card-soft p-6 sm:p-8 space-y-6">
-            <h3 class="text-xl font-bold text-amber-900">${q6.zharafZaman.title}</h3>
-            <p class="text-sm text-slate-600">${q6.zharafZaman.desc}</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              ${q6.zharafZaman.list.map(h => `
-                <div class="p-4 bg-amber-50 rounded-2xl border border-amber-200 space-y-2">
-                  <div class="flex items-center justify-between">
-                    <span class="font-arabic text-2xl font-bold text-amber-900">${h.arabic}</span>
-                    <span class="px-3 py-1 bg-amber-200 text-amber-950 font-bold text-xs rounded-full">${h.meaning}</span>
-                  </div>
-                  <div class="bg-white p-2.5 rounded-xl border border-amber-100 flex items-center justify-between">
-                    <span class="font-arabic text-lg font-bold text-slate-800">${h.example}</span>
-                    <button onclick="speakArabic('${h.example}', this)" class="text-xs text-amber-700">🔊</button>
-                  </div>
-                </div>
-              `).join('')}
+            <h3 class="text-xl font-bold text-amber-900">${q6.adadAshli.title}</h3>
+            <p class="text-sm text-slate-600">${q6.adadAshli.desc}</p>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse min-w-[600px]">
+                <thead>
+                  <tr class="bg-amber-100 text-amber-950 text-xs font-bold uppercase">
+                    ${q6.adadAshli.tableHeaders.map(h => `<th class="p-3 text-center font-arabic text-base">${h}</th>`).join('')}
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 text-sm">
+                  ${q6.adadAshli.numbers.map(row => `
+                    <tr class="hover:bg-amber-50 transition-colors">
+                      <td class="p-3 text-center font-bold text-slate-600 bg-slate-50">${row.num1}</td>
+                      <td class="p-3 text-center font-arabic text-xl font-bold text-amber-900">${row.ar1}</td>
+                      <td class="p-3 text-center font-bold text-slate-600 bg-slate-50">${row.num2}</td>
+                      <td class="p-3 text-center font-arabic text-xl font-bold text-teal-800">${row.ar2}</td>
+                      <td class="p-3 text-center font-bold text-slate-600 bg-slate-50">${row.num3}</td>
+                      <td class="p-3 text-center font-arabic text-xl font-bold text-rose-800">${row.ar3}</td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
             </div>
           </div>
 
+          <!-- SECTION 2: ADAD TARTIBI (WAZAN AL-FA'IL) -->
           <div class="card-soft p-6 sm:p-8 space-y-6">
-            <h3 class="text-xl font-bold text-amber-900">${q6.zharafMakan.title}</h3>
-            <p class="text-sm text-slate-600">${q6.zharafMakan.desc}</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              ${q6.zharafMakan.list.map(h => `
-                <div class="p-4 bg-amber-50 rounded-2xl border border-amber-200 space-y-2">
-                  <div class="flex items-center justify-between">
-                    <span class="font-arabic text-2xl font-bold text-amber-900">${h.arabic}</span>
-                    <span class="px-3 py-1 bg-amber-200 text-amber-950 font-bold text-xs rounded-full">${h.meaning}</span>
-                  </div>
-                  <div class="bg-white p-2.5 rounded-xl border border-amber-100 flex items-center justify-between">
-                    <span class="font-arabic text-lg font-bold text-slate-800">${h.example}</span>
-                    <button onclick="speakArabic('${h.example}', this)" class="text-xs text-amber-700">🔊</button>
-                  </div>
-                </div>
-              `).join('')}
+            <h3 class="text-xl font-bold text-amber-900">${q6.adadTartibi.title}</h3>
+            <p class="text-sm text-slate-600">${q6.adadTartibi.desc}</p>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse min-w-[650px]">
+                <thead>
+                  <tr class="bg-amber-100 text-amber-950 text-xs font-bold uppercase">
+                    ${q6.adadTartibi.tableHeaders.map(h => `<th class="p-3 text-center font-arabic text-base">${h}</th>`).join('')}
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 text-sm">
+                  ${q6.adadTartibi.rows.map(row => `
+                    <tr class="hover:bg-amber-50 transition-colors">
+                      <td class="p-3 text-center font-bold text-slate-600 bg-slate-50">${row.num}</td>
+                      <td class="p-3 text-center font-arabic text-lg font-semibold text-slate-700">${row.cardMz}</td>
+                      <td class="p-3 text-center font-arabic text-xl font-bold text-blue-800 bg-blue-50/50 rounded-lg">${row.ordMz}</td>
+                      <td class="p-3 text-center font-arabic text-lg font-semibold text-slate-700">${row.cardMn}</td>
+                      <td class="p-3 text-center font-arabic text-xl font-bold text-purple-800 bg-purple-50/50 rounded-lg">${row.ordMn}</td>
+                      <td class="p-3 text-center font-bold text-slate-800">${row.meaning}</td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
             </div>
           </div>
 
+          <!-- SECTION 3: 10 SOAL LATIHAN QAWAID BAB 6 -->
           <div class="card-soft p-6 sm:p-8 space-y-6">
-            <h3 class="text-xl font-bold text-amber-900">📝 Latihan 10 Soal Qawaid Bab 6</h3>
+            <div class="flex items-center justify-between pb-2 border-b border-amber-200/60">
+              <h3 class="text-xl font-bold text-amber-900">📝 Latihan 10 Soal Qawaid Bab 6</h3>
+              <span class="text-xs font-bold text-amber-700 bg-amber-100 px-3 py-1 rounded-full">Soal Pilihan Ganda</span>
+            </div>
             <div class="space-y-6">
               ${questions6.map((q, qIdx) => `
                 <div class="p-5 bg-amber-50/50 rounded-2xl border border-amber-100 space-y-4">
                   <div class="flex items-start gap-3">
                     <span class="w-7 h-7 rounded-full bg-amber-200 text-amber-900 font-bold text-xs flex items-center justify-center flex-shrink-0 mt-1">${qIdx + 1}</span>
-                    <h4 class="font-arabic text-2xl font-bold text-slate-800 leading-[2.4] pt-1">${q.q}</h4>
+                    <div>
+                      <h4 class="font-arabic text-2xl font-bold text-slate-800 leading-[2.4] pt-1">${q.q}</h4>
+                      <p class="text-xs text-slate-500 italic">${q.latinQ}</p>
+                    </div>
                   </div>
                   <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                     ${q.options.map((opt, optIdx) => `
