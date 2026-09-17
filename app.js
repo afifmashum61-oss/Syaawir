@@ -1414,13 +1414,13 @@ function renderQawaidHTML() {
           <span>Bab 3</span>
         </button>
         <button onclick="switchQawaidBab(4)" class="flex-1 sm:flex-none px-3 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 whitespace-nowrap ${state.qawaidBab === 4 ? 'bg-gradient-to-r from-amber-600 to-yellow-600 text-white shadow-md ring-2 ring-amber-400/50' : 'bg-slate-800 hover:bg-slate-700 text-slate-300'}">
-          <span>Bab 4 (Genap)</span>
+          <span>Bab 4</span>
         </button>
         <button onclick="switchQawaidBab(5)" class="flex-1 sm:flex-none px-3 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 whitespace-nowrap ${state.qawaidBab === 5 ? 'bg-gradient-to-r from-amber-600 to-yellow-600 text-white shadow-md ring-2 ring-amber-400/50' : 'bg-slate-800 hover:bg-slate-700 text-slate-300'}">
-          <span>Bab 5 (Genap)</span>
+          <span>Bab 5</span>
         </button>
         <button onclick="switchQawaidBab(6)" class="flex-1 sm:flex-none px-3 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 whitespace-nowrap ${state.qawaidBab === 6 ? 'bg-gradient-to-r from-amber-600 to-yellow-600 text-white shadow-md ring-2 ring-amber-400/50' : 'bg-slate-800 hover:bg-slate-700 text-slate-300'}">
-          <span>Bab 6 (Genap)</span>
+          <span>Bab 6</span>
         </button>
       </div>
     </div>
