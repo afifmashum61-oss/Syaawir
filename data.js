@@ -1993,50 +1993,6 @@ const ARABIC_DATA = {
       ]
     },
     {
-      "id": "dialog8",
-      "title": "الكلام (٢) - البَابُ الرَّابِعُ : مَعْرِضُ الْهِوَايَاتِ",
-      "latinTitle": "Bab 4 - Percakapan 2: Pameran Hobi (Khalil & Ahmad)",
-      "topicId": "hiwayah",
-      "lines": [
-        {
-          "speaker": "خَلِيْل",
-          "arabic": "هَلْ زُرْتَ مَعْرِضَ الْهِوَايَاتِ؟",
-          "latin": "Hal zurta ma'riḍal hiwāyāt?",
-          "translation": "Apakah kamu sudah mengunjungi pameran hobi?"
-        },
-        {
-          "speaker": "أَحْمَد",
-          "arabic": "نَعَمْ، زُرْتُهُ بِالأَمْسِ. كَانَ جَمِيْلًا جِدًّا.",
-          "latin": "Na'am, zurtuhū bil-ams. Kāna jamīlan jiddā.",
-          "translation": "Ya, saya mengunjunginya kemarin. Pameran itu sangat indah."
-        },
-        {
-          "speaker": "خَلِيْل",
-          "arabic": "مَاذَا شَاهَدْتَ فِي الْمَعْرِضِ؟",
-          "latin": "Māżā syāhadta fil ma'riḍ?",
-          "translation": "Apa yang kamu lihat di pameran?"
-        },
-        {
-          "speaker": "أَحْمَد",
-          "arabic": "شَاهَدْتُ الطَّوَابِعَ الْمُخْتَلِفَةَ وَالرَّسْمَ وَالْكُتُبَ.",
-          "latin": "Syāhadtuṭ ṭawābi'al mukhtalifata war rasma wal kutub.",
-          "translation": "Saya melihat aneka perangko, lukisan, dan buku-buku."
-        },
-        {
-          "speaker": "خَلِيْل",
-          "arabic": "هَلْ فِيهِ جُنَاحٌ لِلْخَطِّ الْعَرَبِيِّ؟",
-          "latin": "Hal fīhi junāḥun lil khaṭṭil 'arabiyy?",
-          "translation": "Apakah di sana ada stan Seni Kaligrafi Arab?"
-        },
-        {
-          "speaker": "أَحْمَد",
-          "arabic": "نَعَمْ، وَفِيْهِ لَوْحَاتٌ رَائِعَةٌ بِالْخَطِّ الْعَرَبِيِّ.",
-          "latin": "Na'am, wa fīhi lauḥātun rā'i'atun bil khaṭṭil 'arabiyy.",
-          "translation": "Ya, dan di sana terdapat lukisan kaligrafi Arab yang mengagumkan."
-        }
-      ]
-    },
-    {
       "id": "dialog9",
       "title": "الكلام (١) - البَابُ الْخَامِسُ : الْمِهْنَةُ وَالأَمَلُ",
       "latinTitle": "Bab 5 - Percakapan 1: Profesi & Cita-cita (Hasan & Tariq)",
@@ -2203,6 +2159,300 @@ const ARABIC_DATA = {
           "arabic": "أَنَامُ ثَمَانِيَ سَاعَاتٍ، أَنَامُ فِي السَّاعَةِ التَّاسِعَةِ.",
           "latin": "Anāmu tsamāniya sā'ātin, anāmu fis sā'atit tāsi'ah.",
           "translation": "Saya tidur 8 jam, saya tidur pada jam sembilan."
+        }
+      ]
+    },
+    {
+      "id": "dialog7",
+      "title": "الكلام (١) - البَابُ الرَّابِعُ : الْحِوَارُ الأَوَّلُ (رِضْوَان وَشُكُوْر)",
+      "latinTitle": "Bab 4 - Percakapan 1: Hobi Membaca & Olahraga (Ridhwan & Syukur)",
+      "topicId": "hiwayah",
+      "lines": [
+        {
+          "speaker": "رِضْوَان",
+          "arabic": "مَا هِوَايَتُكَ يَا أَخِيْ؟",
+          "latin": "Mā hiwāyatuka yā akhī?",
+          "translation": "Apa hobimu wahai saudaraku?"
+        },
+        {
+          "speaker": "شُكُوْر",
+          "arabic": "هِوَايَتِيْ قِرَاءَةٌ وَرَسْمٌ.",
+          "latin": "Hiwāyatī qirā'atun wa rasmun.",
+          "translation": "Hobiku adalah membaca dan melukis."
+        },
+        {
+          "speaker": "رِضْوَان",
+          "arabic": "مَا هِوَايَتُكَ الْمُفَضَّلَةُ؟",
+          "latin": "Mā hiwāyatukal mufaḍḍalah?",
+          "translation": "Apa hobi favoritmu?"
+        },
+        {
+          "speaker": "شُكُوْر",
+          "arabic": "أُفَضِّلُ الْقِرَاءَةَ.",
+          "latin": "Ufaḍḍilul qirā'ah.",
+          "translation": "Saya paling menyukai membaca."
+        },
+        {
+          "speaker": "رِضْوَان",
+          "arabic": "أَيَّ كِتَابٍ تُحِبُّ أَنْ تَقْرَأَ؟",
+          "latin": "Ayya kitābin tuḥibbu an taqra'a?",
+          "translation": "Buku apa yang paling kamu suka baca?"
+        },
+        {
+          "speaker": "شُكُوْر",
+          "arabic": "أُحِبُّ كُتُبَ التَّارِيْخِ وَالْقِصَّةِ.",
+          "latin": "Uḥibbu kutubat tārīkhi wal qiṣṣah.",
+          "translation": "Saya menyukai buku-buku sejarah dan novel/cerita."
+        },
+        {
+          "speaker": "رِضْوَان",
+          "arabic": "مَتَى تَقْرَأُ الْكُتُبَ؟",
+          "latin": "Matā taqra'ul kutuba?",
+          "translation": "Kapan kamu membaca buku-buku tersebut?"
+        },
+        {
+          "speaker": "شُكُوْر",
+          "arabic": "فِي أَوْقَاتِ الْفَرَاعِ. أَعْرِفُ مِنْهَا قِصَصًا عَجِيْبَةً.",
+          "latin": "Fī auqātil farāg. A'rifu minhā qiṣaṣan 'ajībah.",
+          "translation": "Di waktu-waktu luang. Saya mengetahui darinya cerita-cerita yang menakjubkan."
+        },
+        {
+          "speaker": "رِضْوَان",
+          "arabic": "الْقِرَاءَةُ هِوَايَةٌ مُفِيْدَةٌ جِدًّا.",
+          "latin": "Al-Qirā'atu hiwāyatun mufīdatun jiddā.",
+          "translation": "Membaca adalah hobi yang sangat bermanfaat."
+        },
+        {
+          "speaker": "شُكُوْر",
+          "arabic": "وَأَنْتَ يَا رِضْوَانُ، مَا هِوَايَتُكَ؟",
+          "latin": "Wa anta yā Riḍwānu, mā hiwāyatuk?",
+          "translation": "Dan kamu wahai Ridhwan, apa hobimu?"
+        },
+        {
+          "speaker": "رِضْوَان",
+          "arabic": "هِوَايَتِيْ رِيَاضَةٌ وَرِحْلَةٌ.",
+          "latin": "Hiwāyatī riyāḍatun wa riḥlah.",
+          "translation": "Hobiku adalah berolahraga dan traveling/bepergian."
+        },
+        {
+          "speaker": "شُكُوْر",
+          "arabic": "أَيَّ رِيَاضَةٍ تُفَضِّـلُ؟",
+          "latin": "Ayya riyāḍatin tufaḍḍilu?",
+          "translation": "Olahraga apa yang paling kamu sukai?"
+        },
+        {
+          "speaker": "رِضْوَان",
+          "arabic": "أُفَضِّـلُ تَنِسَ الطَّاوِلَةِ.",
+          "latin": "Ufaḍḍilu tanisat ṭāwilah.",
+          "translation": "Saya paling menyukai tenis meja."
+        },
+        {
+          "speaker": "شُكُوْر",
+          "arabic": "مَتَى تُمَارِسُ الرِّيَاضَةَ؟",
+          "latin": "Matā tumārisur riyāḍata?",
+          "translation": "Kapan kamu berlatih olahraga?"
+        },
+        {
+          "speaker": "رِضْوَان",
+          "arabic": "أُمَارِسُ الرِّيَاضَةَ يَوْمَ السَّبْتِ وَالثَّلَاثَاءِ، مَرَّتَيْنِ فِي الأُسْبُوْعِ.",
+          "latin": "Umārisur riyāḍata yaumas sabti wat tsulātsā'i, marrataini fil usbū'.",
+          "translation": "Saya berlatih olahraga pada hari Sabtu dan Selasa, dua kali dalam seminggu."
+        },
+        {
+          "speaker": "شُكُوْر",
+          "arabic": "الرِّيَاضَةُ هِوَايَةٌ مُفِيْدَةٌ أَيْضًا.",
+          "latin": "Ar-Riyāḍatu hiwāyatun mufīdatun aiḍā.",
+          "translation": "Olahraga adalah hobi yang bermanfaat juga."
+        },
+        {
+          "speaker": "رِضْوَان",
+          "arabic": "طَبْعًا، أَشْتَرِكُ فِي جَمْعِيَّةِ الرِّيَاضَةِ.",
+          "latin": "Ṭab'an, asytariku fī jam'iyyatir riyāḍah.",
+          "translation": "Tentu saja, saya bergabung dalam klub/ekstrakurikuler olahraga."
+        }
+      ]
+    },
+    {
+      "id": "dialog8",
+      "title": "الكلام (٢) - البَابُ الرَّابِعُ : الْحِوَارُ الثَّانِي (سَنِيَّة وَشَافِيَة)",
+      "latinTitle": "Bab 4 - Percakapan 2: Jurnalistik & Memasak (Saniyyah & Syafiyah)",
+      "topicId": "hiwayah",
+      "lines": [
+        {
+          "speaker": "سَنِيَّة",
+          "arabic": "مَا هِوَايَتُكِ يَا أُخْتِيْ؟",
+          "latin": "Mā hiwāyatuki yā ukhtī?",
+          "translation": "Apa hobimu wahai saudariku?"
+        },
+        {
+          "speaker": "شَافِيَة",
+          "arabic": "هِوَايَتِيْ صَحَافَةٌ وَفُتُوْغْرَافِيَا.",
+          "latin": "Hiwāyatī ṣaḥāfatun wa futūgrāfiyā.",
+          "translation": "Hobiku adalah jurnalistik dan fotografi."
+        },
+        {
+          "speaker": "سَنِيَّة",
+          "arabic": "هَلْ فِي الْمَدْرَسَةِ أَنْشِطَةٌ لَامَنَهَجِيَّةٌ فِي الصَّحَافَةِ؟",
+          "latin": "Hal fil madrasati ansyitaṭun lāmanhajiyyatun fiṣ ṣaḥāfah?",
+          "translation": "Apakah di sekolah ada kegiatan ekstrakurikuler jurnalistik?"
+        },
+        {
+          "speaker": "شَافِيَة",
+          "arabic": "نَعَمْ، وَأَشْتَرِكُ فِي جَمْعِيَّةِ الصَّحَافَةِ وَفُتُوْغْرَافِيَا.",
+          "latin": "Na'am, wa asytariku fī jam'iyyatiṣ ṣaḥāfati wa futūgrāfiyā.",
+          "translation": "Ya, dan saya bergabung dalam klub jurnalistik dan fotografi."
+        },
+        {
+          "speaker": "سَنِيَّة",
+          "arabic": "مَتَى تُمَارِسِيْنَ الصَّحَافَةَ؟",
+          "latin": "Matā tumārisīnaṣ ṣaḥāfah?",
+          "translation": "Kapan kamu berlatih jurnalistik?"
+        },
+        {
+          "speaker": "شَافِيَة",
+          "arabic": "فِي يَوْمِ الإِثْنَيْنِ وَالْخَمِيْسِ بَعْدَ الدِّرَاسَةِ.",
+          "latin": "Fī yaumil itsnaini wal khamīsi ba'dad dirāsah.",
+          "translation": "Pada hari Senin dan Kamis setelah jam pelajaran."
+        },
+        {
+          "speaker": "سَنِيَّة",
+          "arabic": "أَيَّ الأَخْبَارِ تَكْتُبِيْنَ؟",
+          "latin": "Ayyal akhbāri taktubīna?",
+          "translation": "Berita apa yang kamu tulis?"
+        },
+        {
+          "speaker": "شَافِيَة",
+          "arabic": "أَكْتُبُ الأَخْبَارَ عَنْ مَدْرَسَتِنَا.",
+          "latin": "Aktubul akhbāra 'an madrasatinā.",
+          "translation": "Saya menulis berita tentang sekolah kami."
+        },
+        {
+          "speaker": "سَنِيَّة",
+          "arabic": "إِلَى أَيْن تُرْسِلِيْنَ هَذِهِ الأَخْبَارَ؟",
+          "latin": "Ilā aina tursilīna hāżihil akhbār?",
+          "translation": "Ke mana kamu mengirimkan berita-berita ini?"
+        },
+        {
+          "speaker": "شَافِيَة",
+          "arabic": "أُرْسِلُهَا وَأَحْمِلُهَا إِلَى الشَّبَكَةِ الدَّوْلِيَّةِ عَبْرَ حِسَابِ الْمَدْرَسَةِ.",
+          "latin": "Ursiluhā wa aḥmiluhā ilaṣ syabakatil dauliyyati 'abra ḥisābil madrasah.",
+          "translation": "Saya mengirim dan mengunggahnya ke internet via akun resmi sekolah."
+        },
+        {
+          "speaker": "سَنِيَّة",
+          "arabic": "الصَّحَافَةُ جَذَّابَةٌ.",
+          "latin": "Aṣ-Ṣaḥāfatu jażżābah.",
+          "translation": "Jurnalistik itu sangat menarik."
+        },
+        {
+          "speaker": "شَافِيَة",
+          "arabic": "وَأَنْتِ يَا سَنِيَّةُ، مَا هِوَايَتُكِ؟",
+          "latin": "Wa anti yā Saniyyatu, mā hiwāyatuk?",
+          "translation": "Dan kamu wahai Saniyyah, apa hobimu?"
+        },
+        {
+          "speaker": "سَنِيَّة",
+          "arabic": "هِوَايَتِيْ طَبْخٌ. وَأَشْتَرِكُ جَمْعِيَّةَ الطَّبْخِ.",
+          "latin": "Hiwāyatī ṭabkh. Wa asytariku fī jam'iyyatiṭ ṭabkh.",
+          "translation": "Hobiku adalah memasak. Dan saya bergabung dalam klub memasak."
+        },
+        {
+          "speaker": "شَافِيَة",
+          "arabic": "مَتَى تُمَارِسِيْنَ الطَّبْخَ؟",
+          "latin": "Matā tumārisīnaṭ ṭabkh?",
+          "translation": "Kapan kamu berlatih memasak?"
+        },
+        {
+          "speaker": "سَنِيَّة",
+          "arabic": "يَوْمَ الثَّلَاثَاءِ بَعْدَ الدِّرَاسَةِ.",
+          "latin": "Yaumat tsulātsā'i ba'dad dirāsah.",
+          "translation": "Hari Selasa setelah jam pelajaran."
+        },
+        {
+          "speaker": "شَافِيَة",
+          "arabic": "مَاذَا نَسْتَفِيْدُ مِنْ أَنْشِطَةٍ طَبْخِيَّةٍ؟",
+          "latin": "Māżā nastafīdu min ansyitaṭin ṭabkhiyyah?",
+          "translation": "Apa manfaat yang kita dapatkan dari kegiatan memasak?"
+        },
+        {
+          "speaker": "سَنِيَّة",
+          "arabic": "نَعْرِفُ أَنْوَاعَ الطَّعَامِ وَكَيْفِيَّةَ طَبْخِهَا الصِّحِّيَّةَ وَتَقْدِيْمِهَا الرَّائَعَةَ.",
+          "latin": "Na'rifu anwā'aṭ ṭa'āmi wa kaifiyyata ṭabkhihāṣ ṣiḥḥiyyata wa taqdīmihār rā'i'ah.",
+          "translation": "Kita mengetahui aneka ragam makanan, cara memasak yang sehat, dan penyajiannya yang indah."
+        },
+        {
+          "speaker": "شَافِيَة",
+          "arabic": "أَنْشِطَةٌ طَبْخِيَّةٌ نَافِعَةٌ وَمُمْتِعَةٌ.",
+          "latin": "Ansyitaṭun ṭabkhiyyatun nāfi'atun wa mumti'ah.",
+          "translation": "Kegiatan memasak itu sangat bermanfaat dan menyenangkan."
+        }
+      ]
+    },
+    {
+      "id": "dialog13",
+      "title": "الكلام (٣) - البَابُ الرَّابِعُ : الْحِوَارُ الثَّالِثُ (حِلْمِي وَفِكْرِي)",
+      "latinTitle": "Bab 4 - Percakapan 3: Seni Kaligrafi Arab (Hilmi & Fikri)",
+      "topicId": "hiwayah",
+      "lines": [
+        {
+          "speaker": "حِلْمِي",
+          "arabic": "هَذَا الْخَطُّ رَائِعٌ. هَلْ هَذِهِ لَوْحَتُكَ؟",
+          "latin": "Hāżal khaṭṭu rā'i'. Hal hāżihī lauḥatuk?",
+          "translation": "Kaligrafi ini sangat indah. Apakah ini lukisanmu?"
+        },
+        {
+          "speaker": "فِكْرِي",
+          "arabic": "نَعَمْ، هَذَا خَطُّ الرُّقْعَةِ.",
+          "latin": "Na'am, hāżā khaṭṭur ruq'ah.",
+          "translation": "Ya, ini kaligrafi gaya Riq'ah."
+        },
+        {
+          "speaker": "حِلْمِي",
+          "arabic": "هَلْ هِوَايَتُكَ خَطٌّ عَرَبِيٌّ؟",
+          "latin": "Hal hiwāyatuka khaṭṭun 'arabiyy?",
+          "translation": "Apakah hobimu kaligrafi Arab?"
+        },
+        {
+          "speaker": "فِكْرِي",
+          "arabic": "نَعَمْ، وَأَشْتَرِكُ فِي جَمْعِيَّةِ الْخَطِّ الْعَرَبِيِّ.",
+          "latin": "Na'am, wa asytariku fī jam'iyyatil khaṭṭil 'arabiyy.",
+          "translation": "Ya, dan saya bergabung dalam klub Kaligrafi Arab."
+        },
+        {
+          "speaker": "حِلْمِي",
+          "arabic": "مَتَى تُمَارِسُ الْخَطَّ الْعَرَبِيَّ فِي الْمَدْرَسَةِ؟",
+          "latin": "Matā tumārisul khaṭṭal 'arabiyya fil madrasah?",
+          "translation": "Kapan kamu berlatih kaligrafi Arab di sekolah?"
+        },
+        {
+          "speaker": "فِكْرِي",
+          "arabic": "يَوْمَ السَّبْتِ وَالثَّلَاثَاءِ بَعْدَ الدِّرَاسَةِ.",
+          "latin": "Yaumas sabti wat tsulātsā'i ba'dad dirāsah.",
+          "translation": "Hari Sabtu dan Selasa setelah jam pelajaran."
+        },
+        {
+          "speaker": "حِلْمِي",
+          "arabic": "مَاذَا تَدْرُسُ فِي الْخَطِّ الْعَرَبِيِّ؟",
+          "latin": "Māżā tadrusu fil khaṭṭil 'arabiyy?",
+          "translation": "Apa yang kamu pelajari dalam seni kaligrafi Arab?"
+        },
+        {
+          "speaker": "فِكْرِي",
+          "arabic": "نَدْرُسُ كَيْفِيَّةَ كِتَابَةِ الأَحْرُفِ ثُمَّ الْكَلِمَاتِ صَحِيْحًا وَجَمِيْلًا.",
+          "latin": "Nadrusu kaifiyyata kitābatil aḥrufi tsummal kalimāti ṣaḥīḥan wa jamīlā.",
+          "translation": "Kami mempelajari cara menulis huruf-huruf kemudian kata-kata secara benar dan indah."
+        },
+        {
+          "speaker": "حِلْمِي",
+          "arabic": "أُرِيْدُ إِشْتِرَاكَ جَمْعِيَّةِ الْخَطِّ الْعَرَبِيِّ. هَلْ هُنَاكَ شُرُوْطٌ خَاصَّةٌ؟",
+          "latin": "Urīdu isytirāka jam'iyyatil khaṭṭil 'arabiyy. Hal hunāka syurūṭun khāṣṣah?",
+          "translation": "Saya ingin bergabung dengan klub Kaligrafi Arab. Apakah ada syarat-syarat khusus?"
+        },
+        {
+          "speaker": "فِكْرِي",
+          "arabic": "لَا، الْمُهِمُّ عِنْدَكَ جُهُوْدٌ وَجِدٌّ فِي الْكِتَابَةِ. وَلَا تَنْسَ مُمَارَسَةَ الْكِتَابَةِ كُلَّ يَوْمٍ.",
+          "latin": "Lā, al-muhimmu 'indaka juhūdun wa jiddun fil kitābah. Wa lā tansa mumārasatal kitābati kulla yaum.",
+          "translation": "Tidak ada, yang penting kamu memiliki ketekunan dan kesungguhan dalam menulis. Dan jangan lupa berlatih menulis setiap hari."
         }
       ]
     }
