@@ -918,6 +918,231 @@ const ARABIC_DATA = {
       "example": "نَتَعَلَّمُ أَحْكامَ الصَّلَاةِ فِي دَرْسِ الفِقْهِ"
     },
     {
+      "id": 301,
+      "topicId": "hiwayah",
+      "arabic": "قِرَاءَةٌ",
+      "latin": "Qirā'ah",
+      "indonesian": "Membaca",
+      "type": "isim",
+      "example": "الْقِرَاءَةُ تُوَسِّعُ الْمَعْرِفَةَ وَالْمَفَاهِيْمَ"
+    },
+    {
+      "id": 302,
+      "topicId": "hiwayah",
+      "arabic": "صَحَافَةٌ",
+      "latin": "Ṣaḥāfah",
+      "indonesian": "Jurnalistik / Kewartawanan",
+      "type": "isim",
+      "example": "يُحِبُّ أَحْمَدُ الصَّحَافَةَ وَكِتَابَةَ الأَخْبَارِ"
+    },
+    {
+      "id": 303,
+      "topicId": "hiwayah",
+      "arabic": "فُتُوْغْرَافِيَا",
+      "latin": "Futūgrāfiyā",
+      "indonesian": "Fotografi / Memotret",
+      "type": "isim",
+      "example": "الفُتُوْغْرَافِيَا هِوَايَةٌ جَمِيْلَةٌ لِلْتِقَاطِ الصُّوَرِ"
+    },
+    {
+      "id": 304,
+      "topicId": "hiwayah",
+      "arabic": "تَدْبِيْرٌ مَنْزِلِيٌّ",
+      "latin": "Tadbīrun Manziliyyun",
+      "indonesian": "Tata Boga / Keahlian Rumah Tangga",
+      "type": "isim",
+      "example": "تَتَعَلَّمُ فَاطِمَةُ التَّدْبِيْرَ الْمَنْزِلِيَّ فِي الْمَدْرَسَةِ"
+    },
+    {
+      "id": 305,
+      "topicId": "hiwayah",
+      "arabic": "طَبْخٌ",
+      "latin": "Ṭabkhun",
+      "indonesian": "Memasak",
+      "type": "isim",
+      "example": "الطَّبْخُ هِوَايَةُ أُمِّي الْمُفَضَّلَةُ"
+    },
+    {
+      "id": 306,
+      "topicId": "hiwayah",
+      "arabic": "رِيَاضَةٌ بَدَنِيَّةٌ",
+      "latin": "Riyāḍatun Badaniyyatun",
+      "indonesian": "Olahraga Fisik",
+      "type": "isim",
+      "example": "الرِّيَاضَةُ الْبَدَنِيَّةُ تُقَوِّي الْجِسْمَ"
+    },
+    {
+      "id": 307,
+      "topicId": "hiwayah",
+      "arabic": "كُرَةُ الْقَدَمِ",
+      "latin": "Kuratul Qadami",
+      "indonesian": "Sepak Bola",
+      "type": "isim",
+      "example": "يَلْعَبُ الطُّلَّابُ كُرَةَ الْقَدَمِ فِي الْمَلْعَبِ"
+    },
+    {
+      "id": 308,
+      "topicId": "hiwayah",
+      "arabic": "الْكُرَةُ الطَّائِرَةُ",
+      "latin": "Al-Kuratus Ṭā'irah",
+      "indonesian": "Bola Voli",
+      "type": "isim",
+      "example": "نُمَارِسُ الْكُرَةَ الطَّائِرَةَ فِي فِنَاءِ الْمَدْرَسَةِ"
+    },
+    {
+      "id": 309,
+      "topicId": "hiwayah",
+      "arabic": "تَنِسُ الطَّاوِلَةِ",
+      "latin": "Tanisut Ṭāwilah",
+      "indonesian": "Tenis Meja",
+      "type": "isim",
+      "example": "تَنِسُ الطَّاوِلَةِ رِيَاضَةٌ مُمْتِعَةٌ"
+    },
+    {
+      "id": 310,
+      "topicId": "hiwayah",
+      "arabic": "رِحْلَةٌ",
+      "latin": "Riḥlah",
+      "indonesian": "Traveling / Bepergian / Piknik",
+      "type": "isim",
+      "example": "الرِّحْلَةُ إِلَى الْجَبَلِ تُنَشِّطُ الْعَقْلَ"
+    },
+    {
+      "id": 311,
+      "topicId": "hiwayah",
+      "arabic": "الْخَطُّ الْعَرَبِيُّ",
+      "latin": "Al-Khaṭṭul 'Arabiyyu",
+      "indonesian": "Kaligrafi Arab",
+      "type": "isim",
+      "example": "يَكْتُبُ زَيْدٌ الآيَاتِ بِالْخَطِّ الْعَرَبِيِّ"
+    },
+    {
+      "id": 312,
+      "topicId": "hiwayah",
+      "arabic": "رَسْمٌ",
+      "latin": "Rasmun",
+      "indonesian": "Melukis / Menggambar",
+      "type": "isim",
+      "example": "عَائِشَةُ تُحِبُّ الرَّسْمَ فِي كُرَّاسَتِهَا"
+    },
+    {
+      "id": 313,
+      "topicId": "hiwayah",
+      "arabic": "مُوْسِيْقَى",
+      "latin": "Mūsīqā",
+      "indonesian": "Musik",
+      "type": "isim",
+      "example": "يَسْتَمِعُ حَسَنٌ إِلَى الْمُوْسِيْقَى الْهَادِئَةِ"
+    },
+    {
+      "id": 314,
+      "topicId": "hiwayah",
+      "arabic": "الْغِنَاءُ",
+      "latin": "Al-Ginā'u",
+      "indonesian": "Menyanyi / Bernyanyi",
+      "type": "isim",
+      "example": "الْغِنَاءُ صَوْتٌ جَمِيْلٌ يُعَبِّرُ عَنِ الْمَشَاعِرِ"
+    },
+    {
+      "id": 315,
+      "topicId": "hiwayah",
+      "arabic": "رَقْصٌ",
+      "latin": "Raqṣun",
+      "indonesian": "Menari / Seni Tari",
+      "type": "isim",
+      "example": "تَتَدَرَّبُ الطَّالِبَاتُ عَلَى الرَّقْصِ التَّقْلِيْدِيِّ"
+    },
+    {
+      "id": 316,
+      "topicId": "hiwayah",
+      "arabic": "شَبَكَةٌ دَوْلِيَّةٌ / إِنْتِرْنِيت",
+      "latin": "Syabakatun Dauliyyatun / Intirnīt",
+      "indonesian": "Internet / Jaringan Komputer",
+      "type": "isim",
+      "example": "نَبْحَثُ عَنِ الْمَعْلُوْمَاتِ فِي الشَّبَكَةِ الدَّوْلِيَّةِ"
+    },
+    {
+      "id": 317,
+      "topicId": "hiwayah",
+      "arabic": "أَنْشِطَةٌ لَامَنَهَجِيَّةٌ",
+      "latin": "Ansyitaṭun Lāmanhajiyyah",
+      "indonesian": "Kegiatan Ekstrakurikuler",
+      "type": "isim",
+      "example": "يَشْتَرِكُ الطُّلَّابُ فِي الأَنْشِطَةِ اللاَّمَنَهَجِيَّةِ"
+    },
+    {
+      "id": 318,
+      "topicId": "hiwayah",
+      "arabic": "مُسَابَقَةٌ",
+      "latin": "Musābaqah",
+      "indonesian": "Lomba / Perlombaan / Kompetisi",
+      "type": "isim",
+      "example": "فَازَ عُمَرُ فِي مُسَابَقَةِ الْخِطَابَةِ"
+    },
+    {
+      "id": 319,
+      "topicId": "hiwayah",
+      "arabic": "قَرَأَ - يَقْرَأُ",
+      "latin": "Qara'a - Yaqra'u",
+      "indonesian": "Membaca (Past - Present)",
+      "type": "fiil",
+      "example": "يَقْرَأُ الطَّالِبُ الْكِتَابَ فِي الْمَكْتَبَةِ"
+    },
+    {
+      "id": 320,
+      "topicId": "hiwayah",
+      "arabic": "كَتَبَ - يَكْتُبُ",
+      "latin": "Kataba - Yaktubu",
+      "indonesian": "Menulis (Past - Present)",
+      "type": "fiil",
+      "example": "يَكْتُبُ زَيْدٌ الْقِصَّةَ الْقَصِيْرَةَ"
+    },
+    {
+      "id": 321,
+      "topicId": "hiwayah",
+      "arabic": "طَبَخَ - يَطْبُخُ",
+      "latin": "Ṭabakha - Yaṭbukhu",
+      "indonesian": "Memasak (Past - Present)",
+      "type": "fiil",
+      "example": "تَطْبُخُ الأُمُّ الطَّعَامَ فِي الْمَطْبَخِ"
+    },
+    {
+      "id": 322,
+      "topicId": "hiwayah",
+      "arabic": "تَدَرَّبَ - يَتَدَرَّبُ",
+      "latin": "Tadarriba - Yatadarribu",
+      "indonesian": "Berlatih (Past - Present)",
+      "type": "fiil",
+      "example": "يَتَدَرَّبُ السَّبَّاحُ فِي الْمَسْبَحِ"
+    },
+    {
+      "id": 323,
+      "topicId": "hiwayah",
+      "arabic": "لَعِبَ - يَلْعَبُ",
+      "latin": "La'iba - Yal'abu",
+      "indonesian": "Bermain (Past - Present)",
+      "type": "fiil",
+      "example": "يَلْعَبُ الأَطْفَالُ كُرَةَ الْقَدَمِ"
+    },
+    {
+      "id": 324,
+      "topicId": "hiwayah",
+      "arabic": "السِّبَاحَةُ",
+      "latin": "As-Sibāḥah",
+      "indonesian": "Berenang",
+      "type": "isim",
+      "example": "نُمَارِسُ السِّبَاحَةَ فِي الْمَسْبَحِ كُلَّ يَوْمِ الأَحَدِ"
+    },
+    {
+      "id": 325,
+      "topicId": "hiwayah",
+      "arabic": "الْخِطَابَةُ",
+      "latin": "Al-Khiṭābah",
+      "indonesian": "Berpidato / Orasi",
+      "type": "isim",
+      "example": "يَتَدَرَّبُ عُمَرُ عَلَى الْخِطَابَةِ فِي الْمَدْرَسَةِ"
+    },
+    {
       "id": 401,
       "topicId": "mihnah",
       "arabic": "الْمِهْنَةُ",
@@ -929,23 +1154,14 @@ const ARABIC_DATA = {
     {
       "id": 402,
       "topicId": "mihnah",
-      "arabic": "طَبِيْبٌ",
-      "latin": "Ṭabībun",
-      "indonesian": "Dokter (Laki-laki)",
+      "arabic": "طَبِيْبٌ / طَبِيْبَةٌ",
+      "latin": "Ṭabībun / Ṭabībatun",
+      "indonesian": "Dokter (Laki-laki / Perempuan)",
       "type": "isim",
       "example": "يَفْحَصُ الطَّبِيْبُ الْمَرِيْضَ فِي الْمُسْتَشْفَى"
     },
     {
       "id": 403,
-      "topicId": "mihnah",
-      "arabic": "طَبِيْبَةٌ",
-      "latin": "Ṭabībatun",
-      "indonesian": "Dokter (Perempuan)",
-      "type": "isim",
-      "example": "عَائِشَةُ طَبِيْبَةٌ مَاهِرَةٌ فِي عِيَادَتِهَا"
-    },
-    {
-      "id": 404,
       "topicId": "mihnah",
       "arabic": "مُدَرِّسٌ / أُسْتَاذٌ",
       "latin": "Mudarrisun / Ustāżun",
@@ -954,25 +1170,16 @@ const ARABIC_DATA = {
       "example": "يُدَرِّسُ الْمُدَرِّسُ الطُّلَّابَ بِإِخْلَاصٍ"
     },
     {
-      "id": 405,
+      "id": 404,
       "topicId": "mihnah",
-      "arabic": "مُهَنْدِسٌ",
-      "latin": "Muhandisun",
-      "indonesian": "Insinyur / Arsitek (Laki-laki)",
+      "arabic": "مُهَنْدِسٌ / مُهَنْدِسَةٌ",
+      "latin": "Muhandisun / Muhandisatun",
+      "indonesian": "Insinyur / Arsitek",
       "type": "isim",
       "example": "يَبْنِي الْمُهَنْدِسُ الْبُيُوْتَ وَالشَّوَارِعَ"
     },
     {
-      "id": 406,
-      "topicId": "mihnah",
-      "arabic": "مُهَنْدِسَةٌ",
-      "latin": "Muhandisatun",
-      "indonesian": "Insinyur / Arsitek (Perempuan)",
-      "type": "isim",
-      "example": "تُرَمِّمُ الْمُهَنْدِسَةُ الْمَبَانِيَ الْحَدِيْثَةَ"
-    },
-    {
-      "id": 407,
+      "id": 405,
       "topicId": "mihnah",
       "arabic": "شُرْطِيٌّ",
       "latin": "Syurṭiyyun",
@@ -981,7 +1188,7 @@ const ARABIC_DATA = {
       "example": "يُنَظِّمُ الشُّرْطِيُّ الْمُرُوْرَ فِي الشَّارِعِ"
     },
     {
-      "id": 408,
+      "id": 406,
       "topicId": "mihnah",
       "arabic": "تَاجِرٌ",
       "latin": "Tājirun",
@@ -990,7 +1197,7 @@ const ARABIC_DATA = {
       "example": "يَبِيْعُ التَّاجِرُ الْبَضَائِعَ فِي السُّوْقِ"
     },
     {
-      "id": 409,
+      "id": 407,
       "topicId": "mihnah",
       "arabic": "فَلَّاحٌ",
       "latin": "Fallāḥun",
@@ -999,7 +1206,7 @@ const ARABIC_DATA = {
       "example": "يَزْرَعُ الْفَلَّاحُ الرُّزَّ فِي الْمَزْرَعَةِ"
     },
     {
-      "id": 410,
+      "id": 408,
       "topicId": "mihnah",
       "arabic": "صَحَفِيٌّ",
       "latin": "Ṣaḥafiyyun",
@@ -1008,7 +1215,7 @@ const ARABIC_DATA = {
       "example": "يَكْتُبُ الصَّحَفِيُّ الأَخْبَارَ فِي الصَّحِيْفَةِ"
     },
     {
-      "id": 411,
+      "id": 409,
       "topicId": "mihnah",
       "arabic": "جُنْدِيٌّ",
       "latin": "Jundiyyun",
@@ -1017,7 +1224,7 @@ const ARABIC_DATA = {
       "example": "يَحْمِي الْجُنْدِيُّ الْوَطَنَ مِن الأَعْدَاءِ"
     },
     {
-      "id": 412,
+      "id": 410,
       "topicId": "mihnah",
       "arabic": "مُوَظَّفٌ",
       "latin": "Muwaẓẓafun",
@@ -1026,7 +1233,7 @@ const ARABIC_DATA = {
       "example": "يَعْمَلُ الْمُوَظَّفُ فِي الْمَكْتَبِ الْحُكُوْمِيِّ"
     },
     {
-      "id": 413,
+      "id": 411,
       "topicId": "mihnah",
       "arabic": "طَيَّارٌ",
       "latin": "Ṭayyārun",
@@ -1035,7 +1242,7 @@ const ARABIC_DATA = {
       "example": "يَقُوْدُ الطَّيَّارُ الطَّائِرَةَ فِي السَّمَاءِ"
     },
     {
-      "id": 414,
+      "id": 412,
       "topicId": "mihnah",
       "arabic": "قَاضٍ / الْقَاضِي",
       "latin": "Qāḍin",
@@ -1044,7 +1251,7 @@ const ARABIC_DATA = {
       "example": "يَحْكُمُ الْقَاضِي بِالْعَدْلِ فِي الْمَحْكَمَةِ"
     },
     {
-      "id": 415,
+      "id": 413,
       "topicId": "mihnah",
       "arabic": "صَيَّادٌ",
       "latin": "Ṣayyādun",
@@ -1053,7 +1260,7 @@ const ARABIC_DATA = {
       "example": "يَصْطَادُ الصَّيَّادُ السَّمَكَ فِي الْبَحْرِ"
     },
     {
-      "id": 416,
+      "id": 414,
       "topicId": "mihnah",
       "arabic": "خَيَّاطٌ",
       "latin": "Khayyāṭun",
@@ -1062,7 +1269,7 @@ const ARABIC_DATA = {
       "example": "يَخِيْطُ الْخَيَّاطُ الْمَلَابِسَ الْجَمِيْلَةَ"
     },
     {
-      "id": 417,
+      "id": 415,
       "topicId": "mihnah",
       "arabic": "طَبَّاخٌ",
       "latin": "Ṭabbākhun",
@@ -1071,7 +1278,7 @@ const ARABIC_DATA = {
       "example": "يُعِدُّ الطَّبَّاخُ الطَّعَامَ اللَذِيْذَ فِي الْمَطْعَمِ"
     },
     {
-      "id": 418,
+      "id": 416,
       "topicId": "mihnah",
       "arabic": "مُصَمِّمٌ",
       "latin": "Muṣammimun",
@@ -1080,7 +1287,16 @@ const ARABIC_DATA = {
       "example": "يُصَمِّمُ الْمُصَمِّمُ الْمَلَابِسَ وَالْمُؤَلَّفَاتِ"
     },
     {
-      "id": 419,
+      "id": 417,
+      "topicId": "mihnah",
+      "arabic": "مُحَاضِرٌ",
+      "latin": "Muḥāḍirun",
+      "indonesian": "Dosen / Pengajar Perguruan Tinggi",
+      "type": "isim",
+      "example": "تُدَرِّسُ الْمُحَاضِرَةُ فِي الْجَامِعَةِ"
+    },
+    {
+      "id": 418,
       "topicId": "mihnah",
       "arabic": "مُسْتَقْبَلٌ",
       "latin": "Mustaqbalun",
@@ -1089,13 +1305,22 @@ const ARABIC_DATA = {
       "example": "أَرْمِي إِلَى مُسْتَقْبَلٍ مُشْرِقٍ فِي حَيَاتِي"
     },
     {
-      "id": 420,
+      "id": 419,
       "topicId": "mihnah",
       "arabic": "أَمَلٌ / أُمْنِيَّةٌ",
       "latin": "Amalun / Umniyyatun",
       "indonesian": "Cita-cita / Harapan",
       "type": "isim",
       "example": "أُمْنِيَتِي أَنْ أَكُوْنَ طَبِيْبًا فِي الْمُسْتَقْبَلِ"
+    },
+    {
+      "id": 420,
+      "topicId": "mihnah",
+      "arabic": "عَمِلَ - يَعْمَلُ",
+      "latin": "‘Amila - Ya'malu",
+      "indonesian": "Bekerja (Past - Present)",
+      "type": "fiil",
+      "example": "يَعْمَلُ الطَّبِيْبُ فِي الْمُسْتَشْفَى"
     },
     {
       "id": 501,
@@ -1199,9 +1424,9 @@ const ARABIC_DATA = {
     {
       "id": 512,
       "topicId": "yaumiyyah",
-      "arabic": "يَكْتُبُ",
-      "latin": "Yaktubu",
-      "indonesian": "Menulis",
+      "arabic": "يَكْتُبُ الْوَاجِبَ الْمَنْزِلِيَّ",
+      "latin": "Yaktubul Wājibal Manziliyya",
+      "indonesian": "Menulis Pekerjaan Rumah (PR)",
       "type": "fiil",
       "example": "يَكْتُبُ الطَّالِبُ الْوَاجِبَ الْمَنْزِلِيَّ فِي الْغُرْفَةِ"
     },
