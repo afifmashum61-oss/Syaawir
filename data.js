@@ -2886,143 +2886,157 @@ const ARABIC_DATA = {
     },
     {
       "id": "qiraah7",
-      "title": "القِرَاءَةُ (١) - البَابُ الرَّابِعُ : الْهِوَايَاتُ فِي وَقْتِ الْفَرَاغِ",
-      "latinTitle": "Bab 4 - Teks 1: Hobi di Waktu Luang (Cerita Faruq)",
+      "title": "القِرَاءَةُ (١) - البَابُ الرَّابِعُ : دِدِيْن وَالأَنْشِطَةُ اللَامَنَهَجِيَّةُ (Didin & Ekstrakurikuler)",
+      "latinTitle": "Qira'ah 1 Bab 4: Didin Syihabuddin & Ekstrakurikuler Tenis Meja",
       "topicId": "hiwayah",
-      "arabicText": "أَنَا فَارُوْقٌ. لَدَيَّ هِوَايَاتٌ كَثِيْرَةٌ أُمَارِسُهَا فِي وَقْتِ الْفَرَاغِ. مِنْ هِوَايَاتِي الْقِرَاءَةُ وَالتَّصْوِيْرُ وَالرِّيَاضَةُ. أَقْرَأُ الْكُتُبَ وَالْمَجَلَّاتِ فِي مَكْتَبَةِ الْمَدْرَسَةِ أَوْ فِي الْبَيْتِ. وَأَلْتَقِطُ الصُّوَرَ الْجَمِيْلَةَ لِلْطَبِيْعَةِ بِالْكَامِيْرَا فِي أَيَّامِ الْعُطْلَةِ.\n\nوَصَدِيْقِي سَلْمَانُ يُحِبُّ كُرَةَ الْقَدَمِ وَالسِّبَاحَةَ. هُوَ يَلْعَبُ كُرَةَ الْقَدَمِ مَعَ الأَصْدِقَاءِ فِي مَلْعَبِ الْمَدْرَسَةِ كُلَّ مَسَاءٍ. وَفِي يَوْمِ الأَحَدِ، نَذْهَبُ مَعًا إِلَى الْمَسْبَحِ لِمُمَارَسَةِ السِّبَاحَةِ. الرِّيَاضَةُ تُعْطِي النَّشَاطَ وَالصِّحَّةَ لِلْجِسْمِ.",
-      "latinText": "",
-      "translation": "Saya Faruq. Saya memiliki banyak hobi yang saya lakukan di waktu luang. Di antara hobi saya adalah membaca, memotret, dan berolahraga. Saya membaca buku dan majalah di perpustakaan sekolah atau di rumah. Dan saya memotret pemandangan alam yang indah dengan kamera pada hari libur.\n\nDan teman saya Salman menyukai sepak bola dan berenang. Dia bermain sepak bola bersama teman-teman di lapangan sekolah setiap sore. Dan pada hari Minggu, kami pergi bersama ke kolam renang untuk berenang. Olahraga memberikan kesegaran dan kesehatan bagi tubuh.",
+      "paragraphs": [
+        "أَنَا دِدِيْن شِهَابُ الدِّيْنِ. أَجْلِسُ فِي الصَّفِّ الْعَاشِرِ مِنْ الْمَدْرَسَةِ الثَّانَوِيَّةِ الإِسْلَامِيَّةِ الْحُكُوْمِيَّةِ. أَتَعَلَّمُ فِي الْمَدْرَسَةِ الدُّرُوْسَ الْمُقَرَّرَةَ مِنْ يَوْمِ الإِثْنَيْنِ إِلَى يَوْمِ السَّبْتِ. أَدْرُسُ مِنَ السَّاعَةِ السَّابِعَةِ صَبَاحًا إِلَى السَّاعَةِ الثَّانِيَةِ وَالنِّصْفِ بَعْدَ الظُّهْرِ.",
+        "فِي مَدْرَسَتِنَا أَنْشِطَةٌ لَامَنَهَجِيَّةٌ كَثِيْرَةٌ. مِنْهَا كَشَّافَةٌ وَصَحَافَةٌ وَرِيَاضَةٌ بَدَنِيَّةٌ وَخَطٌّ عَرَبِيٌّ وَتَدْبِيْرٌ مَنْزِلِيٌّ وَفُتُوْغْرَافِيَّةٌ وَغَيْرُ ذَلِكَ. يُمْكِنُ لِلطُّلَّابِ أَنْ يَشْتَرِكُوا فِي هَذِهِ الأَنْشِطَةِ لِمُمَارَسَةِ هِوَايَاتِهِمْ. وَيُمَارِسُ الطُّلَّابُ هَذِهِ الأَنْشِطَةَ بَعْدَ الدِّرَاسَةِ الْمُقَرَّرَةِ مِنَ السَّاعَةِ الثَّانِيَةِ وَالنِّصْفِ إِلَى الثَّالِثَةِ وَالنِّصْفِ مَسَاءً.",
+        "أَنَا أُحِبُّ تَنِسَ الطَّاوِلَةِ. أَشْتَرِكُ فِي جَمْعِيَّةِ الرِّيَاضَةِ الْبَدَنِيَّةِ. أُمَارِسُ هِوَايَتِي مَرَّتَيْنِ فِي الأُسْبُوْعِ، يَوْمَ السَّبْتِ وَالثُّلَاثَاءِ. أَلْعَبُ تَنِسَ الطَّاوِلَةِ مَعَ أَصْدِقَائِي فِي مَلْعَبِ الْمَدْرَسَةِ. وَيُدَرِّبُنَا الْمُدَرِّسُ الْمُدَرِّبُ. وَهُوَ مُدَرِّسُ الرِّيَاضَةِ فِي الْمَدْرَسَةِ. وَأَحْيَانًا يُدَرِّبُنَا مُدَرِّبٌ مِنْ نَادِي تَنِسِ الطَّاوِلَةِ فِي مَدِيْنَتِنَا."
+      ],
+      "translations": [
+        "Saya Didin Syihabuddin. Saya duduk di kelas X Madrasah Aliyah Negeri (MAN). Saya belajar pelajaran yang ditetapkan di sekolah dari hari Senin sampai hari Sabtu. Saya belajar dari jam 07.00 pagi sampai jam 14.30 siang (dua setengah siang).",
+        "Di sekolah kami terdapat banyak kegiatan ekstrakurikuler. Di antaranya pramuka, jurnalistik, olahraga fisik, kaligrafi Arab, tata boga, fotografi, dan lain-lain. Para siswa dapat bergabung dalam kegiatan-kegiatan ini untuk menyalurkan hobi mereka. Para siswa melakukan kegiatan ini setelah jam pelajaran selesai dari jam 14.30 sampai jam 15.30 sore.",
+        "Saya menyukai tenis meja. Saya bergabung dalam ekstrakurikuler olahraga. Saya melatih hobi saya dua kali dalam seminggu, yaitu hari Sabtu dan Selasa. Saya bermain tenis meja bersama teman-teman saya di lapangan sekolah. Dan kami dilatih oleh pelatih yang merupakan guru olahraga di sekolah. Dan terkadang kami dilatih oleh pelatih dari klub tenis meja di kota kami."
+      ],
       "questions": [
         {
-          "q": "مَا هِيَ هِوَايَاتُ فَارُوْقٍ؟",
-          "latinQ": "Apakah hobi Faruq?",
+          "q": "فِي أَيِّ صَفٍّ يَدْرُسُ دِدِيْن شِهَابُ الدِّيْنِ؟",
+          "latinQ": "Di kelas manakah Didin Syihabuddin belajar?",
           "options": [
-            "الْقِرَاءَةُ وَالتَّصْوِيْرُ وَالرِّيَاضَةُ",
-            "الْخِيَاطَةُ وَالطَّبْخُ",
-            "الرَّسْمُ وَالْمُوْسِيْقَى",
-            "السَّفَرُ وَالْمُرَاسَلَةُ"
+            "فِي الصَّفِّ الْعَاشِرِ",
+            "فِي الصَّفِّ الْحَادِيَ عَشَرَ",
+            "فِي الصَّفِّ الثَّانِيَ عَشَرَ",
+            "فِي الصَّفِّ التَّاسِعِ"
           ],
           "answer": 0,
-          "explanation": "Pada teks disebutkan: 'مِنْ هِوَايَاتِي الْقِرَاءَةُ وَالتَّصْوِيْرُ وَالرِّيَاضَةُ'."
+          "explanation": "Berdasarkan teks: 'أَجْلِسُ فِي الصَّفِّ الْعَاشِرِ' (Kelas X)."
         },
         {
-          "q": "أَيْنَ يَقْرَأُ فَارُوْقٌ الْكُتُبَ وَالْمَجَلَّاتِ؟",
-          "latinQ": "Di mana Faruq membaca buku dan majalah?",
+          "q": "مَتَى يَبْدَأُ دِدِيْن الدِّرَاسَةَ فِي الْمَدْرَسَةِ صَبَاحًا؟",
+          "latinQ": "Jam berapa Didin mulai belajar di sekolah pada pagi hari?",
           "options": [
-            "فِي مَكْتَبَةِ الْمَدْرَسَةِ أَوْ فِي الْبَيْتِ",
-            "فِي الْمَسْجِدِ",
-            "فِي الْمَلْعَبِ",
-            "فِي الْمَطْعَمِ"
+            "مِنَ السَّاعَةِ السَّابِعَةِ صَبَاحًا",
+            "مِنَ السَّاعَةِ السَّادِسَةِ",
+            "مِنَ السَّاعَةِ الثَّامِنَةِ",
+            "مِنَ السَّاعَةِ الْخَامِسَةِ"
           ],
           "answer": 0,
-          "explanation": "Pada teks disebutkan: 'أَقْرَأُ الْكُتُبَ وَالْمَجَلَّاتِ فِي مَكْتَبَةِ الْمَدْرَسَةِ أَوْ فِي الْبَيْتِ'."
+          "explanation": "Berdasarkan teks: 'أَدْرُسُ مِنَ السَّاعَةِ السَّابِعَةِ صَبَاحًا' (Jam 7 pagi)."
         },
         {
-          "q": "مَاذَا يُحِبُّ سَلْمَانُ؟",
-          "latinQ": "Apa yang disukai Salman?",
+          "q": "مَا هِيَ الأَنْشِطَةُ اللَامَنَهَجِيَّةُ الْمَذْكُوْرَةُ فِي النَّصِّ؟",
+          "latinQ": "Apa saja kegiatan ekstrakurikuler yang disebutkan dalam teks?",
           "options": [
-            "كُرَةَ الْقَدَمِ وَالسِّبَاحَةَ",
-            "الْخِطَابَةَ",
-            "الرَّسْمَ",
-            "جَمْعَ الطَّوَابِعِ"
+            "كَشَّافَةٌ وَصَحَافَةٌ وَرِيَاضَةٌ وَخَطٌّ عَرَبِيٌّ وَتَدْبِيْرٌ مَنْزِلِيٌّ وَفُتُوْغْرَافِيَّةٌ",
+            "تِجَارَةٌ وَزِرَاعَةٌ",
+            "سِبَاحَةٌ وَرَكْضٌ",
+            "فَقَطْ كُرَةُ الْقَدَمِ"
           ],
           "answer": 0,
-          "explanation": "Pada teks disebutkan: 'وَصَدِيْقِي سَلْمَانُ يُحِبُّ كُرَةَ الْقَدَمِ وَالسِّبَاحَةَ'."
+          "explanation": "Berdasarkan paragraf ke-2 teks."
         },
         {
-          "q": "مَتَى يَلْعَبُ سَلْمَانُ كُرَةَ الْقَدَمِ؟",
-          "latinQ": "Kapan Salman bermain sepak bola?",
+          "q": "مَا هِيَ هِوَايَةُ دِدِيْن الْمُفَضَّلَةُ؟",
+          "latinQ": "Apakah hobi favorit Didin?",
           "options": [
-            "كُلَّ مَسَاءٍ",
-            "كُلَّ صَبَاحٍ",
-            "فِي اللَّيْلِ",
-            "فِي الظُّهْرِ"
+            "تَنِسُ الطَّاوِلَةِ",
+            "كُرَةُ الْقَدَمِ",
+            "الرَّسْمُ",
+            "التَّصْوِيْرُ"
           ],
           "answer": 0,
-          "explanation": "Pada teks disebutkan: 'يَلْعَبُ كُرَةَ الْقَدَمِ... كُلَّ مَسَاءٍ'."
+          "explanation": "Berdasarkan teks: 'أَنَا أُحِبُّ تَنِسَ الطَّاوِلَةِ' (Tenis meja)."
         },
         {
-          "q": "مَا فَائِدَةُ الرِّيَاضَةِ لِلْإِنْسَانِ؟",
-          "latinQ": "Apakah manfaat olahraga bagi manusia?",
+          "q": "كَمْ مَرَّةً يُمَارِسُ دِدِيْن هِوَايَتَهُ فِي الأُسْبُوْعِ؟",
+          "latinQ": "Berapa kali Didin melatih hobinya dalam seminggu?",
           "options": [
-            "تُعْطِي النَّشَاطَ وَالصِّحَّةَ لِلْجِسْمِ",
-            "تُسَبِّبُ التَّعَبَ",
-            "تُضَيِّعُ الوَقْتَ",
-            "لَا فَائِدَةَ لَهَا"
+            "مَرَّتَيْنِ فِي الأُسْبُوْعِ (يَوْمَ السَّبْتِ وَالثُّلَاثَاءِ)",
+            "مَرَّةً وَاحِدَةً",
+            "ثَلَاثَ مَرَّاتٍ",
+            "كُلَّ يَوْمٍ"
           ],
           "answer": 0,
-          "explanation": "Pada teks disebutkan: 'الرِّيَاضَةُ تُعْطِي النَّشَاطَ وَالصِّحَّةَ لِلْجِسْمِ'."
+          "explanation": "Berdasarkan teks: 'أُمَارِسُ هِوَايَتِي مَرَّتَيْنِ فِي الأُسْبُوْعِ'."
         }
       ]
     },
     {
       "id": "qiraah8",
-      "title": "القِرَاءَةُ (٢) - البَابُ الرَّابِعُ : مَعْرِضُ الْهِوَايَاتِ فِي الْمَدْرَسَةِ",
-      "latinTitle": "Bab 4 - Teks 2: Pameran Hobi di Sekolah",
+      "title": "القِرَاءَةُ (٢) - البَابُ الرَّابِعُ : يَاقُوْت وَسَنِيُّ الْخَطِّ الْعَرَبِيِّ (Yaqut & Kaligrafi Arab)",
+      "latinTitle": "Qira'ah 2 Bab 4: Yaqut Zarin & Seni Kaligrafi Juara Lomba Nasional",
       "topicId": "hiwayah",
-      "arabicText": "فِي الأُسْبُوْعِ الْمَاضِي، أَقَامَتْ مَدْرَسَتُنَا مَعْرِضَ الْهِوَايَاتِ. شَارَكَ الطُّلَّابُ وَالطَّالِبَاتُ فِي هَذَا الْمَعْرِضِ بِعَرْضِ أَعْمَالِهِمْ وَمُقْتَنَيَاتِهِمْ. فِي الْجُنَاحِ الأَوَّلِ، نَشَاهِدُ جُمُعَةَ الطَّوَابِعِ الْقَدِيْمَةِ وَالْحَدِيْثَةِ مِنْ مُخْتَلِفِ الدُّوَلِ.\n\nوَفِي الْجُنَاحِ الثَّانِي، نَجِدُ اللَّوْحَاتِ الْفَنِّيَّةَ وَالرَّسْمَ وَالْخَطَّ الْعَرَبِيَّ الَّذِي كَتَبَهُ الطُّلَّابُ بِإِتْقَانٍ. أَمَّا الْجُنَاحُ الثَّالِثُ، فَيَحْتَوِي عَلَى الْكُتُبِ وَالْقِصَصِ الْقَصِيْرَةِ الَّتِي أَلَّفَهَا الطُّلَّابُ. زَارَ الْمَعْرِضَ كَثِيْرٌ مِنَ الضُّيُوْفِ وَعَبَّرُوْا عَنْ إِعْجَابِهِمْ بِإِبْدَاعَاتِ الطُّلَّابِ.",
-      "latinText": "",
-      "translation": "Pada minggu lalu, sekolah kami mengadakan pameran hobi. Para siswa dan siswi berpartisipasi dalam pameran ini dengan menampilkan karya dan koleksi mereka. Di stan pertama, kita melihat koleksi perangko lama dan baru dari berbagai negara.\n\nDi stan kedua, kita menemukan lukisan seni, gambar, dan kaligrafi Arab yang ditulis para siswa dengan sangat rapi. Sedangkan stan ketiga berisi buku-buku dan cerita pendek yang disusun para siswa. Banyak tamu mengunjungi pameran dan mengungkapkan kekaguman mereka atas kreativitas para siswa.",
+      "paragraphs": [
+        "هَذَا صَدِيْقِي يَاقُوْت. اِسْمُهُ بِالْكَامِلِ يَاقُوْت زَارِيْن. هُوَ يُحِبُّ الْقِرَاءَةَ وَالْخَطَّ الْعَرَبِيَّ. يَقْرَأُ يَاقُوْت الْكُتُبَ وَالْمَجَلَّاتِ وَيُفَضِّلُ قِرَاءَةَ التَّارِيْخِ الإِسْلَامِيِّ وَخَاصَّةً عَنِ الْخَطِّ الْعَرَبِيِّ. أَحَبَّ يَاقُوْت الْخَطَّ مُنْذُ السَّنَوَاتِ الْمَاضِيَةِ. وَهُوَ تِلْمِيْذٌ فِي الْمَدْرَسَةِ الْمُتَوَسِّطَةِ. رَأَى حِيْنئِذٍ أَخَاهُ الْكَبِيْرَ يَكْتُبُ الأَحْرُفَ وَالْكَلِمَاتِ الْعَرَبِيَّةَ فِي اللَّوْحَةِ. وَبَعْدَ التَّخَرُّجِ فِي الْمَدْرَسَةِ الْمُتَوَسِّطَةِ وَاصَلَ دِرَاسَتَهُ إِلَى الْمَدْرَسَةِ الثَّانَوِيَّةِ الإِسْلَامِيَّةِ.",
+        "لِهَذِهِ الْمَدْرَسَةِ أَنْشِطَةٌ لَامَنَهَجِيَّةٌ كَثِيْرَةٌ، مِنْهَا خَطٌّ عَرَبِيٌّ. اِشْتَرَكَ يَاقُوْت جَمْعِيَّةَ الْخَطِّ وَتَعَلَّمَ الْخَطَّ فِيْهَا. هُوَ يُمَارِسُ كِتَابَةَ الأَحْرُفِ الْعَرَبِيَّةِ كُلَّ يَوْمٍ. يَكْتُبُ يَاقُوْت الأَحْرُفَ وَالْكَلِمَاتِ الْعَرَبِيَّةَ ثُمَّ يُقَدِّمُهَا الْمُدَرِّسُ. يُصَحِّحُ الْمُدَرِّسُ الْكِتَابَةَ، وَأَعَادَ يَاقُوْت الْكِتَابَةَ مَرَّاتٍ لِتَكُوْنَ صَحِيْحَةً وَفْقًا لِنِظَامِ الْخَطِّ.",
+        "فِي شَهْرِ أُكْتُوبِر 2024 الْمَاضِي إِشْتَرَكَ يَاقُوْت فِي مُسَابَقَةِ الْخَطِّ الْعَرَبِيِّ عَلَى الْمُسْتَوَى الْقَوْمِيِّ فِي بِكَاسِي (Bekasi) جَاوَى الْغَرْبِيَّةِ. وَهُوَ حَصَلَ عَلَى الْفَائِزِ الأَوَّلِ. وَفِي الشَّهْرِ التَّالِي نُوفَمْبِيْر 2024 إِشْتَرَكَ يَاقُوْت فِي مُسَابَقَةِ الْخَطِّ الْعَرَبِيِّ عَلَى الْمُسْتَوَى الْوَطَنِيِّ فِي سُورَابَايَا (Surabaya). عَقَدَتْ هَذِهِ الْمُسَابَقَةَ اِتِّحَادُ طَلَبَةِ قِسْمِ تَعْلِيْمِ اللُّغَةِ الْعَرَبِيَّةِ بِجَامِعَةِ سُنَن أَمْبِيْل الإِسْلَامِيَّةِ الْحُكُوْمِيَّةِ. وَهُوَ حَصَلَ عَلَى الْفَائِزِ الأَوَّلِ. مُبَارَكٌ يَا صَدِيْقِي يَاقُوْت."
+      ],
+      "translations": [
+        "Ini temanku Yaqut. Nama lengkapnya Yaqut Zarin. Dia menyukai membaca dan kaligrafi Arab. Yaqut membaca buku-buku dan majalah, dan lebih menyukai membaca sejarah Islam khususnya tentang kaligrafi Arab. Yaqut menyukai kaligrafi sejak tahun-tahun yang lalu ketika dia masih menjadi murid di SMP. Saat itu dia melihat kakak laki-lakinya menulis huruf-huruf dan kata-kata Arab di atas papan. Setelah lulus dari SMP, dia melanjutkan sekolahnya ke Madrasah Aliyah (SMA).",
+        "Di sekolah ini terdapat banyak kegiatan ekstrakurikuler, di antaranya kaligrafi Arab. Yaqut bergabung dalam ekstrakurikuler kaligrafi dan mempelajari kaligrafi di sana. Dia melatih penulisan huruf-huruf Arab setiap hari. Yaqut menulis huruf-huruf dan kata-kata Arab lalu menyerahkannya kepada guru. Guru mengoreksi tulisannya, dan Yaqut mengulang tulisannya berulang kali agar benar sesuai kaidah kaligrafi.",
+        "Pada bulan Oktober 2024 yang lalu, Yaqut mengikuti perlombaan kaligrafi Arab tingkat nasional di Bekasi, Jawa Barat. Dan dia berhasil meraih Juara Pertama (Juara 1). Dan pada bulan berikutnya, November 2024, Yaqut mengikuti perlombaan kaligrafi Arab tingkat nasional di Surabaya. Perlombaan ini diselenggarakan oleh Himpunan Mahasiswa Jurusan Pendidikan Bahasa Arab Universitas Islam Negeri Sunan Ampel (UINSA). Dan dia berhasil meraih Juara Pertama (Juara 1). Selamat untukmu wahai temanku Yaqut!"
+      ],
       "questions": [
         {
-          "q": "مَتَى أَقَامَتِ الْمَدْرَسَةُ مَعْرِضَ الْهِوَايَاتِ؟",
-          "latinQ": "Kapan sekolah mengadakan pameran hobi?",
+          "q": "مَا هُوَ الإِسْمُ بِالْكَامِلِ لِصَدِيْقِ النَّصِّ؟",
+          "latinQ": "Siapakah nama lengkap dari teman dalam teks tersebut?",
           "options": [
-            "فِي الأُسْبُوْعِ الْمَاضِي",
-            "الْيَوْمَ",
-            "غَدًا",
-            "فِي الشَّهْرِ الْقَادِمِ"
+            "يَاقُوْت زَارِيْن",
+            "دِدِيْن شِهَابُ الدِّيْنِ",
+            "فَارُوْق",
+            "سَلْمَان"
           ],
           "answer": 0,
-          "explanation": "Pada teks disebutkan: 'فِي الأُسْبُوْعِ الْمَاضِي، أَقَامَتْ مَدْرَسَتُنَا مَعْرِضَ الْهِوَايَاتِ'."
+          "explanation": "Berdasarkan teks: 'اِسْمُهُ بِالْكَامِلِ يَاقُوْت زَارِيْن'."
         },
         {
-          "q": "مَاذَا يُوْجَدُ فِي الْجُنَاحِ الأَوَّلِ؟",
-          "latinQ": "Apa yang ada di stan pertama?",
+          "q": "مَتَى بَدَأَ يَاقُوْت يُحِبُّ الْخَطَّ الْعَرَبِيَّ؟",
+          "latinQ": "Kapan Yaqut mulai menyukai kaligrafi Arab?",
           "options": [
-            "جُمُعَةُ الطَّوَابِعِ الْقَدِيْمَةِ وَالْحَدِيْثَةِ",
-            "اللَّوْحَاتُ الْفَنِّيَّةُ",
-            "الْكُتُبُ وَالْقِصَصُ",
-            "الْمَأْكُوْلَاتُ"
+            "عِنْدَمَا كَانَ تِلْمِيْذًا فِي الْمَدْرَسَةِ الْمُتَوَسِّطَةِ",
+            "فِي الْمَدْرَسَةِ الإِبْتِدَائِيَّةِ",
+            "فِي الْجَامِعَةِ",
+            "فِي شَهْرِ أُكْتُوبِر 2024"
           ],
           "answer": 0,
-          "explanation": "Pada teks disebutkan: 'فِي الْجُنَاحِ الأَوَّلِ، نَشَاهِدُ جُمُعَةَ الطَّوَابِعِ'."
+          "explanation": "Berdasarkan teks: 'وَهُوَ تِلْمِيْذٌ فِي الْمَدْرَسَةِ الْمُتَوَسِّطَةِ. رَأَى حِيْنئِذٍ أَخَاهُ الْكَبِيْرَ...'"
         },
         {
-          "q": "مَاذَا نَجِدُ فِي الْجُنَاحِ الثَّانِي؟",
-          "latinQ": "Apa yang terdapat di stan kedua?",
+          "q": "مَا هُوَ النَّشَاطُ اللَامَنَهَجِيُّ الَّذِي اشْتَرَكَ فِيْهِ يَاقُوْت فِي الْمَدْرَسَةِ؟",
+          "latinQ": "Kegiatan ekstrakurikuler apa yang diikuti Yaqut di sekolah?",
           "options": [
-            "اللَّوْحَاتُ الْفَنِّيَّةُ وَالْخَطُّ الْعَرَبِيُّ",
-            "الأَطْعِمَةُ",
-            "الْمَلَابِسُ",
-            "الرِّيَاضَةُ"
+            "جَمْعِيَّةُ الْخَطِّ (Klub Kaligrafi)",
+            "كشَّافَةٌ (Pramuka)",
+            "تَنِسُ الطَّاوِلَةِ (Tenis Meja)",
+            "صَحَافَةٌ (Jurnalistik)"
           ],
           "answer": 0,
-          "explanation": "Pada teks disebutkan: 'وَفِي الْجُنَاحِ الثَّانِي، نَجِدُ اللَّوْحَاتِ الْفَنِّيَّةَ... وَالْخَطَّ الْعَرَبِيَّ'."
+          "explanation": "Berdasarkan teks: 'اِشْتَرَكَ يَاقُوْت جَمْعِيَّةَ الْخَطِّ'."
         },
         {
-          "q": "مَنْ كَتَبَ اللَّوْحَاتِ بِالْخَطِّ الْعَرَبِيِّ؟",
-          "latinQ": "Siapa yang menulis kaligrafi Arab tersebut?",
+          "q": "مَاذَا حَصَلَ يَاقُوْت فِي مُسَابَقَةِ الْخَطِّ الْعَرَبِيِّ فِي بِكَاسِي (Bekasi) أُكْتُوبِر 2024؟",
+          "latinQ": "Juara berapa yang diraih Yaqut pada lomba kaligrafi di Bekasi pada Oktober 2024?",
           "options": [
-            "الطُّلَّابُ",
-            "الْمُدَرِّسُوْنَ",
-            "الضُّيُوْفُ",
-            "الْمُدِيْرُ"
+            "حَصَلَ عَلَى الْفَائِزِ الأَوَّلِ (Juara 1)",
+            "الْفَائِزِ الثَّانِي (Juara 2)",
+            "الْفَائِزِ الثَّالِثِ (Juara 3)",
+            "لَمْ يَفُزْ"
           ],
           "answer": 0,
-          "explanation": "Pada teks disebutkan: 'الْخَطَّ الْعَرَبِيَّ الَّذِي كَتَبَهُ الطُّلَّابُ بِإِتْقَانٍ'."
+          "explanation": "Berdasarkan teks: 'وَهُوَ حَصَلَ عَلَى الْفَائِزِ الأَوَّلِ' (Juara 1)."
         },
         {
-          "q": "مَا رَأْيُ الضُّيُوْفِ فِي الْمَعْرِضِ؟",
-          "latinQ": "Bagaimanakah pendapat para tamu mengenai pameran?",
+          "q": "مَنْ عَقَدَ مُسَابَقَةَ الْخَطِّ الْعَرَبِيِّ فِي سُورَابَايَا (Surabaya) نُوفَمْبِيْر 2024؟",
+          "latinQ": "Siapakah penyelenggara lomba kaligrafi Arab di Surabaya pada November 2024?",
           "options": [
-            "عَبَّرُوْا عَنْ إِعْجَابِهِمْ بِإِبْدَاعَاتِ الطُّلَّابِ",
-            "حَزِنُوْا",
-            "غَضِبُوْا",
-            "لَمْ يَعْجَبْهُمْ"
+            "اِتِّحَادُ طَلَبَةِ قِسْمِ تَعْلِيْمِ اللُّغَةِ الْعَرَبِيَّةِ بِجَامِعَةِ سُنَن أَمْبِيْل",
+            "مَدْرَسَةُ MAN 1",
+            "نَادِي الْخَطِّ",
+            "حُكُوْمَةُ بِكَاسِي"
           ],
           "answer": 0,
-          "explanation": "Pada teks disebutkan: 'عَبَّرُوْا عَنْ إِعْجَابِهِمْ بِإِبْدَاعَاتِ الطُّلَّابِ'."
+          "explanation": "Berdasarkan teks paragraf ke-3."
         }
       ]
     },
@@ -4100,131 +4114,119 @@ const ARABIC_DATA = {
     },
     {
       "id": "istima_teks_g",
-      "title": "الاسْتِمَاعُ (ز) - البَابُ الرَّابِعُ : نَصُّ الْهِوَايَةِ (فَارُوْق)",
-      "latinTitle": "Bahan Istima' Bab 4 Teks G: Hobi & Kegemaran (Faruq)",
+      "title": "الاسْتِمَاعُ (ز) - البَابُ الرَّابِعُ : نَصُّ دِدِيْن (الأَنْشِطَةُ اللَامَنَهَجِيَّةُ)",
+      "latinTitle": "Bahan Istima' Bab 4 Teks G: Ekstrakurikuler & Tenis Meja (Didin)",
       "topicId": "hiwayah",
-      "arabicText": "أَنَا فَارُوْقٌ. أَنَا طَالِبٌ فِي الصَّفِّ الْعَاشِرِ. لَدَيَّ هِوَايَاتٌ كَثِيْرَةٌ، مِنْهَا الْقِرَاءَةُ وَالتَّصْوِيْرُ وَكُرَةُ الْقَدَمِ. فِي وَقْتِ الْفَرَاغِ، أَقْرَأُ الْكُتُبَ فِي الْمَكْتَبَةِ وَأَلْتَقِطُ الصُّوَرَ فِي الْحَدِيْقَةِ.",
+      "arabicText": "أَنَا دِدِيْن شِهَابُ الدِّيْنِ. أَجْلِسُ فِي الصَّفِّ الْعَاشِرِ. فِي مَدْرَسَتِنَا أَنْشِطَةٌ لَامَنَهَجِيَّةٌ كَثِيْرَةٌ، مِنْهَا كَشَّافَةٌ وَصَحَافَةٌ وَرِيَاضَةٌ بَدَنِيَّةٌ وَخَطٌّ عَرَبِيٌّ. أَنَا أُحِبُّ تَنِسَ الطَّاوِلَةِ. أُمَارِسُ هِوَايَتِي مَرَّتَيْنِ فِي الأُسْبُوْعِ، يَوْمَ السَّبْتِ وَالثُّلَاثَاءِ.",
       "fillBlanks": [
         {
-          "textToSpeech": "أَنَا طَالِبٌ فِي الصَّفِّ الْعَاشِرِ",
-          "sentenceTemplate": "أَنَا طَالِبٌ فِي الصَّفِّ _____ ",
+          "textToSpeech": "أَجْلِسُ فِي الصَّفِّ الْعَاشِرِ مِنْ الْمَدْرَسَةِ الثَّانَوِيَّةِ",
+          "sentenceTemplate": "أَجْلِسُ فِي الصَّفِّ _____ مِنْ الْمَدْرَسَةِ الثَّانَوِيَّةِ",
           "options": [
             "الْعَاشِرِ",
             "التَّاسِعِ",
-            "الثَّامِنِ",
-            "السَّابِعِ"
+            "الرَّابِعِ",
+            "الْخَامِسِ"
           ],
           "correct": 0,
           "explanation": "Kata yang terucap pada audio adalah 'الْعَاشِرِ' (Kelas X)."
         },
         {
-          "textToSpeech": "مِنْهَا الْقِرَاءَةُ وَالتَّصْوِيْرُ وَكُرَةُ الْقَدَمِ",
-          "sentenceTemplate": "مِنْهَا الْقِرَاءَةُ _____ وَكُرَةُ الْقَدَمِ",
+          "textToSpeech": "أَنَا أُحِبُّ تَنِسَ الطَّاوِلَةِ",
+          "sentenceTemplate": "أَنَا أُحِبُّ _____ ",
           "options": [
-            "وَالتَّصْوِيْرُ",
-            "وَالرَّسْمُ",
-            "وَالسِّبَاحَةُ",
-            "وَالطَّبْخُ"
+            "تَنِسَ الطَّاوِلَةِ",
+            "كُرَةَ الْقَدَمِ",
+            "الْكُرَةَ الطَّائِرَةَ",
+            "السِّبَاحَةَ"
           ],
           "correct": 0,
-          "explanation": "Kata yang terucap pada audio adalah 'وَالتَّصْوِيْرُ' (Dan memotret)."
-        },
-        {
-          "textToSpeech": "أَقْرَأُ الْكُتُبَ فِي الْمَكْتَبَةِ",
-          "sentenceTemplate": "أَقْرَأُ الْكُتُبَ فِي _____ ",
-          "options": [
-            "الْمَكْتَبَةِ",
-            "الْمَطْبَخِ",
-            "الْمَسْجِدِ",
-            "الْمَلْعَبِ"
-          ],
-          "correct": 0,
-          "explanation": "Kata yang terucap pada audio adalah 'الْمَكْتَبَةِ' (Perpustakaan)."
+          "explanation": "Kata yang terucap pada audio adalah 'تَنِسَ الطَّاوِلَةِ' (Tenis meja)."
         }
       ],
       "questions": [
         {
-          "q": "مَا هِيَ هِوَايَاتُ فَارُوْقٍ فِي النَّصِّ؟",
-          "latinQ": "Apakah hobi Faruq pada teks audio?",
+          "q": "مَا هِيَ هِوَايَةُ دِدِيْن؟",
+          "latinQ": "Apakah hobi Didin berdasarkan audio?",
           "options": [
-            "الْقِرَاءَةُ وَالتَّصْوِيْرُ وَكُرَةُ الْقَدَمِ",
-            "الْخِيَاطَةُ وَالطَّبْخُ",
-            "الرَّسْمُ وَالْمُوْسِيْقَى",
-            "السَّفَرُ وَالْمُرَاسَلَةُ"
+            "تَنِسُ الطَّاوِلَةِ",
+            "كُرَةُ الْقَدَمِ",
+            "الْخَطُّ الْعَرَبِيُّ",
+            "التَّصْوِيْرُ"
           ],
           "answer": 0,
-          "explanation": "Berdasarkan audio: 'مِنْهَا الْقِرَاءَةُ وَالتَّصْوِيْرُ وَكُرَةُ الْقَدَمِ'."
+          "explanation": "Berdasarkan audio: 'أَنَا أُحِبُّ تَنِسَ الطَّاوِلَةِ'."
         },
         {
-          "q": "أَيْنَ يَلْتَقِطُ فَارُوْقٌ الصُّوَرَ؟",
-          "latinQ": "Di mana Faruq mengambil foto?",
+          "q": "كَمْ مَرَّةً يُمَارِسُ دِدِيْن هِوَايَتَهُ فِي الأُسْبُوْعِ؟",
+          "latinQ": "Berapa kali Didin melatih hobinya dalam seminggu?",
           "options": [
-            "فِي الْحَدِيْقَةِ",
-            "فِي الْمَطْبَخِ",
-            "فِي الْفَصْلِ",
-            "فِي الْمَسْجِدِ"
+            "مَرَّتَيْنِ فِي الأُسْبُوْعِ",
+            "مَرَّةً وَاحِدَةً",
+            "ثَلَاثَ مَرَّاتٍ",
+            "كُلَّ يَوْمٍ"
           ],
           "answer": 0,
-          "explanation": "Berdasarkan audio: 'وَأَلْتَقِطُ الصُّوَرَ فِي الْحَدِيْقَةِ'."
+          "explanation": "Berdasarkan audio: 'أُمَارِسُ هِوَايَتِي مَرَّتَيْنِ فِي الأُسْبُوْعِ'."
         }
       ]
     },
     {
       "id": "istima_teks_h",
-      "title": "الاسْتِمَاعُ (ح) - البَابُ الرَّابِعُ : نَصُّ السِّبَاحَةِ (سَلْمَان)",
-      "latinTitle": "Bahan Istima' Bab 4 Teks H: Olahraga Berenang (Salman)",
+      "title": "الاسْتِمَاعُ (ح) - البَابُ الرَّابِعُ : نَصُّ يَاقُوْت (سَنِيُّ الْخَطِّ الْعَرَبِيِّ)",
+      "latinTitle": "Bahan Istima' Bab 4 Teks H: Yaqut Zarin & Seni Kaligrafi Arab",
       "topicId": "hiwayah",
-      "arabicText": "أَنَا سَلْمَانُ. أَنَا أُحِبُّ الرِّيَاضَةَ كَثِيْرًا. هِوَايَتِي الْمُفَضَّلَةُ هِيَ السِّبَاحَةُ. أَذْهَبُ إِلَى الْمَسْبَحِ مَعَ أَصْدِقَائِي كُلَّ يَوْمِ الأَحَدِ. السِّبَاحَةُ تُقَوِّي الْجِسْمَ وَتَجْعَلُنِي نَشِيْطًا.",
+      "arabicText": "هَذَا صَدِيْقِي يَاقُوْت. هُوَ يُحِبُّ الْقِرَاءَةَ وَالْخَطَّ الْعَرَبِيَّ. اِشْتَرَكَ يَاقُوْت جَمْعِيَّةَ الْخَطِّ. هُوَ يُمَارِسُ كِتَابَةَ الأَحْرُفِ الْعَرَبِيَّةِ كُلَّ يَوْمٍ. فِي شَهْرِ أُكْتُوبِر 2024، إِشْتَرَكَ فِي مُسَابَقَةِ الْخَطِّ فِي بِكَاسِي وَحَصَلَ عَلَى الْفَائِزِ الأَوَّلِ.",
       "fillBlanks": [
         {
-          "textToSpeech": "هِوَايَتِي الْمُفَضَّلَةُ هِيَ السِّبَاحَةُ",
-          "sentenceTemplate": "هِوَايَتِي الْمُفَضَّلَةُ هِيَ _____ ",
+          "textToSpeech": "هُوَ يُحِبُّ الْقِرَاءَةَ وَالْخَطَّ الْعَرَبِيَّ",
+          "sentenceTemplate": "هُوَ يُحِبُّ الْقِرَاءَةَ وَ _____ ",
           "options": [
-            "السِّبَاحَةُ",
-            "الْكِتَابَةُ",
-            "الرَّسْمُ",
-            "الْخِطَابَةُ"
+            "الْخَطَّ الْعَرَبِيَّ",
+            "الرَّسْمَ",
+            "السِّبَاحَةَ",
+            "الْمُوْسِيْقَى"
           ],
           "correct": 0,
-          "explanation": "Kata yang terucap pada audio adalah 'السِّبَاحَةُ' (Berenang)."
+          "explanation": "Kata yang terucap pada audio adalah 'الْخَطَّ الْعَرَبِيَّ' (Kaligrafi Arab)."
         },
         {
-          "textToSpeech": "أَذْهَبُ إِلَى الْمَسْبَحِ كُلَّ يَوْمِ الأَحَدِ",
-          "sentenceTemplate": "أَذْهَبُ إِلَى الْمَسْبَحِ كُلَّ يَوْمِ _____ ",
+          "textToSpeech": "حَصَلَ عَلَى الْفَائِزِ الأَوَّلِ فِي مُسَابَقَةِ الْخَطِّ",
+          "sentenceTemplate": "حَصَلَ عَلَى الْفَائِزِ _____ فِي مُسَابَقَةِ الْخَطِّ",
           "options": [
-            "الأَحَدِ",
-            "الْجُمُعَةِ",
-            "الإِثْنَيْنِ",
-            "السَّبْتِ"
+            "الأَوَّلِ",
+            "الثَّانِي",
+            "الثَّالِثِ",
+            "الرَّابِعِ"
           ],
           "correct": 0,
-          "explanation": "Kata yang terucap pada audio adalah 'الأَحَدِ' (Hari Minggu)."
+          "explanation": "Kata yang terucap pada audio adalah 'الأَوَّلِ' (Juara 1)."
         }
       ],
       "questions": [
         {
-          "q": "مَا هِيَ هِوَايَةُ سَلْمَانَ الْمُفَضَّلَةُ؟",
-          "latinQ": "Apakah hobi favorit Salman?",
+          "q": "مَاذَا يُحِبُّ يَاقُوْت؟",
+          "latinQ": "Apa yang disukai Yaqut berdasarkan audio?",
           "options": [
-            "السِّبَاحَةُ",
-            "الْقِرَاءَةُ",
-            "التَّصْوِيْرُ",
-            "الْخِيَاطَةُ"
+            "الْقِرَاءَةَ وَالْخَطَّ الْعَرَبِيَّ",
+            "كُرَةَ الْقَدَمِ",
+            "الْمُوْسِيْقَى",
+            "التَّصْوِيْرَ"
           ],
           "answer": 0,
-          "explanation": "Berdasarkan audio: 'هِوَايَتِي الْمُفَضَّلَةُ هِيَ السِّبَاحَةُ'."
+          "explanation": "Berdasarkan audio: 'هُوَ يُحِبُّ الْقِرَاءَةَ وَالْخَطَّ الْعَرَبِيَّ'."
         },
         {
-          "q": "مَعَ مَنْ يَذْهَبُ سَلْمَانُ إِلَى الْمَسْبَحِ؟",
-          "latinQ": "Bersama siapa Salman pergi ke kolam renang?",
+          "q": "مَا المَرْكَزُ الَّذِي حَصَلَ عَلَيْهِ يَاقُوْت فِي مُسَابَقَةِ الْخَطِّ فِي بِكَاسِي؟",
+          "latinQ": "Juara berapa yang diperoleh Yaqut pada lomba kaligrafi di Bekasi?",
           "options": [
-            "مَعَ أَصْدِقَائِهِ",
-            "مَعَ أُسْرَتِهِ",
-            "مُفْرَدًا",
-            "مَعَ مُدَرِّسِهِ"
+            "الْفَائِزُ الأَوَّلُ",
+            "الْفَائِزُ الثَّانِي",
+            "الْفَائِزُ الثَّالِثُ",
+            "لَمْ يَفُزْ"
           ],
           "answer": 0,
-          "explanation": "Berdasarkan audio: 'أَذْهَبُ إِلَى الْمَسْبَحِ مَعَ أَصْدِقَائِي'."
+          "explanation": "Berdasarkan audio: 'وَحَصَلَ عَلَى الْفَائِزِ الأَوَّلِ' (Juara 1)."
         }
       ]
     },
