@@ -2162,94 +2162,6 @@ const ARABIC_DATA = {
       ]
     },
     {
-      "id": "dialog11",
-      "title": "الكلام (١) - البَابُ السَّادِسُ : الأَنْشِطَةُ الصَّبَاحِيَّةُ",
-      "latinTitle": "Bab 6 - Percakapan 1: Aktivitas Pagi Hari (Umar & Ali)",
-      "topicId": "yaumiyyah",
-      "lines": [
-        {
-          "speaker": "عُمَر",
-          "arabic": "مَتَى تَسْتَيْقِظُ مِنَ النَّوْمِ يَا عَلِيُّ؟",
-          "latin": "Matā tastaiqiẓu minan naumi yā 'Aliyy?",
-          "translation": "Kapan kamu bangun tidur wahai Ali?"
-        },
-        {
-          "speaker": "عَلِيّ",
-          "arabic": "أَسْتَيْقِظُ فِي السَّاعَةِ الرَّابِعَةِ صَبَاحًا.",
-          "latin": "Astaiqiẓu fis sā'atir rābi'ati ṣabāḥā.",
-          "translation": "Saya bangun pada jam empat pagi."
-        },
-        {
-          "speaker": "عُمَر",
-          "arabic": "وَمَاذَا تَفْعَلُ بَعْدَ ذَلِكَ؟",
-          "latin": "Wa māżā taf'alu ba'da żālik?",
-          "translation": "Dan apa yang kamu lakukan setelah itu?"
-        },
-        {
-          "speaker": "عَلِيّ",
-          "arabic": "أَتَوَضَّأُ وَأُصَلِّي الصُّبْحَ فِي الْمَسْجِدِ جَمَاعَةً.",
-          "latin": "Atawaḍḍa'u wa uṣallīṣ ṣubḥa fil masjidi jamā'ah.",
-          "translation": "Saya berwudhu dan salat Subuh di masjid secara berjamaah."
-        },
-        {
-          "speaker": "عُمَر",
-          "arabic": "هَلْ تَتَنَاوَلُ الْفَطُوْرَ قَبْلَ الذَّهَابِ؟",
-          "latin": "Hal tatanāwalul faṭūra qablal żahāb?",
-          "translation": "Apakah kamu sarapan sebelum pergi?"
-        },
-        {
-          "speaker": "عَلِيّ",
-          "arabic": "نَعَمْ، أَتَنَاوَلُ الْفَطُوْرَ مَعَ الأُسْرَةِ فِي السَّاعَةِ السَّادِسَةِ.",
-          "latin": "Na'am, atanāwalul faṭūra ma'al usrati fis sā'atis sādisah.",
-          "translation": "Ya, saya sarapan bersama keluarga pada jam enam."
-        }
-      ]
-    },
-    {
-      "id": "dialog12",
-      "title": "الكلام (٢) - البَابُ السَّادِسُ : الْعَوْدَةُ وَالْوَاجِبُ الْمَنْزِلِيُّ",
-      "latinTitle": "Bab 6 - Percakapan 2: Pulang Sekolah & PR (Utsman & Ahmad)",
-      "topicId": "yaumiyyah",
-      "lines": [
-        {
-          "speaker": "عُثْمَان",
-          "arabic": "مَتَى تَرْجِعُ مِنَ الْمَدْرَسَةِ؟",
-          "latin": "Matā tarji'u minal madrasah?",
-          "translation": "Kapan kamu pulang dari sekolah?"
-        },
-        {
-          "speaker": "أَحْمَد",
-          "arabic": "أَرْجِعُ فِي السَّاعَةِ الثَّانِيَةِ ظُهْرًا.",
-          "latin": "Arji'u fis sā'atit tsāniyati ẓuhrā.",
-          "translation": "Saya pulang pada jam dua siang."
-        },
-        {
-          "speaker": "عُثْمَان",
-          "arabic": "وَمَتَى تَكْتُبُ الْوَاجِبَ الْمَنْزِلِيَّ؟",
-          "latin": "Wa matā taktubul wājibal manziliyy?",
-          "translation": "Dan kapan kamu menulis Pekerjaan Rumah (PR)?"
-        },
-        {
-          "speaker": "أَحْمَد",
-          "arabic": "أَكْتُبُ الْوَاجِبَ الْمَنْزِلِيَّ بَعْدَ صَلَاةِ الْعِشَاءِ.",
-          "latin": "Aktubul wājibal manziliyya ba'da ṣalātil 'isyā'.",
-          "translation": "Saya menulis PR setelah salat Isya."
-        },
-        {
-          "speaker": "عُثْمَان",
-          "arabic": "كَمْ سَاعَةً تَنَامُ فِي اللَّيْلِ؟",
-          "latin": "Kam sā'atan tanāmu fil lail?",
-          "translation": "Berapa jam kamu tidur di malam hari?"
-        },
-        {
-          "speaker": "أَحْمَد",
-          "arabic": "أَنَامُ ثَمَانِيَ سَاعَاتٍ، أَنَامُ فِي السَّاعَةِ التَّاسِعَةِ.",
-          "latin": "Anāmu tsamāniya sā'ātin, anāmu fis sā'atit tāsi'ah.",
-          "translation": "Saya tidur 8 jam, saya tidur pada jam sembilan."
-        }
-      ]
-    },
-    {
       "id": "dialog7",
       "title": "الكلام (١) - البَابُ الرَّابِعُ : الْحِوَارُ الأَوَّلُ (رِضْوَان وَشُكُوْر)",
       "latinTitle": "Bab 4 - Percakapan 1: Hobi Membaca & Olahraga (Ridhwan & Syukur)",
@@ -2540,6 +2452,252 @@ const ARABIC_DATA = {
           "arabic": "لَا، الْمُهِمُّ عِنْدَكَ جُهُوْدٌ وَجِدٌّ فِي الْكِتَابَةِ. وَلَا تَنْسَ مُمَارَسَةَ الْكِتَابَةِ كُلَّ يَوْمٍ.",
           "latin": "Lā, al-muhimmu 'indaka juhūdun wa jiddun fil kitābah. Wa lā tansa mumārasatal kitābati kulla yaum.",
           "translation": "Tidak ada, yang penting kamu memiliki ketekunan dan kesungguhan dalam menulis. Dan jangan lupa berlatih menulis setiap hari."
+        }
+      ]
+    },
+    {
+      "id": "dialog11",
+      "title": "الكلام (١) - البَابُ السَّادِسُ : الْحِوَارُ الأَوَّلُ (الأَبُ وَ الاِبْنُ)",
+      "latinTitle": "Bab 6 - Percakapan 1: Jam Berangkat Sekolah & Ekstrakurikuler (Ayah & Anak)",
+      "topicId": "yaumiyyah",
+      "lines": [
+        {
+          "speaker": "الأَب",
+          "arabic": "كَمِ السَّاعَةُ الآنَ؟",
+          "latin": "Kamis sā'atul ān?",
+          "translation": "Jam berapa sekarang?"
+        },
+        {
+          "speaker": "الاِبْن",
+          "arabic": "السَّاعَةُ الْخَامِسَةُ تَمَامًا. مَتَى تَذْهَبُ إِلَى الْعَمَلِ؟",
+          "latin": "As-sā'atul khāmisatu tamāmā. Matā tażhabu ilal 'amal?",
+          "translation": "Jam lima tepat. Kapan Ayah berangkat bekerja?"
+        },
+        {
+          "speaker": "الأَب",
+          "arabic": "السَّادِسَةُ إِلَّا الرُّبْعَ. مَتَى تَذْهَبُ إِلَى الْمَدْرَسَةِ؟",
+          "latin": "As-sādisatu illār rub'. Matā tażhabu ilal madrasah?",
+          "translation": "Jam enam kurang seperempat. Kapan kamu berangkat ke sekolah?"
+        },
+        {
+          "speaker": "الاِبْن",
+          "arabic": "السَّاعَةُ السَّادِسَةُ تَمَامًا.",
+          "latin": "As-sā'atus sādisatu tamāmā.",
+          "translation": "Jam enam tepat."
+        },
+        {
+          "speaker": "الأَب",
+          "arabic": "هَلْ تَذْهَبُ مَعِي؟",
+          "latin": "Hal tażhabu ma'ī?",
+          "translation": "Apakah kamu mau berangkat bersama Ayah?"
+        },
+        {
+          "speaker": "الاِبْن",
+          "arabic": "لَا، أَذْهَبُ بِنَفْسِي.",
+          "latin": "Lā, ażhabu bi-nafsī.",
+          "translation": "Tidak, saya berangkat sendiri."
+        },
+        {
+          "speaker": "الأَب",
+          "arabic": "وَمَتَى تَرْجِعُ مِنَ الْمَدْرَسَةِ الْيَوْمَ؟",
+          "latin": "Wa matā tarji'u minal madrasati yaum?",
+          "translation": "Dan jam berapa kamu pulang dari sekolah hari ini?"
+        },
+        {
+          "speaker": "الاِبْن",
+          "arabic": "أَرْجِعُ السَّاعَةَ الرَّابِعَةَ مَسَاءً.",
+          "latin": "Arji'us sā'atar rābi'ata masā'ā.",
+          "translation": "Saya pulang jam empat sore."
+        },
+        {
+          "speaker": "الأَب",
+          "arabic": "لِمَا تَرْجِعُ مَسَاءً؟",
+          "latin": "Limā tarji'u masā'ā?",
+          "translation": "Mengapa kamu pulang sore?"
+        },
+        {
+          "speaker": "الاِبْن",
+          "arabic": "أَشْتَرِكُ الْكَشَّافَةَ بَعْدَ الدِّرَاسَةِ.",
+          "latin": "Asytarikul kassyāfata ba'dad dirāsah.",
+          "translation": "Saya mengikuti ekstrakurikuler Pramuka setelah jam pelajaran."
+        },
+        {
+          "speaker": "الأَب",
+          "arabic": "الْفَطُوْرُ جَاهِزٌ، هَيَّا إِلَى غُرْفَةِ الطَّعَامِ.",
+          "latin": "Al-faṭūru jāhizun, hayyā ilā gurfatit ṭa'ām.",
+          "translation": "Sarapan sudah siap, ayo ke ruang makan!"
+        },
+        {
+          "speaker": "الاِبْن",
+          "arabic": "هَيَّا بِنَا.",
+          "latin": "Hayyā binā.",
+          "translation": "Ayo, mari!"
+        }
+      ]
+    },
+    {
+      "id": "dialog12",
+      "title": "الكلام (٢) - البَابُ السَّادِسُ : الْحِوَارُ الثَّانِي (الأُمُّ وَ الْبِنْتُ)",
+      "latinTitle": "Bab 6 - Percakapan 2: Merapikan Kamar & Membantu Ibu (Ibu & Anak Perempuan)",
+      "topicId": "yaumiyyah",
+      "lines": [
+        {
+          "speaker": "الأُم",
+          "arabic": "مَاذَا تَعْمَلِيْنَ يَا بُنَيَّتِي؟",
+          "latin": "Māżā ta'malīna yā bunayyatī?",
+          "translation": "Apa yang sedang kamu kerjakan wahai putriku?"
+        },
+        {
+          "speaker": "الْبِنْت",
+          "arabic": "أُرَتِّبُ غُرْفَتِي.",
+          "latin": "Urattibu gurfatī.",
+          "translation": "Saya sedang merapikan kamarku."
+        },
+        {
+          "speaker": "الأُم",
+          "arabic": "مَتَى سَتَذْهَبِيْنَ إِلَى الْمَدْرَسَةِ؟",
+          "latin": "Matā satażhabīna ilal madrasah?",
+          "translation": "Kapan kamu akan berangkat ke sekolah?"
+        },
+        {
+          "speaker": "الْبِنْت",
+          "arabic": "فِي السَّاعَةِ السَّادِسَةِ وَالنِّصْفِ.",
+          "latin": "Fīs sā'atis sādisati wan niṣf.",
+          "translation": "Pada jam 06.30 (enam setengah)."
+        },
+        {
+          "speaker": "الأُم",
+          "arabic": "الآنَ السَّاعَةُ الْخَامِسَةُ تَمَامًا.",
+          "latin": "Al-āna as-sā'atul khāmisatu tamāmā.",
+          "translation": "Sekarang jam lima tepat."
+        },
+        {
+          "speaker": "الْبِنْت",
+          "arabic": "هَلْ أَنْتِ بِحَاجَةٍ إِلَى مُسَاعَدَتِي؟",
+          "latin": "Hal anti bi-ḥājatin ilā musā'adatī?",
+          "translation": "Apakah Ibu membutuhkan bantuanku?"
+        },
+        {
+          "speaker": "الأُم",
+          "arabic": "بِالطَّبْعِ. سَاعِدِيْنِي لِإِعْدَادِ الْفَطُوْرِ.",
+          "latin": "Biṭ-ṭab'i. Sā'idīnī li-i'dādil faṭūr.",
+          "translation": "Tentu saja. Bantulah Ibu menyiapkan sarapan."
+        },
+        {
+          "speaker": "الْبِنْت",
+          "arabic": "حَسَنًا. هَلْ هُنَاكَ شَيْءٌ آخَرُ؟",
+          "latin": "Ḥasanā. Hal hunāka syai'un ākhar?",
+          "translation": "Baiklah. Apakah ada hal lainnya?"
+        },
+        {
+          "speaker": "الأُم",
+          "arabic": "جَاهِزِي لَنَا الْفَطُوْرَ فِي غُرْفَةِ الطَّعَامِ.",
+          "latin": "Jāhizī lanāl faṭūra fī gurfatit ṭa'ām.",
+          "translation": "Siapkan sarapan untuk kita di ruang makan."
+        },
+        {
+          "speaker": "الْبِنْت",
+          "arabic": "تَحْتَ خِدْمَتِكِ. شَيْءٌ آخَرُ؟",
+          "latin": "Taḥta khidmatiki. Syai'un ākhar?",
+          "translation": "Dengan senang hati melayani Ibu. Ada hal lain?"
+        },
+        {
+          "speaker": "الأُم",
+          "arabic": "اِدْعِي أَبَاكِ إِلَى الْفَطُوْرِ.",
+          "latin": "Id'ī abāki ilal faṭūr.",
+          "translation": "Panggillah ayahmu untuk sarapan."
+        },
+        {
+          "speaker": "الْبِنْت",
+          "arabic": "طَيِّبٌ. الطَّعَامُ جَاهِزٌ. هَيَّا إِلَى الْفَطُوْرِ.",
+          "latin": "Ṭayyib. Aṭ-ṭa'āmu jāhiz. Hayyā ilal faṭūr.",
+          "translation": "Baik. Makanan sudah siap. Ayo sarapan!"
+        },
+        {
+          "speaker": "الأُم",
+          "arabic": "شُكْرًا عَلَى مُسَاعَدَتِكِ. هَيَّا بِنَا.",
+          "latin": "Syukran 'alā musā'adatiki. Hayyā binā.",
+          "translation": "Terima kasih atas bantuanmu. Ayo, mari!"
+        }
+      ]
+    },
+    {
+      "id": "dialog14",
+      "title": "الكلام (٣) - البَابُ السَّادِسُ : الْحِوَارُ الثَّالِثُ (لُطْفِي وَ الْمُدَرِّسُ)",
+      "latinTitle": "Bab 6 - Percakapan 3: Terlambat Masuk Kelas & Nasihat Tidur Awal (Luthfi & Guru)",
+      "topicId": "yaumiyyah",
+      "lines": [
+        {
+          "speaker": "لُطْفِي",
+          "arabic": "السَّلَامُ عَلَيْكُمْ",
+          "latin": "Assalāmu 'alaikum",
+          "translation": "Assalamu'alaikum"
+        },
+        {
+          "speaker": "الْمُدَرِّس",
+          "arabic": "وَعَلَيْكُمُ السَّلَامُ وَرَحْمَةُ اللَّهِ.",
+          "latin": "Wa 'alaikumus salāmu wa raḥmatullāh.",
+          "translation": "Wa'alaikumussalam warahmatullah."
+        },
+        {
+          "speaker": "لُطْفِي",
+          "arabic": "مَعْذِرَةً يَا أُسْتَاذِي، أَنَا مُتَأَخِّرٌ.",
+          "latin": "Ma'żiratan yā ustāżī, anā muta'akhkhir.",
+          "translation": "Mohon maaf wahai Ustadz (Guru), saya terlambat."
+        },
+        {
+          "speaker": "الْمُدَرِّس",
+          "arabic": "لِمَ تَتَأَخَّرُ، يَا وَلَدِي؟",
+          "latin": "Lima tata'akhkharu yā waladī?",
+          "translation": "Mengapa kamu terlambat, wahai anakku?"
+        },
+        {
+          "speaker": "لُطْفِي",
+          "arabic": "غَلَبَنِي النَّوْمُ. أَنَا نَائِمٌ بَعْدَ الصُّبْحِ.",
+          "latin": "Galabanin naum. Anā nā'imun ba'daṣ ṣubḥ.",
+          "translation": "Saya tertidur lelap. Saya tertidur kembali setelah shalat Subuh."
+        },
+        {
+          "speaker": "الْمُدَرِّس",
+          "arabic": "فِي أَيَّةِ سَاعَةٍ نِمْتَ الْبَارِحَةَ؟",
+          "latin": "Fī ayyati sā'atin nimtal bāriḥah?",
+          "translation": "Jam berapa kamu tidur semalam?"
+        },
+        {
+          "speaker": "لُطْفِي",
+          "arabic": "فِي الثَّانِيَةَ عَشْرَةَ جَوْفَ اللَّيْلِ.",
+          "latin": "Fit tsāniyata 'asyrata jaufal lail.",
+          "translation": "Pada jam 12 tengah malam."
+        },
+        {
+          "speaker": "الْمُدَرِّس",
+          "arabic": "كَمْ أَنْتَ نَائِمٌ مُتَأَخِّرًا!",
+          "latin": "Kam anta nā'imun muta'akhkhirā!",
+          "translation": "Alangkah larut malamnya kamu tidur!"
+        },
+        {
+          "speaker": "لُطْفِي",
+          "arabic": "هَلْ تَسْمَحُ لِي بِدُخُوْلِ الْفَصْلِ؟",
+          "latin": "Hal tasmaḥu lī bi-dukhūlil faṣl?",
+          "translation": "Apakah Ustadz mengizinkan saya masuk kelas?"
+        },
+        {
+          "speaker": "الْمُدَرِّس",
+          "arabic": "تَفَضَّلْ. لَا تَعُدْ مَرَّةً ثَانِيَةً. نَمْ مُبَكِّرًا لِتَسْتَيْقِظَ مُبَكِّرًا.",
+          "latin": "Tafaḍḍal. Lā ta'ud marratan tsāniyah. Nam mubakkiran li-tastaiqiẓa mubakkirā.",
+          "translation": "Silakan. Jangan mengulanginya lagi untuk kedua kali. Tidurlah lebih awal agar kamu bangun lebih awal!"
+        },
+        {
+          "speaker": "لُطْفِي",
+          "arabic": "شُكْرًا عَلَى سَمَاحَتِكُمْ.",
+          "latin": "Syukran 'alā samāḥatikum.",
+          "translation": "Terima kasih atas kemurahan hati Ustadz."
+        },
+        {
+          "speaker": "الْمُدَرِّس",
+          "arabic": "لَا شُكْرَ عَلَى وَاجِبٍ.",
+          "latin": "Lā syukra 'alā wājib.",
+          "translation": "Sama-sama (Tidak perlu berterima kasih atas sebuah kewajiban)."
         }
       ]
     }
