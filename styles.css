@@ -42,7 +42,7 @@ body {
 
 .transform-style-3d {
   transform-style: preserve-3d;
-  transition: transform 0.38s cubic-bezier(0.34, 1.35, 0.64, 1);
+  transition: transform 0.4s cubic-bezier(0.34, 1.35, 0.64, 1) !important;
   will-change: transform;
 }
 
@@ -52,7 +52,11 @@ body {
 }
 
 .rotate-y-180 {
-  transform: rotateY(180deg);
+  transform: rotateY(180deg) !important;
+}
+
+.rotate-y-180:hover {
+  transform: rotateY(180deg) translateY(-2px) !important;
 }
 
 /* Card Styling */
