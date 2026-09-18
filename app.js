@@ -2999,66 +2999,68 @@ function renderGuruDashboardHTML() {
       
       <!-- Title Header -->
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
-        <div class="flex items-center gap-4">
-          <img src="${ARABIC_DATA.info.teacherPhoto || 'guru.jpg'}" alt="Foto Guru Pengajar" class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover border-2 border-amber-500 shadow-md transform hover:scale-105 transition-transform" />
-          <div>
-            <h2 class="text-xl sm:text-2xl font-bold text-slate-800 flex items-center gap-2">
-              <span>👨‍🏫 Dashboard Guru Bahasa Arab</span>
-              <span class="font-arabic text-2xl sm:text-3xl text-amber-700">لوحة التحكم</span>
-            </h2>
-            <p class="text-slate-600 text-xs sm:text-sm mt-1">
+        <div class="flex items-center gap-3 sm:gap-4">
+          <img src="${ARABIC_DATA.info.teacherPhoto || 'guru.jpg'}" alt="Foto Guru Pengajar" class="w-12 h-12 sm:w-20 sm:h-20 rounded-2xl object-cover border-2 border-amber-500 shadow-md transform hover:scale-105 transition-transform shrink-0" />
+          <div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+              <h2 class="text-base sm:text-2xl font-bold text-slate-800 leading-tight">
+                👨‍🏫 Dashboard Guru Bahasa Arab
+              </h2>
+              <span class="font-arabic text-xl sm:text-3xl text-amber-700">لوحة التحكم</span>
+            </div>
+            <p class="text-slate-600 text-xs sm:text-sm mt-0.5 truncate">
               Pengajar: <strong class="text-slate-900 font-extrabold">${ARABIC_DATA.info.teacher}</strong> — MAN 1 Pontianak
             </p>
           </div>
         </div>
 
-        <div class="flex flex-wrap items-center gap-2">
-          <button onclick="exportScoresToCSV()" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center gap-2">
-            <span>📥 Export Rekap (Excel / CSV)</span>
+        <div class="flex items-center gap-2 w-full sm:w-auto">
+          <button onclick="exportScoresToCSV()" class="flex-1 sm:flex-none px-3 sm:px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center justify-center gap-1.5">
+            <span>📥 Export Rekap</span>
           </button>
-          <button onclick="window.print()" class="px-4 py-2.5 bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center gap-2">
+          <button onclick="window.print()" class="flex-1 sm:flex-none px-3 sm:px-4 py-2.5 bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center justify-center gap-1.5">
             <span>🖨️ Cetak Laporan</span>
           </button>
         </div>
       </div>
 
       <!-- 3 STAT SUMMARY CARDS -->
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-        <div class="card-soft p-6 bg-gradient-to-br from-amber-500 to-amber-600 text-white shadow-lg rounded-2xl">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+        <div class="card-soft p-4 sm:p-6 bg-gradient-to-br from-amber-500 to-amber-600 text-white shadow-lg rounded-2xl">
           <div class="text-xs font-bold uppercase tracking-wider text-amber-100">Total Kuis Selesai</div>
-          <div class="text-4xl font-extrabold mt-2">${totalAttempts} <span class="text-lg font-normal">Kuis</span></div>
+          <div class="text-3xl sm:text-4xl font-extrabold mt-2">${totalAttempts} <span class="text-base sm:text-lg font-normal">Kuis</span></div>
           <p class="text-xs text-amber-100/80 mt-1">Total pengerjaan kuis siswa</p>
         </div>
 
-        <div class="card-soft p-6 bg-gradient-to-br from-teal-600 to-teal-700 text-white shadow-lg rounded-2xl">
+        <div class="card-soft p-4 sm:p-6 bg-gradient-to-br from-teal-600 to-teal-700 text-white shadow-lg rounded-2xl">
           <div class="text-xs font-bold uppercase tracking-wider text-teal-100">Rata-rata Nilai Siswa</div>
-          <div class="text-4xl font-extrabold mt-2">${avgScore} <span class="text-lg font-normal">/ 100</span></div>
+          <div class="text-3xl sm:text-4xl font-extrabold mt-2">${avgScore} <span class="text-base sm:text-lg font-normal">/ 100</span></div>
           <p class="text-xs text-teal-100/80 mt-1">Capaian rata-rata kuis</p>
         </div>
 
-        <div class="card-soft p-6 bg-gradient-to-br from-indigo-600 to-indigo-700 text-white shadow-lg rounded-2xl">
+        <div class="card-soft p-4 sm:p-6 bg-gradient-to-br from-indigo-600 to-indigo-700 text-white shadow-lg rounded-2xl">
           <div class="text-xs font-bold uppercase tracking-wider text-indigo-100">Siswa Aktif Kuis</div>
-          <div class="text-4xl font-extrabold mt-2">${uniqueStudents} <span class="text-lg font-normal">Siswa</span></div>
+          <div class="text-3xl sm:text-4xl font-extrabold mt-2">${uniqueStudents} <span class="text-base sm:text-lg font-normal">Siswa</span></div>
           <p class="text-xs text-indigo-100/80 mt-1">Siswa terdaftar pengerjaan</p>
         </div>
       </div>
 
       <!-- FILTERS & TABLE REKAP -->
-      <div class="card-soft p-6 bg-white space-y-6">
-        <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
-          <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+      <div class="card-soft p-4 sm:p-6 bg-white space-y-4 sm:space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
+          <h3 class="text-base sm:text-lg font-bold text-slate-800 flex items-center gap-2">
             <span>📊 Rekapitulasi Nilai Kuis Siswa</span>
           </h3>
 
-          <div class="flex flex-wrap items-center gap-3 w-full sm:w-auto">
+          <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto">
             <!-- Filter Kelas -->
-            <select id="guru-filter-class" class="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-amber-500">
+            <select id="guru-filter-class" class="flex-1 sm:flex-none px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-amber-500">
               <option value="all" ${state.guruFilterClass === 'all' ? 'selected' : ''}>Semua Kelas</option>
               ${classesList.map(c => `<option value="${c}" ${state.guruFilterClass === c ? 'selected' : ''}>${c}</option>`).join('')}
             </select>
 
             <!-- Filter Bab -->
-            <select id="guru-filter-bab" class="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-amber-500">
+            <select id="guru-filter-bab" class="flex-1 sm:flex-none px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-amber-500">
               <option value="all" ${state.guruFilterBab === 'all' ? 'selected' : ''}>Semua Bab</option>
               <option value="1" ${state.guruFilterBab == 1 ? 'selected' : ''}>Bab 1</option>
               <option value="2" ${state.guruFilterBab == 2 ? 'selected' : ''}>Bab 2</option>
@@ -3069,7 +3071,7 @@ function renderGuruDashboardHTML() {
             </select>
 
             <!-- Search Nama -->
-            <input type="text" id="guru-search-name" value="${state.guruSearchName}" placeholder="Cari nama siswa..." class="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-amber-500 flex-1 min-w-[150px]"/>
+            <input type="text" id="guru-search-name" value="${state.guruSearchName}" placeholder="Cari nama..." class="w-full sm:w-auto px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-amber-500 flex-1 min-w-[120px]"/>
           </div>
         </div>
 
