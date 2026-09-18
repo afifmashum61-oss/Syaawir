@@ -548,11 +548,11 @@ function renderHomeHTML() {
             </div>
 
             <!-- Main Title Block -->
-            <div class="space-y-3">
+            <div class="space-y-4 sm:space-y-5">
               <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
                 Media Pembelajaran Interaktif
               </h1>
-              <div class="text-teal-200 font-arabic text-4xl sm:text-5xl lg:text-6xl font-normal pt-2 leading-[2] tracking-wide">
+              <div class="text-teal-200 font-arabic text-4xl sm:text-5xl lg:text-6xl font-normal mt-4 sm:mt-5 pt-1 sm:pt-2 leading-[2.2] tracking-wide">
                 اللُّغَةُ العَرَبِيَّةُ
               </div>
             </div>
