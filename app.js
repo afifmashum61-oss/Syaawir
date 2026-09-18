@@ -343,6 +343,7 @@ function updateUserHeaderUI() {
   const headerElement = document.getElementById('app-header');
   const badgeContainer = document.getElementById('user-header-badge');
   const btnGuru = document.getElementById('nav-btn-guru');
+  const btnGuruMobileContainer = document.getElementById('nav-btn-guru-mobile-container');
 
   if (state.auth.isLoggedIn) {
     if (headerElement) headerElement.classList.remove('hidden');
@@ -359,6 +360,7 @@ function updateUserHeaderUI() {
         `;
       }
       if (btnGuru) btnGuru.classList.remove('hidden');
+      if (btnGuruMobileContainer) btnGuruMobileContainer.classList.remove('hidden');
     } else if (state.auth.role === 'siswa') {
       if (badgeContainer) {
         badgeContainer.innerHTML = `
@@ -371,11 +373,38 @@ function updateUserHeaderUI() {
         `;
       }
       if (btnGuru) btnGuru.classList.add('hidden');
+      if (btnGuruMobileContainer) btnGuruMobileContainer.classList.add('hidden');
     }
   } else {
     // HIDE TOP HEADER BAR ON FULL-SCREEN LOGIN GATE SCREEN
     if (headerElement) headerElement.classList.add('hidden');
   }
+}
+
+// HAMBURGER MENU DRAWER HELPERS
+function toggleHamburgerMenu() {
+  const drawer = document.getElementById('hamburger-drawer');
+  if (!drawer) return;
+  const isClosed = drawer.classList.contains('-translate-x-full');
+  if (isClosed) {
+    openHamburgerMenu();
+  } else {
+    closeHamburgerMenu();
+  }
+}
+
+function openHamburgerMenu() {
+  const drawer = document.getElementById('hamburger-drawer');
+  const overlay = document.getElementById('hamburger-overlay');
+  if (drawer) drawer.classList.remove('-translate-x-full');
+  if (overlay) overlay.classList.remove('hidden');
+}
+
+function closeHamburgerMenu() {
+  const drawer = document.getElementById('hamburger-drawer');
+  const overlay = document.getElementById('hamburger-overlay');
+  if (drawer) drawer.classList.add('-translate-x-full');
+  if (overlay) overlay.classList.add('hidden');
 }
 
 function initNavigation() {
@@ -391,6 +420,8 @@ function initNavigation() {
 }
 
 function switchTab(tabId) {
+  closeHamburgerMenu();
+
   // STRICT LOGIN GUARD: Block navigation if not logged in
   if (!state.auth.isLoggedIn && tabId !== 'login') {
     state.currentTab = 'login';
