@@ -1524,13 +1524,15 @@ function renderQawaidHTML() {
     return `
       <div class="space-y-8 animate-fadeIn max-w-4xl mx-auto">
         ${babSwitcherHTML}
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
-          <div>
-            <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">
-              <span>📐 Qawaid Bab 6: Bilangan (1-100) & Bilangan Bertingkat / Jam</span>
-              <span class="font-arabic text-3xl text-amber-700">الأَرْقَامُ وَالْعَدَدُ التَّرْتِيْبِيُّ</span>
-            </h2>
-            <p class="text-slate-600 text-sm mt-1">Struktur Bilangan Kardinal (Al-Arqaam 1-100) dan Bilangan Bertingkat / Jam (Wazan Al-Fa'il).</p>
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-200">
+          <div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+              <h2 class="text-xl sm:text-2xl font-bold text-slate-800">
+                📐 Qawaid Bab 6: Bilangan (1-100) & Bilangan Bertingkat / Jam
+              </h2>
+              <span class="font-arabic text-2xl sm:text-3xl text-amber-700 whitespace-nowrap">الأَرْقَامُ وَالْعَدَدُ التَّرْتِيْبِيُّ</span>
+            </div>
+            <p class="text-slate-600 text-xs sm:text-sm mt-1">Struktur Bilangan Kardinal (Al-Arqaam 1-100) dan Bilangan Bertingkat / Jam (Wazan Al-Fa'il).</p>
           </div>
         </div>
 
@@ -1626,13 +1628,15 @@ function renderQawaidHTML() {
     return `
       <div class="space-y-8 animate-fadeIn max-w-4xl mx-auto">
         ${babSwitcherHTML}
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
-          <div>
-            <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">
-              <span>📐 Qawaid Bab 5: Jumlah Ismiyyah & Jumlah Fi'liyyah</span>
-              <span class="font-arabic text-3xl text-amber-700">الجملة الاسمية والجملة الفعلية</span>
-            </h2>
-            <p class="text-slate-600 text-sm mt-1">Struktur Kalimat Nominal (Mubtada' + Khabar) dan Kalimat Verbal (Fi'il + Fa'il + Maf'ul Bih).</p>
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-200">
+          <div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+              <h2 class="text-xl sm:text-2xl font-bold text-slate-800">
+                📐 Qawaid Bab 5: Jumlah Ismiyyah & Jumlah Fi'liyyah
+              </h2>
+              <span class="font-arabic text-2xl sm:text-3xl text-amber-700 whitespace-nowrap">الجملة الاسمية والجملة الفعلية</span>
+            </div>
+            <p class="text-slate-600 text-xs sm:text-sm mt-1">Struktur Kalimat Nominal (Mubtada' + Khabar) dan Kalimat Verbal (Fi'il + Fa'il + Maf'ul Bih).</p>
           </div>
         </div>
 
@@ -1727,13 +1731,15 @@ function renderQawaidHTML() {
     return `
       <div class="space-y-8 animate-fadeIn max-w-4xl mx-auto">
         ${babSwitcherHTML}
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
-          <div>
-            <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">
-              <span>📐 Qawaid Bab 4: Pembagian Kata & Pembagian Kata Kerja</span>
-              <span class="font-arabic text-3xl text-amber-700">تَقْسِيْمُ الْكَلِمَةِ وَأَقْسَامُ الْفِعْلِ</span>
-            </h2>
-            <p class="text-slate-600 text-sm mt-1">Materi Qawaid Kurikulum Merdeka: Isim, Fi'il, Harf & Pembagian Fi'il Madhi, Mudhari', Amr.</p>
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-200">
+          <div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+              <h2 class="text-xl sm:text-2xl font-bold text-slate-800">
+                📐 Qawaid Bab 4: Pembagian Kata & Pembagian Kata Kerja
+              </h2>
+              <span class="font-arabic text-2xl sm:text-3xl text-amber-700 whitespace-nowrap">تَقْسِيْمُ الْكَلِمَةِ وَأَقْسَامُ الْفِعْلِ</span>
+            </div>
+            <p class="text-slate-600 text-xs sm:text-sm mt-1">Materi Qawaid Kurikulum Merdeka: Isim, Fi'il, Harf & Pembagian Fi'il Madhi, Mudhari', Amr.</p>
           </div>
         </div>
 
@@ -1852,13 +1858,15 @@ function renderQawaidHTML() {
         ${babSwitcherHTML}
 
         <!-- Title Header -->
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
-          <div>
-            <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">
-              <span>📐 Qawaid Bab 3: Mufrad, Mutsanna, Jamak & Huruf 'Athaf</span>
-              <span class="font-arabic text-3xl text-amber-700">القواعد والتراكيب</span>
-            </h2>
-            <p class="text-slate-600 text-sm mt-1">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-200">
+          <div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+              <h2 class="text-xl sm:text-2xl font-bold text-slate-800">
+                📐 Qawaid Bab 3: Mufrad, Mutsanna, Jamak & Huruf 'Athaf
+              </h2>
+              <span class="font-arabic text-2xl sm:text-3xl text-amber-700 whitespace-nowrap">القواعد والتراكيب</span>
+            </div>
+            <p class="text-slate-600 text-xs sm:text-sm mt-1">
               Bentuk Kata Benda berdasarkan jumlah (Tunggal, Dual, Jamak) dan Kata Hubung / Konjungsi (وَ, فَـ, ثُمَّ, أَوْ).
             </p>
           </div>
@@ -1990,13 +1998,15 @@ function renderQawaidHTML() {
         ${babSwitcherHTML}
 
         <!-- Title Header -->
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
-          <div>
-            <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">
-              <span>📐 Qawaid Bab 2: Al-Muzakkar wal-Mu'annats & Huruf Jar</span>
-              <span class="font-arabic text-3xl text-amber-700">القواعد والتراكيب</span>
-            </h2>
-            <p class="text-slate-600 text-sm mt-1">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-200">
+          <div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+              <h2 class="text-xl sm:text-2xl font-bold text-slate-800">
+                📐 Qawaid Bab 2: Al-Muzakkar wal-Mu'annats & Huruf Jar
+              </h2>
+              <span class="font-arabic text-2xl sm:text-3xl text-amber-700 whitespace-nowrap">القواعد والتراكيب</span>
+            </div>
+            <p class="text-slate-600 text-xs sm:text-sm mt-1">
               Pola Isim Muzakkar/Mu'annats, Kata Tunjuk (Isim Isyarah), Kata Ganti (Dhomir), dan Huruf Jar (حُرُوْفُ الْجَرِّ).
             </p>
           </div>
@@ -2162,13 +2172,15 @@ function renderQawaidHTML() {
       ${babSwitcherHTML}
 
       <!-- Title Header -->
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
-        <div>
-          <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">
-            <span>📐 Qawaid Bab 1: Kata Tanya, Dhomir & Pembagian Kata</span>
-            <span class="font-arabic text-3xl text-amber-700">القواعد والتراكيب</span>
-          </h2>
-          <p class="text-slate-600 text-sm mt-1">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-200">
+        <div class="min-w-0 flex-1">
+          <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+            <h2 class="text-xl sm:text-2xl font-bold text-slate-800">
+              📐 Qawaid Bab 1: Kata Tanya, Dhomir & Pembagian Kata
+            </h2>
+            <span class="font-arabic text-2xl sm:text-3xl text-amber-700 whitespace-nowrap">القواعد والتراكيب</span>
+          </div>
+          <p class="text-slate-600 text-xs sm:text-sm mt-1">
             Ringkasan materi Adawatul Istifham (Kata Tanya), Dhomir (Kata Ganti), dan Pembagian Kata.
           </p>
         </div>
