@@ -731,21 +731,21 @@ function renderMufrodatHTML() {
         </div>
       </div>
 
-      <!-- Controls & Filters -->
+      <!-- Controls & Filters (Fully Flexible Responsive Bar) -->
       <div class="card-soft p-4 bg-white flex flex-wrap items-center justify-between gap-4">
         <!-- Topic Filter -->
-        <div class="flex items-center gap-2">
-          <label class="text-xs font-bold text-slate-600 uppercase tracking-wider">Tema:</label>
-          <select id="mufrodat-topic-filter" class="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-teal-500">
+        <div class="flex flex-1 sm:flex-initial items-center gap-2 min-w-[180px]">
+          <label class="text-xs font-bold text-slate-600 uppercase tracking-wider whitespace-nowrap">Tema:</label>
+          <select id="mufrodat-topic-filter" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-teal-500">
             <option value="all" ${state.mufrodatTopic === 'all' ? 'selected' : ''}>Semua Tema Bab</option>
             ${ARABIC_DATA.topics.map(t => `<option value="${t.id}" ${state.mufrodatTopic === t.id ? 'selected' : ''}>${t.latin}</option>`).join('')}
           </select>
         </div>
 
         <!-- Type Filter -->
-        <div class="flex items-center gap-2">
-          <label class="text-xs font-bold text-slate-600 uppercase tracking-wider">Jenis:</label>
-          <select id="mufrodat-type-filter" class="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-teal-500 font-arabic">
+        <div class="flex flex-1 sm:flex-initial items-center gap-2 min-w-[140px]">
+          <label class="text-xs font-bold text-slate-600 uppercase tracking-wider whitespace-nowrap">Jenis:</label>
+          <select id="mufrodat-type-filter" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-teal-500 font-arabic">
             <option value="all" ${state.mufrodatType === 'all' ? 'selected' : ''}>Semua Jenis</option>
             <option value="isim" ${state.mufrodatType === 'isim' ? 'selected' : ''}>الاسم</option>
             <option value="fiil" ${state.mufrodatType === 'fiil' ? 'selected' : ''}>الفعل</option>
@@ -754,18 +754,18 @@ function renderMufrodatHTML() {
         </div>
 
         <!-- Search Input -->
-        <div class="flex-1 min-w-[200px]">
-          <input type="text" id="mufrodat-search" value="${state.mufrodatSearch}" placeholder="Cari kata Arab / Latin / Arti..." class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"/>
+        <div class="flex-1 w-full sm:w-auto min-w-[200px]">
+          <input type="text" id="mufrodat-search" value="${state.mufrodatSearch}" placeholder="Cari kata Arab / Latin / Arti..." class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"/>
         </div>
       </div>
 
-      <!-- Flashcards Grid -->
+      <!-- Flashcards Grid (Flexible Grid Layout) -->
       ${filtered.length === 0 ? `
         <div class="card-soft p-12 text-center text-slate-500">
           <p class="text-lg">Tidak ada kosakata yang cocok dengan pencarian.</p>
         </div>
       ` : `
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6">
           ${filtered.map(item => renderFlashcardItem(item)).join('')}
         </div>
       `}
@@ -778,46 +778,46 @@ function renderFlashcardItem(item) {
   const typeText = item.type === 'isim' ? 'الاسم' : (item.type === 'fiil' ? 'الفعل' : 'الحرف');
 
   return `
-    <div class="perspective-1000 h-64 select-none cursor-pointer group" onclick="flipCard(${item.id})">
-      <div id="card-inner-${item.id}" class="transform-style-3d relative w-full h-full card-soft shadow-sm hover:shadow-xl transition-all">
+    <div class="perspective-1000 min-h-[260px] sm:min-h-[280px] w-full select-none cursor-pointer group flex flex-col" onclick="flipCard(${item.id})">
+      <div id="card-inner-${item.id}" class="transform-style-3d relative w-full flex-1 min-h-[260px] sm:min-h-[280px] card-soft shadow-sm hover:shadow-xl transition-all rounded-2xl">
         
         <!-- CARD FRONT (HANYA BAHASA ARAB) -->
-        <div class="backface-hidden absolute inset-0 p-6 flex flex-col justify-between items-center text-center bg-white rounded-2xl border border-slate-200 group-hover:border-teal-500">
+        <div class="backface-hidden absolute inset-0 p-5 sm:p-6 flex flex-col justify-between items-center text-center bg-white rounded-2xl border border-slate-200 group-hover:border-teal-500 overflow-y-auto scrollbar-none">
           <div class="w-full flex justify-between items-center text-xs">
-            <span class="px-3 py-1 rounded-full font-arabic font-bold text-sm ${typeBadge}">${typeText}</span>
-            <button onclick="event.stopPropagation(); speakArabic('${item.arabic}', this)" class="p-2 bg-teal-50 hover:bg-teal-100 text-teal-700 rounded-full transition-colors" title="Dengarkan Suara">
+            <span class="px-3 py-1 rounded-full font-arabic font-bold text-xs sm:text-sm ${typeBadge}">${typeText}</span>
+            <button onclick="event.stopPropagation(); speakArabic('${item.arabic.replace(/'/g, "\\'")}', this)" class="p-2 bg-teal-50 hover:bg-teal-100 text-teal-700 rounded-full transition-colors flex-shrink-0" title="Dengarkan Suara">
               🔊
             </button>
           </div>
 
-          <div class="space-y-2 my-auto">
-            <h3 class="font-arabic text-4xl sm:text-5xl text-slate-800 leading-[2.2] py-2">${item.arabic}</h3>
+          <div class="space-y-2 my-auto py-2">
+            <h3 class="font-arabic text-3xl sm:text-4xl lg:text-5xl text-slate-800 leading-[2.2]">${item.arabic}</h3>
           </div>
 
-          <div class="text-xs text-slate-400 font-semibold flex items-center gap-1">
+          <div class="text-[11px] sm:text-xs text-slate-400 font-semibold flex items-center gap-1">
             <span>🔄 Klik untuk melihat arti</span>
           </div>
         </div>
 
         <!-- CARD BACK (ARTI & LATIN) -->
-        <div class="backface-hidden rotate-y-180 absolute inset-0 p-6 flex flex-col justify-between text-center bg-gradient-to-br from-teal-700 to-[#1f4750] text-white rounded-2xl shadow-lg">
+        <div class="backface-hidden rotate-y-180 absolute inset-0 p-5 sm:p-6 flex flex-col justify-between text-center bg-gradient-to-br from-teal-700 to-[#1f4750] text-white rounded-2xl shadow-lg overflow-y-auto scrollbar-none">
           <div class="w-full flex justify-between items-center text-xs text-teal-200">
-            <span class="font-semibold text-sm">${item.latin}</span>
-            <button onclick="event.stopPropagation(); speakArabic('${item.example || item.arabic}', this)" class="p-1.5 bg-white/20 hover:bg-white/30 text-white rounded-full transition-colors" title="Dengarkan Kalimat">
+            <span class="font-semibold text-xs sm:text-sm truncate max-w-[80%]">${item.latin}</span>
+            <button onclick="event.stopPropagation(); speakArabic('${(item.example || item.arabic).replace(/'/g, "\\'")}', this)" class="p-1.5 bg-white/20 hover:bg-white/30 text-white rounded-full transition-colors flex-shrink-0" title="Dengarkan Kalimat">
               🔊
             </button>
           </div>
 
-          <div class="space-y-3 my-auto">
-            <h4 class="text-2xl font-bold text-teal-100">${item.indonesian}</h4>
+          <div class="space-y-2 sm:space-y-3 my-auto py-2">
+            <h4 class="text-xl sm:text-2xl font-bold text-teal-100">${item.indonesian}</h4>
             ${item.example ? `
-              <div class="p-2.5 bg-white/10 rounded-xl backdrop-blur-sm border border-white/15 text-xs text-teal-50 space-y-1">
-                <p class="font-arabic text-lg text-teal-200">${item.example}</p>
+              <div class="p-2 sm:p-2.5 bg-white/10 rounded-xl backdrop-blur-sm border border-white/15 text-xs text-teal-50 space-y-1">
+                <p class="font-arabic text-base sm:text-lg text-teal-200 leading-[2]">${item.example}</p>
               </div>
             ` : ''}
           </div>
 
-          <div class="text-xs text-teal-200/80 font-semibold">
+          <div class="text-[11px] sm:text-xs text-teal-200/80 font-semibold">
             🔄 Klik untuk kembali
           </div>
         </div>
