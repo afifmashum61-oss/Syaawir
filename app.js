@@ -351,6 +351,7 @@ function updateUserHeaderUI() {
       if (badgeContainer) {
         badgeContainer.innerHTML = `
           <div class="flex items-center gap-2 bg-amber-50 border border-amber-200 px-3 py-1.5 rounded-xl text-xs font-semibold text-amber-900 shadow-sm">
+            <img src="${ARABIC_DATA.info.teacherPhoto || 'guru.jpg'}" alt="Foto Guru" class="w-6 h-6 rounded-full object-cover border border-amber-400 shadow-xs" />
             <span>👨‍🏫 Guru: <strong class="font-bold text-amber-950">${ARABIC_DATA.info.teacher}</strong></span>
             <button onclick="logoutUser()" class="ml-1 px-2 py-0.5 bg-amber-200 hover:bg-amber-300 text-amber-900 rounded-lg font-bold text-[10px] transition-colors" title="Keluar">
               Keluar
@@ -2674,10 +2675,13 @@ function renderQuizResultHTML() {
           <p><strong>Skor Capaian Akhir:</strong> <span class="text-xl font-bold text-emerald-700">${state.quizScore} / 100</span> (${isPassed ? 'Sangat Baik (Lulus)' : 'Cukup'})</p>
         </div>
 
-        <div class="pt-12 flex justify-between text-xs text-slate-500">
+        <div class="pt-8 flex justify-between text-xs text-slate-500">
           <div>
             <p>Mengetahui,</p>
-            <p class="mt-12 font-bold text-slate-700">Guru Mata Pelajaran Bahasa Arab</p>
+            <p class="font-bold text-slate-700">Guru Mata Pelajaran Bahasa Arab</p>
+            <div class="my-3">
+              <img src="${ARABIC_DATA.info.teacherPhoto || 'guru.jpg'}" alt="Foto Guru Pengajar" class="w-16 h-16 rounded-xl object-cover border border-slate-300 shadow-sm" />
+            </div>
             <p class="font-extrabold text-slate-900">${ARABIC_DATA.info.teacher}</p>
           </div>
           <div class="text-right">
@@ -2775,9 +2779,12 @@ function renderLoginHTML() {
         </div>
 
         <!-- Footer Info -->
-        <div class="text-xs text-teal-100/70 font-medium space-y-1">
-          <p>👨‍🏫 Guru Pengajar: <strong>${ARABIC_DATA.info.teacher}</strong></p>
-          <p>© 2026 MAN 1 Pontianak — Hak Cipta Dilindungi</p>
+        <div class="flex flex-col items-center justify-center gap-2 text-xs text-teal-100/90 font-medium">
+          <div class="flex items-center gap-2.5 bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-full border border-white/20 shadow-sm">
+            <img src="${ARABIC_DATA.info.teacherPhoto || 'guru.jpg'}" alt="Foto Guru Pengajar" class="w-7 h-7 rounded-full object-cover border border-amber-300 shadow-xs" />
+            <span>Guru Pengajar: <strong class="text-white font-bold">${ARABIC_DATA.info.teacher}</strong></span>
+          </div>
+          <p class="text-[11px] text-teal-100/60">© 2026 MAN 1 Pontianak — Hak Cipta Dilindungi</p>
         </div>
 
       </div>
@@ -2900,14 +2907,17 @@ function renderGuruDashboardHTML() {
       
       <!-- Title Header -->
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
-        <div>
-          <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">
-            <span>👨‍🏫 Dashboard Guru Bahasa Arab</span>
-            <span class="font-arabic text-3xl text-amber-700">لوحة التحكم</span>
-          </h2>
-          <p class="text-slate-600 text-sm mt-1">
-            Pengajar: <strong>${ARABIC_DATA.info.teacher}</strong> — MAN 1 Pontianak
-          </p>
+        <div class="flex items-center gap-4">
+          <img src="${ARABIC_DATA.info.teacherPhoto || 'guru.jpg'}" alt="Foto Guru Pengajar" class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover border-2 border-amber-500 shadow-md transform hover:scale-105 transition-transform" />
+          <div>
+            <h2 class="text-xl sm:text-2xl font-bold text-slate-800 flex items-center gap-2">
+              <span>👨‍🏫 Dashboard Guru Bahasa Arab</span>
+              <span class="font-arabic text-2xl sm:text-3xl text-amber-700">لوحة التحكم</span>
+            </h2>
+            <p class="text-slate-600 text-xs sm:text-sm mt-1">
+              Pengajar: <strong class="text-slate-900 font-extrabold">${ARABIC_DATA.info.teacher}</strong> — MAN 1 Pontianak
+            </p>
+          </div>
         </div>
 
         <div class="flex flex-wrap items-center gap-2">

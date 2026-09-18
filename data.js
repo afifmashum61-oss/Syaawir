@@ -4,6 +4,7 @@ const ARABIC_DATA = {
     "subject": "Bahasa Arab (اللغة العربية)",
     "grade": "Kelas X (العاشر)",
     "teacher": "Yosi, S. Ag, M. Pd.",
+    "teacherPhoto": "guru.jpg",
     "curriculum": "Kurikulum Merdeka / KMA Nomor 1503 Tahun 2025"
   },
   "topics": [
