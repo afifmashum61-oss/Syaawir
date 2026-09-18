@@ -718,9 +718,9 @@ function renderMufrodatHTML() {
       <!-- Title Header -->
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
         <div>
-          <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">
-            <span>🔤 Mufrodat Interaktif</span>
-            <span class="font-arabic text-3xl text-teal-700">المفردات</span>
+          <h2 class="text-xl sm:text-2xl font-bold text-slate-800 flex flex-wrap items-center gap-2 sm:gap-3">
+            <span class="whitespace-nowrap">🔤 Mufrodat Interaktif</span>
+            <span class="font-arabic text-2xl sm:text-3xl text-teal-700 whitespace-nowrap leading-none">المفردات</span>
           </h2>
           <p class="text-slate-600 text-sm mt-1">
             Klik pada kartu untuk membalik kata (Flip Card) dan dengarkan pelafalan fasihnya.
@@ -873,9 +873,9 @@ function renderKalamHTML() {
       <!-- Title Header -->
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
         <div>
-          <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">
-            <span>🗣️ Maharah Kalam (Berbicara)</span>
-            <span class="font-arabic text-3xl text-blue-700">مهارة الكلام</span>
+          <h2 class="text-xl sm:text-2xl font-bold text-slate-800 flex flex-wrap items-center gap-2 sm:gap-3">
+            <span class="whitespace-nowrap">🗣️ Maharah Kalam (Berbicara)</span>
+            <span class="font-arabic text-2xl sm:text-3xl text-blue-700 whitespace-nowrap leading-none">مهارة الكلام</span>
           </h2>
           <p class="text-slate-600 text-sm mt-1">
             Simulasi percakapan interaktif 2 tokoh. Dengarkan pelafalan dan latih kemampuan bicara Anda.
@@ -1115,9 +1115,9 @@ function renderQiraahHTML() {
       <!-- Title Header -->
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
         <div>
-          <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">
-            <span>📖 Maharah Qira'ah (Membaca)</span>
-            <span class="font-arabic text-3xl text-emerald-700">مهارة القراءة</span>
+          <h2 class="text-xl sm:text-2xl font-bold text-slate-800 flex flex-wrap items-center gap-2 sm:gap-3">
+            <span class="whitespace-nowrap">📖 Maharah Qira'ah (Membaca)</span>
+            <span class="font-arabic text-2xl sm:text-3xl text-emerald-700 whitespace-nowrap leading-none">مهارة القراءة</span>
           </h2>
           <p class="text-slate-600 text-sm mt-1">
             Baca teks Bahasa Arab di bawah ini, sesuaikan pengaturan harakat & terjemahan, lalu jawab soal pemahamannya.
@@ -1274,9 +1274,9 @@ function renderIstimaHTML() {
       <!-- Title Header -->
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
         <div>
-          <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">
-            <span>🎧 Maharah Istima' (Mendengarkan Teks Bacaan)</span>
-            <span class="font-arabic text-3xl text-purple-700">مهارة الاستماع</span>
+          <h2 class="text-xl sm:text-2xl font-bold text-slate-800 flex flex-wrap items-center gap-2 sm:gap-3">
+            <span class="whitespace-nowrap">🎧 Maharah Istima' (Mendengarkan)</span>
+            <span class="font-arabic text-2xl sm:text-3xl text-purple-700 whitespace-nowrap leading-none">مهارة الاستماع</span>
           </h2>
           <p class="text-slate-600 text-sm mt-1">
             Bahan mendengarkan diambil langsung dari naskah bacaan Maharah Qira'ah (Teks A & Teks B).
