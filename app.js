@@ -344,40 +344,66 @@ function updateUserHeaderUI() {
   const badgeContainer = document.getElementById('user-header-badge');
   const btnGuru = document.getElementById('nav-btn-guru');
   const btnGuruMobileContainer = document.getElementById('nav-btn-guru-mobile-container');
+  const drawerFooterUser = document.getElementById('drawer-footer-user');
 
   if (state.auth.isLoggedIn) {
     if (headerElement) headerElement.classList.remove('hidden');
 
+    // Clear top header badge completely as requested
+    if (badgeContainer) badgeContainer.innerHTML = '';
+
     if (state.auth.role === 'guru') {
-      if (badgeContainer) {
-        badgeContainer.innerHTML = `
-          <div class="flex items-center gap-2 bg-amber-50 border border-amber-200 px-3 py-1.5 rounded-xl text-xs font-semibold text-amber-900 shadow-sm">
-            <span>👨‍🏫 Guru</span>
-            <button onclick="logoutUser()" class="ml-1 px-2 py-0.5 bg-amber-200 hover:bg-amber-300 text-amber-900 rounded-lg font-bold text-[10px] transition-colors" title="Keluar">
-              Keluar
-            </button>
-          </div>
-        `;
-      }
       if (btnGuru) btnGuru.classList.remove('hidden');
       if (btnGuruMobileContainer) btnGuruMobileContainer.classList.remove('hidden');
-    } else if (state.auth.role === 'siswa') {
-      if (badgeContainer) {
-        badgeContainer.innerHTML = `
-          <div class="flex items-center gap-2 bg-teal-50 border border-teal-200 px-3 py-1.5 rounded-xl text-xs font-semibold text-teal-900 shadow-sm">
-            <span>👨‍🎓 <strong class="font-bold">${state.auth.userName}</strong> (${state.auth.userClass})</span>
-            <button onclick="logoutUser()" class="ml-1 px-2 py-0.5 bg-teal-200 hover:bg-teal-300 text-teal-900 rounded-lg font-bold text-[10px] transition-colors" title="Keluar">
-              Keluar
-            </button>
+
+      if (drawerFooterUser) {
+        drawerFooterUser.innerHTML = `
+          <div class="space-y-3">
+            <div class="flex items-center justify-between p-3 bg-amber-50 border border-amber-200/80 rounded-xl text-amber-900 shadow-xs">
+              <div class="flex items-center gap-2 font-bold text-xs">
+                <span>👨‍🏫 Mode Guru</span>
+              </div>
+              <button onclick="logoutUser()" class="px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-lg text-xs transition-all shadow-xs flex items-center gap-1.5" title="Keluar Akun">
+                <span>🚪 Keluar</span>
+              </button>
+            </div>
+            <div class="text-[11px] text-slate-400 text-center">MAN 1 Pontianak • ${ARABIC_DATA.info.teacher}</div>
           </div>
         `;
       }
+    } else if (state.auth.role === 'siswa') {
       if (btnGuru) btnGuru.classList.add('hidden');
       if (btnGuruMobileContainer) btnGuruMobileContainer.classList.add('hidden');
+
+      if (drawerFooterUser) {
+        drawerFooterUser.innerHTML = `
+          <div class="space-y-3">
+            <div class="flex items-center justify-between p-3 bg-teal-50 border border-teal-200/80 rounded-xl text-teal-900 shadow-xs">
+              <div class="text-left">
+                <div class="font-extrabold text-xs text-teal-950">${state.auth.userName}</div>
+                <div class="text-[10px] font-semibold text-teal-700">${state.auth.userClass}</div>
+              </div>
+              <button onclick="logoutUser()" class="px-3 py-1.5 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-lg text-xs transition-all shadow-xs flex items-center gap-1.5" title="Keluar Akun">
+                <span>🚪 Keluar</span>
+              </button>
+            </div>
+            <div class="text-[11px] text-slate-400 text-center">MAN 1 Pontianak • Bahasa Arab X</div>
+          </div>
+        `;
+      }
     }
   } else {
     // HIDE TOP HEADER BAR ON FULL-SCREEN LOGIN GATE SCREEN
     if (headerElement) headerElement.classList.add('hidden');
+    if (badgeContainer) badgeContainer.innerHTML = '';
+    if (drawerFooterUser) {
+      drawerFooterUser.innerHTML = `
+        <div class="text-center space-y-1">
+          <p class="font-semibold text-slate-700">MAN 1 Pontianak</p>
+          <p class="text-[11px] text-slate-400">Guru: ${ARABIC_DATA.info.teacher}</p>
+        </div>
+      `;
+    }
   }
 }
 
@@ -2919,6 +2945,7 @@ function handleGuruLogin(e) {
 }
 
 function logoutUser() {
+  closeHamburgerMenu();
   if (confirm("Apakah Anda yakin ingin keluar dari akun?")) {
     state.auth.isLoggedIn = false;
     state.auth.role = null;
