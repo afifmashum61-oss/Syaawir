@@ -351,7 +351,7 @@ function updateUserHeaderUI() {
       if (badgeContainer) {
         badgeContainer.innerHTML = `
           <div class="flex items-center gap-2 bg-amber-50 border border-amber-200 px-3 py-1.5 rounded-xl text-xs font-semibold text-amber-900 shadow-sm">
-            <span>👨‍🏫 Guru: <strong class="font-bold text-amber-950">${ARABIC_DATA.info.teacher}</strong></span>
+            <span>👨‍🏫 Guru</span>
             <button onclick="logoutUser()" class="ml-1 px-2 py-0.5 bg-amber-200 hover:bg-amber-300 text-amber-900 rounded-lg font-bold text-[10px] transition-colors" title="Keluar">
               Keluar
             </button>
