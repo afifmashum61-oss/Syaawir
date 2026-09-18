@@ -472,40 +472,75 @@ function renderHomeHTML() {
   return `
     <div class="space-y-8 animate-fadeIn">
       <!-- Hero Banner -->
-      <div class="card-soft p-8 sm:p-12 bg-gradient-to-br from-[#2f6b78] to-[#1f4750] text-white relative overflow-hidden">
+      <div class="card-soft p-6 sm:p-10 lg:p-12 bg-gradient-to-br from-[#2f6b78] via-[#1f4750] to-[#15343b] text-white relative overflow-hidden shadow-2xl rounded-3xl">
         
-        <div class="relative z-10 max-w-3xl space-y-6">
-          <!-- Badge Header -->
-          <div class="inline-flex items-center gap-2.5 px-4 py-1.5 bg-white/10 backdrop-blur-md rounded-full text-xs font-semibold tracking-wide text-teal-100 border border-white/20">
-            <img src="logo.webp" alt="Logo MAN 1 Pontianak" class="w-5 h-5 object-contain" />
-            <span>${ARABIC_DATA.info.school}</span>
-            <span class="text-teal-300">•</span>
-            <span>Kelas X</span>
-            <span class="text-teal-200 font-semibold">(العاشر)</span>
-          </div>
+        <!-- Subtle Background Pattern / Glow -->
+        <div class="absolute -right-16 -top-16 w-96 h-96 bg-teal-400/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -left-16 -bottom-16 w-96 h-96 bg-amber-400/10 rounded-full blur-3xl pointer-events-none"></div>
 
-          <!-- Main Title Block -->
-          <div class="space-y-6">
-            <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-snug">
-              Media Pembelajaran Interaktif
-            </h1>
-            <div class="text-teal-200 font-arabic text-4xl sm:text-6xl font-normal pt-6 mt-6 leading-[2.2] tracking-wide">
-              اللُّغَةُ العَرَبِيَّةُ
+        <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8 lg:gap-12">
+          
+          <!-- Left Column: Content -->
+          <div class="flex-1 space-y-6 text-left">
+            <!-- Badge Header -->
+            <div class="inline-flex items-center gap-2.5 px-4 py-1.5 bg-white/10 backdrop-blur-md rounded-full text-xs font-semibold tracking-wide text-teal-100 border border-white/20">
+              <img src="logo.webp" alt="Logo MAN 1 Pontianak" class="w-5 h-5 object-contain" />
+              <span>${ARABIC_DATA.info.school}</span>
+              <span class="text-teal-300">•</span>
+              <span>Kelas X</span>
+              <span class="text-teal-200 font-semibold">(العاشر)</span>
+            </div>
+
+            <!-- Main Title Block -->
+            <div class="space-y-3">
+              <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
+                Media Pembelajaran Interaktif
+              </h1>
+              <div class="text-teal-200 font-arabic text-4xl sm:text-5xl lg:text-6xl font-normal pt-2 leading-[2] tracking-wide">
+                اللُّغَةُ العَرَبِيَّةُ
+              </div>
+            </div>
+
+            <p class="text-teal-50/90 text-sm sm:text-base lg:text-lg max-w-xl leading-relaxed">
+              Selamat datang di media pembelajaran Bahasa Arab Kelas X MAN 1 Pontianak. Kuasai kosakata, percakapan, membaca, menyimak, dan tata bahasa Arab melalui fitur interaktif modern!
+            </p>
+
+            <!-- Buttons -->
+            <div class="pt-2 flex flex-wrap gap-3 sm:gap-4">
+              <button onclick="switchTab('mufrodat')" class="px-5 py-3 sm:px-6 sm:py-3.5 bg-white text-[#2f6b78] hover:bg-teal-50 font-bold rounded-xl shadow-lg transition-all transform hover:-translate-y-0.5 flex items-center gap-2 text-sm sm:text-base">
+                <span>🚀 Mulai Belajar Mufrodat</span>
+              </button>
+              <button onclick="switchTab('tadribat')" class="px-5 py-3 sm:px-6 sm:py-3.5 bg-teal-800/60 hover:bg-teal-800 text-white font-semibold rounded-xl border border-teal-400/30 transition-all flex items-center gap-2 text-sm sm:text-base">
+                <span>📝 Uji Kemampuan (Kuis)</span>
+              </button>
             </div>
           </div>
 
-          <p class="text-teal-50/90 text-base sm:text-lg max-w-2xl leading-relaxed">
-            Selamat datang di media pembelajaran Bahasa Arab Kelas X MAN 1 Pontianak. Kuasai kosakata, percakapan, membaca, menyimak, dan tata bahasa Arab melalui fitur interaktif modern!
-          </p>
-
-          <div class="pt-4 flex flex-wrap gap-4">
-            <button onclick="switchTab('mufrodat')" class="px-6 py-3 bg-white text-[#2f6b78] hover:bg-teal-50 font-bold rounded-xl shadow-lg transition-all transform hover:-translate-y-0.5 flex items-center gap-2">
-              <span>🚀 Mulai Belajar Mufrodat</span>
-            </button>
-            <button onclick="switchTab('tadribat')" class="px-6 py-3 bg-teal-800/60 hover:bg-teal-800 text-white font-semibold rounded-xl border border-teal-400/30 transition-all flex items-center gap-2">
-              <span>📝 Uji Kemampuan (Kuis)</span>
-            </button>
+          <!-- Right Column: Teacher Photo Card -->
+          <div class="w-full md:w-auto flex-shrink-0 flex justify-center md:justify-end">
+            <div class="relative group">
+              <!-- Frame background accent/glow -->
+              <div class="absolute -inset-1.5 bg-gradient-to-tr from-amber-400 via-amber-500 to-teal-400 rounded-3xl blur opacity-75 group-hover:opacity-100 transition duration-500"></div>
+              
+              <div class="relative w-56 sm:w-64 lg:w-72 bg-slate-900/80 backdrop-blur-md rounded-2.5xl p-3 border border-white/20 shadow-2xl flex flex-col items-center">
+                <div class="w-full h-64 sm:h-72 lg:h-80 rounded-2xl overflow-hidden border border-white/10 relative">
+                  <img src="${ARABIC_DATA.info.teacherPhoto || 'guru.jpg'}" alt="Foto Guru Pengajar ${ARABIC_DATA.info.teacher}" class="w-full h-full object-cover object-top transform group-hover:scale-105 transition-transform duration-500" />
+                  
+                  <!-- Bottom Overlay Tag -->
+                  <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent p-4 text-center">
+                    <span class="inline-block px-2.5 py-0.5 bg-amber-500/90 text-amber-950 text-[10px] font-extrabold uppercase tracking-wider rounded-md mb-1 shadow-sm">
+                      👨‍🏫 Guru Pengajar
+                    </span>
+                    <h3 class="text-sm sm:text-base font-extrabold text-white leading-snug drop-shadow-md">
+                      ${ARABIC_DATA.info.teacher}
+                    </h3>
+                    <p class="text-[11px] text-teal-200/90 font-medium">Bahasa Arab — MAN 1 Pontianak</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+
         </div>
       </div>
 
