@@ -2846,6 +2846,8 @@ function attachTadribatEvents() {}
 // ==========================================
 // 8. ULANGAN HARIAN BERBASIS KURIKULUM BERBASIS CINTA (FORMATIF & SUMATIF)
 // ==========================================
+let ulanganTimerInterval = null;
+
 function getUlanganPackageInfo() {
   if (!ARABIC_DATA.ulanganCinta) return null;
   return state.ulanganPackage === 1 
@@ -2863,6 +2865,9 @@ function switchUlanganPackage(pkgNum) {
   SoundFx.playClick();
   state.ulanganPackage = pkgNum;
   resetUlanganState();
+  if (state.ulanganMode === 'sumatif') {
+    startUlanganTimer();
+  }
   renderTabContent();
 }
 
@@ -2871,6 +2876,11 @@ function switchUlanganMode(mode) {
   SoundFx.playClick();
   state.ulanganMode = mode;
   resetUlanganState();
+  if (mode === 'sumatif') {
+    startUlanganTimer();
+  } else {
+    stopUlanganTimer();
+  }
   renderTabContent();
 }
 
@@ -2883,28 +2893,72 @@ function resetUlanganState() {
   state.ulanganMaxStreak = 0;
   state.ulanganIsFinished = false;
   state.ulanganShowReview = false;
-  state.ulanganTimerSeconds = 0;
+  state.ulanganTimerSeconds = 30 * 60; // 30 minutes for sumatif
+}
+
+function startUlanganTimer() {
+  stopUlanganTimer();
+  if (!state.ulanganTimerSeconds || state.ulanganTimerSeconds <= 0) {
+    state.ulanganTimerSeconds = 30 * 60;
+  }
+
+  ulanganTimerInterval = setInterval(() => {
+    if (state.currentTab !== 'ulangan' || state.ulanganMode !== 'sumatif' || state.ulanganIsFinished) {
+      stopUlanganTimer();
+      return;
+    }
+
+    if (state.ulanganTimerSeconds > 0) {
+      state.ulanganTimerSeconds--;
+      const display = document.getElementById('ulangan-timer-display');
+      if (display) {
+        const mins = Math.floor(state.ulanganTimerSeconds / 60);
+        const secs = state.ulanganTimerSeconds % 60;
+        display.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+        if (state.ulanganTimerSeconds < 300) {
+          display.className = "font-mono font-extrabold text-rose-400 text-sm animate-pulse";
+        }
+      }
+    } else {
+      stopUlanganTimer();
+      alert("⏱️ Waktu ujian Sumatif telah habis! Sistem akan mengumpulkan lembar jawaban Anda secara otomatis.");
+      finishUlangan();
+    }
+  }, 1000);
+}
+
+function stopUlanganTimer() {
+  if (ulanganTimerInterval) {
+    clearInterval(ulanganTimerInterval);
+    ulanganTimerInterval = null;
+  }
 }
 
 function selectUlanganAnswer(optIdx) {
-  if (state.ulanganMode === 'formatif') {
-    if (state.ulanganAnswers[state.ulanganCurrentIndex] !== undefined) return;
-  }
-  
   const questions = getUlanganQuestions();
   const q = questions[state.ulanganCurrentIndex];
-  state.ulanganAnswers[state.ulanganCurrentIndex] = optIdx;
 
-  if (optIdx === q.answer) {
-    SoundFx.playCorrect();
-    state.ulanganStreak++;
-    if (state.ulanganStreak > state.ulanganMaxStreak) {
-      state.ulanganMaxStreak = state.ulanganStreak;
+  if (state.ulanganMode === 'formatif') {
+    // In Formatif mode, once answered, lock the choice so student reads reflection
+    if (state.ulanganAnswers[state.ulanganCurrentIndex] !== undefined) return;
+    state.ulanganAnswers[state.ulanganCurrentIndex] = optIdx;
+
+    if (optIdx === q.answer) {
+      SoundFx.playCorrect();
+      state.ulanganStreak++;
+      if (state.ulanganStreak > state.ulanganMaxStreak) {
+        state.ulanganMaxStreak = state.ulanganStreak;
+      }
+      state.ulanganPoints += 1000 + (state.ulanganStreak * 250);
+    } else {
+      SoundFx.playWrong();
+      state.ulanganStreak = 0;
     }
-    state.ulanganPoints += 1000 + (state.ulanganStreak * 250);
   } else {
-    SoundFx.playWrong();
-    state.ulanganStreak = 0;
+    // In Sumatif mode (Official CBT Exam): student CAN freely change their answer!
+    // No right/wrong sound or indication is given during the exam!
+    SoundFx.playClick();
+    state.ulanganAnswers[state.ulanganCurrentIndex] = optIdx;
   }
 
   renderTabContent();
@@ -2916,7 +2970,7 @@ function nextUlanganQuestion() {
     SoundFx.playClick();
     state.ulanganCurrentIndex++;
     renderTabContent();
-    window.scrollTo({ top: 100, behavior: 'smooth' });
+    window.scrollTo({ top: 140, behavior: 'smooth' });
   }
 }
 
@@ -2925,7 +2979,7 @@ function prevUlanganQuestion() {
     SoundFx.playClick();
     state.ulanganCurrentIndex--;
     renderTabContent();
-    window.scrollTo({ top: 100, behavior: 'smooth' });
+    window.scrollTo({ top: 140, behavior: 'smooth' });
   }
 }
 
@@ -2935,11 +2989,32 @@ function jumpToUlanganQuestion(idx) {
     SoundFx.playClick();
     state.ulanganCurrentIndex = idx;
     renderTabContent();
-    window.scrollTo({ top: 100, behavior: 'smooth' });
+    window.scrollTo({ top: 140, behavior: 'smooth' });
+  }
+}
+
+function confirmFinishUlangan() {
+  const questions = getUlanganQuestions();
+  const totalQ = questions.length;
+  const answeredCount = state.ulanganAnswers.filter(a => a !== undefined).length;
+  const unanswered = totalQ - answeredCount;
+
+  let msg = "Apakah Ananda yakin ingin menyelesaikan dan mengumpulkan asesmen ini?";
+  if (state.ulanganMode === 'sumatif') {
+    if (unanswered > 0) {
+      msg = `⚠️ Perhatian: Ananda baru menjawab ${answeredCount} dari ${totalQ} soal (${unanswered} soal belum diisi).\n\nApakah Ananda yakin ingin tetap mengumpulkan Ujian Sumatif sekarang?`;
+    } else {
+      msg = `Alhamdulillah seluruh ${totalQ} soal telah terisi!\n\nApakah Ananda yakin ingin mengumpulkan Ujian Sumatif sekarang dan menerbitkan Piagam Capaian?`;
+    }
+  }
+
+  if (confirm(msg)) {
+    finishUlangan();
   }
 }
 
 function finishUlangan() {
+  stopUlanganTimer();
   const questions = getUlanganQuestions();
   const totalQ = questions.length;
   let correctCount = 0;
@@ -3007,33 +3082,46 @@ function renderUlanganHTML() {
 
   const answeredCount = state.ulanganAnswers.filter(a => a !== undefined).length;
   const allAnswered = answeredCount === totalQ;
+  const isFormatif = state.ulanganMode === 'formatif';
 
-  // Kahoot Shape Symbols & Colors
+  // Format timer display
+  const timerMins = Math.floor((state.ulanganTimerSeconds || 1800) / 60);
+  const timerSecs = (state.ulanganTimerSeconds || 1800) % 60;
+  const timerString = `${String(timerMins).padStart(2, '0')}:${String(timerSecs).padStart(2, '0')}`;
+
+  // Start timer automatically if in sumatif mode and not running
+  if (!isFormatif && !ulanganTimerInterval) {
+    setTimeout(startUlanganTimer, 100);
+  }
+
+  // Kahoot Shape Symbols & Colors (Used in Formatif Mode)
   const kahootStyles = [
-    { bg: "bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-500 hover:to-red-500 text-white border-rose-700", shape: "▲", label: "A" },
+    { bg: "bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white border-emerald-700", shape: "▲", label: "A" },
     { bg: "bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white border-blue-700", shape: "◆", label: "B" },
     { bg: "bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-900 border-amber-600", shape: "●", label: "C" },
-    { bg: "bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white border-emerald-700", shape: "■", label: "D" }
+    { bg: "bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white border-purple-700", shape: "■", label: "D" }
   ];
+
+  const optionLabels = ["A", "B", "C", "D"];
 
   return `
     <div class="space-y-6 animate-fadeIn max-w-4xl mx-auto">
       
       <!-- HERO BANNER KURIKULUM BERBASIS CINTA -->
-      <div class="card-soft p-6 sm:p-8 bg-gradient-to-br from-rose-900 via-slate-900 to-[#1f4750] text-white rounded-3xl shadow-xl border border-rose-500/30 relative overflow-hidden">
-        <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-rose-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="card-soft p-6 sm:p-8 ${isFormatif ? 'bg-gradient-to-br from-emerald-900 via-slate-900 to-[#1f4750] border-emerald-500/40' : 'bg-gradient-to-br from-blue-950 via-slate-900 to-[#152e35] border-blue-500/40'} text-white rounded-3xl shadow-xl border relative overflow-hidden transition-all duration-500">
+        <div class="absolute -right-10 -bottom-10 w-64 h-64 ${isFormatif ? 'bg-emerald-500/10' : 'bg-blue-500/10'} rounded-full blur-3xl pointer-events-none"></div>
         <div class="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div>
-            <div class="inline-flex items-center gap-2 px-3 py-1 bg-rose-500/20 text-rose-300 border border-rose-500/40 rounded-full text-xs font-bold uppercase tracking-wider mb-2">
+            <div class="inline-flex items-center gap-2 px-3 py-1 ${isFormatif ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40' : 'bg-blue-500/20 text-blue-300 border-blue-500/40'} border rounded-full text-xs font-bold uppercase tracking-wider mb-2">
               <span>💖 KURIKULUM BERBASIS CINTA (KBC)</span>
               <span>•</span>
               <span>MAN 1 PONTIANAK</span>
             </div>
             <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white flex items-center gap-2">
-              <span>Ulangan Harian & Asesmen Karakter</span>
-              <span class="font-arabic text-2xl sm:text-3xl text-rose-300">الاختبار اليومي</span>
+              <span>${isFormatif ? 'Asesmen Formatif (Latihan Reflektif)' : 'Asesmen Sumatif (Ujian CBT Resmi)'}</span>
+              <span class="font-arabic text-2xl sm:text-3xl ${isFormatif ? 'text-emerald-300' : 'text-blue-300'}">الاختبار اليومي</span>
             </h2>
-            <p class="text-rose-100/90 text-xs sm:text-sm mt-1 max-w-xl leading-relaxed">
+            <p class="text-slate-200 text-xs sm:text-sm mt-1 max-w-xl leading-relaxed">
               «مَنْ سَلَكَ طَرِيقًا يَلْتَمِسُ فِيهِ عِلْمًا سَهَّلَ اللَّهُ لَهُ بِهِ طَرِيقًا إِلَى الْجَنَّةِ» — Belajar dengan cinta, menguji pemahaman dengan ketenangan hati, kejujuran, dan kebahagiaan.
             </p>
           </div>
@@ -3041,74 +3129,114 @@ function renderUlanganHTML() {
       </div>
 
       <!-- SELECTOR BAR (PAKET PENILAIAN 1 vs 2 & MODE FORMATIF vs SUMATIF) -->
-      <div class="card-soft p-4 sm:p-5 bg-white rounded-2xl border border-slate-200 shadow-md flex flex-col md:flex-row items-center justify-between gap-4">
-        <!-- Paket Selector -->
-        <div class="flex items-center gap-2 w-full md:w-auto">
-          <span class="text-xs font-bold text-slate-500 uppercase tracking-wider hidden sm:inline">Paket:</span>
-          <button onclick="switchUlanganPackage(1)" class="flex-1 md:flex-none px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold transition-all flex items-center justify-center gap-2 ${state.ulanganPackage === 1 ? 'bg-gradient-to-r from-rose-600 to-pink-600 text-white shadow-md ring-2 ring-rose-400/50' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}">
-            <span>💖 Penilaian 1 (Bab 1–3)</span>
-          </button>
-          <button onclick="switchUlanganPackage(2)" class="flex-1 md:flex-none px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold transition-all flex items-center justify-center gap-2 ${state.ulanganPackage === 2 ? 'bg-gradient-to-r from-rose-600 to-pink-600 text-white shadow-md ring-2 ring-rose-400/50' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}">
-            <span>💖 Penilaian 2 (Bab 4–6)</span>
-          </button>
+      <div class="card-soft p-4 sm:p-5 bg-white rounded-2xl border border-slate-200 shadow-md space-y-4">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+          <!-- Paket Selector -->
+          <div class="flex items-center gap-2 w-full md:w-auto">
+            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider hidden sm:inline">Paket:</span>
+            <button onclick="switchUlanganPackage(1)" class="flex-1 md:flex-none px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold transition-all flex items-center justify-center gap-2 ${state.ulanganPackage === 1 ? 'bg-gradient-to-r from-rose-600 to-pink-600 text-white shadow-md ring-2 ring-rose-400/50' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}">
+              <span>💖 Penilaian 1 (Bab 1–3)</span>
+            </button>
+            <button onclick="switchUlanganPackage(2)" class="flex-1 md:flex-none px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold transition-all flex items-center justify-center gap-2 ${state.ulanganPackage === 2 ? 'bg-gradient-to-r from-rose-600 to-pink-600 text-white shadow-md ring-2 ring-rose-400/50' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}">
+              <span>💖 Penilaian 2 (Bab 4–6)</span>
+            </button>
+          </div>
+
+          <!-- Mode Selector (Formatif vs Sumatif) -->
+          <div class="flex items-center gap-2 w-full md:w-auto bg-slate-100 p-1.5 rounded-2xl border border-slate-200">
+            <button onclick="switchUlanganMode('formatif')" class="flex-1 md:flex-none px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition-all flex items-center justify-center gap-2 ${isFormatif ? 'bg-emerald-600 text-white shadow-md ring-2 ring-emerald-400/40' : 'text-slate-600 hover:text-slate-900'}">
+              <span>🌱 Formatif (Refleksi)</span>
+            </button>
+            <button onclick="switchUlanganMode('sumatif')" class="flex-1 md:flex-none px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition-all flex items-center justify-center gap-2 ${!isFormatif ? 'bg-blue-700 text-white shadow-md ring-2 ring-blue-400/40' : 'text-slate-600 hover:text-slate-900'}">
+              <span>🎯 Sumatif (CBT Resmi)</span>
+            </button>
+          </div>
         </div>
 
-        <!-- Mode Selector (Formatif vs Sumatif) -->
-        <div class="flex items-center gap-2 w-full md:w-auto bg-slate-100 p-1 rounded-xl border border-slate-200">
-          <button onclick="switchUlanganMode('formatif')" class="flex-1 md:flex-none px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${state.ulanganMode === 'formatif' ? 'bg-white text-rose-700 shadow-xs' : 'text-slate-600 hover:text-slate-900'}">
-            <span>🌱 Formatif (Refleksi)</span>
-          </button>
-          <button onclick="switchUlanganMode('sumatif')" class="flex-1 md:flex-none px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${state.ulanganMode === 'sumatif' ? 'bg-white text-teal-700 shadow-xs' : 'text-slate-600 hover:text-slate-900'}">
-            <span>🎯 Sumatif (Evaluasi Capaian)</span>
-          </button>
+        <!-- MODE EXPLAINER CARD: JELAS MEMBEDAKAN FORMATIF VS SUMATIF -->
+        <div class="p-4 rounded-xl border text-xs leading-relaxed ${isFormatif ? 'bg-emerald-50/80 border-emerald-200 text-emerald-950' : 'bg-blue-50/80 border-blue-200 text-blue-950'}">
+          ${isFormatif ? `
+            <div class="flex items-start gap-2.5">
+              <span class="text-xl shrink-0">🌱</span>
+              <div>
+                <strong class="font-bold text-emerald-900 text-sm">Mode Asesmen Formatif (Refleksi Pembelajaran Mandiri):</strong>
+                <p class="mt-0.5 text-emerald-800">
+                  Dirancang untuk <strong>proses belajar santai</strong>. Kunci jawaban dan pembahasan refleksi karakter cinta akan <strong>langsung muncul seketika</strong> setelah Ananda memilih jawaban. Tidak ada tekanan timer kaku, sehingga Ananda bisa memahami konsep secara mendalam.
+                </p>
+              </div>
+            </div>
+          ` : `
+            <div class="flex items-start gap-2.5">
+              <span class="text-xl shrink-0">🎯</span>
+              <div>
+                <strong class="font-bold text-blue-900 text-sm">Mode Asesmen Sumatif (Ujian CBT Resmi Capaian Pembelajaran):</strong>
+                <p class="mt-0.5 text-blue-800">
+                  Format <strong>ujian resmi CBT (Computer Based Test)</strong> dengan <strong>timer 30 menit</strong>. Kunci jawaban dan pembahasan <strong>dirahasiakan</strong> selama ujian berlangsung. Ananda bebas mengganti jawaban kapan saja sebelum menekan tombol <strong>Kumpulkan Ujian</strong>. Di akhir, Ananda akan memperoleh Piagam Resmi bertandatangan guru.
+                </p>
+              </div>
+            </div>
+          `}
         </div>
       </div>
 
       <!-- STATUS & PALETTE BAR -->
-      <div class="card-soft p-4 bg-slate-900 text-white rounded-2xl border border-slate-800 shadow-lg space-y-4">
+      <div class="card-soft p-4 ${isFormatif ? 'bg-slate-900 border-slate-800' : 'bg-slate-950 border-blue-900/60'} text-white rounded-2xl border shadow-lg space-y-4">
         <div class="flex flex-wrap items-center justify-between gap-3">
           <div class="flex items-center gap-3">
             <span class="text-xs font-bold text-slate-400">
               Soal <strong class="text-white text-base font-extrabold">${state.ulanganCurrentIndex + 1}</strong> / ${totalQ}
             </span>
-            <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30">
+            <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold ${isFormatif ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' : 'bg-blue-500/20 text-blue-300 border border-blue-500/30'}">
               ${pkg.title}
-            </span>
-            <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold ${state.ulanganMode === 'formatif' ? 'bg-amber-500/20 text-amber-300' : 'bg-teal-500/20 text-teal-300'}">
-              ${state.ulanganMode === 'formatif' ? 'Mode Formatif' : 'Mode Sumatif'}
             </span>
           </div>
 
           <div class="flex items-center gap-3 text-xs font-bold">
-            <div class="flex items-center gap-1 px-3 py-1 bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded-xl">
-              <span>🔥 STREAK: x${state.ulanganStreak}</span>
-            </div>
-            <div class="flex items-center gap-1 px-3 py-1 bg-teal-500/20 text-teal-300 border border-teal-500/30 rounded-xl">
-              <span>⭐ POIN: ${state.ulanganPoints.toLocaleString('id-ID')}</span>
-            </div>
+            ${isFormatif ? `
+              <div class="flex items-center gap-1 px-3 py-1 bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded-xl">
+                <span>🔥 STREAK: x${state.ulanganStreak}</span>
+              </div>
+              <div class="flex items-center gap-1 px-3 py-1 bg-teal-500/20 text-teal-300 border border-teal-500/30 rounded-xl">
+                <span>⭐ POIN: ${state.ulanganPoints.toLocaleString('id-ID')}</span>
+              </div>
+            ` : `
+              <!-- CBT EXAM COUNTDOWN TIMER DISPLAY -->
+              <div class="flex items-center gap-2 px-3.5 py-1.5 bg-blue-900/60 text-blue-200 border border-blue-500/40 rounded-xl shadow-inner">
+                <span class="text-sm">⏱️ Sisa Waktu:</span>
+                <span id="ulangan-timer-display" class="font-mono font-extrabold text-amber-300 text-sm tracking-wider">${timerString}</span>
+              </div>
+            `}
             <div class="text-slate-400 text-xs">
-              Terjawab: <strong class="text-white">${answeredCount}/${totalQ}</strong>
+              Terjawab: <strong class="${isFormatif ? 'text-emerald-400' : 'text-blue-300'}">${answeredCount}/${totalQ}</strong>
             </div>
           </div>
         </div>
 
         <!-- PROGRESS BAR -->
         <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden border border-slate-700">
-          <div class="bg-gradient-to-r from-rose-500 via-pink-500 to-amber-500 h-full transition-all duration-300 rounded-full" style="width: ${progressPercent}%"></div>
+          <div class="${isFormatif ? 'bg-gradient-to-r from-emerald-500 via-teal-400 to-amber-400' : 'bg-gradient-to-r from-blue-600 via-indigo-500 to-cyan-400'} h-full transition-all duration-300 rounded-full" style="width: ${progressPercent}%"></div>
         </div>
 
-        <!-- QUICK QUESTION PALETTE (1 - 20) -->
+        <!-- CBT NUMBER PALETTE (1 - 20) -->
         <div class="flex flex-wrap items-center gap-1.5 pt-1 border-t border-slate-800">
-          <span class="text-[10px] text-slate-400 uppercase font-bold mr-1">Lompat Soal:</span>
+          <span class="text-[10px] text-slate-400 uppercase font-bold mr-1">
+            ${isFormatif ? 'Lompat Soal:' : 'Lembar CBT:'}
+          </span>
           ${questions.map((_, qIdx) => {
             const isCurr = state.ulanganCurrentIndex === qIdx;
             const isAns = state.ulanganAnswers[qIdx] !== undefined;
             let btnClass = 'bg-slate-800 text-slate-400 border-slate-700 hover:bg-slate-700';
-            if (isAns) btnClass = 'bg-emerald-600/90 text-white border-emerald-500 font-bold';
-            if (isCurr) btnClass = 'bg-amber-500 text-slate-950 font-extrabold ring-2 ring-amber-300 border-amber-400 scale-105';
+            if (isAns) {
+              btnClass = isFormatif 
+                ? 'bg-emerald-600 text-white border-emerald-500 font-bold' 
+                : 'bg-blue-600 text-white border-blue-400 font-bold';
+            }
+            if (isCurr) {
+              btnClass = 'bg-amber-500 text-slate-950 font-extrabold ring-2 ring-amber-300 border-amber-400 scale-105';
+            }
 
             return `
-              <button onclick="jumpToUlanganQuestion(${qIdx})" class="w-7 h-7 rounded-lg text-xs flex items-center justify-center transition-all border shadow-xs ${btnClass}" title="Buka Soal ${qIdx + 1}">
+              <button onclick="jumpToUlanganQuestion(${qIdx})" class="w-7 h-7 rounded-lg text-xs flex items-center justify-center transition-all border shadow-xs ${btnClass}" title="Soal ${qIdx + 1} ${isAns ? '(Sudah Terisi)' : '(Belum Terisi)'}">
                 ${qIdx + 1}
               </button>
             `;
@@ -3117,13 +3245,15 @@ function renderUlanganHTML() {
       </div>
 
       <!-- MAIN QUESTION CARD -->
-      <div class="card-soft p-6 sm:p-10 space-y-6 bg-white border border-slate-200 rounded-3xl shadow-xl">
+      <div class="card-soft p-6 sm:p-10 space-y-6 bg-white ${isFormatif ? 'border-2 border-emerald-200 shadow-emerald-500/5' : 'border-2 border-blue-200 shadow-blue-500/5'} rounded-3xl shadow-xl transition-all">
         <!-- Question Header & Indicator -->
         <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3 text-xs">
-          <span class="px-3 py-1 bg-rose-50 text-rose-800 border border-rose-200/80 rounded-full font-bold">
-            ✨ Bab ${currentQ.bab} • ${currentQ.indikator}
+          <span class="px-3 py-1 ${isFormatif ? 'bg-emerald-50 text-emerald-800 border-emerald-200' : 'bg-blue-50 text-blue-800 border-blue-200'} border rounded-full font-bold">
+            ${isFormatif ? '🌱 Formatif' : '🎯 CBT Sumatif'} • Bab ${currentQ.bab} • ${currentQ.indikator}
           </span>
-          <span class="text-slate-400 font-semibold">Kurikulum Berbasis Cinta (KBC)</span>
+          <span class="text-slate-400 font-semibold">
+            ${isFormatif ? 'Mode Pembelajaran Reflektif' : 'Lembar Ujian Resmi Capaian'}
+          </span>
         </div>
 
         <!-- Question Arabic Text -->
@@ -3133,61 +3263,94 @@ function renderUlanganHTML() {
           </h3>
         </div>
 
-        <!-- Gentle Love Hint (Petunjuk Mahabbah) -->
-        ${currentQ.hint ? `
-          <div class="p-3.5 bg-rose-50/70 border border-rose-200/80 rounded-2xl flex items-center gap-2.5 text-xs text-rose-900">
+        <!-- FORMATIF ONLY: Gentle Love Hint (Petunjuk Mahabbah) -->
+        ${(isFormatif && currentQ.hint) ? `
+          <div class="p-3.5 bg-emerald-50/80 border border-emerald-200 rounded-2xl flex items-center gap-2.5 text-xs text-emerald-950 animate-fadeIn">
             <span class="text-base">💡</span>
             <div>
-              <strong>Petunjuk Cinta:</strong> ${currentQ.hint}
+              <strong class="font-bold text-emerald-900">Petunjuk Refleksi Cinta:</strong> ${currentQ.hint}
             </div>
           </div>
         ` : ''}
 
-        <!-- 4 KAHOOT-STYLE OPTIONS -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-          ${currentQ.options.map((opt, idx) => {
-            const style = kahootStyles[idx];
-            const isChosen = currentAnswer === idx;
-            const isCorrectChoice = isAnswered && idx === currentQ.answer;
-            const isWrongChoice = isAnswered && isChosen && idx !== currentQ.answer;
+        <!-- OPTIONS CONTAINER: DIFFERENT STYLES FOR FORMATIF VS SUMATIF -->
+        ${isFormatif ? `
+          <!-- MODE FORMATIF: KAHOOT-STYLE INTERACTIVE OPTIONS WITH INSTANT VISUAL FEEDBACK -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+            ${currentQ.options.map((opt, idx) => {
+              const style = kahootStyles[idx];
+              const isChosen = currentAnswer === idx;
+              const isCorrectChoice = isAnswered && idx === currentQ.answer;
+              const isWrongChoice = isAnswered && isChosen && idx !== currentQ.answer;
 
-            let borderEffect = 'border-transparent shadow-md';
-            if (isAnswered) {
-              if (isCorrectChoice) borderEffect = 'ring-4 ring-emerald-400 border-white scale-[1.02] shadow-2xl';
-              else if (isWrongChoice) borderEffect = 'opacity-40 border-slate-400 line-through';
-              else borderEffect = 'opacity-50';
-            }
+              let borderEffect = 'border-transparent shadow-md';
+              if (isAnswered) {
+                if (isCorrectChoice) borderEffect = 'ring-4 ring-emerald-400 border-white scale-[1.02] shadow-2xl';
+                else if (isWrongChoice) borderEffect = 'opacity-40 border-slate-400 line-through';
+                else borderEffect = 'opacity-50';
+              }
 
-            return `
-              <button onclick="selectUlanganAnswer(${idx})" ${(state.ulanganMode === 'formatif' && isAnswered) ? 'disabled' : ''} class="p-5 ${style.bg} ${borderEffect} rounded-2xl text-left transition-all transform hover:-translate-y-0.5 active:scale-95 flex items-center justify-between shadow-lg cursor-pointer">
-                <div class="flex items-center gap-3.5">
-                  <span class="w-9 h-9 rounded-xl bg-white/20 backdrop-blur-md text-white font-extrabold text-sm flex items-center justify-center flex-shrink-0 border border-white/30">
-                    ${style.shape}
-                  </span>
-                  <span class="text-base sm:text-lg font-bold">${opt}</span>
-                </div>
-                ${isChosen ? `<span class="text-xl font-bold">${idx === currentQ.answer ? '✅' : '❌'}</span>` : ''}
-              </button>
-            `;
-          }).join('')}
-        </div>
+              return `
+                <button onclick="selectUlanganAnswer(${idx})" ${isAnswered ? 'disabled' : ''} class="p-5 ${style.bg} ${borderEffect} rounded-2xl text-left transition-all transform hover:-translate-y-0.5 active:scale-95 flex items-center justify-between shadow-lg cursor-pointer">
+                  <div class="flex items-center gap-3.5">
+                    <span class="w-9 h-9 rounded-xl bg-white/20 backdrop-blur-md text-white font-extrabold text-sm flex items-center justify-center shrink-0 border border-white/30">
+                      ${style.shape}
+                    </span>
+                    <span class="text-base sm:text-lg font-bold">${opt}</span>
+                  </div>
+                  ${isChosen ? `<span class="text-xl font-bold">${idx === currentQ.answer ? '✅' : '❌'}</span>` : ''}
+                </button>
+              `;
+            }).join('')}
+          </div>
 
-        <!-- INSTANT FEEDBACK BANNER (IN FORMATIF MODE) -->
-        ${(state.ulanganMode === 'formatif' && isAnswered) ? `
-          <div class="p-5 rounded-2xl text-sm font-bold animate-fadeIn space-y-2 ${currentAnswer === currentQ.answer ? 'bg-emerald-50 text-emerald-950 border-2 border-emerald-300' : 'bg-rose-50 text-rose-950 border-2 border-rose-300'}">
-            <div class="flex items-center justify-between">
-              <span class="text-base font-extrabold flex items-center gap-2">
-                ${currentAnswer === currentQ.answer ? '💖 BENAR SEKALI! MUMTAZ!' : '🌱 TETAP SEMANGAT! AYO BELAJAR BERSAMA!'}
-              </span>
-              ${currentAnswer === currentQ.answer ? `
-                <span class="px-3 py-1 bg-emerald-200 text-emerald-900 rounded-full text-xs font-mono font-bold">
-                  +${1000 + (state.ulanganStreak * 250)} POIN
+          <!-- INSTANT FEEDBACK BANNER (FORMATIF ONLY) -->
+          ${isAnswered ? `
+            <div class="p-5 rounded-2xl text-sm font-bold animate-fadeIn space-y-2 ${currentAnswer === currentQ.answer ? 'bg-emerald-50 text-emerald-950 border-2 border-emerald-300' : 'bg-rose-50 text-rose-950 border-2 border-rose-300'}">
+              <div class="flex items-center justify-between">
+                <span class="text-base font-extrabold flex items-center gap-2">
+                  ${currentAnswer === currentQ.answer ? '💖 BENAR SEKALI! MUMTAZ!' : '🌱 TETAP SEMANGAT! AYO BELAJAR BERSAMA!'}
                 </span>
-              ` : ''}
+                ${currentAnswer === currentQ.answer ? `
+                  <span class="px-3 py-1 bg-emerald-200 text-emerald-900 rounded-full text-xs font-mono font-bold">
+                    +${1000 + (state.ulanganStreak * 250)} POIN
+                  </span>
+                ` : ''}
+              </div>
+              <p class="text-xs leading-relaxed font-normal">${currentQ.explanation}</p>
             </div>
-            <p class="text-xs leading-relaxed font-normal">${currentQ.explanation}</p>
+          ` : ''}
+        ` : `
+          <!-- MODE SUMATIF: FORMAL CBT EXAM RADIO OPTIONS (NO ANSWERS REVEALED, FREELY CHANGEABLE) -->
+          <div class="space-y-3 pt-2">
+            ${currentQ.options.map((opt, idx) => {
+              const isChosen = currentAnswer === idx;
+
+              return `
+                <div onclick="selectUlanganAnswer(${idx})" class="p-4 sm:p-5 rounded-2xl border-2 transition-all cursor-pointer flex items-center justify-between ${isChosen ? 'bg-blue-50/90 border-blue-600 shadow-md ring-2 ring-blue-300/40 text-blue-950' : 'bg-slate-50 border-slate-200 hover:bg-white hover:border-blue-300 text-slate-800'}">
+                  <div class="flex items-center gap-4">
+                    <span class="w-9 h-9 rounded-xl flex items-center justify-center font-extrabold text-sm border transition-all ${isChosen ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-slate-600 border-slate-300'}">
+                      ${optionLabels[idx]}
+                    </span>
+                    <span class="text-base sm:text-lg font-bold font-arabic pt-1">${opt}</span>
+                  </div>
+                  <div class="shrink-0 pl-2">
+                    <span class="w-6 h-6 rounded-full border-2 flex items-center justify-center ${isChosen ? 'border-blue-600 bg-blue-600 text-white' : 'border-slate-300 bg-white'}">
+                      ${isChosen ? '●' : ''}
+                    </span>
+                  </div>
+                </div>
+              `;
+            }).join('')}
           </div>
-        ` : ''}
+
+          <div class="p-3 bg-slate-100 rounded-xl text-slate-500 text-xs flex items-center justify-between">
+            <span>ℹ️ Ananda dapat bebas mengubah pilihan jawaban sebelum menekan Kumpulkan Ujian.</span>
+            <span class="${isAnswered ? 'text-blue-700 font-bold' : 'text-slate-400'}">
+              ${isAnswered ? 'Status: Jawaban Tersimpan ✓' : 'Status: Belum Terisi'}
+            </span>
+          </div>
+        `}
 
         <!-- BOTTOM NAVIGATION ACTION BUTTONS -->
         <div class="flex flex-wrap justify-between items-center gap-3 pt-6 border-t border-slate-100">
@@ -3197,229 +3360,19 @@ function renderUlanganHTML() {
 
           <div class="flex items-center gap-2">
             ${state.ulanganCurrentIndex < totalQ - 1 ? `
-              <button onclick="nextUlanganQuestion()" ${(!isAnswered && state.ulanganMode === 'formatif') ? 'disabled class="opacity-40 cursor-not-allowed px-6 py-2.5 bg-slate-200 text-slate-500 text-xs font-bold rounded-xl"' : 'class="px-6 py-2.5 bg-rose-600 hover:bg-rose-700 text-white text-xs font-extrabold rounded-xl shadow-md transition-all"'}>
+              <button onclick="nextUlanganQuestion()" ${(isFormatif && !isAnswered) ? 'disabled class="opacity-40 cursor-not-allowed px-6 py-2.5 bg-slate-200 text-slate-500 text-xs font-bold rounded-xl"' : 'class="px-6 py-2.5 bg-slate-800 hover:bg-slate-900 text-white text-xs font-extrabold rounded-xl shadow-md transition-all"'}>
                 Soal Selanjutnya →
               </button>
             ` : ''}
 
-            ${(allAnswered || state.ulanganCurrentIndex === totalQ - 1 || state.ulanganMode === 'sumatif') ? `
-              <button onclick="finishUlangan()" class="px-6 py-2.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white text-xs font-extrabold rounded-xl shadow-lg transition-all flex items-center gap-2 transform hover:scale-105">
-                <span>🏆 Selesaikan & Lihat Nilai</span>
-              </button>
-            ` : ''}
+            <!-- FINISH / SUBMIT BUTTON -->
+            <button onclick="confirmFinishUlangan()" class="px-6 py-2.5 ${!isFormatif ? 'bg-gradient-to-r from-blue-700 to-indigo-700 hover:from-blue-800 hover:to-indigo-800' : 'bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700'} text-white text-xs font-extrabold rounded-xl shadow-lg transition-all flex items-center gap-2 transform hover:scale-105">
+              <span>${!isFormatif ? '📥 Kumpulkan Ujian CBT' : '🏆 Selesaikan Asesmen'}</span>
+            </button>
           </div>
         </div>
 
       </div>
-    </div>
-  `;
-}
-
-function renderUlanganResultHTML() {
-  const pkg = getUlanganPackageInfo();
-  const questions = pkg ? pkg.questions : [];
-  const totalQ = questions.length;
-  let correctCount = 0;
-  questions.forEach((q, idx) => {
-    if (state.ulanganAnswers[idx] === q.answer) {
-      correctCount++;
-    }
-  });
-
-  const isPassed = state.ulanganScore >= 70;
-  const studentName = (state.auth.isLoggedIn && state.auth.userName) ? state.auth.userName : 'Siswa MAN 1 Pontianak';
-  const studentClass = (state.auth.isLoggedIn && state.auth.userClass) ? state.auth.userClass : 'Kelas X';
-
-  let predikatArab = 'مَقْبُوْلٌ';
-  let predikatIndo = 'Cukup (Perlu Penguatan Kasih Sayang)';
-  let predikatColor = 'text-amber-500';
-  let motivasi = 'Tetap semangat dan jangan berkecil hati. Jadikan asesmen ini motivasi untuk belajar kembali dengan penuh ketekunan dan bimbingan guru.';
-
-  if (state.ulanganScore >= 90) {
-    predikatArab = 'مُمْتَازٌ';
-    predikatIndo = 'Istimewa (Mumtaz - Penuh Mahabbah)';
-    predikatColor = 'text-emerald-400';
-    motivasi = 'Subhanallah! Pemahaman Ananda luar biasa mendalam. Pertahankan semangat cinta ilmu dan tebarkan kasih sayang serta budi pekerti mulia!';
-  } else if (state.ulanganScore >= 80) {
-    predikatArab = 'جَيِّدٌ جِدًّا';
-    predikatIndo = 'Sangat Baik (Jayyid Jiddan - Berkarakter)';
-    predikatColor = 'text-teal-400';
-    motivasi = 'Alhamdulillah! Capaian yang sangat membanggakan. Teruslah mengasah kecintaan pada bahasa Al-Qur\'an dan amalkan ilmunya.';
-  } else if (state.ulanganScore >= 70) {
-    predikatArab = 'جَيِّدٌ';
-    predikatIndo = 'Baik & Tuntas (Jayyid - Memuaskan)';
-    predikatColor = 'text-blue-400';
-    motivasi = 'Bagus sekali! Tuntaskan kompetensi dengan penuh ketekunan. Usaha yang dilandasi cinta tidak akan pernah sia-sia.';
-  }
-
-  return `
-    <div class="space-y-8 animate-fadeIn max-w-4xl mx-auto">
-      
-      <!-- RESULT SUMMARY BANNER -->
-      <div class="card-soft p-8 sm:p-12 space-y-6 bg-gradient-to-br from-slate-900 via-rose-950 to-slate-900 text-white rounded-3xl shadow-2xl border border-rose-800/40 text-center">
-        <div class="inline-flex p-5 rounded-full ${isPassed ? 'bg-rose-500/20 text-rose-300 border-2 border-rose-400/40' : 'bg-amber-500/20 text-amber-300 border-2 border-amber-400/40'} text-6xl mb-2 animate-bounce">
-          ${isPassed ? '💖' : '🌱'}
-        </div>
-
-        <div class="space-y-2">
-          <div class="font-arabic text-3xl sm:text-4xl text-rose-300 font-bold">${predikatArab}</div>
-          <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
-            ${isPassed ? 'Alhamdulillah! Capaian Membanggakan!' : 'Tetap Bersemangat dalam Belajar!'}
-          </h2>
-          <p class="text-rose-200 text-sm max-w-xl mx-auto">
-            Hasil ${pkg.title} • Mode ${state.ulanganMode === 'formatif' ? 'Formatif KBC' : 'Sumatif KBC'}
-          </p>
-        </div>
-
-        <!-- 3 STAT CARDS -->
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto pt-4">
-          <div class="p-5 bg-white/10 backdrop-blur-md rounded-2xl border border-white/15">
-            <div class="text-xs font-bold text-rose-300 uppercase tracking-wider">Nilai Capaian</div>
-            <div class="text-4xl font-extrabold ${predikatColor} mt-1">${state.ulanganScore} <span class="text-lg font-normal text-slate-300">/ 100</span></div>
-            <div class="text-[11px] text-slate-300 mt-1 font-semibold">${predikatIndo}</div>
-          </div>
-
-          <div class="p-5 bg-white/10 backdrop-blur-md rounded-2xl border border-white/15">
-            <div class="text-xs font-bold text-rose-300 uppercase tracking-wider">Jawaban Benar</div>
-            <div class="text-4xl font-extrabold text-emerald-400 mt-1">${correctCount} <span class="text-lg font-normal text-slate-300">/ ${totalQ}</span></div>
-            <div class="text-[11px] text-slate-300 mt-1">Status: ${isPassed ? 'Tuntas' : 'Perlu Penguatan'}</div>
-          </div>
-
-          <div class="p-5 bg-white/10 backdrop-blur-md rounded-2xl border border-white/15">
-            <div class="text-xs font-bold text-rose-300 uppercase tracking-wider">Total Poin Cinta</div>
-            <div class="text-4xl font-extrabold text-amber-300 mt-1">⭐ ${state.ulanganPoints.toLocaleString('id-ID')}</div>
-            <div class="text-[11px] text-slate-300 mt-1">Max Streak: x${state.ulanganMaxStreak}</div>
-          </div>
-        </div>
-
-        <!-- MOTIVATIONAL ADVICE FROM TEACHER -->
-        <div class="p-4 bg-rose-500/10 border border-rose-400/20 rounded-2xl max-w-2xl mx-auto text-xs leading-relaxed text-rose-100/90 text-left space-y-1">
-          <div class="font-bold text-rose-200 flex items-center gap-2">
-            <span>💌 Catatan Apresiasi Pendidik (Yosi, S. Ag, M. Pd.):</span>
-          </div>
-          <p>${motivasi}</p>
-        </div>
-
-        <!-- ACTION BUTTONS -->
-        <div class="flex flex-wrap justify-center gap-3 pt-4">
-          <button onclick="window.print()" class="px-6 py-3 bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-slate-950 font-extrabold rounded-2xl shadow-lg transition-all flex items-center gap-2 transform hover:scale-105">
-            <span>🖨️ Cetak Piagam Asesmen Cinta</span>
-          </button>
-
-          <button onclick="toggleUlanganReview()" class="px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-bold rounded-2xl border border-white/20 transition-all flex items-center gap-2">
-            <span>📖 ${state.ulanganShowReview ? 'Sembunyikan' : 'Tinjau'} Pembahasan Soal</span>
-          </button>
-
-          <button onclick="resetUlanganState(); renderTabContent();" class="px-6 py-3 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-2xl shadow-lg transition-all flex items-center gap-2">
-            <span>🔄 Ulangi Asesmen</span>
-          </button>
-
-          <button onclick="switchTab('home')" class="px-5 py-3 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold rounded-2xl transition-all">
-            <span>🏠 Beranda</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- REVIEW ACCORDION LIST -->
-      ${state.ulanganShowReview ? `
-        <div class="card-soft p-6 sm:p-8 bg-white border border-slate-200 rounded-3xl shadow-lg space-y-6 animate-fadeIn">
-          <div class="border-b border-slate-200 pb-4 flex items-center justify-between">
-            <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2">
-              <span>📖 Tinjauan Kunci Jawaban & Refleksi Karakter</span>
-            </h3>
-            <span class="text-xs font-semibold text-slate-500">20 Soal Kurikulum Berbasis Cinta</span>
-          </div>
-
-          <div class="space-y-4">
-            ${questions.map((q, idx) => {
-              const userAns = state.ulanganAnswers[idx];
-              const isCorrect = userAns === q.answer;
-
-              return `
-                <div class="p-5 rounded-2xl border ${isCorrect ? 'bg-emerald-50/50 border-emerald-200' : 'bg-rose-50/50 border-rose-200'} space-y-3">
-                  <div class="flex items-start justify-between gap-3">
-                    <div class="flex items-center gap-2">
-                      <span class="w-7 h-7 rounded-full ${isCorrect ? 'bg-emerald-200 text-emerald-900' : 'bg-rose-200 text-rose-900'} font-bold text-xs flex items-center justify-center shrink-0">
-                        ${idx + 1}
-                      </span>
-                      <span class="text-xs font-bold text-slate-500">Bab ${q.bab} • ${q.indikator}</span>
-                    </div>
-                    <span class="px-2.5 py-0.5 rounded-full text-xs font-bold ${isCorrect ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}">
-                      ${isCorrect ? '✅ Benar' : '❌ Kurang Tepat'}
-                    </span>
-                  </div>
-
-                  <div class="font-arabic text-xl sm:text-2xl font-bold text-slate-900 py-1 leading-[2.2]">
-                    ${q.question}
-                  </div>
-
-                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-                    <div>
-                      Jawaban Ananda: <strong class="${isCorrect ? 'text-emerald-700' : 'text-rose-700 font-bold'}">${userAns !== undefined ? q.options[userAns] : '(Tidak dijawab)'}</strong>
-                    </div>
-                    <div>
-                      Kunci Jawaban Benar: <strong class="text-emerald-800 font-bold">${q.options[q.answer]}</strong>
-                    </div>
-                  </div>
-
-                  <div class="p-3 bg-white/80 rounded-xl border border-slate-200 text-xs text-slate-700 leading-relaxed">
-                    <strong>Refleksi & Pembahasan:</strong> ${q.explanation}
-                  </div>
-                </div>
-              `;
-            }).join('')}
-          </div>
-        </div>
-      ` : ''}
-
-      <!-- PRINTABLE OFFICIAL CERTIFICATE / PIAGAM HASIL ASESMEN -->
-      <div id="ulangan-certificate" class="hidden print:block p-8 bg-white border-8 border-double border-amber-600 rounded-3xl text-slate-900 space-y-6 max-w-3xl mx-auto shadow-2xl">
-        <div class="text-center border-b-2 border-slate-800 pb-4 space-y-1">
-          <div class="flex items-center justify-center gap-3">
-            <img src="logo.webp" alt="Logo MAN 1 Pontianak" class="w-16 h-16 object-contain" />
-            <div>
-              <h1 class="text-lg font-extrabold uppercase tracking-wider text-slate-900">KEMENTERIAN AGAMA REPUBLIK INDONESIA</h1>
-              <h2 class="text-base font-bold text-slate-800">MADRASAH ALIYAH NEGERI 1 PONTIANAK</h2>
-              <p class="text-[11px] text-slate-600">Jalan Harapan Jaya No. 1 Pontianak — Kalimantan Barat</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="text-center space-y-2 py-4">
-          <h2 class="text-2xl font-extrabold text-amber-900 tracking-wide uppercase">PIAGAM CAPAIAN ASESMEN BERBASIS CINTA</h2>
-          <div class="font-arabic text-xl text-amber-800 font-bold">شَهَادَةُ التَّقْيِيْمِ الْمَبْنِيِّ عَلَى الْمَحَبَّةِ</div>
-          <p class="text-xs text-slate-600 font-medium">Berdasarkan Kurikulum Berbasis Cinta (KBC) & KMA Nomor 1503 Tahun 2025</p>
-        </div>
-
-        <div class="p-6 bg-amber-50/50 border border-amber-200 rounded-2xl text-xs space-y-2 leading-relaxed">
-          <p>Diberikan kepada:</p>
-          <div class="text-xl font-extrabold text-slate-900 py-1">${studentName}</div>
-          <p><strong>Kelas / Rombel:</strong> ${studentClass}</p>
-          <p><strong>Paket Penilaian:</strong> ${pkg.title} (${pkg.semester})</p>
-          <p><strong>Mata Pelajaran:</strong> Bahasa Arab (اللغة العربية)</p>
-          <p><strong>Nilai Akhir:</strong> <span class="text-lg font-bold text-emerald-800">${state.ulanganScore} / 100</span></p>
-          <p><strong>Predikat Capaian:</strong> <strong class="text-amber-900">${predikatArab} — ${predikatIndo}</strong></p>
-          <p><strong>Nilai Karakter Terwujud:</strong> ${pkg.characterValues}</p>
-        </div>
-
-        <div class="pt-6 flex justify-between items-end text-xs text-slate-700">
-          <div>
-            <p>Mengetahui,</p>
-            <p class="font-bold text-slate-900">Guru Mata Pelajaran Bahasa Arab</p>
-            <div class="my-3">
-              <img src="${ARABIC_DATA.info.teacherPhoto || 'guru.jpg'}" alt="Foto Guru" class="w-16 h-16 rounded-xl object-cover border border-slate-300 shadow-sm" />
-            </div>
-            <p class="font-extrabold text-slate-900">${ARABIC_DATA.info.teacher}</p>
-            <p class="text-[10px] text-slate-500">NIP. Guru Pengajar MAN 1 Pontianak</p>
-          </div>
-          <div class="text-right">
-            <p>Pontianak, ${new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
-            <p class="mt-16 font-bold text-slate-900">Kepala Madrasah / Urusan Kurikulum</p>
-            <p class="text-[10px] text-slate-500">MAN 1 Pontianak</p>
-          </div>
-        </div>
-      </div>
-
     </div>
   `;
 }
