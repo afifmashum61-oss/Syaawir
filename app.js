@@ -58,6 +58,7 @@ const state = {
   // Ulangan Harian Berbasis Kurikulum Berbasis Cinta (KBC)
   ulanganPackage: 1, // 1 = Penilaian 1 (Bab 1-3), 2 = Penilaian 2 (Bab 4-6)
   ulanganMode: 'formatif', // 'formatif' (reflektif + feedback langsung) | 'sumatif' (evaluasi capaian + sertifikat)
+  ulanganUnlocked: { 1: false, 2: false }, // CBT token unlock status for Penilaian 1 & 2
   ulanganCurrentIndex: 0,
   ulanganAnswers: [],
   ulanganScore: 0,
@@ -2865,13 +2866,89 @@ function getUlanganQuestions() {
   }
 }
 
+// Token Management Helpers
+function getExpectedUlanganToken(pkgNum) {
+  const customToken = localStorage.getItem(`ulangan_token_p${pkgNum}`);
+  if (customToken && customToken.trim()) {
+    return customToken.trim().toUpperCase();
+  }
+  if (window.ARABIC_DATA && window.ARABIC_DATA.ulanganCinta) {
+    const pkgData = window.ARABIC_DATA.ulanganCinta[`penilaian${pkgNum}`];
+    if (pkgData && pkgData.token) {
+      return pkgData.token.toUpperCase();
+    }
+  }
+  return pkgNum === 1 ? 'CINTA1' : 'CINTA2';
+}
+
+function submitUlanganToken(e) {
+  if (e) e.preventDefault();
+  const input = document.getElementById('ulangan-token-input');
+  if (!input) return;
+
+  const entered = input.value.trim().toUpperCase();
+  const pkgNum = state.ulanganPackage;
+  const expectedToken = getExpectedUlanganToken(pkgNum);
+
+  if (!entered) {
+    alert("⚠️ Silakan ketikkan token ujian yang diberikan oleh guru.");
+    input.focus();
+    return;
+  }
+
+  if (entered === expectedToken) {
+    state.ulanganUnlocked[pkgNum] = true;
+    SoundFx.playCorrect();
+    resetUlanganState();
+    startUlanganTimer();
+    renderTabContent();
+  } else {
+    SoundFx.playWrong();
+    alert(`❌ Token Ujian Tidak Sesuai!\n\nToken "${entered}" salah untuk Penilaian ${pkgNum}.\nSilakan hubungi Guru Pengampu (Yosi, S. Ag, M. Pd.) untuk mendapatkan token ujian yang benar.`);
+    input.value = '';
+    input.focus();
+  }
+}
+
+function updateUlanganToken(pkgNum, newToken) {
+  if (!newToken || !newToken.trim()) {
+    alert("⚠️ Token ujian tidak boleh kosong!");
+    return;
+  }
+  const clean = newToken.trim().toUpperCase();
+  localStorage.setItem(`ulangan_token_p${pkgNum}`, clean);
+  alert(`✅ Berhasil! Token Ujian Penilaian ${pkgNum} berhasil diubah menjadi: ${clean}`);
+  renderTabContent();
+}
+
+function resetUlanganTokenDefault(pkgNum) {
+  localStorage.removeItem(`ulangan_token_p${pkgNum}`);
+  const defaultToken = pkgNum === 1 ? 'CINTA1' : 'CINTA2';
+  alert(`🔄 Token Ujian Penilaian ${pkgNum} telah dikembalikan ke pengaturan awal: ${defaultToken}`);
+  renderTabContent();
+}
+
+function copyUlanganToken(tokenText) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(tokenText).then(() => {
+      alert(`📋 Token "${tokenText}" berhasil disalin ke clipboard! Bagikan kepada siswa sebelum ujian dimulai.`);
+    }).catch(() => {
+      prompt("Salin token ini untuk dibagikan kepada siswa:", tokenText);
+    });
+  } else {
+    prompt("Salin token ini untuk dibagikan kepada siswa:", tokenText);
+  }
+}
+
 function switchUlanganPackage(pkgNum) {
   if (state.ulanganPackage === pkgNum) return;
   SoundFx.playClick();
   state.ulanganPackage = pkgNum;
   resetUlanganState();
-  if (state.ulanganMode === 'sumatif') {
+  if (state.ulanganMode === 'sumatif' && state.ulanganUnlocked[pkgNum]) {
     startUlanganTimer();
+  } else {
+    stopUlanganTimer();
   }
   renderTabContent();
 }
@@ -2881,7 +2958,7 @@ function switchUlanganMode(mode) {
   SoundFx.playClick();
   state.ulanganMode = mode;
   resetUlanganState();
-  if (mode === 'sumatif') {
+  if (mode === 'sumatif' && state.ulanganUnlocked[state.ulanganPackage]) {
     startUlanganTimer();
   } else {
     stopUlanganTimer();
@@ -2903,6 +2980,7 @@ function resetUlanganState() {
 
 function startUlanganTimer() {
   stopUlanganTimer();
+  if (state.ulanganMode !== 'sumatif' || !state.ulanganUnlocked[state.ulanganPackage]) return;
   if (!state.ulanganTimerSeconds || state.ulanganTimerSeconds <= 0) {
     state.ulanganTimerSeconds = 30 * 60;
   }
@@ -3078,6 +3156,14 @@ function renderUlanganHTML() {
     return '<div class="p-8 text-center text-slate-500">Materi ulangan belum tersedia.</div>';
   }
 
+  const isFormatif = state.ulanganMode === 'formatif';
+  const isUnlocked = state.ulanganUnlocked && state.ulanganUnlocked[state.ulanganPackage];
+
+  // If in sumatif mode and package is locked, render CBT Token Gate
+  if (!isFormatif && !isUnlocked) {
+    return renderUlanganTokenGateHTML();
+  }
+
   const questions = getUlanganQuestions();
   const totalQ = questions.length;
   const currentQ = questions[state.ulanganCurrentIndex];
@@ -3087,15 +3173,14 @@ function renderUlanganHTML() {
 
   const answeredCount = state.ulanganAnswers.filter(a => a !== undefined).length;
   const allAnswered = answeredCount === totalQ;
-  const isFormatif = state.ulanganMode === 'formatif';
 
   // Format timer display
   const timerMins = Math.floor((state.ulanganTimerSeconds || 1800) / 60);
   const timerSecs = (state.ulanganTimerSeconds || 1800) % 60;
   const timerString = `${String(timerMins).padStart(2, '0')}:${String(timerSecs).padStart(2, '0')}`;
 
-  // Start timer automatically if in sumatif mode and not running
-  if (!isFormatif && !ulanganTimerInterval) {
+  // Start timer automatically if in sumatif mode, unlocked, and not running
+  if (!isFormatif && isUnlocked && !ulanganTimerInterval) {
     setTimeout(startUlanganTimer, 100);
   }
 
@@ -3340,6 +3425,380 @@ function renderUlanganHTML() {
   `;
 }
 
+function renderUlanganTokenGateHTML() {
+  const pkg = getUlanganPackageInfo();
+  const pkgNum = state.ulanganPackage;
+
+  return `
+    <div class="space-y-4 sm:space-y-6 animate-fadeIn max-w-xl mx-auto px-2 sm:px-4">
+      
+      <!-- TOP COMPACT CONTROL BAR (SO STUDENT CAN SWITCH EASILY) -->
+      <div class="card-soft p-3 bg-white border border-slate-200/90 rounded-2xl shadow-sm space-y-2">
+        <div class="grid grid-cols-2 gap-2">
+          <!-- SEGMENT 1: PAKET SELECTOR -->
+          <div class="bg-slate-100 p-1 rounded-xl flex items-center border border-slate-200 text-[11px] sm:text-xs font-extrabold">
+            <button onclick="switchUlanganPackage(1)" class="flex-1 py-1.5 px-1 sm:px-2 rounded-lg transition-all flex items-center justify-center gap-1 ${state.ulanganPackage === 1 ? 'bg-white text-rose-700 shadow-xs font-black' : 'text-slate-600 hover:text-slate-900'}">
+              <span class="truncate">💖 Bab 1–3</span>
+            </button>
+            <button onclick="switchUlanganPackage(2)" class="flex-1 py-1.5 px-1 sm:px-2 rounded-lg transition-all flex items-center justify-center gap-1 ${state.ulanganPackage === 2 ? 'bg-white text-rose-700 shadow-xs font-black' : 'text-slate-600 hover:text-slate-900'}">
+              <span class="truncate">💖 Bab 4–6</span>
+            </button>
+          </div>
+
+          <!-- SEGMENT 2: MODE SELECTOR -->
+          <div class="bg-slate-100 p-1 rounded-xl flex items-center border border-slate-200 text-[11px] sm:text-xs font-extrabold">
+            <button onclick="switchUlanganMode('formatif')" class="flex-1 py-1.5 px-1 sm:px-2 rounded-lg transition-all flex items-center justify-center gap-1 text-slate-600 hover:text-slate-900">
+              <span class="truncate">🌱 Formatif</span>
+            </button>
+            <button onclick="switchUlanganMode('sumatif')" class="flex-1 py-1.5 px-1 sm:px-2 rounded-lg transition-all flex items-center justify-center gap-1 bg-blue-600 text-white shadow-xs font-black">
+              <span class="truncate">🎯 Sumatif</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- MAIN TOKEN GATE CARD -->
+      <div class="card-soft p-5 sm:p-8 bg-white border-2 border-blue-200/80 rounded-3xl shadow-xl shadow-blue-500/5 text-center space-y-5">
+        
+        <!-- ICON BADGE -->
+        <div class="relative inline-flex items-center justify-center">
+          <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-gradient-to-tr from-blue-700 via-indigo-600 to-blue-500 text-white flex items-center justify-center text-4xl sm:text-5xl shadow-xl shadow-blue-500/30 transform hover:scale-105 transition-all">
+            🔐
+          </div>
+          <span class="absolute -top-1 -right-1 px-2.5 py-0.5 bg-rose-500 text-white text-[10px] font-black rounded-full uppercase tracking-wider shadow-sm animate-pulse">
+            Terproteksi
+          </span>
+        </div>
+
+        <!-- TITLES -->
+        <div class="space-y-1.5">
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-50 text-blue-900 border border-blue-200/80 rounded-full text-xs font-extrabold">
+            <span>🏛️ GERBANG UJIAN CBT MADRASAH</span>
+          </div>
+          <h2 class="text-xl sm:text-2xl font-black text-slate-900 leading-tight">
+            Asesmen Sumatif ${pkgNum}: ${pkg ? (pkg.title.split(':')[1] || pkg.title) : `Paket ${pkgNum}`}
+          </h2>
+          <div class="font-arabic text-xl sm:text-2xl text-blue-900 py-0.5">
+            ${pkg ? (pkg.arabicTitle || '') : ''}
+          </div>
+          <p class="text-xs sm:text-sm text-slate-500">
+            Kurikulum Berbasis Cinta (KBC) • MAN 1 Pontianak
+          </p>
+        </div>
+
+        <!-- EXAM SPECIFICATION CHIPS -->
+        <div class="grid grid-cols-2 gap-2 sm:gap-3 text-left pt-1">
+          <div class="p-3 bg-slate-50 border border-slate-200/80 rounded-2xl flex items-center gap-2.5">
+            <span class="text-xl sm:text-2xl">📝</span>
+            <div class="min-w-0">
+              <div class="text-[10px] uppercase font-bold text-slate-400">Jumlah Soal</div>
+              <div class="text-xs sm:text-sm font-extrabold text-slate-800">20 Soal Pilihan Ganda</div>
+            </div>
+          </div>
+          <div class="p-3 bg-slate-50 border border-slate-200/80 rounded-2xl flex items-center gap-2.5">
+            <span class="text-xl sm:text-2xl">⏱️</span>
+            <div class="min-w-0">
+              <div class="text-[10px] uppercase font-bold text-slate-400">Durasi Waktu</div>
+              <div class="text-xs sm:text-sm font-extrabold text-slate-800">30 Menit (Hitung Mundur)</div>
+            </div>
+          </div>
+          <div class="p-3 bg-slate-50 border border-slate-200/80 rounded-2xl flex items-center gap-2.5">
+            <span class="text-xl sm:text-2xl">🎖️</span>
+            <div class="min-w-0">
+              <div class="text-[10px] uppercase font-bold text-slate-400">Standar Nilai</div>
+              <div class="text-xs sm:text-sm font-extrabold text-slate-800">Skor 0–100 & Piagam KBC</div>
+            </div>
+          </div>
+          <div class="p-3 bg-slate-50 border border-slate-200/80 rounded-2xl flex items-center gap-2.5">
+            <span class="text-xl sm:text-2xl">👨‍🏫</span>
+            <div class="min-w-0">
+              <div class="text-[10px] uppercase font-bold text-slate-400">Pengampu</div>
+              <div class="text-xs sm:text-sm font-extrabold text-slate-800 truncate">Yosi, S. Ag, M. Pd.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TOKEN INPUT FORM -->
+        <form onsubmit="submitUlanganToken(event)" class="space-y-3 pt-2">
+          <div class="space-y-1.5">
+            <label for="ulangan-token-input" class="block text-xs font-black text-slate-700 uppercase tracking-wider">
+              Ketik Token Ujian dari Guru:
+            </label>
+            <div class="relative max-w-xs mx-auto">
+              <input 
+                type="text" 
+                id="ulangan-token-input" 
+                maxlength="16" 
+                autocomplete="off" 
+                autocorrect="off" 
+                autocapitalize="characters" 
+                spellcheck="false"
+                placeholder="CONTOH: CINTA${pkgNum}"
+                oninput="this.value = this.value.toUpperCase()"
+                class="w-full text-center text-xl sm:text-2xl font-black font-mono tracking-widest uppercase py-3 px-4 rounded-2xl border-2 border-blue-400 focus:border-blue-600 focus:ring-4 focus:ring-blue-100 outline-none transition-all shadow-inner bg-blue-50/40 text-blue-950 placeholder:text-slate-300"
+                required
+              />
+            </div>
+          </div>
+
+          <button 
+            type="submit" 
+            class="w-full max-w-xs mx-auto py-3.5 px-6 bg-gradient-to-r from-blue-700 via-indigo-600 to-blue-700 hover:from-blue-800 hover:to-indigo-800 text-white font-black text-sm sm:text-base rounded-2xl shadow-lg hover:shadow-xl shadow-blue-600/30 transition-all flex items-center justify-center gap-2 transform active:scale-98 cursor-pointer"
+          >
+            <span>🚀 Buka Soal & Mulai Ujian</span>
+          </button>
+        </form>
+
+        <!-- ALTERNATIVE & HINTS -->
+        <div class="pt-3 border-t border-slate-100 space-y-2">
+          <div>
+            <button onclick="switchUlanganMode('formatif')" class="text-xs text-emerald-700 hover:text-emerald-800 font-extrabold underline cursor-pointer inline-flex items-center gap-1">
+              <span>🌱 Belum punya token? Coba Asesmen Formatif (Bebas Akses Tanpa Token)</span>
+            </button>
+          </div>
+          <p class="text-[11px] text-slate-400">
+            💡 <em>Token resmi dibagikan oleh guru di ruang kelas sebelum asesmen dimulai.</em>
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  `;
+}
+
+function renderUlanganResultHTML() {
+  const isPassed = state.ulanganScore >= 70;
+  const pkg = getUlanganPackageInfo();
+  const pkgNum = state.ulanganPackage;
+  const isFormatif = state.ulanganMode === 'formatif';
+  const questions = getUlanganQuestions();
+  const totalQ = questions.length;
+  let correctCount = 0;
+  questions.forEach((q, idx) => {
+    if (state.ulanganAnswers[idx] === q.answer) correctCount++;
+  });
+
+  const studentName = (state.auth.isLoggedIn && state.auth.userName) ? state.auth.userName : 'Siswa Tamu / Peserta';
+  const studentClass = (state.auth.isLoggedIn && state.auth.userClass) ? state.auth.userClass : 'Kelas X MAN 1 Pontianak';
+
+  let predikat = 'Mumtaz (Istimewa)';
+  let predikatColor = 'text-emerald-400';
+  if (state.ulanganScore < 60) {
+    predikat = "Perlu Bimbingan (Dha'if)";
+    predikatColor = 'text-rose-400';
+  } else if (state.ulanganScore < 70) {
+    predikat = 'Maqbul (Cukup)';
+    predikatColor = 'text-amber-400';
+  } else if (state.ulanganScore < 85) {
+    predikat = 'Jayyid (Baik)';
+    predikatColor = 'text-teal-300';
+  } else if (state.ulanganScore < 95) {
+    predikat = 'Jayyid Jiddan (Sangat Baik)';
+    predikatColor = 'text-blue-300';
+  }
+
+  const optionLabels = ["A", "B", "C", "D"];
+
+  return `
+    <div class="space-y-6 sm:space-y-8 animate-fadeIn max-w-4xl mx-auto text-center px-1 sm:px-4">
+      
+      <!-- TOP CONTROL TO SWITCH OR RETRY -->
+      <div class="card-soft p-3 bg-white border border-slate-200/90 rounded-2xl shadow-sm space-y-2">
+        <div class="grid grid-cols-2 gap-2">
+          <div class="bg-slate-100 p-1 rounded-xl flex items-center border border-slate-200 text-[11px] sm:text-xs font-extrabold">
+            <button onclick="switchUlanganPackage(1)" class="flex-1 py-1.5 px-1 sm:px-2 rounded-lg transition-all flex items-center justify-center gap-1 ${state.ulanganPackage === 1 ? 'bg-white text-rose-700 shadow-xs font-black' : 'text-slate-600 hover:text-slate-900'}">
+              <span class="truncate">💖 Bab 1–3</span>
+            </button>
+            <button onclick="switchUlanganPackage(2)" class="flex-1 py-1.5 px-1 sm:px-2 rounded-lg transition-all flex items-center justify-center gap-1 ${state.ulanganPackage === 2 ? 'bg-white text-rose-700 shadow-xs font-black' : 'text-slate-600 hover:text-slate-900'}">
+              <span class="truncate">💖 Bab 4–6</span>
+            </button>
+          </div>
+          <div class="bg-slate-100 p-1 rounded-xl flex items-center border border-slate-200 text-[11px] sm:text-xs font-extrabold">
+            <button onclick="switchUlanganMode('formatif')" class="flex-1 py-1.5 px-1 sm:px-2 rounded-lg transition-all flex items-center justify-center gap-1 ${isFormatif ? 'bg-emerald-600 text-white shadow-xs font-black' : 'text-slate-600 hover:text-slate-900'}">
+              <span class="truncate">🌱 Formatif</span>
+            </button>
+            <button onclick="switchUlanganMode('sumatif')" class="flex-1 py-1.5 px-1 sm:px-2 rounded-lg transition-all flex items-center justify-center gap-1 ${!isFormatif ? 'bg-blue-600 text-white shadow-xs font-black' : 'text-slate-600 hover:text-slate-900'}">
+              <span class="truncate">🎯 Sumatif</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- MAIN RESULT CARD -->
+      <div class="card-soft p-6 sm:p-10 space-y-6 ${isFormatif ? 'bg-gradient-to-br from-slate-900 via-teal-950 to-slate-900 border-teal-800/40' : 'bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 border-blue-800/40'} text-white rounded-3xl shadow-2xl border">
+        
+        <div class="inline-flex p-4 sm:p-5 rounded-3xl ${isPassed ? 'bg-amber-400/20 text-amber-300 border-2 border-amber-400/40' : 'bg-rose-400/20 text-rose-300 border-2 border-rose-400/40'} text-5xl sm:text-6xl mb-1 animate-bounce">
+          ${isPassed ? '🏆' : '🌱'}
+        </div>
+
+        <div class="space-y-2">
+          <div class="inline-block px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider ${isFormatif ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-400/30' : 'bg-blue-500/20 text-blue-300 border border-blue-400/30'}">
+            ${isFormatif ? '🌱 Lembar Hasil Asesmen Formatif (Refleksi)' : '🎯 Hasil Resmi Asesmen Sumatif (CBT)'}
+          </div>
+          <h2 class="text-2xl sm:text-4xl font-black tracking-tight text-white">
+            ${isPassed ? 'Mumtaz! Pencapaian Membanggakan!' : 'Tetap Semangat & Terus Berlatih!'}
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-300 max-w-lg mx-auto">
+            ${pkg ? pkg.title : `Penilaian ${pkgNum}`} • Kurikulum Berbasis Cinta (KBC) MAN 1 Pontianak
+          </p>
+        </div>
+
+        <!-- STAT CARDS -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl mx-auto pt-2">
+          <div class="p-3.5 sm:p-4 bg-white/10 backdrop-blur-md rounded-2xl border border-white/10">
+            <div class="text-[10px] sm:text-xs font-bold text-slate-300 uppercase tracking-wider">Nilai Akhir</div>
+            <div class="text-2xl sm:text-3xl font-black ${isPassed ? 'text-emerald-400' : 'text-amber-400'} mt-1">${state.ulanganScore}</div>
+            <div class="text-[10px] text-slate-400">Skor Skala 100</div>
+          </div>
+
+          <div class="p-3.5 sm:p-4 bg-white/10 backdrop-blur-md rounded-2xl border border-white/10">
+            <div class="text-[10px] sm:text-xs font-bold text-slate-300 uppercase tracking-wider">Benar / Total</div>
+            <div class="text-2xl sm:text-3xl font-black text-teal-300 mt-1">${correctCount}/${totalQ}</div>
+            <div class="text-[10px] text-slate-400">Soal Terjawab Benar</div>
+          </div>
+
+          <div class="p-3.5 sm:p-4 bg-white/10 backdrop-blur-md rounded-2xl border border-white/10">
+            <div class="text-[10px] sm:text-xs font-bold text-slate-300 uppercase tracking-wider">Predikat KBC</div>
+            <div class="text-xs sm:text-sm font-black ${predikatColor} mt-2 truncate">${predikat}</div>
+            <div class="text-[10px] text-slate-400">Kriteria Capaian</div>
+          </div>
+
+          <div class="p-3.5 sm:p-4 bg-white/10 backdrop-blur-md rounded-2xl border border-white/10">
+            <div class="text-[10px] sm:text-xs font-bold text-slate-300 uppercase tracking-wider">Poin Game</div>
+            <div class="text-xl sm:text-2xl font-black text-amber-300 mt-1">⭐ ${state.ulanganPoints.toLocaleString('id-ID')}</div>
+            <div class="text-[10px] text-slate-400">Apresiasi Siswa</div>
+          </div>
+        </div>
+
+        <p class="text-slate-300 text-xs sm:text-sm max-w-md mx-auto leading-relaxed">
+          Siswa <strong class="text-white">${studentName}</strong> (${studentClass}) telah menuntaskan asesmen ini dan nilainya telah otomatis disinkronkan ke Dashboard Guru.
+        </p>
+
+        <!-- ACTION BUTTONS -->
+        <div class="flex flex-wrap justify-center gap-2.5 sm:gap-3 pt-2">
+          <button onclick="toggleUlanganReview()" class="px-4 sm:px-5 py-2.5 sm:py-3 bg-white/15 hover:bg-white/25 text-white font-bold text-xs sm:text-sm rounded-xl border border-white/20 transition-all flex items-center gap-1.5 cursor-pointer">
+            <span>📖 ${state.ulanganShowReview ? 'Sembunyikan' : 'Buka'} Pembahasan & Refleksi</span>
+          </button>
+
+          <button onclick="window.print()" class="px-4 sm:px-5 py-2.5 sm:py-3 bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white font-bold text-xs sm:text-sm rounded-xl shadow-md transition-all flex items-center gap-1.5 cursor-pointer">
+            <span>🖨️ Cetak Piagam Hasil</span>
+          </button>
+
+          <button onclick="resetUlanganState(); renderTabContent();" class="px-4 sm:px-5 py-2.5 sm:py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold text-xs sm:text-sm rounded-xl shadow-md transition-all flex items-center gap-1.5 cursor-pointer">
+            <span>🔄 Uji Ulang Asesmen</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- REVIEW SECTION (TOGGLEABLE) -->
+      ${state.ulanganShowReview ? `
+        <div class="card-soft p-4 sm:p-7 bg-white text-left space-y-4 rounded-3xl border border-slate-200 shadow-sm animate-fadeIn">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+            <h3 class="text-base sm:text-lg font-black text-slate-800 flex items-center gap-2">
+              <span>📖 Lembar Pembahasan & Refleksi Kurikulum Berbasis Cinta (KBC)</span>
+            </h3>
+            <span class="text-xs text-slate-500 font-bold">${correctCount} Benar / ${totalQ - correctCount} Salah</span>
+          </div>
+
+          <div class="space-y-4">
+            ${questions.map((q, qIdx) => {
+              const studentAns = state.ulanganAnswers[qIdx];
+              const isCorrect = studentAns === q.answer;
+
+              return `
+                <div class="p-4 rounded-2xl border ${isCorrect ? 'border-emerald-200 bg-emerald-50/40' : 'border-rose-200 bg-rose-50/40'} space-y-3">
+                  <div class="flex items-center justify-between gap-2 text-xs">
+                    <span class="font-extrabold px-2.5 py-0.5 rounded-full ${isCorrect ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}">
+                      Soal ${qIdx + 1} • Bab ${q.bab} • ${isCorrect ? '✅ Benar' : '❌ Salah'}
+                    </span>
+                    <span class="text-slate-400 text-[11px] font-semibold">${q.indikator || ''}</span>
+                  </div>
+
+                  <div class="text-right font-arabic text-lg sm:text-xl font-bold text-slate-900 leading-relaxed py-1">
+                    ${q.question}
+                  </div>
+
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                    ${q.options.map((opt, oIdx) => {
+                      const isKey = oIdx === q.answer;
+                      const isChosen = oIdx === studentAns;
+                      let badge = 'bg-slate-50 border-slate-200 text-slate-700';
+                      if (isKey) badge = 'bg-emerald-100/90 border-emerald-400 text-emerald-950 font-bold ring-1 ring-emerald-400';
+                      else if (isChosen && !isCorrect) badge = 'bg-rose-100/90 border-rose-400 text-rose-950 font-bold line-through';
+
+                      return `
+                        <div class="p-2.5 rounded-xl border flex items-center justify-between ${badge}">
+                          <div class="flex items-center gap-2 min-w-0">
+                            <span class="w-6 h-6 rounded-md font-mono text-[11px] font-extrabold flex items-center justify-center shrink-0 ${isKey ? 'bg-emerald-600 text-white' : (isChosen ? 'bg-rose-600 text-white' : 'bg-slate-200 text-slate-700')}">
+                              ${optionLabels[oIdx]}
+                            </span>
+                            <span class="font-arabic text-sm leading-relaxed truncate">${opt}</span>
+                          </div>
+                          ${isKey ? '<span class="text-xs">✓ Kunci</span>' : (isChosen ? '<span class="text-xs">Jawabanmu</span>' : '')}
+                        </div>
+                      `;
+                    }).join('')}
+                  </div>
+
+                  ${q.explanation ? `
+                    <div class="p-3 bg-white/90 rounded-xl border border-slate-200 text-xs text-slate-700 space-y-1">
+                      <div class="font-bold text-slate-800 flex items-center gap-1">
+                        <span>💖 Nilai Karakter & Refleksi Cinta:</span>
+                      </div>
+                      <p class="leading-relaxed font-normal">${q.explanation}</p>
+                    </div>
+                  ` : ''}
+                </div>
+              `;
+            }).join('')}
+          </div>
+        </div>
+      ` : ''}
+
+      <!-- PRINTABLE OFFICIAL CERTIFICATE -->
+      <div id="printable-certificate-ulangan" class="hidden print:block p-8 bg-white text-slate-800 text-left space-y-6 border-4 border-blue-900 rounded-3xl">
+        <div class="text-center border-b-2 border-slate-200 pb-4">
+          <h1 class="text-2xl font-black text-blue-900 uppercase">MAN 1 PONTIANAK</h1>
+          <h2 class="text-base sm:text-lg font-bold text-slate-800">
+            ${isFormatif ? 'Laporan Hasil Asesmen Formatif (Refleksi Cinta)' : 'Piagam Hasil Asesmen Sumatif Resmi (CBT)'}
+          </h2>
+          <p class="text-xs text-slate-500 font-mono">Kurikulum Merdeka / KMA Nomor 1503 Tahun 2025 • Kurikulum Berbasis Cinta (KBC)</p>
+        </div>
+
+        <div class="space-y-2 text-sm">
+          <p><strong>Nama Siswa:</strong> <span class="text-base font-extrabold text-slate-900">${studentName}</span></p>
+          <p><strong>Kelas:</strong> <span class="font-bold text-slate-800">${studentClass}</span></p>
+          <p><strong>Mata Pelajaran:</strong> Bahasa Arab (اللغة العربية) — Kelas X</p>
+          <p><strong>Materi Penilaian:</strong> ${pkg ? pkg.title : `Penilaian ${pkgNum}`}</p>
+          <p><strong>Mode Asesmen:</strong> ${isFormatif ? 'Formatif Mandiri (Refleksi KBC)' : 'Sumatif CBT Terproteksi Token'}</p>
+          <p><strong>Jumlah Soal:</strong> ${totalQ} Soal Pilihan Ganda</p>
+          <p><strong>Tanggal Pengerjaan:</strong> ${new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+          <p><strong>Jawaban Benar:</strong> ${correctCount} dari ${totalQ} Soal</p>
+          <p><strong>Skor Capaian:</strong> <span class="text-xl font-black text-blue-900">${state.ulanganScore} / 100</span> — Predikat: <strong>${predikat}</strong></p>
+        </div>
+
+        <div class="pt-8 flex justify-between text-xs text-slate-500">
+          <div>
+            <p>Mengetahui,</p>
+            <p class="font-bold text-slate-700">Guru Pengampu Bahasa Arab</p>
+            <div class="my-3">
+              <img src="${ARABIC_DATA.info.teacherPhoto || 'guru.jpg'}" alt="Foto Guru Pengajar" class="w-16 h-16 rounded-xl object-cover border border-slate-300 shadow-sm" />
+            </div>
+            <p class="font-extrabold text-slate-900">${ARABIC_DATA.info.teacher}</p>
+          </div>
+          <div class="text-right">
+            <p>Pontianak, ${new Date().toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+            <p class="mt-12 font-bold text-slate-700">MAN 1 Pontianak</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  `;
+}
+
 function attachUlanganEvents() {}
 
 
@@ -3557,6 +4016,8 @@ function renderGuruDashboardHTML() {
   const avgScore = scores.length > 0 ? Math.round(scores.reduce((acc, curr) => acc + (curr.skor || 0), 0) / scores.length) : 0;
   const uniqueStudents = new Set(scores.map(s => s.nama)).size;
   const classesList = ARABIC_DATA.classes || ["X Merdeka 1", "X Merdeka 2", "X Merdeka 3", "X Merdeka 4", "X Merdeka 5", "X Merdeka 6", "X Merdeka 7"];
+  const currentTokenP1 = getExpectedUlanganToken(1);
+  const currentTokenP2 = getExpectedUlanganToken(2);
 
   return `
     <div class="space-y-8 animate-fadeIn">
@@ -3698,6 +4159,78 @@ function renderGuruDashboardHTML() {
             ⚠️ Hapus Semua Rekap Nilai
           </button>
         </div>
+      </div>
+
+      <!-- SETTING TOKEN UJIAN CBT SUMATIF BOX -->
+      <div class="card-soft p-5 sm:p-6 bg-gradient-to-br from-slate-900 via-blue-950 to-indigo-950 text-white rounded-2xl sm:rounded-3xl space-y-4 print:hidden border border-blue-800/40 shadow-xl">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-blue-800/40 pb-3">
+          <div class="flex items-center gap-2.5">
+            <span class="text-2xl">🔑</span>
+            <div>
+              <h3 class="text-base font-bold text-white leading-tight">Pengaturan Token Ujian CBT Sumatif</h3>
+              <p class="text-xs text-blue-200">Kelola token akses resmi untuk Asesmen Sumatif 1 (Bab 1–3) dan Sumatif 2 (Bab 4–6).</p>
+            </div>
+          </div>
+          <span class="px-2.5 py-1 bg-blue-500/20 text-blue-300 border border-blue-400/30 rounded-lg text-xs font-mono font-bold self-start sm:self-auto">
+            🔐 Proteksi CBT Aktif
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- CARD TOKEN PENILAIAN 1 -->
+          <div class="p-4 bg-white/5 border border-white/10 rounded-2xl space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-amber-300 uppercase tracking-wider">💖 Asesmen Sumatif 1 (Bab 1–3)</span>
+              <button onclick="copyUlanganToken('${currentTokenP1}')" class="px-2 py-0.5 bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-bold rounded-lg transition-colors flex items-center gap-1 cursor-pointer" title="Salin Token">
+                <span>📋 Salin</span>
+              </button>
+            </div>
+            
+            <div class="flex items-center justify-between bg-black/30 p-2.5 rounded-xl border border-white/10">
+              <span class="text-xs text-slate-400">Token Aktif Saat Ini:</span>
+              <span class="text-lg font-mono font-black text-teal-300 tracking-widest">${currentTokenP1}</span>
+            </div>
+
+            <form onsubmit="event.preventDefault(); updateUlanganToken(1, document.getElementById('token-input-p1').value);" class="flex items-center gap-2">
+              <input type="text" id="token-input-p1" placeholder="Token Baru P1..." maxlength="16" class="px-3 py-1.5 bg-slate-800 border border-slate-700 rounded-xl text-xs font-mono font-bold text-white uppercase focus:outline-none focus:ring-2 focus:ring-amber-500 flex-1" />
+              <button type="submit" class="px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs rounded-xl shadow-xs transition-colors shrink-0">
+                Ubah
+              </button>
+              <button type="button" onclick="resetUlanganTokenDefault(1)" class="px-2.5 py-1.5 bg-slate-700 hover:bg-slate-600 text-slate-300 text-xs rounded-xl transition-colors shrink-0" title="Reset ke Default (CINTA1)">
+                🔄
+              </button>
+            </form>
+          </div>
+
+          <!-- CARD TOKEN PENILAIAN 2 -->
+          <div class="p-4 bg-white/5 border border-white/10 rounded-2xl space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-rose-300 uppercase tracking-wider">💖 Asesmen Sumatif 2 (Bab 4–6)</span>
+              <button onclick="copyUlanganToken('${currentTokenP2}')" class="px-2 py-0.5 bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-bold rounded-lg transition-colors flex items-center gap-1 cursor-pointer" title="Salin Token">
+                <span>📋 Salin</span>
+              </button>
+            </div>
+            
+            <div class="flex items-center justify-between bg-black/30 p-2.5 rounded-xl border border-white/10">
+              <span class="text-xs text-slate-400">Token Aktif Saat Ini:</span>
+              <span class="text-lg font-mono font-black text-teal-300 tracking-widest">${currentTokenP2}</span>
+            </div>
+
+            <form onsubmit="event.preventDefault(); updateUlanganToken(2, document.getElementById('token-input-p2').value);" class="flex items-center gap-2">
+              <input type="text" id="token-input-p2" placeholder="Token Baru P2..." maxlength="16" class="px-3 py-1.5 bg-slate-800 border border-slate-700 rounded-xl text-xs font-mono font-bold text-white uppercase focus:outline-none focus:ring-2 focus:ring-amber-500 flex-1" />
+              <button type="submit" class="px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs rounded-xl shadow-xs transition-colors shrink-0">
+                Ubah
+              </button>
+              <button type="button" onclick="resetUlanganTokenDefault(2)" class="px-2.5 py-1.5 bg-slate-700 hover:bg-slate-600 text-slate-300 text-xs rounded-xl transition-colors shrink-0" title="Reset ke Default (CINTA2)">
+                🔄
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <p class="text-[11px] text-slate-400">
+          💡 <em>Siswa hanya dapat membuka lembar ujian CBT Sumatif setelah memasukkan token aktif di atas. Mode Formatif tidak memerlukan token sehingga siswa bebas berlatih secara mandiri kapan saja.</em>
+        </p>
       </div>
 
       <!-- SETTING PIN GURU BOX -->

@@ -9591,6 +9591,7 @@ const ARABIC_DATA = {
       "characterValues": "Ukhuwah Islamiyyah, Birrul Walidain (Bakti Orang Tua), Cinta Menuntut Ilmu & Menghormati Guru",
       "totalQuestions": 20,
       "durationMinutes": 30,
+      "token": "CINTA1",
       "questions": [
         {
           "id": 1,
@@ -10492,6 +10493,7 @@ const ARABIC_DATA = {
       "characterValues": "Cinta Potensi Diri & Seni Positif, Khidmah Ta'awun (Pengabdian Sosial), Disiplin Ibadah & Menghargai Waktu",
       "totalQuestions": 20,
       "durationMinutes": 30,
+      "token": "CINTA2",
       "questions": [
         {
           "id": 1,
