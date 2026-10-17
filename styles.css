@@ -155,8 +155,9 @@ body {
     margin: 0 !important;
   }
 
-  /* Printable Certificate Mode (Quiz Result) */
-  #printable-certificate {
+  /* Printable Certificate Mode (Quiz Result & Ulangan Berbasis Cinta) */
+  #printable-certificate,
+  #ulangan-certificate {
     display: block !important;
     visibility: visible !important;
     position: relative !important;
@@ -164,7 +165,7 @@ body {
     top: auto !important;
     width: 100% !important;
     box-shadow: none !important;
-    border: 4px double #2f6b78 !important;
+    border: 4px double #b45309 !important;
     padding: 2rem !important;
     margin: 0 auto !important;
   }

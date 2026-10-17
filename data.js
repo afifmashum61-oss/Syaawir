@@ -9567,5 +9567,649 @@ const ARABIC_DATA = {
       "poin": 1900,
       "tanggal": "14/09/2026 13:45"
     }
-  ]
+  ],
+  "ulanganCinta": {
+  "info": {
+    "title": "Ulangan Harian & Asesmen Berbasis Kurikulum Berbasis Cinta (KBC)",
+    "subtitle": "Madrasah Ramah Anak & Kurikulum Berbasis Cinta MAN 1 Pontianak",
+    "teacher": "Yosi, S. Ag, M. Pd.",
+    "kemenagRef": "KMA Nomor 1503 Tahun 2025 / Panduan Asesmen Formatif & Sumatif Berkarakter Cinta",
+    "motto": "مَنْ سَلَكَ طَرِيقًا يَلْتَمِسُ فِيهِ عِلْمًا سَهَّلَ اللَّهُ لَهُ بِهِ طَرِيقًا إِلَى الْجَنَّةِ",
+    "mottoTranslation": "Belajar dengan cinta, menguji pemahaman dengan ketenangan hati, kejujuran, dan kebahagiaan."
+  },
+  "penilaian1": {
+    "id": 1,
+    "title": "Penilaian 1: Asesmen Formatif & Sumatif (Bab 1 - 3)",
+    "arabicTitle": "التَّقْيِيْمُ الأَوَّلُ (الوَحْدَةُ ١ - ٣)",
+    "semester": "Semester Ganjil",
+    "babs": "Bab 1 - Bab 3",
+    "topics": [
+      "Bab 1: At-Tahiyyah wat-Ta'aruf (Salam, Perkenalan, Kata Tanya & Dhomir)",
+      "Bab 2: Al-Usrah wal-Bait (Keluarga, Rumah, Isim Muzakkar/Mu'annats & Huruf Jar)",
+      "Bab 3: Al-Madrasah (Sekolah, Mufrad/Mutsanna/Jamak & Huruf 'Athaf)"
+    ],
+    "characterValues": "Ukhuwah Islamiyyah, Birrul Walidain (Bakti Orang Tua), Cinta Menuntut Ilmu & Menghormati Guru",
+    "totalQuestions": 20,
+    "durationMinutes": 30,
+    "questions": [
+      {
+        "id": 1,
+        "bab": 1,
+        "indikator": "Ungkapan Sapaan Ramah & Ukhuwah (At-Tahiyyah)",
+        "question": "إِذَا قَالَ لَكَ صَدِيْقُكَ فِي الصَّبَاحِ: «صَبَاحَ الْخَيْرِ»، فَمَاذَا تُجِيْبُهُ بِمَوَدَّةٍ وَلُطْفٍ؟",
+        "hint": "Jawaban sapaan pagi yang menebarkan cahaya kebaikan dan kasih sayang.",
+        "options": [
+          "صَبَاحَ النُّوْرِ",
+          "مَسَاءَ الْخَيْرِ",
+          "أَهْلًا وَسَهْلًا",
+          "مَعَ السَّلَامَةِ"
+        ],
+        "answer": 0,
+        "explanation": "Jawaban yang penuh keramahan untuk sapaan 'صَبَاحَ الْخَيْرِ' (Selamat pagi) adalah 'صَبَاحَ النُّوْرِ' (Selamat pagi bercahaya). Nilai Cinta: Saling menebar salam dan senyuman mempererat ukhuwah."
+      },
+      {
+        "id": 2,
+        "bab": 1,
+        "indikator": "Kata Tanya Asal Tempat (Adawatul Istifham)",
+        "question": "أَيُّ أَدَاةِ اسْتِفْهَامٍ تُسْتَخْدَمُ لِلسُّؤَالِ عَنِ الْمَوْطِنِ فِي: «... أَنْتَ؟ - أَنَا مِنْ بُوْنْتِيَانَاك»؟",
+        "hint": "Kata tanya untuk menanyakan 'dari mana' asal seseorang.",
+        "options": [
+          "مِنْ أَيْنَ",
+          "مَاذَا",
+          "هَلْ",
+          "كَمْ"
+        ],
+        "answer": 0,
+        "explanation": "'مِنْ أَيْنَ' artinya 'Dari mana', digunakan untuk menanyakan daerah/kota asal dengan penuh rasa ingin saling mengenal (ta'aruf)."
+      },
+      {
+        "id": 3,
+        "bab": 1,
+        "indikator": "Dhomir Munfashil untuk Perempuan (Mu'annats)",
+        "question": "مَا هُوَ الضَّمِيْرُ الْمُنَاسِبُ لِلْمُخَاطَبَةِ فِي: «... طَالِبَةٌ مُجْتَهِدَةٌ فِي مَدْرَسَةِ MAN 1 Pontianak»؟",
+        "hint": "Kata ganti orang kedua tunggal perempuan (kamu perempuan).",
+        "options": [
+          "أَنْتِ",
+          "أَنْتَ",
+          "هُوَ",
+          "نَحْنُ"
+        ],
+        "answer": 0,
+        "explanation": "Dhomir munfashil untuk kata ganti orang kedua tunggal perempuan adalah 'أَنْتِ' (dengan harakat kasrah)."
+      },
+      {
+        "id": 4,
+        "bab": 1,
+        "indikator": "Perbedaan Kata Tanya Benda vs Orang (Maa vs Man)",
+        "question": "لِلسُّؤَالِ عَنْ غَيْرِ الْعَاقِلِ (الأَشْيَاءِ) نَسْتَخْدِمُ «مَا»، كَقَوْلِنَا: «مَا هَذَا؟ هَذَا ...»",
+        "hint": "Pilihlah kata yang merupakan benda (bukan manusia/profesi).",
+        "options": [
+          "قَلَمٌ جَدِيْدٌ",
+          "مُدَرِّسٌ مَاهِرٌ",
+          "طَالِبٌ نَشِيْطٌ",
+          "طَبِيْبٌ رَحِيْمٌ"
+        ],
+        "answer": 0,
+        "explanation": "'مَا' digunakan untuk menanyakan benda yang tidak berakal (ghairu 'aqil), seperti 'قَلَمٌ جَدِيْدٌ' (pena baru)."
+      },
+      {
+        "id": 5,
+        "bab": 1,
+        "indikator": "Profesi Pendidik Penuh Cinta di Madrasah",
+        "question": "مَنْ هُوَ الشَّخْصُ الَّذِي يُعَلِّمُ التَّلَامِيْذَ وَيُرَبِّيْهِمْ فِي الْفَصْلِ بِكُلِّ إِخْلَاصٍ وَمَحَبَّةٍ؟",
+        "hint": "Pendidik yang membimbing siswa di kelas.",
+        "options": [
+          "الْمُدَرِّسُ",
+          "الْبَوَّابُ",
+          "السَّائِقُ",
+          "الْبَائِعُ"
+        ],
+        "answer": 0,
+        "explanation": "Sosok mulia yang mengajar dan mendidik siswa di kelas dengan keikhlasan adalah 'الْمُدَرِّسُ' (Guru)."
+      },
+      {
+        "id": 6,
+        "bab": 1,
+        "indikator": "Pembagian Kata dalam Bahasa Arab (Taqsim al-Kalimah)",
+        "question": "تَنْقَسِمُ الْكَلِمَةُ فِي اللُّغَةِ الْعَرَبِيَّةِ إِلَى ثَلَاثَةِ أَقْسَامٍ رَئِيْسِيَّةٍ، وَهِيَ:",
+        "hint": "Tiga unsur pembentuk kalimat dalam gramatika bahasa Arab.",
+        "options": [
+          "اسْمٌ، وَفِعْلٌ، وَحَرْفٌ",
+          "مُبْتَدَأٌ، وَخَبَرٌ، وَفَاعِلٌ",
+          "مَاضٍ، وَمُضَارِعٌ، وَأَمْرٌ",
+          "مُفْرَدٌ، وَمُثَنَّى، وَجَمْعٌ"
+        ],
+        "answer": 0,
+        "explanation": "Pembagian kata dasar dalam bahasa Arab terdiri atas Isim (kata benda), Fi'il (kata kerja), dan Harf (huruf/kata sambung)."
+      },
+      {
+        "id": 7,
+        "bab": 1,
+        "indikator": "Refleksi Nilai Karakter Cinta Ukhuwah",
+        "question": "قَالَ تَعَالَى: ﴿إِنَّمَا الْمُؤْمِنُونَ إِخْوَةٌ﴾. مَا الْقِيْمَةُ الْخُلُقِيَّةُ الَّتِي نَتَعَلَّمُهَا مِنْ مَوْضُوْعِ «التَّعَارُفِ»؟",
+        "hint": "Tujuan perkenalan dalam ajaran Islam.",
+        "options": [
+          "بِنَاءُ الأُخُوَّةِ وَالتَّعَاوُنُ عَلَى الْبِرِّ وَالتَّقْوَى",
+          "التَّفَاخُرُ بِالأَنْسَابِ وَالأَمْوَالِ",
+          "التَّعَالِي عَلَى الآخَرِيْنَ",
+          "الْخُصُوْمَةُ وَالْجَفَاءُ"
+        ],
+        "answer": 0,
+        "explanation": "Nilai luhur dari perkenalan (Ta'aruf) adalah mempererat persaudaraan (ukhuwah), empati, serta saling tolong menolong dalam kebajikan."
+      },
+      {
+        "id": 8,
+        "bab": 2,
+        "indikator": "Cinta Orang Tua & Bakti Keluarga (Birrul Walidain)",
+        "question": "مَا مَعْنَى «بِرُّ الْوَالِدَيْنِ» فِي الْحَيَاةِ الأُسَرِيَّةِ، وَكَيْفَ نُعَبِّرُ عَنْهُ سُلُوْكِيًّا؟",
+        "hint": "Sikap terpuji anak kepada ayah dan ibu.",
+        "options": [
+          "طَاعَةُ الأَبِ وَالأُمِّ وَالدُّعَاءُ لَهُمَا وَمُعَامَلَتُهُمَا بِالرَّحْمَةِ",
+          "عَدَمُ الاهْتِمَامِ بِأَمْرِهِمَا",
+          "رَفْعُ الصَّوْتِ أَمَامَهُمَا",
+          "تَرْكُ مُسَاعَدَتِهِمَا عِنْدَ الْكِبَرِ"
+        ],
+        "answer": 0,
+        "explanation": "Birrul Walidain adalah berbakti, mendoakan, dan melayani kedua orang tua dengan rasa cinta, hormat, dan kasih sayang."
+      },
+      {
+        "id": 9,
+        "bab": 2,
+        "indikator": "Kata Tunjuk Dekat Mu'annats (Isim Isyarah)",
+        "question": "اخْتَرِ الإِشَارَةَ الْمُنَاسِبَةَ لِلْفَرَاغِ: «... أُمِّي الحَبِيْبَةُ، هِيَ قَلْبُ الْبَيْتِ»:",
+        "hint": "Kata tunjuk dekat untuk perempuan (mu'annats).",
+        "options": [
+          "هَذِهِ",
+          "هَذَا",
+          "ذَلِكَ",
+          "هَؤُلَاءِ"
+        ],
+        "answer": 0,
+        "explanation": "Untuk isim mu'annats tunggal seperti 'أُمِّي' (ibuku), kata tunjuk dekat yang tepat adalah 'هَذِهِ'."
+      },
+      {
+        "id": 10,
+        "bab": 2,
+        "indikator": "Ciri Isim Mu'annats (Ta' Marbuthah)",
+        "question": "أَيُّ كَلِمَةٍ مِنَ الْكَلِمَاتِ الآتِيَةِ تَدُلُّ عَلَى الاسْمِ الْمُؤَنَّثِ لِوُجُوْدِ التَّاءِ الْمَرْبُوْطَةِ (ـة)؟",
+        "hint": "Perhatikan huruf terakhir kata tersebut.",
+        "options": [
+          "غُرْفَةٌ",
+          "بَيْتٌ",
+          "بَابٌ",
+          "مَسْجِدٌ"
+        ],
+        "answer": 0,
+        "explanation": "'غُرْفَةٌ' (kamar/ruangan) berjenis mu'annats karena diakhiri oleh Ta' Marbuthah (ـة)."
+      },
+      {
+        "id": 11,
+        "bab": 2,
+        "indikator": "Pengaruh Huruf Jar terhadap I'rab (Majrur Kasrah)",
+        "question": "مَا هُوَ الضَّبْطُ الصَّحِيْحُ لآخِرِ الاسْمِ بَعْدَ حَرْفِ الْجَرِّ فِي: «يَجْلِسُ الأَبُ فِي الْمَكْتَبِ ...»؟",
+        "hint": "Huruf jar menyebabkan kata benda setelahnya berharakat kasrah.",
+        "options": [
+          "الْمَكْتَبِ (بِالْكَسْرَةِ)",
+          "الْمَكْتَبَ (بِالْفَتْحَةِ)",
+          "الْمَكْتَبُ (بِالضَّمَّةِ)",
+          "الْمَكْتَبْ (بِالسُّكُوْنِ)"
+        ],
+        "answer": 0,
+        "explanation": "Isim yang diawali huruf jar (seperti 'فِي') berstatus majrur, tanda aslinya berharakat kasrah ('الْمَكْتَبِ')."
+      },
+      {
+        "id": 12,
+        "bab": 2,
+        "indikator": "Kosa Kata Ruang Keluarga Penuh Kehangatan",
+        "question": "أَيْنَ تَجْتَمِعُ الأُسْرَةُ السَّعِيْدَةُ مَسَاءً لِتَبَادُلِ الأَحَادِيْثِ وَالْمَوَدَّةِ؟",
+        "hint": "Ruangan tempat keluarga bercengkerama santai.",
+        "options": [
+          "فِي غُرْفَةِ الْجُلُوْسِ",
+          "فِي الْحَمَّامِ",
+          "فِي الشَّارِعِ",
+          "فِي السُّوْقِ"
+        ],
+        "answer": 0,
+        "explanation": "Keluarga berkumpul dengan harmonis di 'غُرْفَةُ الْجُلُوْسِ' (ruang keluarga / ruang tamu)."
+      },
+      {
+        "id": 13,
+        "bab": 2,
+        "indikator": "Dhomir Muttashil Kepemilikan (Ya' Mutakallim)",
+        "question": "كَيْفَ تُعَبِّرُ بِالْعَرَبِيَّةِ عَنْ: «Rumahku yang penuh dengan cinta kasih»?",
+        "hint": "Gunakan kata ganti kepemilikan 'ku' (ـي).",
+        "options": [
+          "بَيْتِي الْمَمْلُوْءُ بِالْمَحَبَّةِ",
+          "بَيْتُكَ الْكَبِيْرُ",
+          "بَيْتُهُ الْجَدِيْدُ",
+          "بَيْتُهَا النَّظِيْفُ"
+        ],
+        "answer": 0,
+        "explanation": "'Rumahku' diterjemahkan menjadi 'بَيْتِي' dengan dhomir muttashil Ya' Mutakallim."
+      },
+      {
+        "id": 14,
+        "bab": 2,
+        "indikator": "Isim Isyarah Jauh Mudzakkar (Dzaalika)",
+        "question": "مَا الإِشَارَةُ الْمُنَاسِبَةُ لِلْبَعِيْدِ الْمُذَكَّرِ فِي: «... مَسْجِدٌ كَبِيْرٌ نُصَلِّي فِيْهِ جَمَاعَةً»؟",
+        "hint": "Kata tunjuk jauh untuk benda mudzakkar (itu).",
+        "options": [
+          "ذَلِكَ",
+          "تِلْكَ",
+          "هَذِهِ",
+          "هَذَانِ"
+        ],
+        "answer": 0,
+        "explanation": "'ذَلِكَ' digunakan untuk kata tunjuk jauh benda tunggal berjenis mudzakkar."
+      },
+      {
+        "id": 15,
+        "bab": 3,
+        "indikator": "Fasilitas Literasi & Cinta Ilmu di Madrasah",
+        "question": "أَيْنَ يَقْصِدُ الطُّلَّابُ لِقِرَاءَةِ الْكُتُبِ النَّافِعَةِ وَتَغْذِيَةِ عُقُوْلِهِمْ بِالْمَعْرِفَةِ؟",
+        "hint": "Tempat meminjam dan membaca aneka buku di sekolah.",
+        "options": [
+          "الْمَكْتَبَةُ الْمَدْرَسِيَّةُ",
+          "الْمَقْصَفُ",
+          "الْمَلْعَبُ",
+          "الْمِرْحَاضُ"
+        ],
+        "answer": 0,
+        "explanation": "Siswa membaca dan menimba ilmu di 'الْمَكْتَبَةُ الْمَدْرَسِيَّةُ' (Perpustakaan Madrasah)."
+      },
+      {
+        "id": 16,
+        "bab": 3,
+        "indikator": "Bentuk Isim Mutsanna (Dua Benda / Dual)",
+        "question": "مَا هِيَ صِيْغَةُ الْمُثَنَّى (الدَّالُّ عَلَى اثْنَيْنِ) مِنْ كَلِمَةِ «كِتَابٌ»؟",
+        "hint": "Tambahkan alif dan nun (ـَانِ) di akhir kata.",
+        "options": [
+          "كِتَابَانِ",
+          "كُتُبٌ",
+          "كِتَابَاتٌ",
+          "كَاتِبُوْنَ"
+        ],
+        "answer": 0,
+        "explanation": "Bentuk mutsanna (dua) dibentuk dengan menambahkan alif dan nun kasrah (ـَانِ), yaitu 'كِتَابَانِ' (dua buah buku)."
+      },
+      {
+        "id": 17,
+        "bab": 3,
+        "indikator": "Bentuk Jamak Mudzakkar Salim",
+        "question": "مَا هُوَ الْجَمْعُ الْمُذَكَّرُ السَّالِمُ مِنْ كَلِمَةِ «مُعَلِّمٌ»؟",
+        "hint": "Tambahkan wau dan nun (ـُوْنَ) di akhir kata.",
+        "options": [
+          "مُعَلِّمُوْنَ",
+          "مُعَلِّمَاتٌ",
+          "مَعَالِمُ",
+          "مُعَلِّمَانِ"
+        ],
+        "answer": 0,
+        "explanation": "Jamak Mudzakkar Salim dibentuk dengan penambahan wau dan nun (ـُوْنَ), menjadi 'مُعَلِّمُوْنَ'."
+      },
+      {
+        "id": 18,
+        "bab": 3,
+        "indikator": "Bentuk Jamak Mu'annats Salim",
+        "question": "مَا هُوَ الْجَمْعُ الْمُؤَنَّثُ السَّالِمُ مِنْ كَلِمَةِ «طَالِبَةٌ»؟",
+        "hint": "Gantikan ta' marbuthah dengan alif dan ta' maftuhah (ـَاتٌ).",
+        "options": [
+          "طَالِبَاتٌ",
+          "طُلَّابٌ",
+          "طَالِبُوْنَ",
+          "طَالِبَتَانِ"
+        ],
+        "answer": 0,
+        "explanation": "Jamak Mu'annats Salim dibentuk dengan penambahan alif dan ta' (ـَاتٌ), menjadi 'طَالِبَاتٌ'."
+      },
+      {
+        "id": 19,
+        "bab": 3,
+        "indikator": "Huruf 'Athaf (Kata Sambung Bersegera)",
+        "question": "مَا هُوَ حَرْفُ الْعَطْفِ الَّذِي يُفِيْدُ التَّرْتِيْبَ السَّرِيْعَ بِلَا تَأْخِيْرٍ (التَّعْقِيْبُ)؟",
+        "hint": "Huruf sambung yang bermakna 'maka/langsung'.",
+        "options": [
+          "الْفَاءُ (فَـ)",
+          "الْوَاوُ (وَ)",
+          "ثُمَّ",
+          "أَوْ"
+        ],
+        "answer": 0,
+        "explanation": "Huruf 'athaf 'فَـ' bermakna urutan seketika / langsung tanpa jeda waktu lama."
+      },
+      {
+        "id": 20,
+        "bab": 3,
+        "indikator": "Adab Penuntut Ilmu & Rasa Cinta kepada Guru",
+        "question": "كَيْفَ يَتَأَدَّبُ طَالِبُ الْعِلْمِ فِي MAN 1 Pontianak أَمَامَ أُسْتَاذِهِ احْتِرَامًا وَتَقْدِيْرًا؟",
+        "hint": "Sikap santun yang mencerminkan kecintaan pada adab dan ilmu.",
+        "options": [
+          "يَسْتَمِعُ إِلَى تَوْجِيْهَاتِهِ بِأَدَبٍ وَيَدْعُو لَهُ بِالْخَيْرِ",
+          "يَتَشَاغَلُ بِالْهَاتِفِ أَثْنَاءَ الدَّرْسِ",
+          "يَتَحَدَّثُ مَعَ زُمَلَائِهِ دُوْنَ اكْتِرَاثٍ",
+          "يَتْرُكُ الْوَاجِبَاتِ الْمَدْرَسِيَّةَ"
+        ],
+        "answer": 0,
+        "explanation": "Adab mulia penuntut ilmu adalah menyimak bimbingan guru dengan takzim dan senantiasa mendoakan kebaikan bagi para pendidik."
+      }
+    ]
+  },
+  "penilaian2": {
+    "id": 2,
+    "title": "Penilaian 2: Asesmen Formatif & Sumatif (Bab 4 - 6)",
+    "arabicTitle": "التَّقْيِيْمُ الثَّانِي (الوَحْدَةُ ٤ - ٦)",
+    "semester": "Semester Genap",
+    "babs": "Bab 4 - Bab 6",
+    "topics": [
+      "Bab 4: Al-Hiwayah (Hobi Positif, Pembagian Kata & Bentuk Fi'il Madhi, Mudhari', Amr)",
+      "Bab 5: Al-Mihan wa Khidmah Al-Mujtama' (Profesi, Pengabdian, Jumlah Ismiyyah & Fi'liyyah)",
+      "Bab 6: Al-Hayah Al-Yaumiyyah (Rutinitas Harian Yaqut Zarin, Adad 1-100 & Adad Tartibi/Jam)"
+    ],
+    "characterValues": "Cinta Potensi Diri & Seni Positif, Khidmah Ta'awun (Pengabdian Sosial), Disiplin Ibadah & Menghargai Waktu",
+    "totalQuestions": 20,
+    "durationMinutes": 30,
+    "questions": [
+      {
+        "id": 1,
+        "bab": 4,
+        "indikator": "Hobi Positif & Pengembangan Bakat",
+        "question": "مَا هُوَ التَّعْرِيْفُ الصَّحِيْحُ لِلْهِوَايَةِ النَّافِعَةِ فِي حَيَاةِ الشَّبَابِ؟",
+        "hint": "Aktivitas yang memberi manfaat bagi diri dan sesama.",
+        "options": [
+          "نَشَاطٌ مُحَبَّبٌ يُنَمِّي الْمَهَارَاتِ وَيَنْفَعُ النَّفْسَ وَالْمُجْتَمَعَ",
+          "تَضْيِيْعُ الأَوْقَاتِ فِي اللَّهْوِ الَّذِي لَا طَائِلَ مِنْهُ",
+          "إِهْمَالُ الصَّلَوَاتِ وَالدِّرَاسَةِ لِأَجْلِ التَّرْفِيْهِ",
+          "السَّهَرُ غَيْرُ الْمُفِيْدِ طَوَالَ اللَّيْلِ"
+        ],
+        "answer": 0,
+        "explanation": "Hobi yang bermanfaat adalah aktivitas positif yang dicintai, mengasah potensi bakat, serta menebarkan kemanfaatan."
+      },
+      {
+        "id": 2,
+        "bab": 4,
+        "indikator": "Seni Kaligrafi Arab (Al-Khatthul 'Arabi) & Prestasi",
+        "question": "مَا هِيَ الْهِوَايَةُ الَّتِي أَبْدَعَ فِيْهَا التِّلْمِيْذُ «يَاقُوْت زَرِيْن» حَتَّى أَحْرَزَ الْمَرْكَزَ الأَوَّلَ وَطَنِيًّا؟",
+        "hint": "Seni memperindah tulisan ayat Al-Qur'an dan mutiara hikmah.",
+        "options": [
+          "فَنُّ الْخَطِّ الْعَرَبِيِّ",
+          "كُرَةُ الْقَدَمِ",
+          "التَّصْوِيْرُ الْفُتُوْغْرَافِيُّ",
+          "الْعَزْفُ الْمُوْسِيْقِيُّ"
+        ],
+        "answer": 0,
+        "explanation": "Yaqut Zarin tekun berlatih seni kaligrafi Arab (فَنُّ الْخَطِّ الْعَرَبِيِّ) hingga menjadi juara lomba kaligrafi tingkat nasional."
+      },
+      {
+        "id": 3,
+        "bab": 4,
+        "indikator": "Identifikasi Fi'il Madhi (Kata Kerja Lampau)",
+        "question": "عَيِّنِ الْفِعْلَ الْمَاضِيَ فِي الْجُمْلَةِ: «قَرَأَ فَارُوْقُ كِتَابَ السِّيْرَةِ النَّبَوِيَّةِ أَمْسِ»:",
+        "hint": "Kata kerja yang menunjukkan perbuatan telah selesai dilakukan.",
+        "options": [
+          "قَرَأَ",
+          "فَارُوْقُ",
+          "كِتَابَ",
+          "أَمْسِ"
+        ],
+        "answer": 0,
+        "explanation": "'قَرَأَ' adalah Fi'il Madhi yang bermakna 'telah membaca'."
+      },
+      {
+        "id": 4,
+        "bab": 4,
+        "indikator": "Identifikasi Fi'il Mudhari' (Sedang/Akan Datang)",
+        "question": "أَيُّ فِعْلٍ مِنَ الأَفْعَالِ الآتِيَةِ يَدُلُّ عَلَى زَمَنِ الْحَالِ أَوِ الاسْتِقْبَالِ (فِعْلٌ مُضَارِعٌ)؟",
+        "hint": "Diawali salah satu huruf mudhara'ah (أ - ن - ي - ت).",
+        "options": [
+          "يَكْتُبُ",
+          "كَتَبَ",
+          "اُكْتُبْ",
+          "كِتَابَةٌ"
+        ],
+        "answer": 0,
+        "explanation": "'يَكْتُبُ' adalah Fi'il Mudhari' diawali huruf mudhara'ah Ya' (يـ) bermakna sedang/akan menulis."
+      },
+      {
+        "id": 5,
+        "bab": 4,
+        "indikator": "Bentuk Fi'il Amr (Kata Kerja Perintah Santun)",
+        "question": "مَا هُوَ فِعْلُ الأَمْرِ الْمُنَاسِبُ فِي نَصِيْحَةِ الصَّدِيْقِ: «... دَرْسَكَ بِعِنَايَةٍ يَا أَخِي»؟",
+        "hint": "Kata kerja perintah untuk laki-laki tunggal.",
+        "options": [
+          "ذَاكِرْ",
+          "تُذَاكِرُ",
+          "ذَاكَرَ",
+          "مُذَاكَرَةٌ"
+        ],
+        "answer": 0,
+        "explanation": "'ذَاكِرْ' adalah Fi'il Amr (pelajarilah/ulangilah) berharakat sukun di akhirnya."
+      },
+      {
+        "id": 6,
+        "bab": 4,
+        "indikator": "Kesesuaian Gender Fi'il Mudhari' untuk Mu'annats",
+        "question": "إِذَا كَانَ الْفَاعِلُ مُؤَنَّثًا مِثْلَ «فَاطِمَةُ»، فَمَا الصِّيْغَةُ الصَّحِيْحَةُ: «فَاطِمَةُ ... الدَّرْسَ»؟",
+        "hint": "Fi'il mudhari' untuk perempuan diawali huruf Ta'.",
+        "options": [
+          "تَفْهَمُ",
+          "يَفْهَمُ",
+          "يَفْهَمُوْنَ",
+          "تَفْهَمِيْنَ"
+        ],
+        "answer": 0,
+        "explanation": "Untuk subjek perempuan tunggal (hiya), fi'il mudhari' menggunakan awalan Ta' ('تَفْهَمُ')."
+      },
+      {
+        "id": 7,
+        "bab": 4,
+        "indikator": "Nilai Keikhlasan & Cinta Menghidupkan Seni Islami",
+        "question": "مَا الْهَدَفُ الأَسْمَى لِلطَّالِبِ عِنْدَمَا يَتَعَلَّمُ فَنَّ الْخَطِّ الْعَرَبِيِّ؟",
+        "hint": "Niat yang ikhlas demi memuliakan kalam Allah.",
+        "options": [
+          "تَعْظِيْمُ كَلَامِ اللهِ تَعَالَى وَإِبْرَازُ جَمَالِ اللُّغَةِ الْعَرَبِيَّةِ",
+          "التَّفَاخُرُ بِالْقُدُرَاتِ أَمَامَ الزُّمَلَاءِ",
+          "كَسْبُ الْمَالِ وَالشُّهْرَةِ فَقَطْ",
+          "إِضَاعَةُ الْوَقْتِ بِلَا هَدَفٍ"
+        ],
+        "answer": 0,
+        "explanation": "Tujuan luhur seni kaligrafi adalah mengagungkan firman Allah SWT dan mengekspresikan kecintaan pada keindahan bahasa Al-Qur'an."
+      },
+      {
+        "id": 8,
+        "bab": 5,
+        "indikator": "Profesi Petani & Pahlawan Pangan (Al-Fallah)",
+        "question": "مَنْ هُوَ الشَّخْصُ الَّذِي يَزْرَعُ الأَرْزَ فِي الْحَقْلِ لِيُوَفِّرَ الْغِذَاءَ لِأَبْنَاءِ وَطَنِهِ؟",
+        "hint": "Petani yang bekerja di sawah/ladang.",
+        "options": [
+          "الْفَلَّاحُ",
+          "الطَّبِيْبُ",
+          "الشُّرْطِيُّ",
+          "الْمُحَامِي"
+        ],
+        "answer": 0,
+        "explanation": "'الْفَلَّاحُ' (Petani) adalah pahlawan yang mengolah tanah untuk memenuhi kebutuhan pangan masyarakat."
+      },
+      {
+        "id": 9,
+        "bab": 5,
+        "indikator": "Profesi Medis Berlandaskan Kasih Sayang (At-Thabib)",
+        "question": "كَيْفَ يُؤَدِّي الطَّبِيْبُ الرَّحِيْمُ عَمَلَهُ فِي الْمُسْتَشْفَى انْطِلَاقًا مِنْ قِيَمِ الرَّحْمَةِ؟",
+        "hint": "Melayani pasien dengan penuh kelembutan dan perhatian.",
+        "options": [
+          "يَفْحَصُ الْمَرْضَى وَيُعَالِجُهُمْ بِرِفْقٍ وَاهْتِمَامٍ إِنْسَانِيٍّ",
+          "يَمْتَنِعُ عَنْ مُسَاعَدَةِ الْمُحْتَاجِيْنَ",
+          "يَتَعَامَلُ مَعَ الْمُصَابِيْنَ بِغِلْظَةٍ",
+          "يَهْتَمُّ بِالْمَالِ قَبْلَ إِنْقَاذِ الأَرْوَاحِ"
+        ],
+        "answer": 0,
+        "explanation": "Dokter yang berjiwa cinta kasih memeriksa dan merawat pasien dengan santun, teliti, dan penuh welas asih."
+      },
+      {
+        "id": 10,
+        "bab": 5,
+        "indikator": "Struktur Kalimat Nominal (Jumlah Ismiyyah)",
+        "question": "تَتَكَوَّنُ الْجُمْلَةُ الاسْمِيَّةُ مِنْ رُكْنَيْنِ أَسَاسِيَّيْنِ هُمَا:",
+        "hint": "Dua unsur pokok: subjek di awal dan predikat penjelas.",
+        "options": [
+          "الْمُبْتَدَأُ وَالْخَبَرُ",
+          "الْفِعْلُ وَالْفَاعِلُ",
+          "الْجَارُّ وَالْمَجْرُوْرُ",
+          "الشَّرْطُ وَالْجَوَابُ"
+        ],
+        "answer": 0,
+        "explanation": "Jumlah Ismiyyah tersusun atas dua pilar utama yaitu Mubtada' (isim di awal) dan Khabar (keterangan penjelas)."
+      },
+      {
+        "id": 11,
+        "bab": 5,
+        "indikator": "Contoh Kalimat Jumlah Ismiyyah",
+        "question": "أَيُّ جُمْلَةٍ مِنَ الْجُمَلِ الآتِيَةِ تُمَثِّلُ جُمْلَةً اسْمِيَّةً صَحِيْحَةً؟",
+        "hint": "Kalimat yang diawali dengan isim (kata benda).",
+        "options": [
+          "الْمُعَلِّمُ مُخْلِصٌ فِي رِسَالَتِهِ",
+          "يَحْفَظُ الشُّرْطِيُّ الأَمْنَ",
+          "فِي السَّاحَةِ تَلَامِيْذُ",
+          "انْصُرْ أَخَاكَ ظَالِمًا أَوْ مَظْلُوْمًا"
+        ],
+        "answer": 0,
+        "explanation": "'الْمُعَلِّمُ مُخْلِصٌ فِي رِسَالَتِهِ' diawali isim 'الْمُعَلِّمُ' (mubtada') diikuti 'مُخْلِصٌ' (khabar)."
+      },
+      {
+        "id": 12,
+        "bab": 5,
+        "indikator": "Struktur Kalimat Verbal (Jumlah Fi'liyyah)",
+        "question": "مَا هُوَ التَّرْتِيْبُ الصَّحِيْحُ لِعَنَاصِرِ الْجُمْلَةِ: «يَحْمِي الْجُنْدِيُّ الْوَطَنَ»؟",
+        "hint": "Kata kerja + Pelaku + Objek.",
+        "options": [
+          "فِعْلٌ + فَاعِلٌ + مَفْعُوْلٌ بِهِ",
+          "مُبْتَدَأٌ + خَبَرٌ + حَالٌ",
+          "فَاعِلٌ + فِعْلٌ + صِفَةٌ",
+          "مَفْعُوْلٌ بِهِ + فِعْلٌ + فَاعِلٌ"
+        ],
+        "answer": 0,
+        "explanation": "'يَحْمِي' adalah Fi'il, 'الْجُنْدِيُّ' adalah Fa'il (pelaku), dan 'الْوَطَنَ' adalah Maf'ul Bih (objek)."
+      },
+      {
+        "id": 13,
+        "bab": 5,
+        "indikator": "Nilai Pengabdian Sosial & Hadis Kemanfaatan (Khidmah)",
+        "question": "قَالَ النَّبِيُّ ﷺ: «خَيْرُ النَّاسِ أَنْفَعُهُمْ لِلنَّاسِ». مَا التَّطْبِيْقُ الْعَمَلِيُّ لِهَذَا التَّوْجِيْهِ فِي اخْتِيَارِ الْمِهْنَةِ؟",
+        "hint": "Memilih jalan profesi yang mendatangkan berkah bagi banyak orang.",
+        "options": [
+          "السَّعْيُ لِاخْتِيَارِ مِهْنَةٍ شَرِيْفَةٍ تَنْفَعُ الْمُجْتَمَعَ وَتَنْشُرُ الْخَيْرَ",
+          "الْبَحْثُ عَنِ الْمَصَالِحِ الشَّخْصِيَّةِ دُوْنَ مُبَالاةٍ بِالآخَرِيْنَ",
+          "التَّرَفُّعُ عَنِ الْمِهَنِ الْخَدَمِيَّةِ النَّافِعَةِ",
+          "تَرْكُ الْعَمَلِ وَالانْعِزَالُ عَنِ النَّاسِ"
+        ],
+        "answer": 0,
+        "explanation": "Sebaik-baik manusia adalah yang paling banyak memberi manfaat. Pilihlah profesi yang menebar kemaslahatan dan kasih sayang sosial."
+      },
+      {
+        "id": 14,
+        "bab": 5,
+        "indikator": "I'rab Maf'ul Bih (Objek Kalimat Fathah)",
+        "question": "مَا هُوَ الإِعْرَابُ الصَّحِيْحُ لِكَلِمَةِ «الْمَرِيْضَ» فِي: «يَفْحَصُ الطَّبِيْبُ الْمَرِيْضَ»؟",
+        "hint": "Objek penderita yang terkena perbuatan berharakat fathah.",
+        "options": [
+          "مَفْعُوْلٌ بِهِ مَنْصُوْبٌ بِالْفَتْحَةِ",
+          "فَاعِلٌ مَرْفُوْعٌ بِالضَّمَّةِ",
+          "مُبْتَدَأٌ مَرْفُوْعٌ بِالضَّمَّةِ",
+          "اسْمٌ مَجْرُوْرٌ بِالْكَسْرَةِ"
+        ],
+        "answer": 0,
+        "explanation": "'الْمَرِيْضَ' adalah Maf'ul Bih (objek), berhukum manshub dengan tanda fathah."
+      },
+      {
+        "id": 15,
+        "bab": 6,
+        "indikator": "Bilangan Kardinal (Al-Arqaam 1-10)",
+        "question": "كَمْ عَدَدُ أَيَّامِ الأُسْبُوْعِ بِاللُّغَةِ الْعَرَبِيَّةِ؟",
+        "hint": "Tujuh hari.",
+        "options": [
+          "سَبْعَةُ أَيَّامٍ",
+          "خَمْسَةُ أَيَّامٍ",
+          "عَشَرَةُ أَيَّامٍ",
+          "أَرْبَعَةُ أَيَّامٍ"
+        ],
+        "answer": 0,
+        "explanation": "Jumlah hari dalam sepekan adalah 7: 'سَبْعَةُ أَيَّامٍ'."
+      },
+      {
+        "id": 16,
+        "bab": 6,
+        "indikator": "Bilangan Bertingkat / Waktu Jam (As-Sa'ah)",
+        "question": "فِي أَيِّ سَاعَةٍ يُنَادَى لِأَذَانِ الظُّهْرِ غَالِبًا؟ «فِي السَّاعَةِ ... ظُهْرًا»:",
+        "hint": "Pukul 12.00 siang.",
+        "options": [
+          "الثَّانِيَةَ عَشْرَةَ",
+          "الْخَامِسَةِ",
+          "السَّابِعَةِ",
+          "التَّاسِعَةِ"
+        ],
+        "answer": 0,
+        "explanation": "Pukul 12 tepat adalah 'السَّاعَةُ الثَّانِيَةَ عَشْرَةَ'."
+      },
+      {
+        "id": 17,
+        "bab": 6,
+        "indikator": "Bilangan Puluhan (1-100)",
+        "question": "تَرْجِمْ إِلَى الْعَرَبِيَّةِ: «Tiga puluh hari» (30 hari):",
+        "hint": "Bentuk puluhan dari angka tiga.",
+        "options": [
+          "ثَلَاثُوْنَ يَوْمًا",
+          "عِشْرُوْنَ يَوْمًا",
+          "أَرْبَعُوْنَ يَوْمًا",
+          "خَمْسُوْنَ يَوْمًا"
+        ],
+        "answer": 0,
+        "explanation": "Tiga puluh diterjemahkan menjadi 'ثَلَاثُوْنَ'."
+      },
+      {
+        "id": 18,
+        "bab": 6,
+        "indikator": "Kedisiplinan Bangun Pagi Yaqut Zarin",
+        "question": "مَتَى يَسْتَيْقِظُ التِّلْمِيْذُ الْمِثَالِيُّ «يَاقُوْت زَرِيْن» لِيَبْدَأَ يَوْمَهُ بِطَاعَةِ اللهِ؟",
+        "hint": "Pukul 03.30 pagi untuk tahajud, muraja'ah, dan shalat Subuh.",
+        "options": [
+          "فِي السَّاعَةِ الثَّالِثَةِ وَالنِّصْفِ صَبَاحًا (03.30)",
+          "فِي السَّاعَةِ السَّادِسَةِ صَبَاحًا",
+          "فِي السَّاعَةِ الثَّامِنَةِ صَبَاحًا",
+          "فِي مُنْتَصَفِ النَّهَارِ"
+        ],
+        "answer": 0,
+        "explanation": "Yaqut Zarin bangun pukul 03.30 pagi untuk qiyamul lail, merapikan kamar, dan bersiap ke masjid."
+      },
+      {
+        "id": 19,
+        "bab": 6,
+        "indikator": "Bakti Anak di Rumah Pagi Hari",
+        "question": "مَاذَا يَصْنَعُ يَاقُوْت زَرِيْن فِي السَّاعَةِ الْخَامِسَةِ صَبَاحًا إِعَانَةً لِوَالِدَتِهِ بِمَحَبَّةٍ؟",
+        "hint": "Membantu ibu di dapur menyiapkan hidangan.",
+        "options": [
+          "يُسَاعِدُ أُمَّهُ فِي الْمَطْبَخِ لِإِعْدَادِ طَعَامِ الإِفْطَارِ",
+          "يَعُوْدُ إِلَى النَّوْمِ كَسَلًا",
+          "يَلْعَبُ بِالْهَاتِفِ الذَّكِيِّ",
+          "يَخْرُجُ لِلَّعِبِ مَعَ الأَصْدِقَاءِ"
+        ],
+        "answer": 0,
+        "explanation": "Yaqut Zarin membantu ibunya di dapur pada pukul 05.00 pagi dengan penuh cinta dan bakti."
+      },
+      {
+        "id": 20,
+        "bab": 6,
+        "indikator": "Nilai Menghargai Waktu & Manajemen Diri (Man Jadda Wajada)",
+        "question": "قَالَ تَعَالَى: ﴿وَالْعَصْرِ ۝ إِنَّ الْإِنْسَانَ لَفِي خُسْرٍ﴾. مَا الدَّرْسُ الإِيْمَانِيُّ فِي تَنْظِيْمِ الْحَيَاةِ الْيَوْمِيَّةِ؟",
+        "hint": "Menghargai waktu sebagai amanah dan sarana beribadah.",
+        "options": [
+          "اسْتِثْمَارُ كُلِّ سَاعَةٍ فِي الْعَمَلِ الصَّالِحِ وَطَلَبِ الْعِلْمِ وَالْبِرِّ",
+          "تَأْجِيْلُ أَعْمَالِ الْيَوْمِ إِلَى الْغَدِ",
+          "تَقْضِيَةُ الأَوْقَاتِ فِيمَا لَا فَائِدَةَ فِيْهِ",
+          "إِهْمَالُ النِّظَامِ الْيَوْمِيِّ"
+        ],
+        "answer": 0,
+        "explanation": "Waktu adalah modal hidup yang sangat berharga. Disiplin harian yang dilandasi cinta Allah akan mengantarkan kita pada keselamatan dan kebahagiaan."
+      }
+    ]
+  }
+}
 };
