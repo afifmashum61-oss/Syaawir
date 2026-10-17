@@ -2857,7 +2857,12 @@ function getUlanganPackageInfo() {
 
 function getUlanganQuestions() {
   const pkg = getUlanganPackageInfo();
-  return pkg ? pkg.questions : [];
+  if (!pkg) return [];
+  if (state.ulanganMode === 'sumatif') {
+    return (pkg.sumatifQuestions && pkg.sumatifQuestions.length > 0) ? pkg.sumatifQuestions : (pkg.questions || []);
+  } else {
+    return (pkg.formatifQuestions && pkg.formatifQuestions.length > 0) ? pkg.formatifQuestions : (pkg.questions || []);
+  }
 }
 
 function switchUlanganPackage(pkgNum) {
@@ -3073,7 +3078,7 @@ function renderUlanganHTML() {
     return '<div class="p-8 text-center text-slate-500">Materi ulangan belum tersedia.</div>';
   }
 
-  const questions = pkg.questions;
+  const questions = getUlanganQuestions();
   const totalQ = questions.length;
   const currentQ = questions[state.ulanganCurrentIndex];
   const progressPercent = ((state.ulanganCurrentIndex + 1) / totalQ) * 100;
