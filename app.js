@@ -3110,170 +3110,127 @@ function renderUlanganHTML() {
   const optionLabels = ["A", "B", "C", "D"];
 
   return `
-    <div class="space-y-6 animate-fadeIn max-w-4xl mx-auto">
+    <div class="space-y-3.5 sm:space-y-5 animate-fadeIn max-w-3xl mx-auto px-1 sm:px-4">
       
-      <!-- HERO BANNER KURIKULUM BERBASIS CINTA -->
-      <div class="card-soft p-6 sm:p-8 ${isFormatif ? 'bg-gradient-to-br from-emerald-900 via-slate-900 to-[#1f4750] border-emerald-500/40' : 'bg-gradient-to-br from-blue-950 via-slate-900 to-[#152e35] border-blue-500/40'} text-white rounded-3xl shadow-xl border relative overflow-hidden transition-all duration-500">
-        <div class="absolute -right-10 -bottom-10 w-64 h-64 ${isFormatif ? 'bg-emerald-500/10' : 'bg-blue-500/10'} rounded-full blur-3xl pointer-events-none"></div>
-        <div class="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-          <div>
-            <div class="inline-flex items-center gap-2 px-3 py-1 ${isFormatif ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40' : 'bg-blue-500/20 text-blue-300 border-blue-500/40'} border rounded-full text-xs font-bold uppercase tracking-wider mb-2">
-              <span>💖 KURIKULUM BERBASIS CINTA (KBC)</span>
-              <span>•</span>
-              <span>MAN 1 PONTIANAK</span>
-            </div>
-            <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white flex items-center gap-2">
-              <span>${isFormatif ? 'Asesmen Formatif (Latihan Reflektif)' : 'Asesmen Sumatif (Ujian CBT Resmi)'}</span>
-              <span class="font-arabic text-2xl sm:text-3xl ${isFormatif ? 'text-emerald-300' : 'text-blue-300'}">الاختبار اليومي</span>
+      <!-- TOP COMPACT CONTROL & STATUS BAR (MOBILE-FIRST) -->
+      <div class="card-soft p-3 sm:p-4 bg-white border border-slate-200/90 rounded-2xl shadow-sm space-y-2.5">
+        
+        <!-- ROW 1: HEADER & STATUS BADGES -->
+        <div class="flex items-center justify-between gap-2 border-b border-slate-100 pb-2">
+          <div class="flex items-center gap-1.5 min-w-0">
+            <span class="w-2.5 h-2.5 rounded-full ${isFormatif ? 'bg-emerald-500 animate-pulse' : 'bg-blue-600'} shrink-0"></span>
+            <h2 class="text-xs sm:text-sm font-extrabold text-slate-800 truncate">
+              ${isFormatif ? '🌱 Asesmen Formatif (Refleksi)' : '🎯 CBT Sumatif Resmi'}
             </h2>
-            <p class="text-slate-200 text-xs sm:text-sm mt-1 max-w-xl leading-relaxed">
-              «مَنْ سَلَكَ طَرِيقًا يَلْتَمِسُ فِيهِ عِلْمًا سَهَّلَ اللَّهُ لَهُ بِهِ طَرِيقًا إِلَى الْجَنَّةِ» — Belajar dengan cinta, menguji pemahaman dengan ketenangan hati, kejujuran, dan kebahagiaan.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- SELECTOR BAR (PAKET PENILAIAN 1 vs 2 & MODE FORMATIF vs SUMATIF) -->
-      <div class="card-soft p-4 sm:p-5 bg-white rounded-2xl border border-slate-200 shadow-md space-y-4">
-        <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-          <!-- Paket Selector -->
-          <div class="flex items-center gap-2 w-full md:w-auto">
-            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider hidden sm:inline">Paket:</span>
-            <button onclick="switchUlanganPackage(1)" class="flex-1 md:flex-none px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold transition-all flex items-center justify-center gap-2 ${state.ulanganPackage === 1 ? 'bg-gradient-to-r from-rose-600 to-pink-600 text-white shadow-md ring-2 ring-rose-400/50' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}">
-              <span>💖 Penilaian 1 (Bab 1–3)</span>
-            </button>
-            <button onclick="switchUlanganPackage(2)" class="flex-1 md:flex-none px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold transition-all flex items-center justify-center gap-2 ${state.ulanganPackage === 2 ? 'bg-gradient-to-r from-rose-600 to-pink-600 text-white shadow-md ring-2 ring-rose-400/50' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}">
-              <span>💖 Penilaian 2 (Bab 4–6)</span>
-            </button>
           </div>
 
-          <!-- Mode Selector (Formatif vs Sumatif) -->
-          <div class="flex items-center gap-2 w-full md:w-auto bg-slate-100 p-1.5 rounded-2xl border border-slate-200">
-            <button onclick="switchUlanganMode('formatif')" class="flex-1 md:flex-none px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition-all flex items-center justify-center gap-2 ${isFormatif ? 'bg-emerald-600 text-white shadow-md ring-2 ring-emerald-400/40' : 'text-slate-600 hover:text-slate-900'}">
-              <span>🌱 Formatif (Refleksi)</span>
-            </button>
-            <button onclick="switchUlanganMode('sumatif')" class="flex-1 md:flex-none px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition-all flex items-center justify-center gap-2 ${!isFormatif ? 'bg-blue-700 text-white shadow-md ring-2 ring-blue-400/40' : 'text-slate-600 hover:text-slate-900'}">
-              <span>🎯 Sumatif (CBT Resmi)</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- MODE EXPLAINER CARD: JELAS MEMBEDAKAN FORMATIF VS SUMATIF -->
-        <div class="p-4 rounded-xl border text-xs leading-relaxed ${isFormatif ? 'bg-emerald-50/80 border-emerald-200 text-emerald-950' : 'bg-blue-50/80 border-blue-200 text-blue-950'}">
-          ${isFormatif ? `
-            <div class="flex items-start gap-2.5">
-              <span class="text-xl shrink-0">🌱</span>
-              <div>
-                <strong class="font-bold text-emerald-900 text-sm">Mode Asesmen Formatif (Refleksi Pembelajaran Mandiri):</strong>
-                <p class="mt-0.5 text-emerald-800">
-                  Dirancang untuk <strong>proses belajar santai</strong>. Kunci jawaban dan pembahasan refleksi karakter cinta akan <strong>langsung muncul seketika</strong> setelah Ananda memilih jawaban. Tidak ada tekanan timer kaku, sehingga Ananda bisa memahami konsep secara mendalam.
-                </p>
-              </div>
-            </div>
-          ` : `
-            <div class="flex items-start gap-2.5">
-              <span class="text-xl shrink-0">🎯</span>
-              <div>
-                <strong class="font-bold text-blue-900 text-sm">Mode Asesmen Sumatif (Ujian CBT Resmi Capaian Pembelajaran):</strong>
-                <p class="mt-0.5 text-blue-800">
-                  Format <strong>ujian resmi CBT (Computer Based Test)</strong> dengan <strong>timer 30 menit</strong>. Kunci jawaban dan pembahasan <strong>dirahasiakan</strong> selama ujian berlangsung. Ananda bebas mengganti jawaban kapan saja sebelum menekan tombol <strong>Kumpulkan Ujian</strong>. Di akhir, Ananda akan memperoleh Piagam Resmi bertandatangan guru.
-                </p>
-              </div>
-            </div>
-          `}
-        </div>
-      </div>
-
-      <!-- STATUS & PALETTE BAR -->
-      <div class="card-soft p-4 ${isFormatif ? 'bg-slate-900 border-slate-800' : 'bg-slate-950 border-blue-900/60'} text-white rounded-2xl border shadow-lg space-y-4">
-        <div class="flex flex-wrap items-center justify-between gap-3">
-          <div class="flex items-center gap-3">
-            <span class="text-xs font-bold text-slate-400">
-              Soal <strong class="text-white text-base font-extrabold">${state.ulanganCurrentIndex + 1}</strong> / ${totalQ}
-            </span>
-            <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold ${isFormatif ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' : 'bg-blue-500/20 text-blue-300 border border-blue-500/30'}">
-              ${pkg.title}
-            </span>
-          </div>
-
-          <div class="flex items-center gap-3 text-xs font-bold">
+          <!-- STATUS BADGES -->
+          <div class="flex items-center gap-1.5 sm:gap-2 shrink-0 text-xs font-bold">
             ${isFormatif ? `
-              <div class="flex items-center gap-1 px-3 py-1 bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded-xl">
-                <span>🔥 STREAK: x${state.ulanganStreak}</span>
-              </div>
-              <div class="flex items-center gap-1 px-3 py-1 bg-teal-500/20 text-teal-300 border border-teal-500/30 rounded-xl">
-                <span>⭐ POIN: ${state.ulanganPoints.toLocaleString('id-ID')}</span>
-              </div>
+              <span class="px-2 py-0.5 bg-amber-50 text-amber-800 border border-amber-200 rounded-lg text-[11px] flex items-center gap-1">
+                <span>🔥</span> x${state.ulanganStreak}
+              </span>
+              <span class="px-2 py-0.5 bg-teal-50 text-teal-800 border border-teal-200 rounded-lg text-[11px] hidden sm:inline-flex">
+                ⭐ ${state.ulanganPoints.toLocaleString('id-ID')} Poin
+              </span>
             ` : `
-              <!-- CBT EXAM COUNTDOWN TIMER DISPLAY -->
-              <div class="flex items-center gap-2 px-3.5 py-1.5 bg-blue-900/60 text-blue-200 border border-blue-500/40 rounded-xl shadow-inner">
-                <span class="text-sm">⏱️ Sisa Waktu:</span>
-                <span id="ulangan-timer-display" class="font-mono font-extrabold text-amber-300 text-sm tracking-wider">${timerString}</span>
+              <div class="flex items-center gap-1 px-2.5 py-0.5 bg-blue-50 text-blue-900 border border-blue-200 rounded-lg font-mono font-extrabold text-xs shadow-2xs">
+                <span>⏱️</span>
+                <span id="ulangan-timer-display" class="text-blue-700 tracking-wider">${timerString}</span>
               </div>
             `}
-            <div class="text-slate-400 text-xs">
-              Terjawab: <strong class="${isFormatif ? 'text-emerald-400' : 'text-blue-300'}">${answeredCount}/${totalQ}</strong>
-            </div>
+            <span class="px-2 py-0.5 bg-slate-100 text-slate-700 rounded-lg text-[11px]">
+              ${state.ulanganCurrentIndex + 1}/${totalQ}
+            </span>
           </div>
         </div>
 
-        <!-- PROGRESS BAR -->
-        <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden border border-slate-700">
-          <div class="${isFormatif ? 'bg-gradient-to-r from-emerald-500 via-teal-400 to-amber-400' : 'bg-gradient-to-r from-blue-600 via-indigo-500 to-cyan-400'} h-full transition-all duration-300 rounded-full" style="width: ${progressPercent}%"></div>
+        <!-- ROW 2: DUAL SEGMENTED CONTROLS (PAKET & MODE) -->
+        <div class="grid grid-cols-2 gap-2">
+          <!-- SEGMENT 1: PAKET SELECTOR -->
+          <div class="bg-slate-100 p-1 rounded-xl flex items-center border border-slate-200 text-[11px] sm:text-xs font-extrabold">
+            <button onclick="switchUlanganPackage(1)" class="flex-1 py-1.5 px-1 sm:px-2 rounded-lg transition-all flex items-center justify-center gap-1 ${state.ulanganPackage === 1 ? 'bg-white text-rose-700 shadow-xs font-black' : 'text-slate-600 hover:text-slate-900'}">
+              <span class="truncate">💖 Bab 1–3</span>
+            </button>
+            <button onclick="switchUlanganPackage(2)" class="flex-1 py-1.5 px-1 sm:px-2 rounded-lg transition-all flex items-center justify-center gap-1 ${state.ulanganPackage === 2 ? 'bg-white text-rose-700 shadow-xs font-black' : 'text-slate-600 hover:text-slate-900'}">
+              <span class="truncate">💖 Bab 4–6</span>
+            </button>
+          </div>
+
+          <!-- SEGMENT 2: MODE SELECTOR -->
+          <div class="bg-slate-100 p-1 rounded-xl flex items-center border border-slate-200 text-[11px] sm:text-xs font-extrabold">
+            <button onclick="switchUlanganMode('formatif')" class="flex-1 py-1.5 px-1 sm:px-2 rounded-lg transition-all flex items-center justify-center gap-1 ${isFormatif ? 'bg-emerald-600 text-white shadow-xs font-black' : 'text-slate-600 hover:text-slate-900'}">
+              <span class="truncate">🌱 Formatif</span>
+            </button>
+            <button onclick="switchUlanganMode('sumatif')" class="flex-1 py-1.5 px-1 sm:px-2 rounded-lg transition-all flex items-center justify-center gap-1 ${!isFormatif ? 'bg-blue-600 text-white shadow-xs font-black' : 'text-slate-600 hover:text-slate-900'}">
+              <span class="truncate">🎯 Sumatif</span>
+            </button>
+          </div>
         </div>
 
-        <!-- CBT NUMBER PALETTE (1 - 20) -->
-        <div class="flex flex-wrap items-center gap-1.5 pt-1 border-t border-slate-800">
-          <span class="text-[10px] text-slate-400 uppercase font-bold mr-1">
-            ${isFormatif ? 'Lompat Soal:' : 'Lembar CBT:'}
-          </span>
-          ${questions.map((_, qIdx) => {
-            const isCurr = state.ulanganCurrentIndex === qIdx;
-            const isAns = state.ulanganAnswers[qIdx] !== undefined;
-            let btnClass = 'bg-slate-800 text-slate-400 border-slate-700 hover:bg-slate-700';
-            if (isAns) {
-              btnClass = isFormatif 
-                ? 'bg-emerald-600 text-white border-emerald-500 font-bold' 
-                : 'bg-blue-600 text-white border-blue-400 font-bold';
-            }
-            if (isCurr) {
-              btnClass = 'bg-amber-500 text-slate-950 font-extrabold ring-2 ring-amber-300 border-amber-400 scale-105';
-            }
-
-            return `
-              <button onclick="jumpToUlanganQuestion(${qIdx})" class="w-7 h-7 rounded-lg text-xs flex items-center justify-center transition-all border shadow-xs ${btnClass}" title="Soal ${qIdx + 1} ${isAns ? '(Sudah Terisi)' : '(Belum Terisi)'}">
-                ${qIdx + 1}
-              </button>
-            `;
-          }).join('')}
+        <!-- ROW 3: SLIM PROGRESS BAR -->
+        <div class="space-y-1">
+          <div class="flex items-center justify-between text-[10px] sm:text-xs text-slate-500 font-bold">
+            <span>Progress: <strong class="${isFormatif ? 'text-emerald-700' : 'text-blue-700'}">${answeredCount}/${totalQ} Soal</strong></span>
+            <span>${Math.round(progressPercent)}%</span>
+          </div>
+          <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden border border-slate-200">
+            <div class="${isFormatif ? 'bg-gradient-to-r from-emerald-500 to-teal-500' : 'bg-gradient-to-r from-blue-600 to-indigo-600'} h-full transition-all duration-300 rounded-full" style="width: ${progressPercent}%"></div>
+          </div>
         </div>
+
+        <!-- ROW 4: TOUCH-FRIENDLY HORIZONTAL QUESTION PALETTE (1 - 20) -->
+        <div class="pt-1.5 border-t border-slate-100">
+          <div class="flex items-center gap-1.5 overflow-x-auto scrollbar-none py-1 px-0.5">
+            ${questions.map((_, qIdx) => {
+              const isCurr = state.ulanganCurrentIndex === qIdx;
+              const isAns = state.ulanganAnswers[qIdx] !== undefined;
+              let btnClass = 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100';
+              if (isAns) {
+                btnClass = isFormatif 
+                  ? 'bg-emerald-600 text-white border-emerald-600 font-bold' 
+                  : 'bg-blue-600 text-white border-blue-600 font-bold';
+              }
+              if (isCurr) {
+                btnClass = 'bg-amber-500 text-slate-950 font-black ring-2 ring-amber-400 border-amber-500 scale-105 shadow-xs';
+              }
+
+              return `
+                <button onclick="jumpToUlanganQuestion(${qIdx})" class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg text-xs flex items-center justify-center shrink-0 transition-all border ${btnClass}" title="Soal ${qIdx + 1} ${isAns ? '(Terisi)' : '(Belum Terisi)'}">
+                  ${qIdx + 1}
+                </button>
+              `;
+            }).join('')}
+          </div>
+        </div>
+
       </div>
 
-      <!-- MAIN QUESTION CARD -->
-      <div class="card-soft p-6 sm:p-10 space-y-6 bg-white ${isFormatif ? 'border-2 border-emerald-200 shadow-emerald-500/5' : 'border-2 border-blue-200 shadow-blue-500/5'} rounded-3xl shadow-xl transition-all">
+      <!-- MAIN QUESTION CARD (ELEVATED & CLEAN) -->
+      <div class="card-soft p-4 sm:p-7 space-y-4 sm:space-y-5 bg-white ${isFormatif ? 'border border-emerald-200/90 shadow-emerald-500/5' : 'border border-blue-200/90 shadow-blue-500/5'} rounded-2xl sm:rounded-3xl shadow-sm transition-all">
         <!-- Question Header & Indicator -->
-        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3 text-xs">
-          <span class="px-3 py-1 ${isFormatif ? 'bg-emerald-50 text-emerald-800 border-emerald-200' : 'bg-blue-50 text-blue-800 border-blue-200'} border rounded-full font-bold">
+        <div class="flex flex-wrap items-center justify-between gap-1.5 border-b border-slate-100 pb-2.5 text-xs">
+          <span class="px-2.5 py-0.5 ${isFormatif ? 'bg-emerald-50 text-emerald-800 border-emerald-200' : 'bg-blue-50 text-blue-800 border-blue-200'} border rounded-full font-bold text-[11px]">
             ${isFormatif ? '🌱 Formatif' : '🎯 CBT Sumatif'} • Bab ${currentQ.bab} • ${currentQ.indikator}
           </span>
-          <span class="text-slate-400 font-semibold">
-            ${isFormatif ? 'Mode Pembelajaran Reflektif' : 'Lembar Ujian Resmi Capaian'}
+          <span class="text-slate-400 font-semibold text-[11px]">
+            ${isFormatif ? 'Umpan Balik Instan' : 'Kunci Rahasia'}
           </span>
         </div>
 
         <!-- Question Arabic Text -->
-        <div dir="rtl" class="text-center py-4 px-2 sm:px-6">
-          <h3 class="font-arabic text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 leading-[2.6] py-3">
+        <div dir="rtl" class="text-center py-2 sm:py-4 px-1 sm:px-4">
+          <h3 class="font-arabic text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 leading-[2.4] py-1">
             ${currentQ.question}
           </h3>
         </div>
 
         <!-- FORMATIF ONLY: Gentle Love Hint (Petunjuk Mahabbah) -->
         ${(isFormatif && currentQ.hint) ? `
-          <div class="p-3.5 bg-emerald-50/80 border border-emerald-200 rounded-2xl flex items-center gap-2.5 text-xs text-emerald-950 animate-fadeIn">
-            <span class="text-base">💡</span>
+          <div class="p-2.5 sm:p-3 bg-emerald-50/80 border border-emerald-200 rounded-xl flex items-center gap-2 text-xs text-emerald-950 animate-fadeIn">
+            <span class="text-base shrink-0">💡</span>
             <div>
-              <strong class="font-bold text-emerald-900">Petunjuk Refleksi Cinta:</strong> ${currentQ.hint}
+              <strong class="font-bold text-emerald-900">Petunjuk Refleksi:</strong> ${currentQ.hint}
             </div>
           </div>
         ` : ''}
@@ -3281,29 +3238,29 @@ function renderUlanganHTML() {
         <!-- OPTIONS CONTAINER: DIFFERENT STYLES FOR FORMATIF VS SUMATIF -->
         ${isFormatif ? `
           <!-- MODE FORMATIF: KAHOOT-STYLE INTERACTIVE OPTIONS WITH INSTANT VISUAL FEEDBACK -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 pt-1">
             ${currentQ.options.map((opt, idx) => {
               const style = kahootStyles[idx];
               const isChosen = currentAnswer === idx;
               const isCorrectChoice = isAnswered && idx === currentQ.answer;
               const isWrongChoice = isAnswered && isChosen && idx !== currentQ.answer;
 
-              let borderEffect = 'border-transparent shadow-md';
+              let borderEffect = 'border-transparent shadow-xs';
               if (isAnswered) {
-                if (isCorrectChoice) borderEffect = 'ring-4 ring-emerald-400 border-white scale-[1.02] shadow-2xl';
+                if (isCorrectChoice) borderEffect = 'ring-3 ring-emerald-400 border-white scale-[1.01] shadow-md';
                 else if (isWrongChoice) borderEffect = 'opacity-40 border-slate-400 line-through';
                 else borderEffect = 'opacity-50';
               }
 
               return `
-                <button onclick="selectUlanganAnswer(${idx})" ${isAnswered ? 'disabled' : ''} class="p-5 ${style.bg} ${borderEffect} rounded-2xl text-left transition-all transform hover:-translate-y-0.5 active:scale-95 flex items-center justify-between shadow-lg cursor-pointer">
-                  <div class="flex items-center gap-3.5">
-                    <span class="w-9 h-9 rounded-xl bg-white/20 backdrop-blur-md text-white font-extrabold text-sm flex items-center justify-center shrink-0 border border-white/30">
+                <button onclick="selectUlanganAnswer(${idx})" ${isAnswered ? 'disabled' : ''} class="p-3.5 sm:p-4 ${style.bg} ${borderEffect} rounded-xl text-left transition-all transform active:scale-98 flex items-center justify-between shadow-sm cursor-pointer">
+                  <div class="flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-lg bg-white/20 backdrop-blur-md text-white font-extrabold text-xs flex items-center justify-center shrink-0 border border-white/30">
                       ${style.shape}
                     </span>
                     <span class="text-base sm:text-lg font-bold font-arabic leading-relaxed">${opt}</span>
                   </div>
-                  ${isChosen ? `<span class="text-xl font-bold">${idx === currentQ.answer ? '✅' : '❌'}</span>` : ''}
+                  ${isChosen ? `<span class="text-lg font-bold">${idx === currentQ.answer ? '✅' : '❌'}</span>` : ''}
                 </button>
               `;
             }).join('')}
@@ -3311,13 +3268,13 @@ function renderUlanganHTML() {
 
           <!-- INSTANT FEEDBACK BANNER (FORMATIF ONLY) -->
           ${isAnswered ? `
-            <div class="p-5 rounded-2xl text-sm font-bold animate-fadeIn space-y-2 ${currentAnswer === currentQ.answer ? 'bg-emerald-50 text-emerald-950 border-2 border-emerald-300' : 'bg-rose-50 text-rose-950 border-2 border-rose-300'}">
+            <div class="p-3.5 sm:p-4 rounded-xl text-xs sm:text-sm font-bold animate-fadeIn space-y-1.5 ${currentAnswer === currentQ.answer ? 'bg-emerald-50 text-emerald-950 border border-emerald-300' : 'bg-rose-50 text-rose-950 border border-rose-300'}">
               <div class="flex items-center justify-between">
-                <span class="text-base font-extrabold flex items-center gap-2">
-                  ${currentAnswer === currentQ.answer ? '💖 BENAR SEKALI! MUMTAZ!' : '🌱 TETAP SEMANGAT! AYO BELAJAR BERSAMA!'}
+                <span class="font-extrabold flex items-center gap-1.5">
+                  ${currentAnswer === currentQ.answer ? '💖 MUMTAZ! JAWABAN BENAR!' : '🌱 TETAP SEMANGAT! BELAJAR LAGI!'}
                 </span>
                 ${currentAnswer === currentQ.answer ? `
-                  <span class="px-3 py-1 bg-emerald-200 text-emerald-900 rounded-full text-xs font-mono font-bold">
+                  <span class="px-2 py-0.5 bg-emerald-200 text-emerald-900 rounded-full text-[11px] font-mono font-bold">
                     +${1000 + (state.ulanganStreak * 250)} POIN
                   </span>
                 ` : ''}
@@ -3327,20 +3284,20 @@ function renderUlanganHTML() {
           ` : ''}
         ` : `
           <!-- MODE SUMATIF: FORMAL CBT EXAM RADIO OPTIONS (NO ANSWERS REVEALED, FREELY CHANGEABLE) -->
-          <div class="space-y-3 pt-2">
+          <div class="space-y-2.5 pt-1">
             ${currentQ.options.map((opt, idx) => {
               const isChosen = currentAnswer === idx;
 
               return `
-                <div onclick="selectUlanganAnswer(${idx})" class="p-4 sm:p-5 rounded-2xl border-2 transition-all cursor-pointer flex items-center justify-between ${isChosen ? 'bg-blue-50/90 border-blue-600 shadow-md ring-2 ring-blue-300/40 text-blue-950' : 'bg-slate-50 border-slate-200 hover:bg-white hover:border-blue-300 text-slate-800'}">
-                  <div class="flex items-center gap-4">
-                    <span class="w-9 h-9 rounded-xl flex items-center justify-center font-extrabold text-sm border transition-all ${isChosen ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-slate-600 border-slate-300'}">
+                <div onclick="selectUlanganAnswer(${idx})" class="p-3 sm:p-4 rounded-xl border transition-all cursor-pointer flex items-center justify-between ${isChosen ? 'bg-blue-50/90 border-blue-600 shadow-xs ring-2 ring-blue-300/40 text-blue-950' : 'bg-slate-50 border-slate-200 hover:bg-white hover:border-blue-300 text-slate-800'}">
+                  <div class="flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-lg flex items-center justify-center font-extrabold text-xs border transition-all ${isChosen ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-slate-600 border-slate-300'}">
                       ${optionLabels[idx]}
                     </span>
-                    <span class="text-base sm:text-lg font-bold font-arabic pt-1 leading-relaxed">${opt}</span>
+                    <span class="text-base sm:text-lg font-bold font-arabic pt-0.5 leading-relaxed">${opt}</span>
                   </div>
                   <div class="shrink-0 pl-2">
-                    <span class="w-6 h-6 rounded-full border-2 flex items-center justify-center ${isChosen ? 'border-blue-600 bg-blue-600 text-white' : 'border-slate-300 bg-white'}">
+                    <span class="w-5 h-5 rounded-full border-2 flex items-center justify-center text-[10px] ${isChosen ? 'border-blue-600 bg-blue-600 text-white' : 'border-slate-300 bg-white'}">
                       ${isChosen ? '●' : ''}
                     </span>
                   </div>
@@ -3349,35 +3306,36 @@ function renderUlanganHTML() {
             }).join('')}
           </div>
 
-          <div class="p-3 bg-slate-100 rounded-xl text-slate-500 text-xs flex items-center justify-between">
-            <span>ℹ️ Ananda dapat bebas mengubah pilihan jawaban sebelum menekan Kumpulkan Ujian.</span>
+          <div class="p-2.5 bg-slate-100 rounded-xl text-slate-500 text-[11px] flex items-center justify-between">
+            <span>ℹ️ Pilihan jawaban dapat diubah sebelum dikumpulkan.</span>
             <span class="${isAnswered ? 'text-blue-700 font-bold' : 'text-slate-400'}">
-              ${isAnswered ? 'Status: Jawaban Tersimpan ✓' : 'Status: Belum Terisi'}
+              ${isAnswered ? 'Tersimpan ✓' : 'Belum Terisi'}
             </span>
           </div>
         `}
 
         <!-- BOTTOM NAVIGATION ACTION BUTTONS -->
-        <div class="flex flex-wrap justify-between items-center gap-3 pt-6 border-t border-slate-100">
-          <button onclick="prevUlanganQuestion()" ${state.ulanganCurrentIndex === 0 ? 'disabled class="opacity-30 cursor-not-allowed px-4 py-2.5 text-xs font-bold text-slate-400"' : 'class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl shadow-xs"'}>
-            ← Soal Sebelumnya
+        <div class="flex items-center justify-between gap-2 pt-4 border-t border-slate-100">
+          <button onclick="prevUlanganQuestion()" ${state.ulanganCurrentIndex === 0 ? 'disabled class="opacity-30 cursor-not-allowed px-3 py-2 text-xs font-bold text-slate-400"' : 'class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl shadow-2xs"'}>
+            ← Sebelumnya
           </button>
 
-          <div class="flex items-center gap-2">
+          <div class="flex items-center gap-1.5 sm:gap-2">
             ${state.ulanganCurrentIndex < totalQ - 1 ? `
-              <button onclick="nextUlanganQuestion()" ${(isFormatif && !isAnswered) ? 'disabled class="opacity-40 cursor-not-allowed px-6 py-2.5 bg-slate-200 text-slate-500 text-xs font-bold rounded-xl"' : 'class="px-6 py-2.5 bg-slate-800 hover:bg-slate-900 text-white text-xs font-extrabold rounded-xl shadow-md transition-all"'}>
-                Soal Selanjutnya →
+              <button onclick="nextUlanganQuestion()" ${(isFormatif && !isAnswered) ? 'disabled class="opacity-40 cursor-not-allowed px-4 py-2 bg-slate-200 text-slate-500 text-xs font-bold rounded-xl"' : 'class="px-4 py-2 bg-slate-800 hover:bg-slate-900 text-white text-xs font-extrabold rounded-xl shadow-xs transition-all"'}>
+                Selanjutnya →
               </button>
             ` : ''}
 
             <!-- FINISH / SUBMIT BUTTON -->
-            <button onclick="confirmFinishUlangan()" class="px-6 py-2.5 ${!isFormatif ? 'bg-gradient-to-r from-blue-700 to-indigo-700 hover:from-blue-800 hover:to-indigo-800' : 'bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700'} text-white text-xs font-extrabold rounded-xl shadow-lg transition-all flex items-center gap-2 transform hover:scale-105">
-              <span>${!isFormatif ? '📥 Kumpulkan Ujian CBT' : '🏆 Selesaikan Asesmen'}</span>
+            <button onclick="confirmFinishUlangan()" class="px-4 py-2 ${!isFormatif ? 'bg-gradient-to-r from-blue-700 to-indigo-700 hover:from-blue-800 hover:to-indigo-800' : 'bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700'} text-white text-xs font-extrabold rounded-xl shadow-md transition-all flex items-center gap-1.5 transform active:scale-95">
+              <span>${!isFormatif ? '📥 Kumpulkan' : '🏆 Selesai'}</span>
             </button>
           </div>
         </div>
 
       </div>
+
     </div>
   `;
 }
