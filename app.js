@@ -3037,12 +3037,6 @@ function renderUlanganHTML() {
               «مَنْ سَلَكَ طَرِيقًا يَلْتَمِسُ فِيهِ عِلْمًا سَهَّلَ اللَّهُ لَهُ بِهِ طَرِيقًا إِلَى الْجَنَّةِ» — Belajar dengan cinta, menguji pemahaman dengan ketenangan hati, kejujuran, dan kebahagiaan.
             </p>
           </div>
-
-          <div class="flex flex-col gap-1 text-xs text-rose-200/80 bg-black/20 p-3 rounded-2xl border border-white/10 shrink-0">
-            <div>👨‍🏫 Pengajar: <strong class="text-white">${ARABIC_DATA.info.teacher}</strong></div>
-            <div>📚 Panduan: <span class="text-amber-200 font-semibold">${pkg.semester}</span></div>
-            <div>💖 Nilai: <span class="text-rose-300 font-semibold">${pkg.characterValues}</span></div>
-          </div>
         </div>
       </div>
 
