@@ -22,12 +22,19 @@ body {
 }
 
 /* Font Arab (Naskh Standard for Pristine Harakat & Tasydid) */
+.font-arabic, [dir="rtl"] {
+  letter-spacing: normal !important;
+}
+
 .font-arabic {
   font-family: 'Amiri', 'Noto Naskh Arabic', 'Scheherazade New', 'Traditional Arabic', serif;
   font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "mset" 1;
-  font-variant-ligatures: normal;
+  font-variant-ligatures: common-ligatures contextual;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  letter-spacing: normal !important;
+  word-break: normal;
+  overflow-wrap: break-word;
   line-height: 2.2;
 }
 

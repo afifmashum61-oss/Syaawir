@@ -569,7 +569,7 @@ function renderHomeHTML() {
               <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
                 Media Pembelajaran Interaktif
               </h1>
-              <div class="text-teal-200 font-arabic text-4xl sm:text-5xl lg:text-6xl font-normal mt-4 sm:mt-5 pt-1 sm:pt-2 leading-[2.2] tracking-wide">
+              <div class="text-teal-200 font-arabic text-4xl sm:text-5xl lg:text-6xl font-normal mt-4 sm:mt-5 pt-1 sm:pt-2 leading-[2.2]">
                 اللُّغَةُ العَرَبِيَّةُ
               </div>
             </div>
@@ -1199,11 +1199,11 @@ function renderQiraahHTML() {
       <!-- Reading Box -->
       <div class="card-soft p-6 sm:p-10 space-y-8 bg-white border border-emerald-100">
         <div class="text-center pb-6 border-b border-slate-100">
-          <h3 class="font-arabic text-3xl sm:text-4xl font-bold text-emerald-900 leading-[2.8] tracking-wide py-2">${currentQiraah.title}</h3>
+          <h3 class="font-arabic text-3xl sm:text-4xl font-bold text-emerald-900 leading-[2.8] py-2">${currentQiraah.title}</h3>
         </div>
 
         <!-- Arabic Text Display (RTL & Extra Generous Line-Height) -->
-        <div dir="rtl" class="font-arabic text-2xl sm:text-3xl text-slate-800 leading-[2.8] tracking-wide text-right space-y-6">
+        <div dir="rtl" class="font-arabic text-2xl sm:text-3xl text-slate-800 leading-[2.8] text-right space-y-6">
           ${formatQiraahText(currentQiraah.arabicText, state.qiraahShowHarakat)}
         </div>
 
@@ -1371,7 +1371,7 @@ function renderIstimaHTML() {
             <p class="text-xs text-purple-400">Hapus centang di atas jika ingin melihat naskah teks.</p>
           </div>
         ` : `
-          <div dir="rtl" class="p-6 bg-purple-950/40 border border-purple-800/40 rounded-2xl font-arabic text-2xl sm:text-3xl text-purple-50 leading-[2.8] tracking-wide text-right space-y-4">
+          <div dir="rtl" class="p-6 bg-purple-950/40 border border-purple-800/40 rounded-2xl font-arabic text-2xl sm:text-3xl text-purple-50 leading-[2.8] text-right space-y-4">
             ${passage.arabicText.split('\n\n').map(p => `<p class="leading-[2.8] block">${p}</p>`).join('')}
           </div>
         `}
@@ -2331,7 +2331,7 @@ function renderQawaidHTML() {
               </button>
             </div>
 
-            <div class="font-arabic text-3xl text-center py-4 text-slate-100 tracking-wide">
+            <div dir="rtl" class="font-arabic text-3xl text-center py-4 text-slate-100">
               "${kalimahData.interactiveSentence.text}"
             </div>
 
@@ -2566,8 +2566,8 @@ function renderTadribatHTML() {
 
       <!-- QUESTION CARD -->
       <div class="card-soft p-6 sm:p-10 space-y-8 bg-white border border-slate-200 rounded-3xl shadow-xl">
-        <div class="text-center py-2">
-          <h3 class="font-arabic text-3xl sm:text-5xl font-bold text-slate-900 leading-[2.4] tracking-wide py-2">${q.question}</h3>
+        <div dir="rtl" class="text-center py-2 px-2 sm:px-6">
+          <h3 class="font-arabic text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 leading-[2.4] py-2">${q.question}</h3>
         </div>
 
         <!-- 4 KAHOOT COLOR CARDS GRID -->
@@ -2591,7 +2591,7 @@ function renderTadribatHTML() {
                   <span class="w-9 h-9 rounded-xl bg-white/20 backdrop-blur-md text-white font-extrabold text-sm flex items-center justify-center flex-shrink-0 border border-white/30">
                     ${style.shape}
                   </span>
-                  <span class="text-base sm:text-lg font-bold">${opt}</span>
+                  <span class="text-base sm:text-lg font-bold font-arabic leading-relaxed">${opt}</span>
                 </div>
                 ${isChosen ? `<span class="text-xl font-bold">${idx === q.answer ? '✅' : '❌'}</span>` : ''}
               </button>
@@ -3257,8 +3257,8 @@ function renderUlanganHTML() {
         </div>
 
         <!-- Question Arabic Text -->
-        <div class="text-center py-4">
-          <h3 class="font-arabic text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 leading-[2.4] tracking-wide py-2">
+        <div dir="rtl" class="text-center py-4 px-2 sm:px-6">
+          <h3 class="font-arabic text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 leading-[2.4] py-2">
             ${currentQ.question}
           </h3>
         </div>
@@ -3296,7 +3296,7 @@ function renderUlanganHTML() {
                     <span class="w-9 h-9 rounded-xl bg-white/20 backdrop-blur-md text-white font-extrabold text-sm flex items-center justify-center shrink-0 border border-white/30">
                       ${style.shape}
                     </span>
-                    <span class="text-base sm:text-lg font-bold">${opt}</span>
+                    <span class="text-base sm:text-lg font-bold font-arabic leading-relaxed">${opt}</span>
                   </div>
                   ${isChosen ? `<span class="text-xl font-bold">${idx === currentQ.answer ? '✅' : '❌'}</span>` : ''}
                 </button>
@@ -3332,7 +3332,7 @@ function renderUlanganHTML() {
                     <span class="w-9 h-9 rounded-xl flex items-center justify-center font-extrabold text-sm border transition-all ${isChosen ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-slate-600 border-slate-300'}">
                       ${optionLabels[idx]}
                     </span>
-                    <span class="text-base sm:text-lg font-bold font-arabic pt-1">${opt}</span>
+                    <span class="text-base sm:text-lg font-bold font-arabic pt-1 leading-relaxed">${opt}</span>
                   </div>
                   <div class="shrink-0 pl-2">
                     <span class="w-6 h-6 rounded-full border-2 flex items-center justify-center ${isChosen ? 'border-blue-600 bg-blue-600 text-white' : 'border-slate-300 bg-white'}">

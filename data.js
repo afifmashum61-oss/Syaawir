@@ -9596,7 +9596,7 @@ const ARABIC_DATA = {
         "id": 1,
         "bab": 1,
         "indikator": "Ungkapan Sapaan Ramah & Ukhuwah (At-Tahiyyah)",
-        "question": "إِذَا قَالَ لَكَ صَدِيْقُكَ فِي الصَّبَاحِ: «صَبَاحَ الْخَيْرِ»، فَمَاذَا تُجِيْبُهُ بِمَوَدَّةٍ وَلُطْفٍ؟",
+        "question": "إِذَا قَالَ لَكَ صَدِيْقُكَ فِي الصَّبَاحِ: (صَبَاحَ الْخَيْرِ)، فَمَاذَا تُجِيْبُهُ بِمَوَدَّةٍ وَلُطْفٍ؟",
         "hint": "Jawaban sapaan pagi yang menebarkan cahaya kebaikan dan kasih sayang.",
         "options": [
           "صَبَاحَ النُّوْرِ",
@@ -9611,7 +9611,7 @@ const ARABIC_DATA = {
         "id": 2,
         "bab": 1,
         "indikator": "Kata Tanya Asal Tempat (Adawatul Istifham)",
-        "question": "أَيُّ أَدَاةِ اسْتِفْهَامٍ تُسْتَخْدَمُ لِلسُّؤَالِ عَنِ الْمَوْطِنِ فِي: «... أَنْتَ؟ - أَنَا مِنْ بُوْنْتِيَانَاك»؟",
+        "question": "أَيُّ أَدَاةِ اسْتِفْهَامٍ تُسْتَخْدَمُ لِلسُّؤَالِ عَنِ الْمَوْطِنِ فِي: (... أَنْتَ؟ - أَنَا مِنْ بُوْنْتِيَانَاك)؟",
         "hint": "Kata tanya untuk menanyakan 'dari mana' asal seseorang.",
         "options": [
           "مِنْ أَيْنَ",
@@ -9626,7 +9626,7 @@ const ARABIC_DATA = {
         "id": 3,
         "bab": 1,
         "indikator": "Dhomir Munfashil untuk Perempuan (Mu'annats)",
-        "question": "مَا هُوَ الضَّمِيْرُ الْمُنَاسِبُ لِلْمُخَاطَبَةِ فِي: «... طَالِبَةٌ مُجْتَهِدَةٌ فِي مَدْرَسَةِ MAN 1 Pontianak»؟",
+        "question": "مَا هُوَ الضَّمِيْرُ الْمُنَاسِبُ لِلْمُخَاطَبَةِ فِي: (... طَالِبَةٌ مُجْتَهِدَةٌ فِي مَدْرَسَةِ MAN 1 Pontianak)؟",
         "hint": "Kata ganti orang kedua tunggal perempuan (kamu perempuan).",
         "options": [
           "أَنْتِ",
@@ -9641,7 +9641,7 @@ const ARABIC_DATA = {
         "id": 4,
         "bab": 1,
         "indikator": "Perbedaan Kata Tanya Benda vs Orang (Maa vs Man)",
-        "question": "لِلسُّؤَالِ عَنْ غَيْرِ الْعَاقِلِ (الأَشْيَاءِ) نَسْتَخْدِمُ «مَا»، كَقَوْلِنَا: «مَا هَذَا؟ هَذَا ...»",
+        "question": "لِلسُّؤَالِ عَنْ غَيْرِ الْعَاقِلِ (الأَشْيَاءِ) نَسْتَخْدِمُ (مَا)، كَقَوْلِنَا: (مَا هَذَا؟ هَذَا ...)؟",
         "hint": "Pilihlah kata yang merupakan benda (bukan manusia/profesi).",
         "options": [
           "قَلَمٌ جَدِيْدٌ",
@@ -9686,7 +9686,7 @@ const ARABIC_DATA = {
         "id": 7,
         "bab": 1,
         "indikator": "Refleksi Nilai Karakter Cinta Ukhuwah",
-        "question": "قَالَ تَعَالَى: ﴿إِنَّمَا الْمُؤْمِنُونَ إِخْوَةٌ﴾. مَا الْقِيْمَةُ الْخُلُقِيَّةُ الَّتِي نَتَعَلَّمُهَا مِنْ مَوْضُوْعِ «التَّعَارُفِ»؟",
+        "question": "قَالَ تَعَالَى: ﴿إِنَّمَا الْمُؤْمِنُونَ إِخْوَةٌ﴾. مَا الْقِيْمَةُ الْخُلُقِيَّةُ الَّتِي نَتَعَلَّمُهَا مِنْ مَوْضُوْعِ (التَّعَارُفِ)؟",
         "hint": "Tujuan perkenalan dalam ajaran Islam.",
         "options": [
           "بِنَاءُ الأُخُوَّةِ وَالتَّعَاوُنُ عَلَى الْبِرِّ وَالتَّقْوَى",
@@ -9701,7 +9701,7 @@ const ARABIC_DATA = {
         "id": 8,
         "bab": 2,
         "indikator": "Cinta Orang Tua & Bakti Keluarga (Birrul Walidain)",
-        "question": "مَا مَعْنَى «بِرُّ الْوَالِدَيْنِ» فِي الْحَيَاةِ الأُسَرِيَّةِ، وَكَيْفَ نُعَبِّرُ عَنْهُ سُلُوْكِيًّا؟",
+        "question": "مَا مَعْنَى (بِرُّ الْوَالِدَيْنِ) فِي الْحَيَاةِ الأُسَرِيَّةِ، وَكَيْفَ نُعَبِّرُ عَنْهُ سُلُوْكِيًّا؟",
         "hint": "Sikap terpuji anak kepada ayah dan ibu.",
         "options": [
           "طَاعَةُ الأَبِ وَالأُمِّ وَالدُّعَاءُ لَهُمَا وَمُعَامَلَتُهُمَا بِالرَّحْمَةِ",
@@ -9716,7 +9716,7 @@ const ARABIC_DATA = {
         "id": 9,
         "bab": 2,
         "indikator": "Kata Tunjuk Dekat Mu'annats (Isim Isyarah)",
-        "question": "اخْتَرِ الإِشَارَةَ الْمُنَاسِبَةَ لِلْفَرَاغِ: «... أُمِّي الحَبِيْبَةُ، هِيَ قَلْبُ الْبَيْتِ»:",
+        "question": "اخْتَرِ الإِشَارَةَ الْمُنَاسِبَةَ لِلْفَرَاغِ: (... أُمِّي الحَبِيْبَةُ، هِيَ قَلْبُ الْبَيْتِ):",
         "hint": "Kata tunjuk dekat untuk perempuan (mu'annats).",
         "options": [
           "هَذِهِ",
@@ -9746,7 +9746,7 @@ const ARABIC_DATA = {
         "id": 11,
         "bab": 2,
         "indikator": "Pengaruh Huruf Jar terhadap I'rab (Majrur Kasrah)",
-        "question": "مَا هُوَ الضَّبْطُ الصَّحِيْحُ لآخِرِ الاسْمِ بَعْدَ حَرْفِ الْجَرِّ فِي: «يَجْلِسُ الأَبُ فِي الْمَكْتَبِ ...»؟",
+        "question": "مَا هُوَ الضَّبْطُ الصَّحِيْحُ لآخِرِ الاسْمِ بَعْدَ حَرْفِ الْجَرِّ فِي: (يَجْلِسُ الأَبُ فِي الْمَكْتَبِ ...)؟",
         "hint": "Huruf jar menyebabkan kata benda setelahnya berharakat kasrah.",
         "options": [
           "الْمَكْتَبِ (بِالْكَسْرَةِ)",
@@ -9776,7 +9776,7 @@ const ARABIC_DATA = {
         "id": 13,
         "bab": 2,
         "indikator": "Dhomir Muttashil Kepemilikan (Ya' Mutakallim)",
-        "question": "كَيْفَ تُعَبِّرُ بِالْعَرَبِيَّةِ عَنْ: «Rumahku yang penuh dengan cinta kasih»?",
+        "question": "كَيْفَ تُعَبِّرُ بِالْعَرَبِيَّةِ عَنْ: \"Rumahku yang penuh dengan cinta kasih\"?",
         "hint": "Gunakan kata ganti kepemilikan 'ku' (ـي).",
         "options": [
           "بَيْتِي الْمَمْلُوْءُ بِالْمَحَبَّةِ",
@@ -9791,7 +9791,7 @@ const ARABIC_DATA = {
         "id": 14,
         "bab": 2,
         "indikator": "Isim Isyarah Jauh Mudzakkar (Dzaalika)",
-        "question": "مَا الإِشَارَةُ الْمُنَاسِبَةُ لِلْبَعِيْدِ الْمُذَكَّرِ فِي: «... مَسْجِدٌ كَبِيْرٌ نُصَلِّي فِيْهِ جَمَاعَةً»؟",
+        "question": "مَا الإِشَارَةُ الْمُنَاسِبَةُ لِلْبَعِيْدِ الْمُذَكَّرِ فِي: (... مَسْجِدٌ كَبِيْرٌ نُصَلِّي فِيْهِ جَمَاعَةً)؟",
         "hint": "Kata tunjuk jauh untuk benda mudzakkar (itu).",
         "options": [
           "ذَلِكَ",
@@ -9821,7 +9821,7 @@ const ARABIC_DATA = {
         "id": 16,
         "bab": 3,
         "indikator": "Bentuk Isim Mutsanna (Dua Benda / Dual)",
-        "question": "مَا هِيَ صِيْغَةُ الْمُثَنَّى (الدَّالُّ عَلَى اثْنَيْنِ) مِنْ كَلِمَةِ «كِتَابٌ»؟",
+        "question": "مَا هِيَ صِيْغَةُ الْمُثَنَّى (الدَّالُّ عَلَى اثْنَيْنِ) مِنْ كَلِمَةِ (كِتَابٌ)؟",
         "hint": "Tambahkan alif dan nun (ـَانِ) di akhir kata.",
         "options": [
           "كِتَابَانِ",
@@ -9836,7 +9836,7 @@ const ARABIC_DATA = {
         "id": 17,
         "bab": 3,
         "indikator": "Bentuk Jamak Mudzakkar Salim",
-        "question": "مَا هُوَ الْجَمْعُ الْمُذَكَّرُ السَّالِمُ مِنْ كَلِمَةِ «مُعَلِّمٌ»؟",
+        "question": "مَا هُوَ الْجَمْعُ الْمُذَكَّرُ السَّالِمُ مِنْ كَلِمَةِ (مُعَلِّمٌ)؟",
         "hint": "Tambahkan wau dan nun (ـُوْنَ) di akhir kata.",
         "options": [
           "مُعَلِّمُوْنَ",
@@ -9851,7 +9851,7 @@ const ARABIC_DATA = {
         "id": 18,
         "bab": 3,
         "indikator": "Bentuk Jamak Mu'annats Salim",
-        "question": "مَا هُوَ الْجَمْعُ الْمُؤَنَّثُ السَّالِمُ مِنْ كَلِمَةِ «طَالِبَةٌ»؟",
+        "question": "مَا هُوَ الْجَمْعُ الْمُؤَنَّثُ السَّالِمُ مِنْ كَلِمَةِ (طَالِبَةٌ)؟",
         "hint": "Gantikan ta' marbuthah dengan alif dan ta' maftuhah (ـَاتٌ).",
         "options": [
           "طَالِبَاتٌ",
@@ -9928,7 +9928,7 @@ const ARABIC_DATA = {
         "id": 2,
         "bab": 4,
         "indikator": "Seni Kaligrafi Arab (Al-Khatthul 'Arabi) & Prestasi",
-        "question": "مَا هِيَ الْهِوَايَةُ الَّتِي أَبْدَعَ فِيْهَا التِّلْمِيْذُ «يَاقُوْت زَرِيْن» حَتَّى أَحْرَزَ الْمَرْكَزَ الأَوَّلَ وَطَنِيًّا؟",
+        "question": "مَا هِيَ الْهِوَايَةُ الَّتِي أَبْدَعَ فِيْهَا التِّلْمِيْذُ (يَاقُوْت زَرِيْن) حَتَّى أَحْرَزَ الْمَرْكَزَ الأَوَّلَ وَطَنِيًّا؟",
         "hint": "Seni memperindah tulisan ayat Al-Qur'an dan mutiara hikmah.",
         "options": [
           "فَنُّ الْخَطِّ الْعَرَبِيِّ",
@@ -9943,7 +9943,7 @@ const ARABIC_DATA = {
         "id": 3,
         "bab": 4,
         "indikator": "Identifikasi Fi'il Madhi (Kata Kerja Lampau)",
-        "question": "عَيِّنِ الْفِعْلَ الْمَاضِيَ فِي الْجُمْلَةِ: «قَرَأَ فَارُوْقُ كِتَابَ السِّيْرَةِ النَّبَوِيَّةِ أَمْسِ»:",
+        "question": "عَيِّنِ الْفِعْلَ الْمَاضِيَ فِي الْجُمْلَةِ: (قَرَأَ فَارُوْقُ كِتَابَ السِّيْرَةِ النَّبَوِيَّةِ أَمْسِ):",
         "hint": "Kata kerja yang menunjukkan perbuatan telah selesai dilakukan.",
         "options": [
           "قَرَأَ",
@@ -9973,7 +9973,7 @@ const ARABIC_DATA = {
         "id": 5,
         "bab": 4,
         "indikator": "Bentuk Fi'il Amr (Kata Kerja Perintah Santun)",
-        "question": "مَا هُوَ فِعْلُ الأَمْرِ الْمُنَاسِبُ فِي نَصِيْحَةِ الصَّدِيْقِ: «... دَرْسَكَ بِعِنَايَةٍ يَا أَخِي»؟",
+        "question": "مَا هُوَ فِعْلُ الأَمْرِ الْمُنَاسِبُ فِي نَصِيْحَةِ الصَّدِيْقِ: (... دَرْسَكَ بِعِنَايَةٍ يَا أَخِي)؟",
         "hint": "Kata kerja perintah untuk laki-laki tunggal.",
         "options": [
           "ذَاكِرْ",
@@ -9988,7 +9988,7 @@ const ARABIC_DATA = {
         "id": 6,
         "bab": 4,
         "indikator": "Kesesuaian Gender Fi'il Mudhari' untuk Mu'annats",
-        "question": "إِذَا كَانَ الْفَاعِلُ مُؤَنَّثًا مِثْلَ «فَاطِمَةُ»، فَمَا الصِّيْغَةُ الصَّحِيْحَةُ: «فَاطِمَةُ ... الدَّرْسَ»؟",
+        "question": "إِذَا كَانَ الْفَاعِلُ مُؤَنَّثًا مِثْلَ (فَاطِمَةُ)، فَمَا الصِّيْغَةُ الصَّحِيْحَةُ: (فَاطِمَةُ ... الدَّرْسَ)؟",
         "hint": "Fi'il mudhari' untuk perempuan diawali huruf Ta'.",
         "options": [
           "تَفْهَمُ",
@@ -10078,7 +10078,7 @@ const ARABIC_DATA = {
         "id": 12,
         "bab": 5,
         "indikator": "Struktur Kalimat Verbal (Jumlah Fi'liyyah)",
-        "question": "مَا هُوَ التَّرْتِيْبُ الصَّحِيْحُ لِعَنَاصِرِ الْجُمْلَةِ: «يَحْمِي الْجُنْدِيُّ الْوَطَنَ»؟",
+        "question": "مَا هُوَ التَّرْتِيْبُ الصَّحِيْحُ لِعَنَاصِرِ الْجُمْلَةِ: (يَحْمِي الْجُنْدِيُّ الْوَطَنَ)؟",
         "hint": "Kata kerja + Pelaku + Objek.",
         "options": [
           "فِعْلٌ + فَاعِلٌ + مَفْعُوْلٌ بِهِ",
@@ -10093,7 +10093,7 @@ const ARABIC_DATA = {
         "id": 13,
         "bab": 5,
         "indikator": "Nilai Pengabdian Sosial & Hadis Kemanfaatan (Khidmah)",
-        "question": "قَالَ النَّبِيُّ ﷺ: «خَيْرُ النَّاسِ أَنْفَعُهُمْ لِلنَّاسِ». مَا التَّطْبِيْقُ الْعَمَلِيُّ لِهَذَا التَّوْجِيْهِ فِي اخْتِيَارِ الْمِهْنَةِ؟",
+        "question": "قَالَ النَّبِيُّ ﷺ: (خَيْرُ النَّاسِ أَنْفَعُهُمْ لِلنَّاسِ). مَا التَّطْبِيْقُ الْعَمَلِيُّ لِهَذَا التَّوْجِيْهِ فِي اخْتِيَارِ الْمِهْنَةِ؟",
         "hint": "Memilih jalan profesi yang mendatangkan berkah bagi banyak orang.",
         "options": [
           "السَّعْيُ لِاخْتِيَارِ مِهْنَةٍ شَرِيْفَةٍ تَنْفَعُ الْمُجْتَمَعَ وَتَنْشُرُ الْخَيْرَ",
@@ -10108,7 +10108,7 @@ const ARABIC_DATA = {
         "id": 14,
         "bab": 5,
         "indikator": "I'rab Maf'ul Bih (Objek Kalimat Fathah)",
-        "question": "مَا هُوَ الإِعْرَابُ الصَّحِيْحُ لِكَلِمَةِ «الْمَرِيْضَ» فِي: «يَفْحَصُ الطَّبِيْبُ الْمَرِيْضَ»؟",
+        "question": "مَا هُوَ الإِعْرَابُ الصَّحِيْحُ لِكَلِمَةِ (الْمَرِيْضَ) فِي: (يَفْحَصُ الطَّبِيْبُ الْمَرِيْضَ)؟",
         "hint": "Objek penderita yang terkena perbuatan berharakat fathah.",
         "options": [
           "مَفْعُوْلٌ بِهِ مَنْصُوْبٌ بِالْفَتْحَةِ",
@@ -10138,7 +10138,7 @@ const ARABIC_DATA = {
         "id": 16,
         "bab": 6,
         "indikator": "Bilangan Bertingkat / Waktu Jam (As-Sa'ah)",
-        "question": "فِي أَيِّ سَاعَةٍ يُنَادَى لِأَذَانِ الظُّهْرِ غَالِبًا؟ «فِي السَّاعَةِ ... ظُهْرًا»:",
+        "question": "فِي أَيِّ سَاعَةٍ يُنَادَى لِأَذَانِ الظُّهْرِ غَالِبًا؟ (فِي السَّاعَةِ ... ظُهْرًا):",
         "hint": "Pukul 12.00 siang.",
         "options": [
           "الثَّانِيَةَ عَشْرَةَ",
@@ -10153,7 +10153,7 @@ const ARABIC_DATA = {
         "id": 17,
         "bab": 6,
         "indikator": "Bilangan Puluhan (1-100)",
-        "question": "تَرْجِمْ إِلَى الْعَرَبِيَّةِ: «Tiga puluh hari» (30 hari):",
+        "question": "تَرْجِمْ إِلَى الْعَرَبِيَّةِ: \"Tiga puluh hari\" (30 hari):",
         "hint": "Bentuk puluhan dari angka tiga.",
         "options": [
           "ثَلَاثُوْنَ يَوْمًا",
@@ -10168,7 +10168,7 @@ const ARABIC_DATA = {
         "id": 18,
         "bab": 6,
         "indikator": "Kedisiplinan Bangun Pagi Yaqut Zarin",
-        "question": "مَتَى يَسْتَيْقِظُ التِّلْمِيْذُ الْمِثَالِيُّ «يَاقُوْت زَرِيْن» لِيَبْدَأَ يَوْمَهُ بِطَاعَةِ اللهِ؟",
+        "question": "مَتَى يَسْتَيْقِظُ التِّلْمِيْذُ الْمِثَالِيُّ (يَاقُوْت زَرِيْن) لِيَبْدَأَ يَوْمَهُ بِطَاعَةِ اللهِ؟",
         "hint": "Pukul 03.30 pagi untuk tahajud, muraja'ah, dan shalat Subuh.",
         "options": [
           "فِي السَّاعَةِ الثَّالِثَةِ وَالنِّصْفِ صَبَاحًا (03.30)",
