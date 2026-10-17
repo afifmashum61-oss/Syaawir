@@ -3258,7 +3258,7 @@ function renderUlanganHTML() {
 
         <!-- Question Arabic Text -->
         <div dir="rtl" class="text-center py-4 px-2 sm:px-6">
-          <h3 class="font-arabic text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 leading-[2.4] py-2">
+          <h3 class="font-arabic text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 leading-[2.6] py-3">
             ${currentQ.question}
           </h3>
         </div>
