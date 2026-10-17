@@ -2917,8 +2917,25 @@ function updateUlanganToken(pkgNum, newToken) {
   }
   const clean = newToken.trim().toUpperCase();
   localStorage.setItem(`ulangan_token_p${pkgNum}`, clean);
-  alert(`✅ Berhasil! Token Ujian Penilaian ${pkgNum} berhasil diubah menjadi: ${clean}`);
+  alert(`✅ Berhasil! Token Ujian Penilaian ${pkgNum} berhasil diubah menjadi: ${clean}\n\nSiswa sekarang wajib memasukkan token "${clean}" untuk mengakses ujian.`);
   renderTabContent();
+}
+
+function generateRandomUlanganToken(pkgNum) {
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  let randomCode = '';
+  for (let i = 0; i < 6; i++) {
+    randomCode += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  updateUlanganToken(pkgNum, randomCode);
+}
+
+function promptUpdateToken(pkgNum) {
+  const current = getExpectedUlanganToken(pkgNum);
+  const input = prompt(`Masukkan Kode Token Baru untuk Asesmen Sumatif ${pkgNum} (bebas sesuai keinginan):`, current);
+  if (input !== null && input.trim() !== '') {
+    updateUlanganToken(pkgNum, input.trim());
+  }
 }
 
 function resetUlanganTokenDefault(pkgNum) {
@@ -3533,9 +3550,9 @@ function renderUlanganTokenGateHTML() {
                 autocorrect="off" 
                 autocapitalize="characters" 
                 spellcheck="false"
-                placeholder="CONTOH: CINTA${pkgNum}"
+                placeholder=""
                 oninput="this.value = this.value.toUpperCase()"
-                class="w-full text-center text-xl sm:text-2xl font-black font-mono tracking-widest uppercase py-3 px-4 rounded-2xl border-2 border-blue-400 focus:border-blue-600 focus:ring-4 focus:ring-blue-100 outline-none transition-all shadow-inner bg-blue-50/40 text-blue-950 placeholder:text-slate-300"
+                class="w-full text-center text-xl sm:text-2xl font-black font-mono tracking-widest uppercase py-3.5 px-4 rounded-2xl border-2 border-blue-400 focus:border-blue-600 focus:ring-4 focus:ring-blue-100 outline-none transition-all shadow-inner bg-blue-50/40 text-blue-950"
                 required
               />
             </div>
@@ -3548,6 +3565,42 @@ function renderUlanganTokenGateHTML() {
             <span>🚀 Buka Soal & Mulai Ujian</span>
           </button>
         </form>
+
+        <!-- PANEL KHUSUS GURU JIKA SEDANG LOGIN (GANTI TOKEN INSTAN) -->
+        ${(state.auth.isLoggedIn && state.auth.role === 'guru') ? `
+          <div class="p-3.5 sm:p-4 bg-amber-50/90 border-2 border-amber-300 rounded-2xl text-left space-y-2.5 shadow-sm">
+            <div class="flex items-center justify-between border-b border-amber-200/80 pb-2">
+              <div class="flex items-center gap-1.5 text-xs font-black text-amber-950">
+                <span class="text-base">👨‍🏫</span> Panel Pengawas Guru
+              </div>
+              <div class="flex items-center gap-1">
+                <span class="text-[10px] text-amber-800 font-bold">Token Aktif:</span>
+                <span class="text-xs font-mono font-black px-2 py-0.5 bg-amber-200 text-amber-950 rounded-lg tracking-wider border border-amber-300">
+                  ${getExpectedUlanganToken(pkgNum)}
+                </span>
+              </div>
+            </div>
+
+            <p class="text-[11px] text-amber-800 leading-relaxed">
+              Anda login sebagai <strong>Guru</strong>. Anda dapat mengganti token kapan saja sesuka hati untuk sesi kelas ini:
+            </p>
+
+            <div class="flex flex-wrap items-center gap-1.5 pt-0.5">
+              <button type="button" onclick="generateRandomUlanganToken(${pkgNum})" class="px-2.5 py-1.5 bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs rounded-xl shadow-xs transition-colors flex items-center gap-1 cursor-pointer">
+                <span>🎲 Rilis Token Acak</span>
+              </button>
+              <button type="button" onclick="promptUpdateToken(${pkgNum})" class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs rounded-xl shadow-xs transition-colors flex items-center gap-1 cursor-pointer">
+                <span>✏️ Ketik Token Sendiri</span>
+              </button>
+              <button type="button" onclick="copyUlanganToken('${getExpectedUlanganToken(pkgNum)}')" class="px-2.5 py-1.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-xs transition-colors flex items-center gap-1 cursor-pointer">
+                <span>📋 Salin</span>
+              </button>
+              <button type="button" onclick="resetUlanganTokenDefault(${pkgNum})" class="px-2.5 py-1.5 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-xs rounded-xl transition-colors flex items-center gap-1 cursor-pointer" title="Kembalikan ke Default">
+                <span>🔄 Reset</span>
+              </button>
+            </div>
+          </div>
+        ` : ''}
 
         <!-- ALTERNATIVE & HINTS -->
         <div class="pt-3 border-t border-slate-100 space-y-2">
@@ -4181,9 +4234,14 @@ function renderGuruDashboardHTML() {
           <div class="p-4 bg-white/5 border border-white/10 rounded-2xl space-y-3">
             <div class="flex items-center justify-between">
               <span class="text-xs font-black text-amber-300 uppercase tracking-wider">💖 Asesmen Sumatif 1 (Bab 1–3)</span>
-              <button onclick="copyUlanganToken('${currentTokenP1}')" class="px-2 py-0.5 bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-bold rounded-lg transition-colors flex items-center gap-1 cursor-pointer" title="Salin Token">
-                <span>📋 Salin</span>
-              </button>
+              <div class="flex items-center gap-1.5">
+                <button type="button" onclick="generateRandomUlanganToken(1)" class="px-2 py-0.5 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-[11px] font-bold rounded-lg transition-colors flex items-center gap-1 cursor-pointer" title="Rilis Token Acak Otomatis">
+                  <span>🎲 Acak</span>
+                </button>
+                <button type="button" onclick="copyUlanganToken('${currentTokenP1}')" class="px-2 py-0.5 bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-bold rounded-lg transition-colors flex items-center gap-1 cursor-pointer" title="Salin Token">
+                  <span>📋 Salin</span>
+                </button>
+              </div>
             </div>
             
             <div class="flex items-center justify-between bg-black/30 p-2.5 rounded-xl border border-white/10">
@@ -4192,7 +4250,7 @@ function renderGuruDashboardHTML() {
             </div>
 
             <form onsubmit="event.preventDefault(); updateUlanganToken(1, document.getElementById('token-input-p1').value);" class="flex items-center gap-2">
-              <input type="text" id="token-input-p1" placeholder="Token Baru P1..." maxlength="16" class="px-3 py-1.5 bg-slate-800 border border-slate-700 rounded-xl text-xs font-mono font-bold text-white uppercase focus:outline-none focus:ring-2 focus:ring-amber-500 flex-1" />
+              <input type="text" id="token-input-p1" placeholder="Ketik token baru..." maxlength="16" class="px-3 py-1.5 bg-slate-800 border border-slate-700 rounded-xl text-xs font-mono font-bold text-white uppercase focus:outline-none focus:ring-2 focus:ring-amber-500 flex-1" />
               <button type="submit" class="px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs rounded-xl shadow-xs transition-colors shrink-0">
                 Ubah
               </button>
@@ -4206,9 +4264,14 @@ function renderGuruDashboardHTML() {
           <div class="p-4 bg-white/5 border border-white/10 rounded-2xl space-y-3">
             <div class="flex items-center justify-between">
               <span class="text-xs font-black text-rose-300 uppercase tracking-wider">💖 Asesmen Sumatif 2 (Bab 4–6)</span>
-              <button onclick="copyUlanganToken('${currentTokenP2}')" class="px-2 py-0.5 bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-bold rounded-lg transition-colors flex items-center gap-1 cursor-pointer" title="Salin Token">
-                <span>📋 Salin</span>
-              </button>
+              <div class="flex items-center gap-1.5">
+                <button type="button" onclick="generateRandomUlanganToken(2)" class="px-2 py-0.5 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-[11px] font-bold rounded-lg transition-colors flex items-center gap-1 cursor-pointer" title="Rilis Token Acak Otomatis">
+                  <span>🎲 Acak</span>
+                </button>
+                <button type="button" onclick="copyUlanganToken('${currentTokenP2}')" class="px-2 py-0.5 bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-bold rounded-lg transition-colors flex items-center gap-1 cursor-pointer" title="Salin Token">
+                  <span>📋 Salin</span>
+                </button>
+              </div>
             </div>
             
             <div class="flex items-center justify-between bg-black/30 p-2.5 rounded-xl border border-white/10">
@@ -4217,7 +4280,7 @@ function renderGuruDashboardHTML() {
             </div>
 
             <form onsubmit="event.preventDefault(); updateUlanganToken(2, document.getElementById('token-input-p2').value);" class="flex items-center gap-2">
-              <input type="text" id="token-input-p2" placeholder="Token Baru P2..." maxlength="16" class="px-3 py-1.5 bg-slate-800 border border-slate-700 rounded-xl text-xs font-mono font-bold text-white uppercase focus:outline-none focus:ring-2 focus:ring-amber-500 flex-1" />
+              <input type="text" id="token-input-p2" placeholder="Ketik token baru..." maxlength="16" class="px-3 py-1.5 bg-slate-800 border border-slate-700 rounded-xl text-xs font-mono font-bold text-white uppercase focus:outline-none focus:ring-2 focus:ring-amber-500 flex-1" />
               <button type="submit" class="px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs rounded-xl shadow-xs transition-colors shrink-0">
                 Ubah
               </button>
