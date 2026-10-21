@@ -3201,8 +3201,13 @@ function renderUlanganHTML() {
     setTimeout(startUlanganTimer, 100);
   }
 
+  const isTrueFalse = currentQ.type === 'true_false' || (currentQ.options && currentQ.options.length === 2);
+
   // Kahoot Shape Symbols & Colors (Used in Formatif Mode)
-  const kahootStyles = [
+  const kahootStyles = isTrueFalse ? [
+    { bg: "bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white border-emerald-700", shape: "✓", label: "A" },
+    { bg: "bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-500 hover:to-red-500 text-white border-rose-700", shape: "✕", label: "B" }
+  ] : [
     { bg: "bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white border-emerald-700", shape: "▲", label: "A" },
     { bg: "bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white border-blue-700", shape: "◆", label: "B" },
     { bg: "bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-900 border-amber-600", shape: "●", label: "C" },
@@ -3312,8 +3317,10 @@ function renderUlanganHTML() {
       <div class="card-soft p-4 sm:p-7 space-y-4 sm:space-y-5 bg-white ${isFormatif ? 'border border-emerald-200/90 shadow-emerald-500/5' : 'border border-blue-200/90 shadow-blue-500/5'} rounded-2xl sm:rounded-3xl shadow-sm transition-all">
         <!-- Question Header & Indicator -->
         <div class="flex flex-wrap items-center justify-between gap-1.5 border-b border-slate-100 pb-2.5 text-xs">
-          <span class="px-2.5 py-0.5 ${isFormatif ? 'bg-emerald-50 text-emerald-800 border-emerald-200' : 'bg-blue-50 text-blue-800 border-blue-200'} border rounded-full font-bold text-[11px]">
-            ${isFormatif ? '🌱 Formatif' : '🎯 CBT Sumatif'} • Bab ${currentQ.bab} • ${currentQ.indikator}
+          <span class="px-2.5 py-0.5 ${isFormatif ? 'bg-emerald-50 text-emerald-800 border-emerald-200' : 'bg-blue-50 text-blue-800 border-blue-200'} border rounded-full font-bold text-[11px] flex items-center gap-1.5 flex-wrap">
+            <span>${isFormatif ? '🌱 Formatif' : '🎯 CBT Sumatif'} • Bab ${currentQ.bab}</span>
+            ${isTrueFalse ? '<span class="px-1.5 py-0.2 bg-amber-100 text-amber-900 border border-amber-300 rounded font-black text-[10px]">⚖️ Benar/Salah</span>' : ''}
+            <span>• ${currentQ.indikator}</span>
           </span>
           <span class="text-slate-400 font-semibold text-[11px]">
             ${isFormatif ? 'Umpan Balik Instan' : 'Kunci Rahasia'}
@@ -3509,7 +3516,7 @@ function renderUlanganTokenGateHTML() {
             <span class="text-xl sm:text-2xl">📝</span>
             <div class="min-w-0">
               <div class="text-[10px] uppercase font-bold text-slate-400">Jumlah Soal</div>
-              <div class="text-xs sm:text-sm font-extrabold text-slate-800">20 Soal Pilihan Ganda</div>
+              <div class="text-xs sm:text-sm font-extrabold text-slate-800">25 Soal (20 PG + 5 B/S)</div>
             </div>
           </div>
           <div class="p-3 bg-slate-50 border border-slate-200/80 rounded-2xl flex items-center gap-2.5">
@@ -3764,7 +3771,7 @@ function renderUlanganResultHTML() {
                 <div class="p-4 rounded-2xl border ${isCorrect ? 'border-emerald-200 bg-emerald-50/40' : 'border-rose-200 bg-rose-50/40'} space-y-3">
                   <div class="flex items-center justify-between gap-2 text-xs">
                     <span class="font-extrabold px-2.5 py-0.5 rounded-full ${isCorrect ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}">
-                      Soal ${qIdx + 1} • Bab ${q.bab} • ${isCorrect ? '✅ Benar' : '❌ Salah'}
+                      Soal ${qIdx + 1} • Bab ${q.bab} • ${q.type === 'true_false' || (q.options && q.options.length === 2) ? '⚖️ Benar/Salah • ' : ''}${isCorrect ? '✅ Benar' : '❌ Salah'}
                     </span>
                     <span class="text-slate-400 text-[11px] font-semibold">${q.indikator || ''}</span>
                   </div>

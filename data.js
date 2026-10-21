@@ -9589,7 +9589,7 @@ const ARABIC_DATA = {
         "Bab 3: Al-Madrasah (Sekolah, Mufrad/Mutsanna/Jamak & Huruf 'Athaf)"
       ],
       "characterValues": "Ukhuwah Islamiyyah, Birrul Walidain (Bakti Orang Tua), Cinta Menuntut Ilmu & Menghormati Guru",
-      "totalQuestions": 20,
+      "totalQuestions": 25,
       "durationMinutes": 30,
       "token": "CINTA1",
       "questions": [
@@ -10194,6 +10194,76 @@ const ARABIC_DATA = {
           ],
           "answer": 0,
           "explanation": "Adab mulia penuntut ilmu adalah menyimak bimbingan guru dengan takzim dan senantiasa mendoakan kebaikan bagi para pendidik."
+        },
+        {
+          "id": 21,
+          "bab": 1,
+          "type": "true_false",
+          "indikator": "Kesesuaian Dhomir & Gender (Ta'aruf)",
+          "question": "عِبَارَةُ: ( هَلْ أَنْتَ طَالِبَةٌ جَدِيْدَةٌ؟ ) عِبَارَةٌ صَحِيْحَةٌ لِمُخَاطَبَةِ التِّلْمِيْذِ الْمُذَكَّرِ.",
+          "hint": "Perhatikan kata ( طَالِبَةٌ ) memiliki ta' marbuthah, apakah cocok dengan dhomir ( أَنْتَ )?",
+          "options": [
+            "صَحِيْحٌ (Benar)",
+            "خَطَأٌ (Salah)"
+          ],
+          "answer": 1,
+          "explanation": "Pernyataan SALAH. Kata ( طَالِبَةٌ ) adalah mu'annats, sehingga dhomir yang tepat adalah ( أَنْتِ ), bukan ( أَنْتَ )."
+        },
+        {
+          "id": 22,
+          "bab": 1,
+          "type": "true_false",
+          "indikator": "Adab Menjawab Salam & Keramahan Ukhuwah",
+          "question": "إِذَا قَالَ لَكَ أَحَدٌ: ( أَهْلًا وَسَهْلًا ) ، فَالْجَوَابُ الرَّفِيْقُ الْمُنَاسِبُ هُوَ: ( أَهْلًا بِكَ ) لِلْمُذَكَّرِ أَوْ ( أَهْلًا بِكِ ) لِلْمُؤَنَّثِ.",
+          "hint": "Ungkapan sambutan selamat datang yang saling membalas kebaikan.",
+          "options": [
+            "صَحِيْحٌ (Benar)",
+            "خَطَأٌ (Salah)"
+          ],
+          "answer": 0,
+          "explanation": "Pernyataan BENAR. Jawaban penuh kasih untuk sapaan ( أَهْلًا وَسَهْلًا ) adalah ( أَهْلًا بِكَ / أَهْلًا بِكِ )."
+        },
+        {
+          "id": 23,
+          "bab": 2,
+          "type": "true_false",
+          "indikator": "Kaidah Huruf Jar & I'rab Majrur",
+          "question": "كُلُّ اسْمٍ يَقَعُ بَعْدَ حَرْفِ الْجَرِّ ( مِثْلُ: فِيْ، عَلَى، إِلَى ) يَكُوْنُ حُكْمُهُ مَجْرُوْرًا، مِثْلُ: ( فِي الْبَيْتِ ).",
+          "hint": "Huruf jar memberikan pengaruh tanda kasrah pada isim setelahnya.",
+          "options": [
+            "صَحِيْحٌ (Benar)",
+            "خَطَأٌ (Salah)"
+          ],
+          "answer": 0,
+          "explanation": "Pernyataan BENAR. Isim yang didahului huruf jar wajib berharakat kasrah (majrur)."
+        },
+        {
+          "id": 24,
+          "bab": 2,
+          "type": "true_false",
+          "indikator": "Kekerabatan Usrah & Birrul Walidain",
+          "question": "مَعْنَى كَلِمَةِ ( عَمٌّ ) فِي مُفْرَدَاتِ الأُسْرَةِ هُوَ: أَخُو الأُمِّ (Paman dari pihak ibu).",
+          "hint": "Pikirkan perbedaan antara saudara laki-laki ayah dan saudara laki-laki ibu dalam bahasa Arab.",
+          "options": [
+            "صَحِيْحٌ (Benar)",
+            "خَطَأٌ (Salah)"
+          ],
+          "answer": 1,
+          "explanation": "Pernyataan SALAH. Saudara laki-laki ayah disebut ( عَمٌّ ), sedangkan paman dari pihak ibu disebut ( خَالٌ )."
+        },
+        {
+          "id": 25,
+          "bab": 3,
+          "type": "true_false",
+          "indikator": "Makna Huruf 'Athaf (Tsalits)",
+          "question": "حَرْفُ الْعَطْفِ ( ثُمَّ ) يُفِيْدُ التَّرْتِيْبَ الْمُبَاشِرَ فَوْرًا بِدُوْنِ مُهْلَةٍ أَوْ تَرَاخٍ فِي الْوَقْتِ.",
+          "hint": "Apakah huruf ( ثُمَّ ) bermakna langsung seketika, atau memiliki jeda waktu?",
+          "options": [
+            "صَحِيْحٌ (Benar)",
+            "خَطَأٌ (Salah)"
+          ],
+          "answer": 1,
+          "explanation": "Pernyataan SALAH. Huruf ( ثُمَّ ) bermakna urutan dengan jeda waktu (tartib ma'at-tarakhi). Yang bermakna langsung tanpa jeda adalah huruf ( فَـ )."
         }
       ],
       "sumatifQuestions": [
@@ -10476,6 +10546,71 @@ const ARABIC_DATA = {
           ],
           "answer": 0,
           "explanation": "Jamak taksir dari kata ( كِتَابٌ ) adalah ( كُتُبٌ ). Berkedudukan sebagai maf'ul bih manshub berharakat fathatain menjadi ( كُتُبًا )."
+        },
+        {
+          "id": 21,
+          "bab": 1,
+          "type": "true_false",
+          "indikator": "Penggunaan Kata Tanya Man & Ma",
+          "question": "تُسْتَخْدَمُ أَدَاةُ الاِسْتِفْهَامِ ( مَنْ ) لِلسُّؤَالِ عَنِ الأَشْيَاءِ غَيْرِ الْعَاقِلَةِ كَالْجَمَادَاتِ.",
+          "options": [
+            "صَحِيْحٌ (Benar)",
+            "خَطَأٌ (Salah)"
+          ],
+          "answer": 1,
+          "explanation": "Pernyataan SALAH. Kata tanya ( مَنْ ) digunakan untuk menanyakan yang berakal (manusia), sedangkan benda tidak berakal menggunakan ( مَا ) atau ( مَاذَا )."
+        },
+        {
+          "id": 22,
+          "bab": 2,
+          "type": "true_false",
+          "indikator": "Ciri Isim Mu'annats (Ta' Marbuthah)",
+          "question": "تَنْدَرِجُ كَلِمَتَا ( غُرْفَةٌ ) وَ ( نَافِذَةٌ ) ضِمْنَ الأَسْمَاءِ الْمُؤَنَّثَةِ لِاتِّصَالِهِمَا بِالتَّاءِ الْمَرْبُوْطَةِ ( ة ) فِي آخِرِهِمَا.",
+          "options": [
+            "صَحِيْحٌ (Benar)",
+            "خَطَأٌ (Salah)"
+          ],
+          "answer": 0,
+          "explanation": "Pernyataan BENAR. Tanda ta' marbuthah ( ة ) di akhir kata merupakan tanda baku isim mu'annats."
+        },
+        {
+          "id": 23,
+          "bab": 2,
+          "type": "true_false",
+          "indikator": "Struktur Kalimat dengan Huruf Jar",
+          "question": "جُمْلَةُ: ( يَجْلِسُ الأَبُ عَلَى الْكُرْسِيِّ ) جُمْلَةٌ صَحِيْحَةٌ قَوَاعِدِيًّا حَيْثُ جُرَّ الاِسْمُ بَعْدَ حَرْفِ الْجَرِّ بِالْكَسْرَةِ.",
+          "options": [
+            "صَحِيْحٌ (Benar)",
+            "خَطَأٌ (Salah)"
+          ],
+          "answer": 0,
+          "explanation": "Pernyataan BENAR. Kata ( الْكُرْسِيِّ ) berharakat kasrah karena didahului oleh huruf jar ( عَلَى )."
+        },
+        {
+          "id": 24,
+          "bab": 3,
+          "type": "true_false",
+          "indikator": "Jamak Mudzakkar Salim Marfu'",
+          "question": "جَمْعُ الْمُذَكَّرِ السَّالِمِ فِي حَالَةِ الرَّفْعِ مِنْ كَلِمَةِ ( مُعَلِّمٌ ) هُوَ: ( مُعَلِّمِيْنَ ).",
+          "options": [
+            "صَحِيْحٌ (Benar)",
+            "خَطَأٌ (Salah)"
+          ],
+          "answer": 1,
+          "explanation": "Pernyataan SALAH. Jamak mudzakkar salim dalam keadaan rafa' berakhiran wawu dan nun: ( مُعَلِّمُوْنَ ), sedangkan ( مُعَلِّمِيْنَ ) adalah untuk keadaan nashab atau jar."
+        },
+        {
+          "id": 25,
+          "bab": 3,
+          "type": "true_false",
+          "indikator": "Fasilitas Belajar Madrasah (Ma'mal)",
+          "question": "كَلِمَةُ ( مَعْمَلُ اللُّغَةِ ) تَعْنِي مُخْتَبَرَ اللُّغَاتِ الَّذِي يَتَدَرَّبُ فِيْهِ طُلَّابُ MAN 1 Pontianak عَلَى مَهَارَاتِ الاِسْتِمَاعِ وَالْكَلَامِ.",
+          "options": [
+            "صَحِيْحٌ (Benar)",
+            "خَطَأٌ (Salah)"
+          ],
+          "answer": 0,
+          "explanation": "Pernyataan BENAR. ( مَعْمَلُ اللُّغَةِ ) adalah laboratorium bahasa untuk meningkatkan kemampuan mendengarkan dan berbicara bahasa Arab."
         }
       ]
     },
@@ -10491,7 +10626,7 @@ const ARABIC_DATA = {
         "Bab 6: Al-Hayah Al-Yaumiyyah (Rutinitas Harian Yaqut Zarin, Adad 1-100 & Adad Tartibi/Jam)"
       ],
       "characterValues": "Cinta Potensi Diri & Seni Positif, Khidmah Ta'awun (Pengabdian Sosial), Disiplin Ibadah & Menghargai Waktu",
-      "totalQuestions": 20,
+      "totalQuestions": 25,
       "durationMinutes": 30,
       "token": "CINTA2",
       "questions": [
@@ -11096,6 +11231,76 @@ const ARABIC_DATA = {
           ],
           "answer": 0,
           "explanation": "Waktu adalah modal hidup yang sangat berharga. Disiplin harian yang dilandasi cinta Allah akan mengantarkan kita pada keselamatan dan kebahagiaan."
+        },
+        {
+          "id": 21,
+          "bab": 4,
+          "type": "true_false",
+          "indikator": "Konsep Pembagian Kata: Definisi Fi'il",
+          "question": "الْفِعْلُ فِي اللُّغَةِ الْعَرَبِيَّةِ هُوَ كَلِمَةٌ تَدُلُّ عَلَى مَعْنًى فِي نَفْسِهَا مُقْتَرِنٍ بِزَمَانٍ ( مَاضٍ أَوْ حَالٍ أَوْ مُسْتَقْبَلٍ ).",
+          "hint": "Kata kerja selalu memiliki keterikatan waktu tertentu.",
+          "options": [
+            "صَحِيْحٌ (Benar)",
+            "خَطَأٌ (Salah)"
+          ],
+          "answer": 0,
+          "explanation": "Pernyataan BENAR. Fi'il adalah kata yang menunjukkan perbuatan dan terikat dengan dimensi waktu (lampau, sekarang, atau akan datang)."
+        },
+        {
+          "id": 22,
+          "bab": 4,
+          "type": "true_false",
+          "indikator": "Bentuk Fi'il Amr untuk Mu'annats",
+          "question": "صِيْغَةُ فِعْلِ الأَمْرِ لِلْمُخَاطَبَةِ الْمُفْرَدَةِ الْمُؤَنَّثَةِ تَتَّصِلُ بِهَا يَاءُ الْمُخَاطَبَةِ فِي آخِرِهِ، مِثْلُ: ( اِقْرَئِيْ ) وَ ( اُكْتُبِيْ ).",
+          "hint": "Perhatikan huruf tambahan ya' sukun di akhir fi'il amr saat meminta perempuan mengerjakan sesuatu.",
+          "options": [
+            "صَحِيْحٌ (Benar)",
+            "خَطَأٌ (Salah)"
+          ],
+          "answer": 0,
+          "explanation": "Pernyataan BENAR. Fi'il amr untuk perempuan mufrad diakhiri dengan ya' mukhatabah: ( اِقْرَئِيْ / اُكْتُبِيْ )."
+        },
+        {
+          "id": 23,
+          "bab": 5,
+          "type": "true_false",
+          "indikator": "Perbedaan Jumlah Ismiyyah & Fi'liyyah",
+          "question": "جُمْلَةُ: ( يُعَالِجُ الطَّبِيْبُ الْمَرْضَى فِي الْمُسْتَشْفَى ) تُسَمَّى جُمْلَةً اسْمِيَّةً لِأَنَّهَا بَدَأَتْ بِفِعْلٍ.",
+          "hint": "Perhatikan kata pertama dalam kalimat tersebut: isim ataukah fi'il?",
+          "options": [
+            "صَحِيْحٌ (Benar)",
+            "خَطَأٌ (Salah)"
+          ],
+          "answer": 1,
+          "explanation": "Pernyataan SALAH. Kalimat tersebut diawali fi'il ( يُعَالِجُ ), sehingga dinamakan Jumlah Fi'liyyah, bukan Jumlah Ismiyyah."
+        },
+        {
+          "id": 24,
+          "bab": 5,
+          "type": "true_false",
+          "indikator": "Arti Profesi Khidmah: Fallah",
+          "question": "مَعْنَى كَلِمَةِ ( فَلَّاحٌ ) فِي قَائِمَةِ الْمِهَنِ هُوَ: الشَّخْصُ الَّذِي يَصِيْدُ الأَسْمَاكَ فِي الْبَحْرِ.",
+          "hint": "Siapakah yang menanam padi dan siapakah yang menangkap ikan di laut?",
+          "options": [
+            "صَحِيْحٌ (Benar)",
+            "خَطَأٌ (Salah)"
+          ],
+          "answer": 1,
+          "explanation": "Pernyataan SALAH. ( فَلَّاحٌ ) artinya petani yang mengolah tanah dan bercocok tanam. Adapun yang menangkap ikan di laut adalah nelayan ( صَيَّادٌ )."
+        },
+        {
+          "id": 25,
+          "bab": 6,
+          "type": "true_false",
+          "indikator": "Penyebutan Waktu Jam Pagi Hari",
+          "question": "التَّعْبِيْرُ الصَّحِيْحُ عَنِ السَّاعَةِ السَّابِعَةِ صَبَاحًا عِنْدَ الذَّهَابِ إِلَى مَدْرَسَةِ MAN 1 Pontianak هُوَ: ( السَّاعَةُ السَّابِعَةُ صَبَاحًا ).",
+          "hint": "Kaidah adad tartibi untuk menyatakan waktu jam menggunakan wazan fa'ilah.",
+          "options": [
+            "صَحِيْحٌ (Benar)",
+            "خَطَأٌ (Salah)"
+          ],
+          "answer": 0,
+          "explanation": "Pernyataan BENAR. Jam 07.00 pagi dalam bahasa Arab diungkapkan dengan: ( السَّاعَةُ السَّابِعَةُ صَبَاحًا )."
         }
       ],
       "sumatifQuestions": [
@@ -11378,6 +11583,71 @@ const ARABIC_DATA = {
           ],
           "answer": 0,
           "explanation": "Siswa yang berdisiplin memanfaatkan malam hari di ruang belajar untuk mengulang pelajaran dan mengerjakan tugas madrasah ( يُرَاجِعُ دُرُوْسَهُ وَيَحُلُّ الْوَاجِبَاتِ )."
+        },
+        {
+          "id": 21,
+          "bab": 4,
+          "type": "true_false",
+          "indikator": "Konjugasi Fi'il Madhi Dhomir Hum",
+          "question": "تَصْرِيْفُ الْفِعْلِ الْمَاضِي ( لَعِبَ ) مَعَ ضَمِيْرِ الْغَائِبِيْنَ ( هُمْ ) هُوَ: ( لَعِبُوْا ) بِإِضَافَةِ وَاوِ الْجَمَاعَةِ.",
+          "options": [
+            "صَحِيْحٌ (Benar)",
+            "خَطَأٌ (Salah)"
+          ],
+          "answer": 0,
+          "explanation": "Pernyataan BENAR. Fi'il madhi untuk dhomir ( هُمْ ) disambung dengan wawu al-jama'ah dan alif fariqah sehingga menjadi ( لَعِبُوْا )."
+        },
+        {
+          "id": 22,
+          "bab": 4,
+          "type": "true_false",
+          "indikator": "Istilah Hobi Seni Kaligrafi Arab",
+          "question": "فَنُّ كِتَابَةِ الْحُرُوْفِ وَالْكَلِمَاتِ الْعَرَبِيَّةِ بِأُسْلُوْبٍ جَمِيْلٍ يُطْلَقُ عَلَيْهِ: ( الرَّسْمُ الْمَنْزِلِيُّ ).",
+          "options": [
+            "صَحِيْحٌ (Benar)",
+            "خَطَأٌ (Salah)"
+          ],
+          "answer": 1,
+          "explanation": "Pernyataan SALAH. Seni menulis indah huruf Arab disebut Kaligrafi Arab ( الْخَطُّ الْعَرَبِيُّ ), bukan ( الرَّسْمُ الْمَنْزِلِيُّ )."
+        },
+        {
+          "id": 23,
+          "bab": 5,
+          "type": "true_false",
+          "indikator": "Kesesuaian Gender Fi'il dan Fa'il",
+          "question": "فِي الْجُمْلَةِ الْفِعْلِيَّةِ، إِذَا كَانَ الْفَاعِلُ اسْمًا مُؤَنَّثًا وَجَبَ أَنْ يَكُوْنَ الْفِعْلُ مُؤَنَّثًا أَيْضًا، مِثْلُ: ( تَشْرَحُ الأُسْتَاذَةُ الدَّرْسَ ).",
+          "options": [
+            "صَحِيْحٌ (Benar)",
+            "خَطَأٌ (Salah)"
+          ],
+          "answer": 0,
+          "explanation": "Pernyataan BENAR. Apabila fa'il berjenis mu'annats, maka fi'il diawali huruf ta' ta'nits mudhara'ah atau diakhiri ta' ta'nits sakinah."
+        },
+        {
+          "id": 24,
+          "bab": 5,
+          "type": "true_false",
+          "indikator": "Tugas & Khidmah Profesi Shurthiy",
+          "question": "الْوَاجِبُ الأَسَاسِيُّ لِمِهْنَةِ ( الشُّرْطِيِّ ) هُوَ مُعَالَجَةُ الْمَرْضَى وَإِعْطَاؤُهُمُ الدَّوَاءَ فِي الْمُسْتَشْفَى.",
+          "options": [
+            "صَحِيْحٌ (Benar)",
+            "خَطَأٌ (Salah)"
+          ],
+          "answer": 1,
+          "explanation": "Pernyataan SALAH. Mengobati orang sakit di rumah sakit adalah tugas dokter ( الطَّبِيْبُ ), sedangkan ( الشُّرْطِيُّ ) bertugas menjaga keamanan dan ketertiban umum."
+        },
+        {
+          "id": 25,
+          "bab": 6,
+          "type": "true_false",
+          "indikator": "Pembacaan Jam Setengah / Tiga Puluh Menit",
+          "question": "عِبَارَةُ: ( السَّاعَةُ الْخَامِسَةُ وَالنِّصْفُ ) تَعْنِي فِي تَوْقِيْتِ السَّاعَةِ: الْخَامِسَةُ وَثَلَاثُوْنَ دَقِيْقَةً ( 05.30 ).",
+          "options": [
+            "صَحِيْحٌ (Benar)",
+            "خَطَأٌ (Salah)"
+          ],
+          "answer": 0,
+          "explanation": "Pernyataan BENAR. Kata ( النِّصْفُ ) berarti setengah atau 30 menit, sehingga ( السَّاعَةُ الْخَامِسَةُ وَالنِّصْفُ ) adalah pukul 05.30."
         }
       ]
     }
