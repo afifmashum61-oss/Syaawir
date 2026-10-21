@@ -375,17 +375,7 @@ function updateUserHeaderUI() {
       }
 
       if (badgeContainer) {
-        badgeContainer.innerHTML = `
-          <div class="flex items-center gap-2">
-            <span class="px-2.5 py-1 bg-amber-100 text-amber-900 border border-amber-300 rounded-xl text-xs font-black hidden sm:inline-flex items-center gap-1">
-              <span>👨‍🏫 Guru</span>
-            </span>
-            <button onclick="logoutUser()" class="px-2.5 py-1.5 bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 rounded-xl text-xs font-extrabold flex items-center gap-1 shadow-2xs transition-all cursor-pointer" title="Keluar Akun">
-              <span>🚪</span>
-              <span class="text-[11px] font-bold">Keluar</span>
-            </button>
-          </div>
-        `;
+        badgeContainer.innerHTML = '';
       }
 
       if (drawerFooterUser) {
@@ -412,18 +402,7 @@ function updateUserHeaderUI() {
       }
 
       if (badgeContainer) {
-        badgeContainer.innerHTML = `
-          <div class="flex items-center gap-2">
-            <div class="text-right hidden sm:block">
-              <div class="text-xs font-extrabold text-slate-800 leading-none">${state.auth.userName}</div>
-              <div class="text-[10px] text-teal-700 font-semibold">${state.auth.userClass}</div>
-            </div>
-            <button onclick="logoutUser()" class="px-2.5 py-1.5 bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 rounded-xl text-xs font-extrabold flex items-center gap-1 shadow-2xs transition-all cursor-pointer" title="Keluar Akun">
-              <span>🚪</span>
-              <span class="text-[11px] font-bold">Keluar</span>
-            </button>
-          </div>
-        `;
+        badgeContainer.innerHTML = '';
       }
 
       if (drawerFooterUser) {
