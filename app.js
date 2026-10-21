@@ -407,8 +407,8 @@ function updateUserHeaderUI() {
       if (btnGuru) btnGuru.classList.add('hidden');
       if (btnGuruMobileContainer) btnGuruMobileContainer.classList.add('hidden');
       if (mobileBtnGuru) {
-        mobileBtnGuru.classList.add('hidden');
-        mobileBtnGuru.classList.remove('flex');
+        mobileBtnGuru.classList.remove('hidden');
+        mobileBtnGuru.classList.add('flex');
       }
 
       if (badgeContainer) {
