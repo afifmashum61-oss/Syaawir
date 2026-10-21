@@ -359,16 +359,34 @@ function updateUserHeaderUI() {
   const btnGuru = document.getElementById('nav-btn-guru');
   const btnGuruMobileContainer = document.getElementById('nav-btn-guru-mobile-container');
   const drawerFooterUser = document.getElementById('drawer-footer-user');
+  const mobileBottomNav = document.getElementById('mobile-bottom-nav');
+  const mobileBtnGuru = document.getElementById('mobile-nav-btn-guru');
 
   if (state.auth.isLoggedIn) {
     if (headerElement) headerElement.classList.remove('hidden');
-
-    // Clear top header badge completely as requested
-    if (badgeContainer) badgeContainer.innerHTML = '';
+    if (mobileBottomNav) mobileBottomNav.classList.remove('hidden');
 
     if (state.auth.role === 'guru') {
       if (btnGuru) btnGuru.classList.remove('hidden');
       if (btnGuruMobileContainer) btnGuruMobileContainer.classList.remove('hidden');
+      if (mobileBtnGuru) {
+        mobileBtnGuru.classList.remove('hidden');
+        mobileBtnGuru.classList.add('flex');
+      }
+
+      if (badgeContainer) {
+        badgeContainer.innerHTML = `
+          <div class="flex items-center gap-2">
+            <span class="px-2.5 py-1 bg-amber-100 text-amber-900 border border-amber-300 rounded-xl text-xs font-black hidden sm:inline-flex items-center gap-1">
+              <span>👨‍🏫 Guru</span>
+            </span>
+            <button onclick="logoutUser()" class="px-2.5 py-1.5 bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 rounded-xl text-xs font-extrabold flex items-center gap-1 shadow-2xs transition-all cursor-pointer" title="Keluar Akun">
+              <span>🚪</span>
+              <span class="text-[11px] font-bold">Keluar</span>
+            </button>
+          </div>
+        `;
+      }
 
       if (drawerFooterUser) {
         drawerFooterUser.innerHTML = `
@@ -388,6 +406,25 @@ function updateUserHeaderUI() {
     } else if (state.auth.role === 'siswa') {
       if (btnGuru) btnGuru.classList.add('hidden');
       if (btnGuruMobileContainer) btnGuruMobileContainer.classList.add('hidden');
+      if (mobileBtnGuru) {
+        mobileBtnGuru.classList.add('hidden');
+        mobileBtnGuru.classList.remove('flex');
+      }
+
+      if (badgeContainer) {
+        badgeContainer.innerHTML = `
+          <div class="flex items-center gap-2">
+            <div class="text-right hidden sm:block">
+              <div class="text-xs font-extrabold text-slate-800 leading-none">${state.auth.userName}</div>
+              <div class="text-[10px] text-teal-700 font-semibold">${state.auth.userClass}</div>
+            </div>
+            <button onclick="logoutUser()" class="px-2.5 py-1.5 bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 rounded-xl text-xs font-extrabold flex items-center gap-1 shadow-2xs transition-all cursor-pointer" title="Keluar Akun">
+              <span>🚪</span>
+              <span class="text-[11px] font-bold">Keluar</span>
+            </button>
+          </div>
+        `;
+      }
 
       if (drawerFooterUser) {
         drawerFooterUser.innerHTML = `
@@ -407,8 +444,9 @@ function updateUserHeaderUI() {
       }
     }
   } else {
-    // HIDE TOP HEADER BAR ON FULL-SCREEN LOGIN GATE SCREEN
+    // HIDE TOP HEADER BAR & BOTTOM NAV ON FULL-SCREEN LOGIN GATE SCREEN
     if (headerElement) headerElement.classList.add('hidden');
+    if (mobileBottomNav) mobileBottomNav.classList.add('hidden');
     if (badgeContainer) badgeContainer.innerHTML = '';
     if (drawerFooterUser) {
       drawerFooterUser.innerHTML = `
@@ -472,7 +510,7 @@ function switchTab(tabId) {
 
   state.currentTab = tabId;
   
-  // Update Active UI Tab Button
+  // Update Active UI Tab Button (Both Drawer & Mobile Bottom Nav)
   document.querySelectorAll('[data-tab]').forEach(tab => {
     if (tab.getAttribute('data-tab') === tabId) {
       tab.classList.add('active');
@@ -480,6 +518,12 @@ function switchTab(tabId) {
       tab.classList.remove('active');
     }
   });
+
+  // Auto-scroll active item in mobile bottom navigation bar into view
+  const activeMobileTab = document.querySelector(`#mobile-bottom-nav [data-tab="${tabId}"]`);
+  if (activeMobileTab) {
+    activeMobileTab.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+  }
 
   renderTabContent();
   window.scrollTo({ top: 0, behavior: 'smooth' });

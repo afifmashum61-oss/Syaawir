@@ -50,12 +50,12 @@
         
         <!-- Left Section: Hamburger Button + School Logo -->
         <div class="flex items-center gap-3">
-          <!-- Hamburger Button (Left Side) -->
-          <button id="hamburger-btn" onclick="toggleHamburgerMenu()" class="p-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl transition-all border border-slate-200 shadow-xs flex items-center gap-2 font-bold text-xs" title="Buka Menu Navigasi">
+          <!-- Hamburger Button (Hanya tampil pada Layar Tablet & Desktop - Pada HP navigasi dipindah ke Bottom Navigation) -->
+          <button id="hamburger-btn" onclick="toggleHamburgerMenu()" class="hidden md:flex p-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl transition-all border border-slate-200 shadow-xs items-center gap-2 font-bold text-xs" title="Buka Menu Navigasi">
             <svg id="hamburger-icon-open" class="w-5 h-5 text-slate-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/>
             </svg>
-            <span class="hidden sm:inline text-xs font-bold text-slate-700">Menu</span>
+            <span class="text-xs font-bold text-slate-700">Menu</span>
           </button>
 
           <!-- School Logo & Branding -->
@@ -190,12 +190,62 @@
   </aside>
 
   <!-- MAIN DYNAMIC CONTENT CONTAINER -->
-  <main id="main-container" class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <main id="main-container" class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-8 pb-28 md:pb-8">
     <!-- Dynamic JS Content rendered here -->
   </main>
 
+  <!-- MOBILE BOTTOM NAVIGATION (KHUSUS TAMPILAN HP) -->
+  <nav id="mobile-bottom-nav" class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200/90 shadow-[0_-4px_25px_rgba(0,0,0,0.08)] px-1.5 py-1.5 pb-[max(0.375rem,env(safe-area-inset-bottom))] transition-all">
+    <div class="flex items-center gap-1 overflow-x-auto scrollbar-none py-0.5 px-0.5 scroll-smooth">
+      <button data-tab="home" class="mobile-nav-btn active flex-1 min-w-[62px] flex flex-col items-center justify-center py-1.5 px-1 rounded-xl transition-all">
+        <span class="text-lg leading-none">🏠</span>
+        <span class="text-[10px] font-bold mt-1 leading-none tracking-tight">Beranda</span>
+      </button>
+
+      <button data-tab="mufrodat" class="mobile-nav-btn flex-1 min-w-[62px] flex flex-col items-center justify-center py-1.5 px-1 rounded-xl transition-all">
+        <span class="text-lg leading-none">🔤</span>
+        <span class="text-[10px] font-bold mt-1 leading-none tracking-tight">Mufrodat</span>
+      </button>
+
+      <button data-tab="kalam" class="mobile-nav-btn flex-1 min-w-[62px] flex flex-col items-center justify-center py-1.5 px-1 rounded-xl transition-all">
+        <span class="text-lg leading-none">🗣️</span>
+        <span class="text-[10px] font-bold mt-1 leading-none tracking-tight">Kalam</span>
+      </button>
+
+      <button data-tab="qiraah" class="mobile-nav-btn flex-1 min-w-[62px] flex flex-col items-center justify-center py-1.5 px-1 rounded-xl transition-all">
+        <span class="text-lg leading-none">📖</span>
+        <span class="text-[10px] font-bold mt-1 leading-none tracking-tight">Qira'ah</span>
+      </button>
+
+      <button data-tab="istima" class="mobile-nav-btn flex-1 min-w-[62px] flex flex-col items-center justify-center py-1.5 px-1 rounded-xl transition-all">
+        <span class="text-lg leading-none">🎧</span>
+        <span class="text-[10px] font-bold mt-1 leading-none tracking-tight">Istima'</span>
+      </button>
+
+      <button data-tab="qawaid" class="mobile-nav-btn flex-1 min-w-[62px] flex flex-col items-center justify-center py-1.5 px-1 rounded-xl transition-all">
+        <span class="text-lg leading-none">📐</span>
+        <span class="text-[10px] font-bold mt-1 leading-none tracking-tight">Qawaid</span>
+      </button>
+
+      <button data-tab="tadribat" class="mobile-nav-btn flex-1 min-w-[62px] flex flex-col items-center justify-center py-1.5 px-1 rounded-xl transition-all">
+        <span class="text-lg leading-none">📝</span>
+        <span class="text-[10px] font-bold mt-1 leading-none tracking-tight">Tadribat</span>
+      </button>
+
+      <button data-tab="ulangan" class="mobile-nav-btn flex-1 min-w-[62px] flex flex-col items-center justify-center py-1.5 px-1 rounded-xl transition-all">
+        <span class="text-lg leading-none">💖</span>
+        <span class="text-[10px] font-bold mt-1 leading-none tracking-tight">Ulangan</span>
+      </button>
+
+      <button id="mobile-nav-btn-guru" data-tab="guru-dashboard" class="mobile-nav-btn min-w-[62px] flex-col items-center justify-center py-1.5 px-1 rounded-xl transition-all hidden">
+        <span class="text-lg leading-none">👨‍🏫</span>
+        <span class="text-[10px] font-bold mt-1 leading-none tracking-tight">Guru</span>
+      </button>
+    </div>
+  </nav>
+
   <!-- FOOTER -->
-  <footer class="bg-white border-t border-slate-200 mt-12 py-8 text-center text-xs text-slate-500">
+  <footer class="bg-white border-t border-slate-200 mt-12 py-8 pb-28 md:pb-8 text-center text-xs text-slate-500">
     <div class="max-w-7xl mx-auto px-4 space-y-2">
       <p class="font-semibold text-slate-700">
         Media Pembelajaran Interaktif Bahasa Arab Kelas X © 2026 MAN 1 Pontianak

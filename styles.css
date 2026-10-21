@@ -131,6 +131,48 @@ body {
   color: var(--primary-teal-dark);
 }
 
+/* Mobile Bottom Navigation Bar Styling */
+.mobile-nav-btn {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  color: #64748b;
+  position: relative;
+  outline: none;
+  user-select: none;
+}
+
+.mobile-nav-btn:hover {
+  color: var(--primary-teal);
+  background-color: rgba(47, 107, 120, 0.05);
+}
+
+.mobile-nav-btn.active {
+  color: var(--primary-teal);
+  background-color: #e2f1f3;
+  font-weight: 800;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(47, 107, 120, 0.15);
+}
+
+.mobile-nav-btn[data-tab="ulangan"].active {
+  color: #be123c;
+  background-color: #ffe4e6;
+  box-shadow: 0 2px 8px rgba(225, 29, 72, 0.15);
+}
+
+.mobile-nav-btn[data-tab="guru-dashboard"].active {
+  color: #b45309;
+  background-color: #fef3c7;
+  box-shadow: 0 2px 8px rgba(217, 119, 6, 0.15);
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 /* Audio Pulse Animation */
 @keyframes audio-pulse {
   0% {
