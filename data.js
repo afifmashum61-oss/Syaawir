@@ -9589,7 +9589,7 @@ const ARABIC_DATA = {
         "Bab 3: Al-Madrasah (Sekolah, Mufrad/Mutsanna/Jamak & Huruf 'Athaf)"
       ],
       "characterValues": "Ukhuwah Islamiyyah, Birrul Walidain (Bakti Orang Tua), Cinta Menuntut Ilmu & Menghormati Guru",
-      "totalQuestions": 25,
+      "totalQuestions": 30,
       "durationMinutes": 30,
       "token": "CINTA1",
       "questions": [
@@ -10264,6 +10264,114 @@ const ARABIC_DATA = {
           ],
           "answer": 1,
           "explanation": "Pernyataan SALAH. Huruf ( ثُمَّ ) bermakna urutan dengan jeda waktu (tartib ma'at-tarakhi). Yang bermakna langsung tanpa jeda adalah huruf ( فَـ )."
+        },
+        {
+          "id": 26,
+          "bab": 1,
+          "type": "matching",
+          "indikator": "Menjodohkan Ungkapan Salam & Jawaban Ramah (At-Tahiyyah)",
+          "question": "صِلْ بَيْنَ التَّحِيَّاتِ وَالتَّعَابِيْرِ الْآتِيَةِ وَمَا يُنَاسِبُهَا مِنَ الْجَوَابِ الْمُؤَدَّبِ!",
+          "promptIndo": "Jodohkanlah setiap ungkapan salam/sapaan di sebelah kiri dengan jawaban ramah yang tepat di sebelah kanan!",
+          "hint": "Perhatikan pasangan sapaan ta'aruf: shobahun nur untuk shobahul khair, masa'un nur untuk masa'ul khair.",
+          "pairs": [
+            {
+              "left": "صَبَاحَ الْخَيْرِ",
+              "right": "صَبَاحَ النُّوْرِ"
+            },
+            {
+              "left": "مَسَاءَ الْخَيْرِ",
+              "right": "مَسَاءَ النُّوْرِ"
+            },
+            {
+              "left": "أَهْلًا وَسَهْلًا",
+              "right": "أَهْلًا بِكَ"
+            },
+            {
+              "left": "شُكْرًا جَزِيْلًا",
+              "right": "عَفْوًا"
+            }
+          ],
+          "explanation": "Pasangan salam dan sapaan ta'aruf: ( صَبَاحَ الْخَيْرِ ⟷ صَبَاحَ النُّوْرِ ), ( مَسَاءَ الْخَيْرِ ⟷ مَسَاءَ النُّوْرِ ), ( أَهْلًا وَسَهْلًا ⟷ أَهْلًا بِكَ ), dan ( شُكْرًا ⟷ عَفْوًا ). Menebarkan salam memupuk rasa mahabbah dan persaudaraan islami."
+        },
+        {
+          "id": 27,
+          "bab": 2,
+          "type": "matching",
+          "indikator": "Menjodohkan Anggota Keluarga & Artinya (Al-Usrah)",
+          "question": "صِلْ بَيْنَ أَعْضَاءِ الأُسْرَةِ وَمَعْنَاهَا الصَّحِيْحِ بِاللُّغَةِ الإِنْدُوْنِيْسِيَّةِ!",
+          "promptIndo": "Jodohkan sebutan anggota keluarga dalam bahasa Arab dengan artinya yang benar dalam bahasa Indonesia!",
+          "hint": "Ingat kembali sebutan kakek-nenek, orang tua, dan kakak-adik dalam keluarga sakinah.",
+          "pairs": [
+            {
+              "left": "الجَدُّ وَالجَدَّةُ",
+              "right": "Kakek dan Nenek"
+            },
+            {
+              "left": "الأَبُ وَالأُمُّ",
+              "right": "Ayah dan Ibu"
+            },
+            {
+              "left": "الأَخُ الكَبِيْرُ",
+              "right": "Saudara Laki-laki Sulung (Kakak)"
+            },
+            {
+              "left": "الأُخْتُ الصَّغِيْرَةُ",
+              "right": "Saudara Perempuan Bungsu (Adik)"
+            }
+          ],
+          "explanation": "Hubungan kekerabatan: ( الجَدُّ وَالجَدَّةُ = Kakek & Nenek ), ( الأَبُ وَالأُمُّ = Ayah & Ibu ), ( الأَخُ الكَبِيْرُ = Kakak Laki-laki ), dan ( الأُخْتُ الصَّغِيْرَةُ = Adik Perempuan ). Bakti dan cinta keluarga (birrul walidain) adalah pilar akhlak mulia."
+        },
+        {
+          "id": 28,
+          "bab": 3,
+          "type": "matching",
+          "indikator": "Menjodohkan Fasilitas Madrasah & Fungsi Belajarnya",
+          "question": "صِلْ بَيْنَ مَرَافِقِ الْمَدْرَسَةِ وَالنَّشَاطِ التَّعْلِيْمِيِّ الْمُنَاسِبِ لَهَا!",
+          "promptIndo": "Jodohkan fasilitas madrasah dengan fungsi atau kegiatan belajar yang sesuai!",
+          "hint": "Pikirkan tempat membaca buku, latihan menyimak audio bahasa, shalat zhuhur, dan sarana olahraga.",
+          "pairs": [
+            {
+              "left": "مَكْتَبَةُ الْمَدْرَسَةِ",
+              "right": "قِرَاءَةُ الْكُتُبِ وَاسْتِعَارَتُهَا"
+            },
+            {
+              "left": "مَعْمَلُ اللُّغَةِ",
+              "right": "التَّدَرُّبُ عَلَى الاِسْتِمَاعِ وَالْكَلَامِ"
+            },
+            {
+              "left": "مَسْجِدُ الْمَدْرَسَةِ",
+              "right": "أَدَاءُ صَلَاةِ الظُّهْرِ جَمَاعَةً"
+            },
+            {
+              "left": "مَيْدَانُ الْمَدْرَسَةِ",
+              "right": "مُمَارَسَةُ الرِّيَاضَةِ وَالتَّمْرِيْنَاتِ"
+            }
+          ],
+          "explanation": "Fasilitas madrasah: Perpustakaan untuk membaca & meminjam buku, Lab Bahasa untuk menyimak & berbicara, Masjid untuk shalat berjamaah, dan Lapangan untuk olahraga. Merawat sarana belajar mencerminkan cinta almamater MAN 1 Pontianak."
+        },
+        {
+          "id": 29,
+          "bab": 1,
+          "type": "essay",
+          "indikator": "Menyusun Kalimat Ta'aruf Diri dan Asal Madrasah",
+          "question": "اُكْتُبْ فِقْرَةً قَصِيْرَةً (٣ جُمَلٍ) تُعَرِّفُ فِيْهَا بِنَفْسِكَ: اسْمُكَ، وَمَدْرَسَتُكَ (MAN 1 Pontianak)، وَمَدِيْنَتُكَ!",
+          "promptIndo": "Tulislah 3 kalimat perkenalan diri dalam bahasa Arab yang memuat: nama lengkapmu, madrasahmu (MAN 1 Pontianak), dan kota asalmu!",
+          "hint": "Awali dengan: اِسْمِي... kemudian: أَنَا طَالِبٌ / طَالِبَةٌ فِي MAN 1 Pontianak... lalu: أَنَا مِنْ مَدِيْنَةِ...",
+          "sampleAnswer": "اِسْمِي أَحْمَدُ فَوْزَان، أَنَا طَالِبٌ فِي MAN 1 Pontianak، وَأَنَا مِنْ مَدِيْنَةِ بُونْتِيَانَاك.",
+          "rubric": "Kriteria Penilaian: (1) Ketepatan susunan dhomir & mubtada khobar (40 poin), (2) Kelengkapan identitas diri, sekolah, dan kota asal (30 poin), (3) Kerapian ejaan/harakat bahasa Arab (30 poin).",
+          "explanation": "Ta'aruf yang santun membuka pintu persahabatan dan kasih sayang sesama muslim di lingkungan MAN 1 Pontianak."
+        },
+        {
+          "id": 30,
+          "bab": 2,
+          "type": "essay",
+          "indikator": "Mendeskripsikan Ruangan Belajar Menggunakan Huruf Jar",
+          "question": "صِفْ غُرْفَةَ تَعَلُّمِكَ أَوْ فَصْلَكَ فِي مَدْرَسَةِ MAN 1 Pontianak بِمَا لَا يَقِلُّ عَنْ جُمْلَتَيْنِ مُسْتَخْدِمًا حُرُوْفَ الْجَرِّ ( فِيْ / عَلَى )!",
+          "promptIndo": "Deskripsikan ruang kelas atau tempat belajarmu di MAN 1 Pontianak minimal dalam 2 kalimat bahasa Arab dengan menggunakan huruf jar ( فِيْ atau عَلَى )!",
+          "hint": "Contoh pola huruf jar: فِي الْفَصْلِ سَبُّوْرَةٌ كَبِيْرَةٌ، وَالْكُتُبُ عَلَى الْمَكْتَبِ.",
+          "sampleAnswer": "فَصْلِي نَظِيْفٌ وَوَاسِعٌ فِي MAN 1 Pontianak. فِي الْفَصْلِ سَبُّوْرَةٌ بَيْضَاءُ، وَالْكُتُبُ عَلَى الْمَكْتَبِ.",
+          "rubric": "Kriteria Penilaian: (1) Ketepatan penggunaan huruf jar فِي dan عَلَى beserta isim majrur (40 poin), (2) Kejelasan deskripsi ruang belajar (30 poin), (3) Struktur tata bahasa Arab yang runtut (30 poin).",
+          "explanation": "Ruang belajar yang bersih, teratur, dan dirawat dengan penuh cinta menghadirkan kenyamanan dan keberkahan dalam menuntut ilmu."
         }
       ],
       "sumatifQuestions": [
@@ -10611,6 +10719,114 @@ const ARABIC_DATA = {
           ],
           "answer": 0,
           "explanation": "Pernyataan BENAR. ( مَعْمَلُ اللُّغَةِ ) adalah laboratorium bahasa untuk meningkatkan kemampuan mendengarkan dan berbicara bahasa Arab."
+        },
+        {
+          "id": 26,
+          "bab": 1,
+          "type": "matching",
+          "indikator": "Menjodohkan Kata Tanya Istifham & Kalimat Ta'aruf",
+          "question": "صِلْ بَيْنَ أَدَوَاتِ الاِسْتِفْهَامِ وَالسُّؤَالِ الْمُنَاسِبِ لَهَا فِي التَّعَارُفِ!",
+          "promptIndo": "Jodohkan kata tanya bahasa Arab dengan kalimat tanya ta'aruf yang tepat!",
+          "hint": "Perhatikan fungsi tiap kata tanya: menanyakan nama benda, orang berakal, keadaan kabar, dan asal daerah.",
+          "pairs": [
+            {
+              "left": "مَا",
+              "right": "مَا اسْمُكَ يَا أَخِي؟"
+            },
+            {
+              "left": "مَنْ",
+              "right": "مَنْ هَذَا الشَّابُّ النَّشِيْطُ؟"
+            },
+            {
+              "left": "كَيْفَ",
+              "right": "كَيْفَ حَالُكَ هَذَا الصَّبَاحَ؟"
+            },
+            {
+              "left": "مِنْ أَيْنَ",
+              "right": "مِنْ أَيْنَ أَنْتَ قَادِمٌ؟"
+            }
+          ],
+          "explanation": "Penggunaan kata tanya istifham: ( مَا ) untuk menanyakan benda/nama, ( مَنْ ) untuk menanyakan orang/berakal, ( كَيْفَ ) untuk menanyakan kabar keadaan, dan ( مِنْ أَيْنَ ) untuk menanyakan tempat asal."
+        },
+        {
+          "id": 27,
+          "bab": 2,
+          "type": "matching",
+          "indikator": "Menjodohkan Ruangan Rumah & Perabotannya",
+          "question": "صِلْ بَيْنَ غُرَفِ الْبَيْتِ وَالأَثَاثِ الْمَوْجُوْدِ فِيْهَا عَادَةً!",
+          "promptIndo": "Jodohkan ruangan dalam rumah dengan perabotan yang lazim terdapat di dalamnya!",
+          "hint": "Pikirkan kasur di ruang tidur, sofa di ruang tamu, rak buku di ruang kerja, dan kompor di dapur.",
+          "pairs": [
+            {
+              "left": "غُرْفَةُ النَّوْمِ",
+              "right": "سَرِيْرٌ وَوِسَادَةٌ مُرِيْحَةٌ"
+            },
+            {
+              "left": "غُرْفَةُ الْجُلُوْسِ",
+              "right": "أَرِيْكَةٌ وَطَاوِلَةُ الضُّيُوْفِ"
+            },
+            {
+              "left": "غُرْفَةُ الْمَكْتَبِ",
+              "right": "مَكْتَبَةٌ وَكُتُبٌ وَحَاسُوْبٌ"
+            },
+            {
+              "left": "الْمَطْبَخُ",
+              "right": "مَوْقِدٌ وَأَوَانِي الطَّبْخِ"
+            }
+          ],
+          "explanation": "Ruangan rumah dan perabotannya: Ruang tidur (غرفة النوم) berisi ranjang dan bantal, ruang tamu (غرفة الجلوس) berisi sofa, ruang belajar/kerja (غرفة المكتب) berisi buku dan komputer, dan dapur (المطبخ) berisi kompor."
+        },
+        {
+          "id": 28,
+          "bab": 3,
+          "type": "matching",
+          "indikator": "Menjodohkan Isim Mufrad & Jamak Taksir",
+          "question": "صِلْ بَيْنَ الاِسْمِ الْمُفْرَدِ وَجَمْعِ التَّكْسِيْرِ الْمُنَاسِبِ لَهُ!",
+          "promptIndo": "Jodohkan isim mufrad (kata benda tunggal) dengan bentuk jamak taksirnya yang tepat!",
+          "hint": "Perhatikan perubahan bentuk dari tunggal ke jamak taksir untuk kitab, pena, kelas, dan sekolah.",
+          "pairs": [
+            {
+              "left": "كِتَابٌ",
+              "right": "كُتُبٌ"
+            },
+            {
+              "left": "قَلَمٌ",
+              "right": "أَقْلَامٌ"
+            },
+            {
+              "left": "فَصْلٌ",
+              "right": "فُصُوْلٌ"
+            },
+            {
+              "left": "مَدْرَسَةٌ",
+              "right": "مَدَارِسُ"
+            }
+          ],
+          "explanation": "Pasangan jamak taksir yang berubah pola katanya: ( كِتَابٌ ⟷ كُتُبٌ ), ( قَلَمٌ ⟷ أَقْلَامٌ ), ( فَصْلٌ ⟷ فُصُوْلٌ ), dan ( مَدْرَسَةٌ ⟷ مَدَارِسُ )."
+        },
+        {
+          "id": 29,
+          "bab": 2,
+          "type": "essay",
+          "indikator": "Mengungkapkan Bakti kepada Orang Tua (Birrul Walidain)",
+          "question": "عَبِّرْ بِجُمْلَتَيْنِ مُفِيْدَتَيْنِ عَنْ بِرِّ الْوَالِدَيْنِ فِي الْبَيْتِ بِمَا يُظْهِرُ مَحَبَّتَكَ لِأَبِيْكَ وَأُمِّكَ!",
+          "promptIndo": "Ungkapkan rasa baktimu kepada kedua orang tua di rumah minimal dalam 2 kalimat bahasa Arab yang baik dan penuh kasih sayang!",
+          "hint": "Gunakan kata kerja kasih sayang seperti: أُحِبُّ أَبِي وَأُمِّي dan أُسَاعِدُ أُمِّي فِي...",
+          "sampleAnswer": "أَنَا أُحِبُّ أَبِي وَأُمِّي حُبًّا كَبِيْرًا. أَنَا أُسَاعِدُ أُمِّي فِي تَرْتِيْبِ الْبَيْتِ وَأَطِيْعُ أَبِي بِاحْتِرَامٍ.",
+          "rubric": "Kriteria Penilaian: (1) Ketepatan kaidah fi'il-fa'il-maf'ul bih (40 poin), (2) Kesesuaian tema birrul walidain dan nilai mahabbah (40 poin), (3) Kejelasan struktur tata bahasa Arab (20 poin).",
+          "explanation": "Bakti kepada orang tua (birrul walidain) adalah wujud nyata Kurikulum Berbasis Cinta (KBC) yang mendatangkan ridha Allah SWT."
+        },
+        {
+          "id": 30,
+          "bab": 3,
+          "type": "essay",
+          "indikator": "Menghormati Guru & Cinta Ilmu di Madrasah",
+          "question": "كَيْفَ تُعَامِلُ مُعَلِّمِيْكَ فِي مَدْرَسَةِ MAN 1 Pontianak بِأَدَبٍ وَمَحَبَّةٍ؟ اُكْتُبْ جُمْلَتَيْنِ بِاللُّغَةِ الْعَرَبِيَّةِ!",
+          "promptIndo": "Bagaimana caramu bersikap sopan dan penuh rasa hormat kepada bapak/ibu guru di MAN 1 Pontianak? Tuliskan dalam 2 kalimat bahasa Arab!",
+          "hint": "Gunakan kosakata: أَحْتَرِمُ الْمُعَلِّمَ, أَسْتَمِعُ إِلَى شَرْحِ الأُسْتَاذِ, atau أُسَلِّمُ عَلَى مُعَلِّمِي.",
+          "sampleAnswer": "أَنَا أَحْتَرِمُ مُعَلِّمِي فِي MAN 1 Pontianak وَأُسَلِّمُ عَلَيْهِ بِمَوَدَّةٍ. أَنَا أَسْتَمِعُ إِلَى شَرْحِ الأُسْتَاذِ بِانْتِبَاهٍ وَأَدَبٍ فِي الْفَصْلِ.",
+          "rubric": "Kriteria Penilaian: (1) Ketepatan susunan kalimat mubtada-khobar atau fi'il-fa'il (40 poin), (2) Kedalaman pesan akhlak terhadap guru (40 poin), (3) Ketepatan ejaan bahasa Arab (20 poin).",
+          "explanation": "Menghormati guru (ihtiram al-mu'allim) adalah kunci utama keberkahan ilmu dan kemuliaan derajat penuntut ilmu."
         }
       ]
     },
@@ -10626,7 +10842,7 @@ const ARABIC_DATA = {
         "Bab 6: Al-Hayah Al-Yaumiyyah (Rutinitas Harian Yaqut Zarin, Adad 1-100 & Adad Tartibi/Jam)"
       ],
       "characterValues": "Cinta Potensi Diri & Seni Positif, Khidmah Ta'awun (Pengabdian Sosial), Disiplin Ibadah & Menghargai Waktu",
-      "totalQuestions": 25,
+      "totalQuestions": 30,
       "durationMinutes": 30,
       "token": "CINTA2",
       "questions": [
@@ -11301,6 +11517,114 @@ const ARABIC_DATA = {
           ],
           "answer": 0,
           "explanation": "Pernyataan BENAR. Jam 07.00 pagi dalam bahasa Arab diungkapkan dengan: ( السَّاعَةُ السَّابِعَةُ صَبَاحًا )."
+        },
+        {
+          "id": 26,
+          "bab": 4,
+          "type": "matching",
+          "indikator": "Menjodohkan Hobi Positif & Alat / Sarana Praktiknya",
+          "question": "صِلْ بَيْنَ الْهِوَايَاتِ الْمُفِيْدَةِ وَالأَدَوَاتِ أَوْ مَجَالِ مُمَارَسَتِهَا!",
+          "promptIndo": "Jodohkan ragam hobi positif dengan peralatan atau sarana praktiknya yang tepat!",
+          "hint": "Ingat sarana untuk sepak bola, membaca, fotografi, dan seni lukis.",
+          "pairs": [
+            {
+              "left": "كُرَةُ الْقَدَمِ",
+              "right": "الْمَلْعَبُ الرِّيَاضِيُّ وَالشَّبَكَةُ"
+            },
+            {
+              "left": "الْقِرَاءَةُ وَالْمُطَالَعَةُ",
+              "right": "الْكُتُبُ وَالْمَجَلَّاتُ الْعِلْمِيَّةُ"
+            },
+            {
+              "left": "التَّصْوِيْرُ الْفَوْتُوغْرَافِيُّ",
+              "right": "آلَةُ التَّصْوِيْرِ (الْكَامِيْرَا)"
+            },
+            {
+              "left": "الرَّسْمُ وَالتَّلْوِيْنُ",
+              "right": "اللَّوْحَةُ وَفُرْشَاةُ الأَلْوَانِ"
+            }
+          ],
+          "explanation": "Hobi dan sarananya: Sepak bola dengan lapangan olahraga, membaca dengan buku ilmiah, fotografi dengan kamera, dan melukis dengan kanvas & kuas warna. Mengembangkan bakat positif adalah wujud syukur atas karunia Allah."
+        },
+        {
+          "id": 27,
+          "bab": 5,
+          "type": "matching",
+          "indikator": "Menjodohkan Profesi Pengabdian & Tempat Bertugasnya",
+          "question": "صِلْ بَيْنَ أَصْحَابِ الْمِهَنِ وَمَكَانِ عَمَلِهِمْ فِي خِدْمَةِ الْمُجْتَمَعِ!",
+          "promptIndo": "Jodohkan jenis profesi pengabdian dengan tempat bertugasnya yang sesuai!",
+          "hint": "Pikirkan dokter di rumah sakit, guru di kelas, petani di sawah, dan polisi di jalan raya.",
+          "pairs": [
+            {
+              "left": "الطَّبِيْبُ وَالطَّبِيْبَةُ",
+              "right": "الْمُسْتَشْفَى وَالْعِيَادَةُ الصِّحِّيَّةُ"
+            },
+            {
+              "left": "الْمُعَلِّمُ وَالْمُدَرِّسُ",
+              "right": "الْمَدْرَسَةُ وَالْفَصْلُ الدِّرَاسِيُّ"
+            },
+            {
+              "left": "الْفَلَّاحُ وَالْمُزَارِعُ",
+              "right": "الْمَزْرَعَةُ وَحُقُوْلُ الرُّزِّ"
+            },
+            {
+              "left": "الشُّرْطِيُّ",
+              "right": "مَرْكَزُ الشُّرْطَةِ وَالشَّارِعُ الْعَامُّ"
+            }
+          ],
+          "explanation": "Tempat bertugas profesi: Dokter di rumah sakit melayani orang sakit, Guru di madrasah mendidik siswa, Petani di sawah menanam padi, dan Polisi menjaga ketertiban masyarakat."
+        },
+        {
+          "id": 28,
+          "bab": 6,
+          "type": "matching",
+          "indikator": "Menjodohkan Adad Tartibi Jam & Angka Waktu",
+          "question": "صِلْ بَيْنَ تَوْقِيْتِ السَّاعَةِ وَمَعْنَاهَا الدَّقِيْقِ بِالأَرْقَامِ!",
+          "promptIndo": "Jodohkan penyebutan jam dalam bahasa Arab dengan angka penunjuk waktu yang benar!",
+          "hint": "Ingat: wan-nisf = lebih setengah (30 mnt), tamaman = tepat, war-rub' = lebih seperempat (15 mnt), illar-rub' = kurang seperempat.",
+          "pairs": [
+            {
+              "left": "السَّاعَةُ الرَّابِعَةُ وَالنِّصْفُ",
+              "right": "Pukul 04.30"
+            },
+            {
+              "left": "السَّاعَةُ السَّابِعَةُ تَمَامًا",
+              "right": "Pukul 07.00 tepat"
+            },
+            {
+              "left": "السَّاعَةُ الثَّانِيَةَ عَشْرَةَ وَالرُّبْعُ",
+              "right": "Pukul 12.15"
+            },
+            {
+              "left": "السَّاعَةُ التَّاسِعَةُ إِلَّا الرُّبْعَ",
+              "right": "Pukul 08.45 (09.00 kurang 15 menit)"
+            }
+          ],
+          "explanation": "Penyebutan waktu adad tartibi: ( وَالنِّصْفُ = lewat 30 menit ), ( تَمَامًا = tepat ), ( وَالرُّبْعُ = lewat 15 menit ), dan ( إِلَّا الرُّبْعَ = kurang 15 menit ). Menghargai waktu adalah cermin pribadi berakhlak mulia."
+        },
+        {
+          "id": 29,
+          "bab": 4,
+          "type": "essay",
+          "indikator": "Menjelaskan Hobi Bermanfaat untuk Prestasi Belajar",
+          "question": "مَا هِيَ هِوَايَتُكَ الْمُفَضَّلَةُ، وَكَيْفَ تَنْفَعُكَ فِي حَيَاتِكَ الدِّرَاسِيَّةِ؟ اُكْتُبْ جُمْلَتَيْنِ بِالْعَرَبِيَّةِ!",
+          "promptIndo": "Apa hobi kegemaranmu dan bagaimana hobi tersebut membantumu dalam belajar? Tuliskan dalam 2 kalimat bahasa Arab!",
+          "hint": "Gunakan pola: هِوَايَتِي الْمُفَضَّلَةُ هِيَ... dan هَذِهِ الْهِوَايَةُ تُسَاعِدُنِي فِي...",
+          "sampleAnswer": "هِوَايَتِي الْمُفَضَّلَةُ هِيَ قِرَاءَةُ الْكُتُبِ الإِسْلَامِيَّةِ. هَذِهِ الْهِوَايَةُ تُوَسِّعُ مَعْلُوْمَاتِي وَتَجْعَلُنِي طَالِبًا نَاجِحًا فِي الْمَدْرَسَةِ.",
+          "rubric": "Kriteria Penilaian: (1) Ketepatan menyebutkan hobi dengan struktur mubtada-khobar (40 poin), (2) Penjelasan manfaat positif bagi proses belajar (40 poin), (3) Ketepatan kosa kata bahasa Arab (20 poin).",
+          "explanation": "Hobi yang diarahkan pada kebaikan akan mengasah potensi diri dan memperkaya wawasan ilmu pengetahuan."
+        },
+        {
+          "id": 30,
+          "bab": 6,
+          "type": "essay",
+          "indikator": "Mendeskripsikan Rutinitas Ibadah Subuh & Berangkat Madrasah",
+          "question": "اُكْتُبْ جُمْلَتَيْنِ تَصِفُ فِيْهِمَا أَنَّكَ تَسْتَيْقِظُ مُبَكِّرًا لِصَلَاةِ الصُّبْحِ ثُمَّ تَذْهَبُ إِلَى MAN 1 Pontianak بِهِمَّةٍ عَالِيَةٍ!",
+          "promptIndo": "Tuliskan 2 kalimat yang menggambarkan bahwa kamu bangun pagi-pagi untuk shalat Subuh lalu berangkat ke MAN 1 Pontianak dengan penuh semangat!",
+          "hint": "Gunakan kata kerja mudhari' orang pertama: أَسْتَيْقِظُ فِي السَّاعَةِ..., أُصَلِّي الصُّبْحَ..., dan أَذْهَبُ إِلَى الْمَدْرَسَةِ.",
+          "sampleAnswer": "أَنَا أَسْتَيْقِظُ فِي السَّاعَةِ الرَّابِعَةِ صَبَاحًا وَأُصَلِّي الصُّبْحَ جَمَاعَةً فِي الْمَسْجِدِ. ثُمَّ أَذْهَبُ إِلَى MAN 1 Pontianak بِهِمَّةٍ وَنَشَاطٍ.",
+          "rubric": "Kriteria Penilaian: (1) Ketepatan fi'il mudhari' mutakallim (أَنَا أَسْتَيْقِظُ / أُصَلِّي / أَذْهَبُ) (40 poin), (2) Keselarasan alur waktu dan adad tartibi (30 poin), (3) Nilai kedisiplinan dan cinta ibadah (30 poin).",
+          "explanation": "Memulai hari dengan shalat subuh berjamaah dan bersiap menuntut ilmu dengan ceria menanamkan keberkahan sepanjang hari."
         }
       ],
       "sumatifQuestions": [
@@ -11648,6 +11972,114 @@ const ARABIC_DATA = {
           ],
           "answer": 0,
           "explanation": "Pernyataan BENAR. Kata ( النِّصْفُ ) berarti setengah atau 30 menit, sehingga ( السَّاعَةُ الْخَامِسَةُ وَالنِّصْفُ ) adalah pukul 05.30."
+        },
+        {
+          "id": 26,
+          "bab": 4,
+          "type": "matching",
+          "indikator": "Menjodohkan Pasangan Fi'il Madhi & Fi'il Mudhari'",
+          "question": "صِلْ بَيْنَ الْفِعْلِ الْمَاضِي وَالْفِعْلِ الْمُضَارِعِ الْمُنَاسِبِ لَهُ فِي التَّصْرِيْفِ!",
+          "promptIndo": "Jodohkan kata kerja lampau (fi'il madhi) dengan kata kerja sekarang/akan datang (fi'il mudhari') yang sesuai!",
+          "hint": "Perhatikan perubahan wazan fi'il: qara'a-yaqra'u, kataba-yaktubu, la'iba-yal'abu, rasama-yarsumu.",
+          "pairs": [
+            {
+              "left": "قَرَأَ (Telah membaca)",
+              "right": "يَقْرَأُ (Sedang membaca)"
+            },
+            {
+              "left": "كَتَبَ (Telah menulis)",
+              "right": "يَكْتُبُ (Sedang menulis)"
+            },
+            {
+              "left": "لَعِبَ (Telah bermain)",
+              "right": "يَلْعَبُ (Sedang bermain)"
+            },
+            {
+              "left": "رَسَمَ (Telah melukis)",
+              "right": "يَرْسُمُ (Sedang melukis)"
+            }
+          ],
+          "explanation": "Pasangan fi'il madhi dan fi'il mudhari': ( قَرَأَ ⟷ يَقْرَأُ ), ( كَتَبَ ⟷ يَكْتُبُ ), ( لَعِبَ ⟷ يَلْعَبُ ), dan ( رَسَمَ ⟷ يَرْسُمُ ). Memahami konjugasi fi'il adalah kunci menguasai tata bahasa Arab."
+        },
+        {
+          "id": 27,
+          "bab": 5,
+          "type": "matching",
+          "indikator": "Menjodohkan Khidmah Kemanusiaan & Profesi Mulia",
+          "question": "صِلْ بَيْنَ الْعِبَارَاتِ وَالْمِهْنَةِ النَّبِيْلَةِ الَّتِي تَقُوْمُ بِهَذِهِ الْخِدْمَةِ الإِنْسَانِيَّةِ!",
+          "promptIndo": "Jodohkan bentuk pengabdian sosial kemanusiaan dengan profesi mulia yang melakukannya!",
+          "hint": "Siapakah yang memeriksa orang sakit, mengajar ilmu dan akhlak, merancang gedung jembatan, dan mengamankan warga?",
+          "pairs": [
+            {
+              "left": "فَحْصُ الْمَرْضَى وَإِعْطَاءُ الدَّوَاءِ لَهُمْ",
+              "right": "طَبِيْبٌ مُخْلِصٌ"
+            },
+            {
+              "left": "تَعْلِيْمُ الْعُلُوْمِ النَّافِعَةِ وَتَرْبِيَةُ الأَخْلَاقِ",
+              "right": "مُعَلِّمٌ رَحِيْمٌ"
+            },
+            {
+              "left": "تَصْمِيْمُ الْمَبَانِي وَالْجُسُوْرِ وَتَشْيِيْدُهَا",
+              "right": "مُهَنْدِسٌ مَاهِرٌ"
+            },
+            {
+              "left": "حِرَاسَةُ الأَمْنِ وَحِمَايَةُ الْمُوَاطِنِيْنَ",
+              "right": "شُرْطِيٌّ شُجَاعٌ"
+            }
+          ],
+          "explanation": "Khidmah kemanusiaan profesi: Dokter memeriksa dan mengobati pasien, Guru mengajarkan ilmu dan membina akhlak, Insinyur mendesain infrastruktur, dan Polisi memelihara keamanan negeri."
+        },
+        {
+          "id": 28,
+          "bab": 6,
+          "type": "matching",
+          "indikator": "Menjodohkan Lafaz Bilangan Adad Arab & Angkanya",
+          "question": "صِلْ بَيْنَ الْعَدَدِ بِاللُّغَةِ الْعَرَبِيَّةِ وَرَقْمِهِ الْحِسَابِيِّ الصَّحِيْحِ!",
+          "promptIndo": "Jodohkan lafaz bilangan Arab dengan angka bilangannya yang sesuai!",
+          "hint": "Perhatikan lafaz puluhan: 'Isyruuna (20), Khamsatun wa Tsalaatsuuna (35), Khamsuuna (50), dan Mi'atun (100).",
+          "pairs": [
+            {
+              "left": "عِشْرُوْنَ ( 'Isyruuna )",
+              "right": "20"
+            },
+            {
+              "left": "خَمْسَةٌ وَثَلَاثُوْنَ ( Khamsatun wa Tsalaatsuuna )",
+              "right": "35"
+            },
+            {
+              "left": "خَمْسُوْنَ ( Khamsuuna )",
+              "right": "50"
+            },
+            {
+              "left": "مِائَةٌ ( Mi'atun )",
+              "right": "100"
+            }
+          ],
+          "explanation": "Lafaz bilangan Arab: ( عِشْرُوْنَ = 20 ), ( خَمْسَةٌ وَثَلَاثُوْنَ = 35 ), ( خَمْسُوْنَ = 50 ), dan ( مِائَةٌ = 100 ). Kaidah adad ma'dud sangat penting untuk penulisan angka yang tepat."
+        },
+        {
+          "id": 29,
+          "bab": 5,
+          "type": "essay",
+          "indikator": "Menguraikan Cita-cita Pengabdian kepada Agama dan Bangsa",
+          "question": "مَا هِيَ أُمْنِيَّتُكَ فِي الْمُسْتَقْبَلِ؟ وَمَاذَا تُرِيْدُ أَنْ تَكُوْنَ لِتَخْدُمَ دِيْنَكَ وَوَطَنَكَ؟ اُكْتُبْ جُمْلَتَيْنِ بِالْعَرَبِيَّةِ!",
+          "promptIndo": "Apa cita-citamu di masa depan dan profesi apa yang ingin kamu capai untuk mengabdi bagi agama, bangsa, dan sesama? Tuliskan dalam 2 kalimat bahasa Arab!",
+          "hint": "Gunakan pola: أُرِيْدُ أَنْ أَكُوْنَ... لِأَنِّي... atau أُمْنِيَّتِي أَنْ أَكُوْنَ طَبِيْبًا / مُعَلِّمًا / مُهَنْدِسًا...",
+          "sampleAnswer": "أُرِيْدُ أَنْ أَكُوْنَ مُعَلِّمًا فِي الْمُسْتَقْبَلِ لِأُعَلِّمَ أَبْنَاءَ الْمُسْلِمِيْنَ. سَأَبْذُلُ جُهْدِي لِخِدْمَةِ دِيْنِي وَوَطَنِي بِعِلْمٍ وَإِخْلَاصٍ.",
+          "rubric": "Kriteria Penilaian: (1) Ketepatan pola أُرِيْدُ أَنْ + fi'il mudhari' (40 poin), (2) Keselarasan cita-cita dengan pengabdian kemanusiaan (40 poin), (3) Keindahan dan kerapian kalimat (20 poin).",
+          "explanation": "Cita-cita yang luhur demi kemaslahatan sesama merupakan cerminan pengabdian (khidmah al-mujtama') dalam Kurikulum Berbasis Cinta (KBC)."
+        },
+        {
+          "id": 30,
+          "bab": 6,
+          "type": "essay",
+          "indikator": "Mendeskripsikan Pengelolaan Waktu Ibadah dan Belajar Sehari-hari",
+          "question": "كَيْفَ تُنَظِّمُ وَقْتَكَ يَوْمِيًّا بَيْنَ الصَّلَاةِ، وَالدِّرَاسَةِ فِي MAN 1 Pontianak، وَالرَّاحَةِ؟ اُكْتُبْ جُمْلَتَيْنِ بِالْعَرَبِيَّةِ!",
+          "promptIndo": "Bagaimana caramu mengatur waktumu setiap hari secara seimbang antara shalat, belajar di MAN 1 Pontianak, dan istirahat? Tuliskan dalam 2 kalimat bahasa Arab!",
+          "hint": "Gunakan kosakata: أُنَظِّمُ وَقْتِي, أُصَلِّي الصَّلَوَاتِ فِي وَقْتِهَا, dan أُذَاكِرُ دُرُوْسِي فِي الْمَسَاءِ.",
+          "sampleAnswer": "أَنَا أُنَظِّمُ وَقْتِي يَوْمِيًّا فَأُصَلِّي الصَّلَوَاتِ الْخَمْسَ فِي وَقْتِهَا دَائِمًا. وَأُذَاكِرُ دُرُوْسِي فِي الْمَسَاءِ لِأَكُوْنَ طَالِبًا مُتَفَوِّقًا فِي MAN 1 Pontianak.",
+          "rubric": "Kriteria Penilaian: (1) Ketepatan susunan kalimat fi'liyyah/ismiyyah dalam mengekspresikan rutinitas (40 poin), (2) Kandungan nilai disiplin waktu dan istiqamah ibadah (40 poin), (3) Ketepatan kosa kata bahasa Arab (20 poin).",
+          "explanation": "Disiplin membagi waktu antara ibadah kepada Allah, belajar menuntut ilmu, dan istirahat yang cukup adalah pilar keberhasilan sejati."
         }
       ]
     }

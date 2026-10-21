@@ -2992,6 +2992,7 @@ function resetUlanganState() {
   state.ulanganMaxStreak = 0;
   state.ulanganIsFinished = false;
   state.ulanganShowReview = false;
+  state.ulanganShowEssayRubric = {};
   state.ulanganTimerSeconds = 30 * 60; // 30 minutes for sumatif
 }
 
@@ -3034,6 +3035,20 @@ function stopUlanganTimer() {
   }
 }
 
+function isUlanganQuestionAnswered(q, qIdx) {
+  if (!q) return false;
+  const ans = state.ulanganAnswers[qIdx];
+  if (ans === undefined || ans === null) return false;
+  if (q.type === 'matching') {
+    if (typeof ans !== 'object') return false;
+    return Array.isArray(q.pairs) && q.pairs.length > 0 && q.pairs.every((_, pIdx) => ans[pIdx] !== undefined && ans[pIdx] !== '');
+  }
+  if (q.type === 'essay') {
+    return typeof ans === 'string' && ans.trim().length > 0;
+  }
+  return typeof ans === 'number';
+}
+
 function selectUlanganAnswer(optIdx) {
   const questions = getUlanganQuestions();
   const q = questions[state.ulanganCurrentIndex];
@@ -3056,11 +3071,75 @@ function selectUlanganAnswer(optIdx) {
     }
   } else {
     // In Sumatif mode (Official CBT Exam): student CAN freely change their answer!
-    // No right/wrong sound or indication is given during the exam!
     SoundFx.playClick();
     state.ulanganAnswers[state.ulanganCurrentIndex] = optIdx;
   }
 
+  renderTabContent();
+}
+
+function selectUlanganMatchingPair(qIdx, pairIdx, chosenVal) {
+  if (!state.ulanganAnswers[qIdx] || typeof state.ulanganAnswers[qIdx] !== 'object') {
+    state.ulanganAnswers[qIdx] = {};
+  }
+  state.ulanganAnswers[qIdx][pairIdx] = chosenVal;
+
+  const questions = getUlanganQuestions();
+  const q = questions[qIdx];
+
+  if (state.ulanganMode === 'formatif') {
+    const allFilled = Array.isArray(q.pairs) && q.pairs.every((_, pI) => state.ulanganAnswers[qIdx][pI] !== undefined && state.ulanganAnswers[qIdx][pI] !== '');
+    if (allFilled) {
+      const isAllCorrect = q.pairs.every((p, pI) => state.ulanganAnswers[qIdx][pI] === p.right);
+      if (isAllCorrect) {
+        SoundFx.playCorrect();
+        state.ulanganStreak++;
+        if (state.ulanganStreak > state.ulanganMaxStreak) {
+          state.ulanganMaxStreak = state.ulanganStreak;
+        }
+        state.ulanganPoints += 1000 + (state.ulanganStreak * 250);
+      } else {
+        SoundFx.playWrong();
+        state.ulanganStreak = 0;
+      }
+    } else {
+      SoundFx.playClick();
+    }
+  } else {
+    SoundFx.playClick();
+  }
+
+  renderTabContent();
+}
+
+function handleUlanganEssayInput(qIdx, textarea) {
+  if (!textarea) return;
+  const text = textarea.value;
+  state.ulanganAnswers[qIdx] = text;
+
+  const counterEl = document.getElementById('ulangan-essay-charcount');
+  if (counterEl) {
+    counterEl.textContent = text.length;
+  }
+
+  const statusEl = document.getElementById('ulangan-essay-status');
+  if (statusEl) {
+    if (text.trim().length >= 10) {
+      statusEl.className = 'text-xs font-bold text-emerald-600 flex items-center gap-1';
+      statusEl.innerHTML = '<span>✓</span> <span>Tersimpan (Memenuhi Syarat Minimal)</span>';
+    } else if (text.trim().length > 0) {
+      statusEl.className = 'text-xs font-bold text-amber-600 flex items-center gap-1';
+      statusEl.innerHTML = '<span>✍️</span> <span>Mengetik... (Minimal 10 karakter)</span>';
+    } else {
+      statusEl.className = 'text-xs font-semibold text-slate-400';
+      statusEl.innerHTML = '<span>Belum diisi</span>';
+    }
+  }
+}
+
+function toggleUlanganEssayRubric(qIdx) {
+  state.ulanganShowEssayRubric = state.ulanganShowEssayRubric || {};
+  state.ulanganShowEssayRubric[qIdx] = !state.ulanganShowEssayRubric[qIdx];
   renderTabContent();
 }
 
@@ -3096,15 +3175,18 @@ function jumpToUlanganQuestion(idx) {
 function confirmFinishUlangan() {
   const questions = getUlanganQuestions();
   const totalQ = questions.length;
-  const answeredCount = state.ulanganAnswers.filter(a => a !== undefined).length;
+  let answeredCount = 0;
+  questions.forEach((q, idx) => {
+    if (isUlanganQuestionAnswered(q, idx)) answeredCount++;
+  });
   const unanswered = totalQ - answeredCount;
 
   let msg = "Apakah Ananda yakin ingin menyelesaikan dan mengumpulkan asesmen ini?";
   if (state.ulanganMode === 'sumatif') {
     if (unanswered > 0) {
-      msg = `⚠️ Perhatian: Ananda baru menjawab ${answeredCount} dari ${totalQ} soal (${unanswered} soal belum diisi).\n\nApakah Ananda yakin ingin tetap mengumpulkan Ujian Sumatif sekarang?`;
+      msg = `⚠️ Perhatian: Ananda baru menyelesaikan ${answeredCount} dari ${totalQ} soal (${unanswered} soal belum lengkap diisi).\n\nApakah Ananda yakin ingin tetap mengumpulkan Ujian Sumatif sekarang?`;
     } else {
-      msg = `Alhamdulillah seluruh ${totalQ} soal telah terisi!\n\nApakah Ananda yakin ingin mengumpulkan Ujian Sumatif sekarang dan menerbitkan Piagam Capaian?`;
+      msg = `Alhamdulillah seluruh ${totalQ} soal telah terisi lengkap!\n\nApakah Ananda yakin ingin mengumpulkan Ujian Sumatif sekarang dan menerbitkan Piagam Capaian?`;
     }
   }
 
@@ -3118,9 +3200,22 @@ function finishUlangan() {
   const questions = getUlanganQuestions();
   const totalQ = questions.length;
   let correctCount = 0;
+
   questions.forEach((q, idx) => {
-    if (state.ulanganAnswers[idx] === q.answer) {
-      correctCount++;
+    const ans = state.ulanganAnswers[idx];
+    if (q.type === 'matching') {
+      if (ans && typeof ans === 'object' && Array.isArray(q.pairs)) {
+        const isMatchAll = q.pairs.every((p, pIdx) => ans[pIdx] === p.right);
+        if (isMatchAll) correctCount++;
+      }
+    } else if (q.type === 'essay') {
+      if (ans && typeof ans === 'string' && ans.trim().length >= 10) {
+        correctCount++;
+      }
+    } else {
+      if (ans === q.answer) {
+        correctCount++;
+      }
     }
   });
 
@@ -3186,9 +3281,12 @@ function renderUlanganHTML() {
   const currentQ = questions[state.ulanganCurrentIndex];
   const progressPercent = ((state.ulanganCurrentIndex + 1) / totalQ) * 100;
   const currentAnswer = state.ulanganAnswers[state.ulanganCurrentIndex];
-  const isAnswered = currentAnswer !== undefined;
+  const isAnswered = isUlanganQuestionAnswered(currentQ, state.ulanganCurrentIndex);
 
-  const answeredCount = state.ulanganAnswers.filter(a => a !== undefined).length;
+  let answeredCount = 0;
+  questions.forEach((q, idx) => {
+    if (isUlanganQuestionAnswered(q, idx)) answeredCount++;
+  });
   const allAnswered = answeredCount === totalQ;
 
   // Format timer display
@@ -3286,12 +3384,12 @@ function renderUlanganHTML() {
           </div>
         </div>
 
-        <!-- ROW 4: TOUCH-FRIENDLY HORIZONTAL QUESTION PALETTE (1 - 20) -->
+        <!-- ROW 4: TOUCH-FRIENDLY HORIZONTAL QUESTION PALETTE (1 - 30) -->
         <div class="pt-1.5 border-t border-slate-100">
           <div class="flex items-center gap-1.5 overflow-x-auto scrollbar-none py-1 px-0.5">
-            ${questions.map((_, qIdx) => {
+            ${questions.map((qItem, qIdx) => {
               const isCurr = state.ulanganCurrentIndex === qIdx;
-              const isAns = state.ulanganAnswers[qIdx] !== undefined;
+              const isAns = isUlanganQuestionAnswered(qItem, qIdx);
               let btnClass = 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100';
               if (isAns) {
                 btnClass = isFormatif 
@@ -3319,7 +3417,10 @@ function renderUlanganHTML() {
         <div class="flex flex-wrap items-center justify-between gap-1.5 border-b border-slate-100 pb-2.5 text-xs">
           <span class="px-2.5 py-0.5 ${isFormatif ? 'bg-emerald-50 text-emerald-800 border-emerald-200' : 'bg-blue-50 text-blue-800 border-blue-200'} border rounded-full font-bold text-[11px] flex items-center gap-1.5 flex-wrap">
             <span>${isFormatif ? '🌱 Formatif' : '🎯 CBT Sumatif'} • Bab ${currentQ.bab}</span>
-            ${isTrueFalse ? '<span class="px-1.5 py-0.2 bg-amber-100 text-amber-900 border border-amber-300 rounded font-black text-[10px]">⚖️ Benar/Salah</span>' : ''}
+            ${currentQ.type === 'true_false' || (currentQ.options && currentQ.options.length === 2) ? '<span class="px-1.5 py-0.2 bg-amber-100 text-amber-900 border border-amber-300 rounded font-black text-[10px]">⚖️ Benar/Salah</span>' : ''}
+            ${currentQ.type === 'matching' ? '<span class="px-1.5 py-0.2 bg-purple-100 text-purple-900 border border-purple-300 rounded font-black text-[10px]">🔗 Menjodohkan</span>' : ''}
+            ${currentQ.type === 'essay' ? '<span class="px-1.5 py-0.2 bg-indigo-100 text-indigo-900 border border-indigo-300 rounded font-black text-[10px]">✍️ Esai / Uraian</span>' : ''}
+            ${(!currentQ.type && currentQ.options && currentQ.options.length > 2) ? '<span class="px-1.5 py-0.2 bg-slate-100 text-slate-700 border border-slate-300 rounded font-black text-[10px]">📝 Pilihan Ganda</span>' : ''}
             <span>• ${currentQ.indikator}</span>
           </span>
           <span class="text-slate-400 font-semibold text-[11px]">
@@ -3328,11 +3429,18 @@ function renderUlanganHTML() {
         </div>
 
         <!-- Question Arabic Text -->
-        <div dir="rtl" class="text-center py-2 sm:py-4 px-1 sm:px-4">
+        <div dir="rtl" class="text-center py-2 sm:py-3 px-1 sm:px-4">
           <h3 class="font-arabic text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 leading-[2.4] py-1">
             ${currentQ.question}
           </h3>
         </div>
+
+        <!-- Indonesian Prompt (if available) -->
+        ${currentQ.promptIndo ? `
+          <div class="p-2 sm:p-2.5 bg-slate-50 border border-slate-200 text-slate-700 text-xs sm:text-sm font-semibold rounded-xl text-center">
+            📋 <strong>Petunjuk:</strong> ${currentQ.promptIndo}
+          </div>
+        ` : ''}
 
         <!-- FORMATIF ONLY: Gentle Love Hint (Petunjuk Mahabbah) -->
         ${(isFormatif && currentQ.hint) ? `
@@ -3344,8 +3452,155 @@ function renderUlanganHTML() {
           </div>
         ` : ''}
 
-        <!-- OPTIONS CONTAINER: DIFFERENT STYLES FOR FORMATIF VS SUMATIF -->
-        ${isFormatif ? `
+        <!-- DYNAMIC QUESTION CONTENT CONTAINER (MATCHING / ESSAY / MULTIPLE CHOICE) -->
+        ${currentQ.type === 'matching' ? `
+          <!-- MATCHING QUESTIONS CONTAINER -->
+          <div class="space-y-3 pt-1">
+            <div class="space-y-2.5">
+              ${currentQ.pairs.map((pair, pIdx) => {
+                const chosen = (currentAnswer && typeof currentAnswer === 'object') ? (currentAnswer[pIdx] || '') : '';
+                const isSelected = chosen !== '';
+                const isPairCorrect = isSelected && chosen === pair.right;
+                const rightOptions = currentQ.pairs.map(x => x.right);
+
+                let cardStyle = 'bg-slate-50 border-slate-200';
+                if (isFormatif && isSelected) {
+                  cardStyle = isPairCorrect 
+                    ? 'bg-emerald-50/70 border-emerald-400 ring-1 ring-emerald-300' 
+                    : 'bg-rose-50/70 border-rose-400 ring-1 ring-rose-300';
+                } else if (!isFormatif && isSelected) {
+                  cardStyle = 'bg-blue-50/70 border-blue-400 ring-1 ring-blue-200';
+                }
+
+                return `
+                  <div class="p-3 sm:p-4 rounded-2xl border transition-all ${cardStyle} space-y-2">
+                    <div class="flex items-center justify-between gap-2">
+                      <div class="flex items-center gap-2">
+                        <span class="w-6 h-6 rounded-lg bg-slate-200 text-slate-700 font-extrabold text-xs flex items-center justify-center shrink-0">
+                          ${pIdx + 1}
+                        </span>
+                        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Pernyataan ${pIdx + 1}</span>
+                      </div>
+                      ${isFormatif && isSelected ? `
+                        <span class="text-xs font-black px-2 py-0.5 rounded-full ${isPairCorrect ? 'bg-emerald-200 text-emerald-900' : 'bg-rose-200 text-rose-900'}">
+                          ${isPairCorrect ? '✓ Cocok' : '✕ Belum Tepat'}
+                        </span>
+                      ` : ''}
+                    </div>
+
+                    <!-- Arabic Premise (Left) -->
+                    <div dir="rtl" class="text-right py-1">
+                      <span class="font-arabic text-lg sm:text-xl font-bold text-slate-900 leading-relaxed">
+                        ${pair.left}
+                      </span>
+                    </div>
+
+                    <!-- Selection Dropdown (Right) -->
+                    <div class="pt-1">
+                      <label class="block text-[11px] font-bold text-slate-500 mb-1">
+                        Pilih Pasangan yang Tepat:
+                      </label>
+                      <select 
+                        onchange="selectUlanganMatchingPair(${state.ulanganCurrentIndex}, ${pIdx}, this.value)"
+                        class="w-full p-2.5 sm:p-3 rounded-xl border border-slate-300 bg-white text-slate-800 font-bold text-xs sm:text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all cursor-pointer font-arabic"
+                      >
+                        <option value="">-- Pilih Pasangan Jawaban --</option>
+                        ${rightOptions.map(opt => `
+                          <option value="${opt}" ${chosen === opt ? 'selected' : ''}>${opt}</option>
+                        `).join('')}
+                      </select>
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+
+            <!-- Formatif Feedback for Matching -->
+            ${(isFormatif && isAnswered) ? `
+              <div class="p-3.5 sm:p-4 rounded-xl text-xs sm:text-sm font-bold animate-fadeIn space-y-1.5 ${currentQ.pairs.every((p, pI) => currentAnswer && currentAnswer[pI] === p.right) ? 'bg-emerald-50 text-emerald-950 border border-emerald-300' : 'bg-rose-50 text-rose-950 border border-rose-300'}">
+                <div class="flex items-center justify-between">
+                  <span class="font-extrabold flex items-center gap-1.5">
+                    ${currentQ.pairs.every((p, pI) => currentAnswer && currentAnswer[pI] === p.right) ? '💖 MUMTAZ! SELURUH PASANGAN TEPAT!' : '🌱 BEBERAPA PASANGAN BELUM TEPAT'}
+                  </span>
+                  ${currentQ.pairs.every((p, pI) => currentAnswer && currentAnswer[pI] === p.right) ? `
+                    <span class="px-2 py-0.5 bg-emerald-200 text-emerald-900 rounded-full text-[11px] font-mono font-bold">
+                      +${1000 + (state.ulanganStreak * 250)} POIN
+                    </span>
+                  ` : ''}
+                </div>
+                <p class="text-xs leading-relaxed font-normal">${currentQ.explanation}</p>
+              </div>
+            ` : ''}
+
+            ${!isFormatif ? `
+              <div class="p-2.5 bg-slate-100 rounded-xl text-slate-500 text-[11px] flex items-center justify-between">
+                <span>ℹ️ Pilihan pasangan dapat diubah kapan saja sebelum dikumpulkan.</span>
+                <span class="${isAnswered ? 'text-blue-700 font-bold' : 'text-slate-400'}">
+                  ${isAnswered ? 'Semua Terpasang ✓' : 'Belum Lengkap'}
+                </span>
+              </div>
+            ` : ''}
+          </div>
+        ` : (currentQ.type === 'essay' ? `
+          <!-- ESSAY QUESTIONS CONTAINER -->
+          <div class="space-y-3 pt-1">
+            <div class="space-y-1.5">
+              <label for="ulangan-essay-input" class="block text-xs font-bold text-slate-700">
+                Lembar Jawaban Uraian Bahasa Arab:
+              </label>
+              <textarea
+                id="ulangan-essay-input"
+                dir="auto"
+                rows="4"
+                oninput="handleUlanganEssayInput(${state.ulanganCurrentIndex}, this)"
+                placeholder="اُكْتُبْ هُنَا... (Tuliskan uraian kalimat bahasa Arab Ananda di sini)"
+                class="w-full p-3.5 sm:p-4 rounded-2xl border-2 border-slate-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none text-slate-900 font-arabic text-base sm:text-lg leading-loose shadow-inner transition-all resize-y"
+              >${typeof currentAnswer === 'string' ? currentAnswer : ''}</textarea>
+            </div>
+
+            <div class="flex items-center justify-between text-xs px-1">
+              <div id="ulangan-essay-status" class="${(typeof currentAnswer === 'string' && currentAnswer.trim().length >= 10) ? 'text-xs font-bold text-emerald-600 flex items-center gap-1' : (typeof currentAnswer === 'string' && currentAnswer.trim().length > 0 ? 'text-xs font-bold text-amber-600 flex items-center gap-1' : 'text-xs font-semibold text-slate-400')}">
+                ${(typeof currentAnswer === 'string' && currentAnswer.trim().length >= 10) ? '<span>✓</span> <span>Tersimpan (Memenuhi Syarat Minimal)</span>' : (typeof currentAnswer === 'string' && currentAnswer.trim().length > 0 ? '<span>✍️</span> <span>Mengetik... (Minimal 10 karakter)</span>' : '<span>Belum diisi</span>')}
+              </div>
+              <div class="text-[11px] text-slate-400 font-mono">
+                <span id="ulangan-essay-charcount">${(typeof currentAnswer === 'string' ? currentAnswer.length : 0)}</span> karakter
+              </div>
+            </div>
+
+            ${isFormatif ? `
+              <div class="pt-2">
+                <button type="button" onclick="toggleUlanganEssayRubric(${state.ulanganCurrentIndex})" class="px-3.5 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer">
+                  <span>💡</span>
+                  <span>${(state.ulanganShowEssayRubric && state.ulanganShowEssayRubric[state.ulanganCurrentIndex]) ? 'Sembunyikan' : 'Buka Kunci Jawaban & Rubrik Refleksi Guru'}</span>
+                </button>
+
+                ${(state.ulanganShowEssayRubric && state.ulanganShowEssayRubric[state.ulanganCurrentIndex]) ? `
+                  <div class="mt-3 p-4 bg-emerald-50/90 border border-emerald-300 rounded-2xl text-xs space-y-2 animate-fadeIn">
+                    <div>
+                      <strong class="text-emerald-950 font-black">🌟 Contoh Jawaban Ideal (Kunci):</strong>
+                      <p class="font-arabic text-base font-bold text-emerald-900 mt-1 leading-relaxed text-right">${currentQ.sampleAnswer}</p>
+                    </div>
+                    <div class="pt-2 border-t border-emerald-200">
+                      <strong class="text-emerald-950 font-black">📋 Rubrik Penilaian Guru:</strong>
+                      <p class="text-emerald-900 mt-0.5 leading-relaxed">${currentQ.rubric}</p>
+                    </div>
+                    ${currentQ.explanation ? `
+                      <div class="pt-2 border-t border-emerald-200">
+                        <strong class="text-emerald-950 font-black">💖 Nilai Refleksi Karakter:</strong>
+                        <p class="text-emerald-900 mt-0.5 leading-relaxed">${currentQ.explanation}</p>
+                      </div>
+                    ` : ''}
+                  </div>
+                ` : ''}
+              </div>
+            ` : `
+              <div class="p-2.5 bg-blue-50 border border-blue-200 rounded-xl text-blue-900 text-[11px] flex items-center gap-2">
+                <span>ℹ️</span>
+                <span>Jawaban esai otomatis tersimpan dan lembar jawaban akan ditinjau langsung oleh guru pengampu (Yosi, S. Ag, M. Pd.).</span>
+              </div>
+            `}
+          </div>
+        ` : (isFormatif ? `
           <!-- MODE FORMATIF: KAHOOT-STYLE INTERACTIVE OPTIONS WITH INSTANT VISUAL FEEDBACK -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 pt-1">
             ${currentQ.options.map((opt, idx) => {
@@ -3421,7 +3676,7 @@ function renderUlanganHTML() {
               ${isAnswered ? 'Tersimpan ✓' : 'Belum Terisi'}
             </span>
           </div>
-        `}
+        `))}
 
         <!-- BOTTOM NAVIGATION ACTION BUTTONS -->
         <div class="flex items-center justify-between gap-2 pt-4 border-t border-slate-100">
@@ -3516,7 +3771,7 @@ function renderUlanganTokenGateHTML() {
             <span class="text-xl sm:text-2xl">📝</span>
             <div class="min-w-0">
               <div class="text-[10px] uppercase font-bold text-slate-400">Jumlah Soal</div>
-              <div class="text-xs sm:text-sm font-extrabold text-slate-800">25 Soal (20 PG + 5 B/S)</div>
+              <div class="text-xs sm:text-sm font-extrabold text-slate-800">30 Soal (20 PG, 5 B/S, 3 Jodoh, 2 Esay)</div>
             </div>
           </div>
           <div class="p-3 bg-slate-50 border border-slate-200/80 rounded-2xl flex items-center gap-2.5">
@@ -3636,7 +3891,16 @@ function renderUlanganResultHTML() {
   const totalQ = questions.length;
   let correctCount = 0;
   questions.forEach((q, idx) => {
-    if (state.ulanganAnswers[idx] === q.answer) correctCount++;
+    const ans = state.ulanganAnswers[idx];
+    if (q.type === 'matching') {
+      if (ans && typeof ans === 'object' && Array.isArray(q.pairs)) {
+        if (q.pairs.every((p, pIdx) => ans[pIdx] === p.right)) correctCount++;
+      }
+    } else if (q.type === 'essay') {
+      if (ans && typeof ans === 'string' && ans.trim().length >= 10) correctCount++;
+    } else {
+      if (ans === q.answer) correctCount++;
+    }
   });
 
   const studentName = (state.auth.isLoggedIn && state.auth.userName) ? state.auth.userName : 'Siswa Tamu / Peserta';
@@ -3765,13 +4029,25 @@ function renderUlanganResultHTML() {
           <div class="space-y-4">
             ${questions.map((q, qIdx) => {
               const studentAns = state.ulanganAnswers[qIdx];
-              const isCorrect = studentAns === q.answer;
+              let isCorrect = false;
+              if (q.type === 'matching') {
+                isCorrect = studentAns && typeof studentAns === 'object' && Array.isArray(q.pairs) && q.pairs.every((p, pIdx) => studentAns[pIdx] === p.right);
+              } else if (q.type === 'essay') {
+                isCorrect = studentAns && typeof studentAns === 'string' && studentAns.trim().length >= 10;
+              } else {
+                isCorrect = studentAns === q.answer;
+              }
+
+              let qTypeLabel = '📝 Pilihan Ganda';
+              if (q.type === 'true_false' || (q.options && q.options.length === 2)) qTypeLabel = '⚖️ Benar/Salah';
+              else if (q.type === 'matching') qTypeLabel = '🔗 Menjodohkan';
+              else if (q.type === 'essay') qTypeLabel = '✍️ Esai / Uraian';
 
               return `
                 <div class="p-4 rounded-2xl border ${isCorrect ? 'border-emerald-200 bg-emerald-50/40' : 'border-rose-200 bg-rose-50/40'} space-y-3">
                   <div class="flex items-center justify-between gap-2 text-xs">
                     <span class="font-extrabold px-2.5 py-0.5 rounded-full ${isCorrect ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}">
-                      Soal ${qIdx + 1} • Bab ${q.bab} • ${q.type === 'true_false' || (q.options && q.options.length === 2) ? '⚖️ Benar/Salah • ' : ''}${isCorrect ? '✅ Benar' : '❌ Salah'}
+                      Soal ${qIdx + 1} • Bab ${q.bab} • ${qTypeLabel} • ${isCorrect ? '✅ Benar / Lengkap' : '❌ Salah / Belum Lengkap'}
                     </span>
                     <span class="text-slate-400 text-[11px] font-semibold">${q.indikator || ''}</span>
                   </div>
@@ -3780,27 +4056,71 @@ function renderUlanganResultHTML() {
                     ${q.question}
                   </div>
 
-                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-                    ${q.options.map((opt, oIdx) => {
-                      const isKey = oIdx === q.answer;
-                      const isChosen = oIdx === studentAns;
-                      let badge = 'bg-slate-50 border-slate-200 text-slate-700';
-                      if (isKey) badge = 'bg-emerald-100/90 border-emerald-400 text-emerald-950 font-bold ring-1 ring-emerald-400';
-                      else if (isChosen && !isCorrect) badge = 'bg-rose-100/90 border-rose-400 text-rose-950 font-bold line-through';
+                  ${q.promptIndo ? `
+                    <div class="p-2 bg-white/80 rounded-lg border border-slate-200 text-xs text-slate-600">
+                      📋 <strong>Petunjuk:</strong> ${q.promptIndo}
+                    </div>
+                  ` : ''}
 
-                      return `
-                        <div class="p-2.5 rounded-xl border flex items-center justify-between ${badge}">
-                          <div class="flex items-center gap-2 min-w-0">
-                            <span class="w-6 h-6 rounded-md font-mono text-[11px] font-extrabold flex items-center justify-center shrink-0 ${isKey ? 'bg-emerald-600 text-white' : (isChosen ? 'bg-rose-600 text-white' : 'bg-slate-200 text-slate-700')}">
-                              ${optionLabels[oIdx]}
-                            </span>
-                            <span class="font-arabic text-sm leading-relaxed truncate">${opt}</span>
+                  ${q.type === 'matching' ? `
+                    <!-- REVIEW MATCHING -->
+                    <div class="space-y-2 text-xs">
+                      ${q.pairs.map((p, pIdx) => {
+                        const chosen = (studentAns && typeof studentAns === 'object') ? (studentAns[pIdx] || 'Belum dipilih') : 'Belum dipilih';
+                        const isMatch = chosen === p.right;
+                        return `
+                          <div class="p-2.5 rounded-xl border ${isMatch ? 'bg-emerald-100/70 border-emerald-300' : 'bg-rose-100/70 border-rose-300'} flex flex-col sm:flex-row sm:items-center justify-between gap-1.5">
+                            <div class="font-arabic font-bold text-slate-900 text-right sm:text-left">${p.left}</div>
+                            <div class="flex items-center gap-2 flex-wrap">
+                              <span class="text-slate-600">Jawabanmu: <strong class="${isMatch ? 'text-emerald-900' : 'text-rose-900 font-bold'}">${chosen}</strong></span>
+                              ${!isMatch ? `<span class="text-emerald-800 font-bold">(Kunci: ${p.right})</span>` : ''}
+                              <span>${isMatch ? '✅' : '❌'}</span>
+                            </div>
                           </div>
-                          ${isKey ? '<span class="text-xs">✓ Kunci</span>' : (isChosen ? '<span class="text-xs">Jawabanmu</span>' : '')}
+                        `;
+                      }).join('')}
+                    </div>
+                  ` : (q.type === 'essay' ? `
+                    <!-- REVIEW ESSAY -->
+                    <div class="space-y-2.5 text-xs">
+                      <div class="p-3 bg-white rounded-xl border border-slate-200 space-y-1">
+                        <span class="font-bold text-slate-700">✍️ Jawaban yang Ditulis Siswa:</span>
+                        <div class="font-arabic text-base sm:text-lg text-slate-900 pt-0.5 leading-relaxed text-right">
+                          ${(studentAns && typeof studentAns === 'string' && studentAns.trim()) ? studentAns : '<em class="text-slate-400 font-sans text-xs">(Tidak ada uraian yang ditulis)</em>'}
                         </div>
-                      `;
-                    }).join('')}
-                  </div>
+                      </div>
+                      <div class="p-3 bg-emerald-50 rounded-xl border border-emerald-200 space-y-1">
+                        <span class="font-bold text-emerald-950">🌟 Contoh Jawaban Ideal (Kunci Guru):</span>
+                        <div class="font-arabic text-base sm:text-lg text-emerald-900 pt-0.5 leading-relaxed text-right">${q.sampleAnswer}</div>
+                        <div class="pt-1.5 border-t border-emerald-200 text-slate-600 font-sans">
+                          <strong>Rubrik Penilaian:</strong> ${q.rubric}
+                        </div>
+                      </div>
+                    </div>
+                  ` : `
+                    <!-- REVIEW MCQ / TRUE-FALSE -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                      ${q.options.map((opt, oIdx) => {
+                        const isKey = oIdx === q.answer;
+                        const isChosen = oIdx === studentAns;
+                        let badge = 'bg-slate-50 border-slate-200 text-slate-700';
+                        if (isKey) badge = 'bg-emerald-100/90 border-emerald-400 text-emerald-950 font-bold ring-1 ring-emerald-400';
+                        else if (isChosen && !isCorrect) badge = 'bg-rose-100/90 border-rose-400 text-rose-950 font-bold line-through';
+
+                        return `
+                          <div class="p-2.5 rounded-xl border flex items-center justify-between ${badge}">
+                            <div class="flex items-center gap-2 min-w-0">
+                              <span class="w-6 h-6 rounded-md font-mono text-[11px] font-extrabold flex items-center justify-center shrink-0 ${isKey ? 'bg-emerald-600 text-white' : (isChosen ? 'bg-rose-600 text-white' : 'bg-slate-200 text-slate-700')}">
+                                ${optionLabels[oIdx]}
+                              </span>
+                              <span class="font-arabic text-sm leading-relaxed truncate">${opt}</span>
+                            </div>
+                            ${isKey ? '<span class="text-xs">✓ Kunci</span>' : (isChosen ? '<span class="text-xs">Jawabanmu</span>' : '')}
+                          </div>
+                        `;
+                      }).join('')}
+                    </div>
+                  `)}
 
                   ${q.explanation ? `
                     <div class="p-3 bg-white/90 rounded-xl border border-slate-200 text-xs text-slate-700 space-y-1">
@@ -3833,7 +4153,7 @@ function renderUlanganResultHTML() {
           <p><strong>Mata Pelajaran:</strong> Bahasa Arab (اللغة العربية) — Kelas X</p>
           <p><strong>Materi Penilaian:</strong> ${pkg ? pkg.title : `Penilaian ${pkgNum}`}</p>
           <p><strong>Mode Asesmen:</strong> ${isFormatif ? 'Formatif Mandiri (Refleksi KBC)' : 'Sumatif CBT Terproteksi Token'}</p>
-          <p><strong>Jumlah Soal:</strong> ${totalQ} Soal Pilihan Ganda</p>
+          <p><strong>Jumlah Soal:</strong> ${totalQ} Soal (20 PG, 5 B/S, 3 Menjodohkan, 2 Esai)</p>
           <p><strong>Tanggal Pengerjaan:</strong> ${new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
           <p><strong>Jawaban Benar:</strong> ${correctCount} dari ${totalQ} Soal</p>
           <p><strong>Skor Capaian:</strong> <span class="text-xl font-black text-blue-900">${state.ulanganScore} / 100</span> — Predikat: <strong>${predikat}</strong></p>
